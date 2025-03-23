@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">myGaji</string>
+    <string name="title_activity_main">myGaji</string>
+    <string name="package_name">com.myGaji.my</string>
+    <string name="custom_url_scheme">com.myGaji.my</string>
+</resources>

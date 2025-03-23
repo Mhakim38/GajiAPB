@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "745825441000",
+    "project_id": "mygaji-7212c",
+    "storage_bucket": "mygaji-7212c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745825441000:android:89d1dabda0ee140dfbe55d",
+        "android_client_info": {
+          "package_name": "com.myGaji.my"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7ePIVMUiVFM5WEwXXrdg-_qR7ras1VPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

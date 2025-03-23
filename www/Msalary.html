@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Top Navigation + Sidebar</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="css/css/all.min.css">
+  <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.min.css">
+
+  <style>
+    .content-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: top;
+      min-height: 100vh; /* Ensure it takes the full height of the viewport */
+      overflow: hidden; /* Prevent scrolling */
+    }
+    .content {
+      width: 100%;
+      padding: 20px; /* Add some padding for better spacing */
+    }
+    .content-header {
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+    .btn-custom {
+      background-color: #007bff;
+      color: white;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+
+</head>
+<body class="hold-transition sidebar-collapse layout-top-nav">
+<div class="wrapper">
+
+<!-- Firebase App (the core Firebase SDK) is always required -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js"></script>
+<!-- Add Firebase Database -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js"></script>
+
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
+    <div class="container justify-content-center"> <!-- Center the container content -->
+      <!-- Logo -->
+      <a href="../../index3.html" class="navbar-brand">
+        <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
+      </a>
+      <!-- end logo -->
+    </div>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper border-0" style="background-color: white;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2 justify-content-center"> <!-- Center the row content -->
+          <div class="col-sm-6 text-center"> <!-- Center the text -->
+            <h1 class="m-0"> SALARY MANAGEMENT</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+      <div class="container">
+        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
+          <div class="col-lg-6">
+            <h1>Salary Calculator</h1>
+
+            <!-- Staff Salary Calculations -->
+            <div class="card card-primary border-0 mb-4">
+              <div class="card-body">
+                <h2>Staff Salary</h2>
+                <h4><strong>Name hereeee...</strong></h4>
+                <label>
+                  <input type="checkbox" id="publicHoliday"> Public Holiday
+                </label>
+                <input type="number" id="publicHolidayDays" class="hidden" placeholder="days" style="width: 30px;">
+                
+                <label>
+                  <input type="checkbox" id="overtime"> Overtime
+                </label>
+                <input type="number" id="overtimeHours" class="hidden" placeholder="hours" style="width: 30px;">
+                
+                <label>
+                  <input type="checkbox" id="unpaidLeave"> Unpaid Leave
+                </label>
+                <input type="number" id="unpaidLeaveDays" class="hidden" placeholder="days" style="width: 30px;">
+                <p class="mt-3">Total : RM <span id="staffOT"> </span></p>
+                              
+                <button id="calcStaffBtn" class="btn btn-custom mt-2">Calculate Staff Salary</button>
+              </div>
+            </div>
+
+            <!-- Part Time salary Calculations -->
+            <div class="card card-primary border-0">
+              <div class="card-body">
+                <h2>Part-Time Salary</h2>
+                <label for="partTimeHours">Hours Worked:</label>
+                <input type="number" id="partTimeHours" placeholder="Enter hours worked">
+                <p class="mt-3">Total <strong>(PT)</strong> : RM <span id="partTime"> </span></p>
+                
+                <button id="calcPartTimeBtn" class="btn btn-custom mt-2">Calculate Part-Time Salary</button>
+                
+              </div>
+            </div>
+          </div>
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
+    <!-- Default to the left -->
+    <strong><a href="https://adminlte.io">MyGaji v1.0</a><br>by Hakim</strong>
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="js/demo.js"></script>
+<script type="module" src="calculation.js"></script>
+<script type="module" src="handle_input.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const publicHolidayCheckbox = document.getElementById('publicHoliday');
+    const publicHolidayDays = document.getElementById('publicHolidayDays');
+    const overtimeCheckbox = document.getElementById('overtime');
+    const overtimeHours = document.getElementById('overtimeHours');
+    const unpaidLeaveCheckbox = document.getElementById('unpaidLeave');
+    const unpaidLeaveDays = document.getElementById('unpaidLeaveDays');
+
+    publicHolidayCheckbox.addEventListener('change', function() {
+      publicHolidayDays.classList.toggle('hidden', !this.checked);
+    });
+
+    overtimeCheckbox.addEventListener('change', function() {
+      overtimeHours.classList.toggle('hidden', !this.checked);
+    });
+
+    unpaidLeaveCheckbox.addEventListener('change', function() {
+      unpaidLeaveDays.classList.toggle('hidden', !this.checked);
+    });
+  });
+</script>
+</body>
+</html>

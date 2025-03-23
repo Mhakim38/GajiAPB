@@ -1,0 +1,8 @@
+{
+  "appId": "com.myGaji.my",
+  "appName": "myGaji",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

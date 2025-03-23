@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AdminLTE 3 | Top Navigation + Sidebar</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="css/css/all.min.css">
+  <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.min.css">
+
+  <style>
+    .content-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh; /* Ensure it takes the full height of the viewport */
+      overflow: hidden; /* Prevent scrolling */
+    }
+    .content {
+      width: 100%;
+      padding: 20px; /* Add some padding for better spacing */
+    }
+    .content-header {
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+    .btn-custom {
+      background-color: #007bff;
+      color: white;
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .navbar-custom {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+    @media (min-width: 768px) {
+      .navbar-custom {
+        position: fixed;
+        bottom: auto;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+      }
+      .content-wrapper {
+        margin-left: 200px; /* Adjust content to the right of the navbar */
+      }
+    }
+  </style>
+
+</head>
+<body class="hold-transition sidebar-collapse layout-top-nav">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
+    <div class="container justify-content-center"> <!-- Center the container content -->
+      <!-- Logo -->
+      <a href="../../index3.html" class="navbar-brand">
+        <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
+      </a>
+      <!-- end logo -->
+    </div>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Custom Navbar -->
+  <nav class="navbar-custom">
+    <a href="index.html" class="nav-link text-white">Home</a>
+    <a href="Menu.html" class="nav-link text-white">Menu</a>
+    <a href="StaffList.html" class="nav-link text-white">Staff List</a>
+    <a href="Msalary.html" class="nav-link text-white">Salary Management</a>
+  </nav>
+  <!-- /.custom-navbar -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper border-0" style="background-color: white;">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container">
+        <div class="row mb-2 justify-content-center"> <!-- Center the row content -->
+          <div class="col-sm-6 text-center"> <!-- Center the text -->
+            <h1 class="m-0"> MENU</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content container-->
+    <div class="content">
+      <div class="container">
+        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
+          <div class="col-lg-6 text-center">
+            <h1 class="font-weight-bold">- KOSONG -<br>Mama</h1>
+            <button class="btn btn-custom mt-4">More - - ></button>
+          </div>
+          <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
+    <!-- Default to the left -->
+    <strong><a href="https://github.com/Mhakim38">MyGaji v1.0</a><br>by Hakim</strong>
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="js/demo.js"></script>
+</body>
+</html>
