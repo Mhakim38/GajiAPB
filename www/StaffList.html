@@ -19,7 +19,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <style>
     .content-wrapper {
       display: flex;
-      justify-content: center;
+      flex-direction: column; /* Ensure content is stacked vertically */
+      justify-content: flex-start; /* Align content to the top */
       align-items: center;
       min-height: 100vh; /* Ensure it takes the full height of the viewport */
       overflow: hidden; /* Prevent scrolling */
@@ -27,10 +28,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .content {
       width: 100%;
       padding: 20px; /* Add some padding for better spacing */
+      flex: 1; /* Allow content to grow and fill the space */
     }
     .content-header {
-      position: absolute;
-      top: 0;
       width: 100%;
     }
     .btn-custom {
@@ -60,21 +60,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper border-0" style="background-color: white;">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2 justify-content-center"> <!-- Center the row content -->
-          <div class="col-sm-6 text-center"> <!-- Center the text -->
-            <h1 class="m-0"> STAFF LIST</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
 
     <!-- Main content -->
     <div class="content">
       <div class="container">
+        <div class="row justify-content-center mb-4 mt-2"> <!-- Add a new row for the button -->
+          <div class="col-lg-6 text-center">
+            <button class="btn btn-custom" onclick="location.href='AddStaff.html'">Add Staff</button>
+          </div>
+        </div>
         <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
           <div class="col-lg-6">
             <div class="card card-primaryborder-0 border-0">
@@ -89,54 +83,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="#" class="card-link">Another link</a>
               </div>
             </div><!-- /.card -->
-
-            <div class="card card-primary border-0">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div><!-- /.card -->
-          </div>
-          <!-- /.col-md-6 -->
-          <div class="col-lg-6">
-
-            <div class="card card-primary border-0">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div><!-- /.card -->
-
-            <div class="card card-primary border-0">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div><!-- /.card -->
-
-            <div class="row justify-content-center mt-4"> <!-- Add a new row for the button -->
-              <div class="col-lg-6 text-center">
-                <button class="btn btn-custom" onclick="location.href='AddStaff.html'">Add Staff</button>
-              </div>
-            </div>
 
           </div>
           <!-- /.col-md-6 -->
