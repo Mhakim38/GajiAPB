@@ -1,0 +1,8 @@
+# Project To-Do List
+
+- [x] Fix text size on starter 'Enter amount: Mobile'
+- [] Fix logo fontawesome didnt work - CnP all files plugin for FONTAWESSOME
+- [] Remove Margin on  container
+- [] Fix change option in terminal keypad
+- [] Merge with Pira Transaction History + Report AND Setting
+
