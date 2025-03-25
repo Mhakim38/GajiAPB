@@ -1,8 +1,28 @@
 # Project To-Do List
 
-- [x] Fix text size on starter 'Enter amount: Mobile'
-- [] Fix logo fontawesome didnt work - CnP all files plugin for FONTAWESSOME
-- [] Remove Margin on  container
-- [] Fix change option in terminal keypad
-- [] Merge with Pira Transaction History + Report AND Setting
+Part 1 (Staff List)
+- [x] Remove ID from display in StaffList.html
+- [] Address is missing after put <br> tag on Edetail
+- [] Add placeholder untuk gambar Staff
+- [] Edit Add Staff Page UI/UX
 
+Part 2 (Salary Management)
+- [] Display the name of the Staff
+- [] Ajust the UI/UX
+- [] Check function Calculation using real data for confirmation
+- [] In Database, update the salary record for each Staff
+
+Part 3 (Login)
+- [] Add Login Page
+- [] Add session for every page
+- [] Add User Restriction
+
+feature to add:
+- [] Hover button on desktop
+- [] Add edit/update page for staff detail
+- [] Add Report for total staff Salary (OT, PH, UPL) in a Month
+
+Finalised
+- [] Double Check Function on Salary Management
+- [] Double Check Function CRUD that are available
+- [] Double Check UI/UX
