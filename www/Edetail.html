@@ -65,9 +65,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <div class="content">
       <div class="container">
         <div class="row justify-content-center mb-4 mt-2"> <!-- Add a new row for the button -->
-          <div class="col-lg-6 text-center">
-            <button class="btn btn-custom" onclick="location.href='add_staff.html'">Add Staff</button>
-          </div>
         </div>
         <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
           <div class="col-lg-6">
@@ -77,7 +74,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <!-- Employee cards will be inserted here by the script -->
                 </div>
               </div>
-
+              <div class="card-body">
+                <h5 class="card-title" id="employee-name">Employee Name</h5>
+                <p><strong>Address:</strong> <span id="employee-address"></span></p>
+                <p><strong>Email:</strong> <span id="employee-email"></span></p>
+                <p><strong>IC:</strong> <span id="employee-ic"></span></p>
+                <p><strong>ID:</strong> <span id="employee-id"></span></p>
+                <p><strong>KWSP:</strong> <span id="employee-kwsp"></span></p>
+              </div>
           </div>
           <!-- /.col-md-6 -->
         </div>
@@ -115,32 +119,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- Import Firebase setup from calculation.js -->
 <script type="module">
-  import { db } from './calculation.js';
-  import { getDocs, collection } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-
-  // Reference to the employees collection in Firestore
-  const employeesRef = collection(db, 'employees');
-
-  // Fetch employee data and display names in individual cards
-  async function fetchEmployeeNames() {
-    const querySnapshot = await getDocs(employeesRef);
-    let employeeCards = '';
-    querySnapshot.forEach((doc) => {
-      employeeCards += `
-        <div class="col-lg-6">
-          <div class="card card-primary border-0">
-            <div class="card-body">
-              <h5 class="card-title">${doc.data().name}</h5>
-            </div>
-          </div>
-        </div>
-      `;
-    });
-    document.getElementById('employee-names').innerHTML = employeeCards;
-  }
-
-  fetchEmployeeNames();
-</script>
+    import { db } from './calculation.js';
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+  
+    // Function to get query parameter by name
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+  
+    // Fetch employee details and display them
+    async function fetchEmployeeDetails() {
+      const employeeId = getQueryParam('id');
+      console.log("Employee ID from URL:", employeeId); // Debugging output
+  
+      if (employeeId) {
+        try {
+          const employeeRef = doc(db, 'employees', employeeId); // Get the document reference
+          const employeeDoc = await getDoc(employeeRef); // Fetch the document
+  
+          if (employeeDoc.exists()) {
+            const employeeData = employeeDoc.data();
+            console.log("Fetched Employee Data:", employeeData); // Debugging output
+  
+            document.getElementById('employee-id').innerText = employeeDoc.id;
+            document.getElementById('employee-name').innerText = employeeData.name;
+            document.getElementById('employee-address').innerText = employeeData.address;
+            document.getElementById('employee-email').innerText = employeeData.email;
+            document.getElementById('employee-ic').innerText = employeeData.ic;
+            document.getElementById('employee-kwsp').innerText = employeeData.kwsp;
+          } else {
+            console.log("No such document exists in Firestore!");
+          }
+        } catch (error) {
+          console.error("Error fetching document:", error);
+        }
+      } else {
+        console.log("No employee ID provided in the URL.");
+      }
+    }
+  
+    fetchEmployeeDetails();
+  </script>
+  
 
 </body>
 </html>
