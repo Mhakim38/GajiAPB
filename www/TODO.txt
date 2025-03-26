@@ -2,8 +2,9 @@
 
 Part 1 (Staff List)
 - [x] Remove ID from display in StaffList.html
-- [] Address is missing after put <br> tag on Edetail
-- [] Add placeholder untuk gambar Staff
+- [x] Address is missing after put <br> tag on Edetail - There some address are missing DONE
+- [] Add placeholder untuk gambar Staff - List Staff
+- [] Add placeholder untuk gambar Staff - details Staff 
 - [] Edit Add Staff Page UI/UX
 
 Part 2 (Salary Management)

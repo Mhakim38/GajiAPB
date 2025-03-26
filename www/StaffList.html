@@ -71,18 +71,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <button class="btn btn-custom" onclick="location.href='add_staff.html'">Add Staff</button>
           </div>
         </div>
-        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
-          <div class="col-lg-6">
+
+        <!-- List Staff Card -->
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12">
             <h3><strong>Employee</strong></h3>
               <div class="card-body">
-                <div id="employee-names" class="row justify-content-center align-items-center">       
-                <div id="employee-id" class="row justify-content-center align-items-center">       
+                <div id="employee-names" class="row"> <!-- Use Bootstrap grid -->
                   <!-- Employee cards will be inserted here by the script -->
                 </div>
               </div>
-
           </div>
-          <!-- /.col-md-6 -->
+          <!-- /.col-12 -->
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -124,16 +124,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   // Reference to the employees collection in Firestore
   const employeesRef = collection(db, 'employees');
 
-  // Fetch employee data and display names in individual cards
+  // Fetch employee data and display names in a responsive grid
   async function fetchEmployeeNames() {
     const querySnapshot = await getDocs(employeesRef);
     let employeeCards = '';
     querySnapshot.forEach((doc) => {
       const employeeData = doc.data();
       employeeCards += `
-        <div class="col-lg-6">
-          <div class="card card-primary border-0" onclick="location.href='Edetail.html?id=${doc.id}'">
-            <div class="card-body">
+        <div class="col-lg-6 col-md-6 col-sm-12 "> <!-- 2x2 grid on desktop, full width on mobile -->
+          <div class="info-box rounded-pill" onclick="location.href='Edetail.html?id=${doc.id}'">
+            <span class="info-box-icon bg-info">
+              <i class="fa-solid fa-users"></i>
+            </span>
+            <div class="info-box-content">
               <h5 class="card-title">${employeeData.name}</h5>
             </div>
           </div>
