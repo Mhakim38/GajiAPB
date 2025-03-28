@@ -3,8 +3,8 @@
 Part 1 (Staff List)
 - [x] Remove ID from display in StaffList.html
 - [x] Address is missing after put <br> tag on Edetail - There some address are missing DONE
-- [] Add placeholder untuk gambar Staff - List Staff
-- [] Add placeholder untuk gambar Staff - details Staff 
+- [x] Add placeholder untuk gambar Staff - List Staff
+- [x] Add placeholder untuk gambar Staff - details Staff 
 - [] Edit Add Staff Page UI/UX
 
 Part 2 (Salary Management)
@@ -17,6 +17,9 @@ Part 3 (Login)
 - [] Add Login Page
 - [] Add session for every page
 - [] Add User Restriction
+
+Part 4
+- [] Finalised The User Interface 
 
 feature to add:
 - [] Hover button on desktop

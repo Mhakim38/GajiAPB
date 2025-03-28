@@ -71,13 +71,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
           <div class="col-lg-6">
             <h3><strong>Employee</strong></h3>
-              <div class="card-body">
-                <div id="employee-names" class="row justify-content-center align-items-center">
-                  <!-- Employee cards will be inserted here by the script -->
+              <div class="card-body text-center">
+                <div style="border-radius: 100px; overflow: hidden; width: 200px; height: 200px; margin: 0 auto;">
+                  <img src="src/me.jpg" alt="Employee Picture" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
+                <h5 class="card-title mt-3" id="employee-name">Employee Name</h5>
               </div>
               <div class="card-body">
-                <h5 class="card-title" id="employee-name">Employee Name</h5>
                 <br><p><strong>Address:</strong> <span id="employee-address"></span></p>
                 <p><strong>Email:</strong> <span id="employee-email"></span></p>
                 <p><strong>IC:</strong> <span id="employee-ic"></span></p>
