@@ -146,7 +146,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       const employeeData = doc.data();
       employeeCards += `
         <div class="col-lg-6 col-md-6 col-sm-12"> <!-- 2x2 grid on desktop, full width on mobile -->
-          <div class="info-box rounded-pill mb-2 border border-primary" onclick="location.href='Edetail.html?id=${doc.id}'">
+          <div class="info-box rounded-pill mb-2 border border-primary" onclick="location.href='Edetail.html?id=${employeeData.id}'">
             <div class="info-box-icon" style="border-radius: 100px; overflow: hidden; width: 60px; height: 60px;">
               <img src="src/me.jpg" alt="Employee Picture" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
