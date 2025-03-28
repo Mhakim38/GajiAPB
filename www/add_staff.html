@@ -20,7 +20,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh; /* Ensure it takes the full height of the viewport */
-            overflow: hidden; /* Prevent scrolling */
+            overflow: auto; /* Allow scrolling when content overflows */
         }
         .content {
             width: 100%;
@@ -38,31 +38,150 @@
             padding: 10px 20px;
             font-size: 16px;
         }
-        .navbar-custom {
-            position: fixed;
-            bottom: 0;
+/* Start fron css */
+        .form {
+            background-color: #f5a391; /* Change to a lighter color to match the background */
+            color: #212529; /* Adjust text color for contrast */
+            border-radius: 20px;
+            box-sizing: border-box;
+            height: 750px;
+            padding: 20px;
+            width: 400px;
+            margin: auto; /* Center horizontally */
+        }
+
+        @media (max-width: 768px) {
+            .form {
+                width: 90%; /* Adjust width for smaller screens */
+                height: auto; /* Allow height to adjust based on content */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form {
+                padding: 15px; /* Reduce padding for very small screens */
+            }
+
+            .title {
+                font-size: 28px; /* Adjust title size */
+            }
+
+            .subtitle {
+                font-size: 14px; /* Adjust subtitle size */
+            }
+        }
+
+        .title {
+            color: #212529; /* Adjust text color for better readability */
+            font-family: sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            margin-top: 30px;
+            letter-spacing: 2px;
+
+        }
+
+        .subtitle {
+            color: #212529; /* Adjust text color for better readability */
+            font-family: sans-serif;
+            font-size: 16px;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        .input-container {
+            height: 50px;
+            position: relative;
             width: 100%;
-            background-color: #007bff;
-            color: white;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
         }
-        @media (min-width: 768px) {
-            .navbar-custom {
-                position: fixed;
-                bottom: auto;
-                top: 0;
-                left: 0;
-                width: 200px;
-                height: 100%;
-                flex-direction: column;
-                align-items: center;
-            }
-            .content-wrapper {
-                margin-left: 200px; /* Adjust content to the right of the navbar */
-            }
+
+        .ic1 {
+            margin-top: 40px;
         }
+
+        .ic2 {
+            margin-top: 30px;
+        }
+
+        .input {
+            background-color: #ffffff; /* Lighten input fields */
+            border-radius: 12px;
+            border: 0;
+            box-sizing: border-box;
+            color: #212529; /* Adjust text color */
+            font-size: 18px;
+            height: 100%;
+            outline: 0;
+            padding: 4px 20px 0;
+            width: 100%;
+        }
+
+        .cut {
+            background-color: #15172b;
+            border-radius: 10px;
+            height: 20px;
+            left: 20px;
+            position: absolute;
+            top: -20px;
+            transform: translateY(0);
+            transition: transform 200ms;
+            width: 76px;
+        }
+
+        .cut-short {
+            width: 50px;
+        }
+
+        .input:focus ~ .cut,
+        .input:not(:placeholder-shown) ~ .cut {
+            transform: translateY(8px);
+        }
+
+        .placeholder {
+            color: #6c757d; /* Adjust placeholder color for better visibility */
+            font-family: sans-serif;
+            left: 20px;
+            line-height: 14px;
+            pointer-events: none;
+            position: absolute;
+            transform-origin: 0 50%;
+            transition: transform 200ms, color 200ms;
+            top: 20px;
+        }
+
+        .input:focus ~ .placeholder,
+        .input:not(:placeholder-shown) ~ .placeholder {
+            transform: translateY(-30px) translateX(10px) scale(0.75);
+        }
+
+        .input:not(:placeholder-shown) ~ .placeholder {
+            color: #808097;
+        }
+
+        .input:focus ~ .placeholder {
+            color: #495057; /* Adjust focus color */
+        }
+
+        .submit {
+            background-color: #007bff; /* Keep button consistent */
+            border-radius: 12px;
+            border: 0;
+            box-sizing: border-box;
+            color: #ffffff; /* Ensure text is readable */
+            cursor: pointer;
+            font-size: 18px;
+            height: 50px;
+            margin-top: 38px;
+            outline: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        .submit:active {
+            background-color: #06b;
+        }
+/* End form CSS */
+
     </style>
 </head>
 <body class="hold-transition sidebar-collapse layout-top-nav">
@@ -79,15 +198,6 @@
         </div>
     </nav>
     <!-- /.navbar -->
-
-    <!-- Custom Navbar -->
-    <nav class="navbar-custom">
-        <a href="index.html" class="nav-link text-white">Home</a>
-        <a href="Menu.html" class="nav-link text-white">Menu</a>
-        <a href="StaffList.html" class="nav-link text-white">Staff List</a>
-        <a href="Msalary.html" class="nav-link text-white">Salary Management</a>
-    </nav>
-    <!-- /.custom-navbar -->
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper border-0" style="background-color: white;">
@@ -107,28 +217,51 @@
         <div class="content">
             <div class="container">
                 <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
-                    <div class="col-lg-6 text-center">
-                        <form id="addStaffForm">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="name" required><br><br>
-                            
-                            <label for="id">ID:</label>
-                            <input type="text" id="id" name="id" required><br><br>
-                            
-                            <label for="ic">IC:</label>
-                            <input type="text" id="ic" name="ic" required><br><br>
-                            
-                            <label for="kwsp">KWSP:</label>
-                            <input type="text" id="kwsp" name="kwsp" required><br><br>
-                            
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required><br><br>
-                            
-                            <label for="address">Address:</label>
-                            <input type="text" id="address" name="address"><br><br>
-                            
-                            <button type="submit" class="btn btn-custom mt-4">Add Staff</button>
-                        </form>
+                    <div class="col-lg-6 text-center justify-content-center">
+                        <div class="form">
+                            <div class="title">Staff Information</div>
+                            <div class="subtitle">Fill out the form</div>
+
+                            <form id="addStaffForm">
+                                <div class="input-container ic1">
+                                    <input id="name" class="input" type="text" placeholder=" " required />
+                                    <div class="cut"></div>
+                                    <label for="name" class="placeholder">Name</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="id" class="input" type="text" placeholder=" " required />
+                                    <div class="cut"></div>
+                                    <label for="id" class="placeholder">Staff ID</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="ic" class="input" type="text" placeholder=" " required />
+                                    <div class="cut"></div>
+                                    <label for="ic" class="placeholder">IC</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="kwsp" class="input" type="text" placeholder=" " required />
+                                    <div class="cut"></div>
+                                    <label for="kwsp" class="placeholder">KWSP</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="email" class="input" type="email" placeholder=" " required />
+                                    <div class="cut"></div>
+                                    <label for="email" class="placeholder">Email</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="address" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="address" class="placeholder">Address</label>
+                                </div>
+
+                                <button type="submit" class="submit">Submit</button>
+                            </form>
+                        </div>
                     </div>
                     <!-- /.col-md-6 -->
                 </div>
@@ -170,7 +303,8 @@
     document.getElementById('addStaffForm').addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const name = document.getElementById('name').value;
+        let name = document.getElementById('name').value;
+        name = name.toUpperCase(); // Convert name to uppercase
         const id = document.getElementById('id').value;
         const ic = document.getElementById('ic').value;
         const kwsp = document.getElementById('kwsp').value;
@@ -181,8 +315,9 @@
 
         try {
             const docRef = await addDoc(collection(db, "employees"), newStaff);
-            alert("Succeccfully added Staff: " + docRef.name);
+            alert("Successfully added Staff: " + name);
             document.getElementById('addStaffForm').reset();
+            window.location.href = "StaffList.html"; // Redirect to StaffList.html
         } catch (error) {
             console.error("Error adding staff: ", error);
             alert("Error adding staff: " + error.message);
