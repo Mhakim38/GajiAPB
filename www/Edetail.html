@@ -144,7 +144,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             const employeeData = employeeDoc.data();
             console.log("Fetched Employee Data:", employeeData); // Debugging output
   
-            document.getElementById('employee-id').innerText = employeeDoc.id;
+            document.getElementById('employee-id').innerText = employeeData.id;
             document.getElementById('employee-name').innerText = employeeData.name;
             document.getElementById('employee-address').innerText = employeeData.address;
             document.getElementById('employee-email').innerText = employeeData.email;
