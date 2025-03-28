@@ -20,27 +20,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <style>
     .content-wrapper {
-      display: flex;
-      flex-direction: column; /* Ensure content is stacked vertically */
-      justify-content: flex-start; /* Align content to the top */
-      align-items: center;
-      min-height: 100vh; /* Ensure it takes the full height of the viewport */
-      overflow: hidden; /* Prevent scrolling */
+        display: flex;
+        flex-direction: column; /* Ensure content is stacked vertically */
+        justify-content: flex-start; /* Align content to the top */
+        align-items: center;
+        min-height: 100vh; /* Ensure it takes the full height of the viewport */
+        overflow: hidden; /* Prevent scrolling */
+        background-color: #ffffff; /* Match the background color */
     }
     .content {
-      width: 100%;
-      padding: 20px; /* Add some padding for better spacing */
-      flex: 1; /* Allow content to grow and fill the space */
+        width: 100%;
+        padding: 20px; /* Add some padding for better spacing */
+        flex: 1; /* Allow content to grow and fill the space */
     }
     .content-header {
-      width: 100%;
+        width: 100%;
     }
     .btn-custom {
-      background-color: #007bff;
-      color: white;
-      border-radius: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+    .info-box {
+        background-color: #f8f9fa; /* Match the card background to the page */
+        border: 1px solid #e0e0e0; /* Add a subtle border */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
+        transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add hover effect */
+    }
+    .info-box:hover {
+        transform: translateY(-5px); /* Slightly lift the card on hover */
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
+    }
+    .info-box-icon {
+        background-color: #f8f9fa; /* Match the icon background to the page */
     }
   </style>
 
