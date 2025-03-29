@@ -14,10 +14,11 @@ Part 1 (Staff List)
 - [x] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
 
 Part 2 (Salary Management)
-- [] Display the name of the Staff
+- [x] Display the name of the Staff
 - [] Ajust the UI/UX
 - [] Check function Calculation using real data for confirmation
 - [] In Database, update the salary record for each Staff
+- [] Add Report page using only table for printing the report. 
 
 Part 3 (Login)
 - [] Add Login Page
@@ -31,6 +32,7 @@ feature to add:
 - [] Hover button on desktop
 - [] Add edit/update page for staff detail
 - [] Add Report for total staff Salary (OT, PH, UPL) in a Month
+- [] Add search button/function
 
 Finalised
 - [] Double Check Function on Salary Management
