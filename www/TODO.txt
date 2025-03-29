@@ -5,10 +5,10 @@ Part 1 (Staff List)
 - [x] Address is missing after put <br> tag on Edetail - There some address are missing DONE
 - [x] Add placeholder untuk gambar Staff - List Staff
 - [x] Add placeholder untuk gambar Staff - details Staff 
-- [] Edit Add Staff Page UI/UX
+- [x] Edit Add Staff Page UI/UX
 - [] Adjst the latest database
 - [] Display the latest data and Photo
-- [] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
+- [x] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
 
 Part 2 (Salary Management)
 - [] Display the name of the Staff
