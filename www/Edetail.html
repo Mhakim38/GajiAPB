@@ -75,14 +75,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div style="border-radius: 100px; overflow: hidden; width: 200px; height: 200px; margin: 0 auto;">
                   <img src="src/me.jpg" alt="Employee Picture" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <h5 class="card-title mt-3" id="employee-name">Employee Name</h5>
+                <h5 class="card-title mt-3" id="employee-name"><strong>Employee Name</strong></h5>
               </div>
               <div class="card-body">
                 <br><p><strong>Address:</strong> <span id="employee-address"></span></p>
                 <p><strong>Email:</strong> <span id="employee-email"></span></p>
                 <p><strong>IC:</strong> <span id="employee-ic"></span></p>
-                <p><strong>ID:</strong> <span id="employee-id"></span></p>
+                <p><strong>Employee ID:</strong> <span id="employee-id"></span></p>
                 <p><strong>KWSP:</strong> <span id="employee-kwsp"></span></p>
+                <p><strong>Bank Name:</strong> <span id="employee-bank"></span></p>
+                <p><strong>Bank Number:</strong> <span id="employee-bankNo"></span></p>
+                <p><strong>Phone Number:</strong> <span id="employee-phoneNo"></span></p>
+
+                <h3 class="text-center"><strong>Family Related section<strong></h3>
+                <p><strong>Household Name:</strong> <span id="employee-Hname"></span></p>
+                <p><strong>Number of Kids:</strong> <span id="employee-Hkids"></span></p>
+                <p><strong>Household Phone Number:</strong> <span id="employee-HphoneNo"></span></p>
+                <p><strong>Father/Mother name:</strong> <span id="employee-Fname"></span></p>
+                <p><strong>Father/Mother Number:</strong> <span id="employee-FphoneNo"></span></p>
+                <p><strong>Disease:</strong> <span id="employee-disease"></span></p>
               </div>
           </div>
           <!-- /.col-md-6 -->
@@ -145,11 +156,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
             console.log("Fetched Employee Data:", employeeData); // Debugging output
   
             document.getElementById('employee-id').innerText = employeeData.id;
-            document.getElementById('employee-name').innerText = employeeData.name;
-            document.getElementById('employee-address').innerText = employeeData.address;
-            document.getElementById('employee-email').innerText = employeeData.email;
-            document.getElementById('employee-ic').innerText = employeeData.ic;
-            document.getElementById('employee-kwsp').innerText = employeeData.kwsp;
+            document.getElementById('employee-name').innerText = employeeData.Nama;
+            document.getElementById('employee-address').innerText = employeeData.Address;
+            document.getElementById('employee-email').innerText = employeeData.Email;
+            document.getElementById('employee-ic').innerText = employeeData.IC;
+            document.getElementById('employee-kwsp').innerText = employeeData.KWSP;
+            document.getElementById('employee-bank').innerText = employeeData.Bank;
+            
+            const bankNumber = employeeData["Nombor Bank"]; // Correctly access the field
+            document.getElementById('employee-bankNo').innerText = bankNumber;
+
+            const phoneNumber = employeeData["Phone Number"];
+            document.getElementById('employee-phoneNo').innerText = phoneNumber;
+
+            //TODO: Add the rest of the fields
+            const Hname = employeeData["[Nama ( Suami/Istri )/n]"]; 
+            document.getElementById('employee-Hname').innerText = Hname;
+
+            const Hkids = employeeData["Bilangan Anak"];
+            document.getElementById('employee-Hkids').innerText = Hkids;
+
+            //TODO: Add the rest of the fields
+            document.getElementById('employee-HphoneNo').innerText = employeeData.householdPhoneNumber;
+
+            const parentName = employeeData["Nama Pewaris (Ibu/Ayah)"];
+            document.getElementById('employee-Fname').innerText = parentName;
+
+            const FphoneNo = employeeData["Nombor telefon Pewaris (Ibu/Ayah)"];
+            document.getElementById('employee-FphoneNo').innerText = FphoneNo;
+
+            const disease = employeeData["Penyakit"];
+            document.getElementById('employee-disease').innerText = disease;
           } else {
             console.log("No such document exists in Firestore!");
           }
