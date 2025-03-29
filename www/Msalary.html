@@ -55,6 +55,9 @@
     .hidden {
       display: none;
     }
+    .input {
+      width: 70px;
+    }
   </style>
 
 </head>
@@ -73,66 +76,10 @@
   </nav>
   <!-- /.navbar -->
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper border-0" style="background-color: white;">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2 justify-content-center"> <!-- Center the row content -->
-          <div class="col-sm-6 text-center"> <!-- Center the text -->
-            <h1 class="m-0"> SALARY MANAGEMENT</h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
     <!-- Main content -->
     <div class="content">
       <div class="container">
         <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
-          <div class="col-lg-6">
-            <h1>Salary Calculator</h1>
-
-            <!-- Staff Salary Calculations -->
-            <div class="card card-primary border-0 mb-4">
-              <div class="card-body">
-                <h2>Staff Salary</h2>
-                <h4><strong>Name hereeee...</strong></h4>
-                <label>
-                  <input type="checkbox" id="publicHoliday"> Public Holiday
-                </label>
-                <input type="number" id="publicHolidayDays" class="hidden" placeholder="days" style="width: 30px;">
-                
-                <label>
-                  <input type="checkbox" id="overtime"> Overtime
-                </label>
-                <input type="number" id="overtimeHours" class="hidden" placeholder="hours" style="width: 30px;">
-                
-                <label>
-                  <input type="checkbox" id="unpaidLeave"> Unpaid Leave
-                </label>
-                <input type="number" id="unpaidLeaveDays" class="hidden" placeholder="days" style="width: 30px;">
-                <p class="mt-3">Total : RM <span id="staffOT"> </span></p>
-                              
-                <button id="calcStaffBtn" class="btn btn-custom mt-2">Calculate Staff Salary</button>
-              </div>
-            </div>
-
-            <!-- Part Time salary Calculations -->
-            <div class="card card-primary border-0">
-              <div class="card-body">
-                <h2>Part-Time Salary</h2>
-                <label for="partTimeHours">Hours Worked:</label>
-                <input type="number" id="partTimeHours" placeholder="Enter hours worked">
-                <p class="mt-3">Total <strong>(PT)</strong> : RM <span id="partTime"> </span></p>
-                
-                <button id="calcPartTimeBtn" class="btn btn-custom mt-2">Calculate Part-Time Salary</button>
-                
-              </div>
-            </div>
-          </div>
-          <!-- /.col-md-6 -->
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -155,27 +102,130 @@
 </div>
 <!-- ./wrapper -->
 
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const publicHolidayCheckbox = document.getElementById('publicHoliday');
-    const publicHolidayDays = document.getElementById('publicHolidayDays');
-    const overtimeCheckbox = document.getElementById('overtime');
-    const overtimeHours = document.getElementById('overtimeHours');
-    const unpaidLeaveCheckbox = document.getElementById('unpaidLeave');
-    const unpaidLeaveDays = document.getElementById('unpaidLeaveDays');
+<script type="module">
+  import { db, calcStaffOT, publlicHoliday, overTime, unpaidLeave, calcPartTime } from './calculation.js';
+  import { getDocs, collection } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-    publicHolidayCheckbox.addEventListener('change', function() {
-      publicHolidayDays.classList.toggle('hidden', !this.checked);
+  // Reference to the employees collection in Firestore
+  const employeesRef = collection(db, 'employees');
+
+  // Fetch employee data and display each employee in its own card
+  async function fetchEmployeeCards() {
+    const querySnapshot = await getDocs(employeesRef);
+    let employeeCards = '';
+    querySnapshot.forEach((doc) => {
+      const employeeData = doc.data();
+      employeeCards += `
+        <div class="col-lg-6 col-md-6 col-sm-12 mb-3"> <!-- 2x2 grid on desktop, full width on mobile -->
+          <div class="card card-primary border-primary">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <div class="info-box-icon" style="border-radius: 100px; overflow: hidden; width: 60px; height: 60px; margin-right: 15px;">
+                  <img src="src/me.jpg" alt="Employee Picture" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div>
+                  <h4 class="card-title mb-0"><strong>${employeeData.Nama}</strong></h4>
+                </div>
+              </div>
+              <label>
+                <input type="checkbox" id="publicHoliday-${doc.id}"> Public Holiday
+              </label>
+              <input type="number" id="publicHolidayDays-${doc.id}" class="hidden input" placeholder="days">
+              
+              <label>
+                <input type="checkbox" id="overtime-${doc.id}"> Overtime
+              </label>
+              <input type="number" id="overtimeHours-${doc.id}" class="hidden input" placeholder="hours">
+              
+              <label>
+                <input type="checkbox" id="unpaidLeave-${doc.id}"> Unpaid Leave
+              </label>
+              <input type="number" id="unpaidLeaveDays-${doc.id}" class="hidden input" placeholder="days">
+              <p class="mt-3">Total Staff Salary: RM <span id="staffOT-${doc.id}">0</span></p>
+                            
+              <button id="calcStaffBtn-${doc.id}" class="btn btn-custom mt-2">Calculate Staff Salary</button>
+            </div>
+          </div>
+        </div>
+      `;
     });
 
-    overtimeCheckbox.addEventListener('change', function() {
-      overtimeHours.classList.toggle('hidden', !this.checked);
+    // Add part-time salary calculation card
+    employeeCards += `
+      <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
+        <div class="card card-primary border-primary">
+          <div class="card-body">
+            <h2>Part-Time Salary</h2>
+            <label for="partTimeHours">Hours Worked:</label>
+            <input type="number" id="partTimeHours" class="input" placeholder="Enter hours worked">
+            <p class="mt-3">Total Part-Time Salary: RM <span id="partTime">0</span></p>
+            <button id="calcPartTimeBtn" class="btn btn-custom mt-2">Calculate Part-Time Salary</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    document.querySelector('.container .row').innerHTML = employeeCards;
+
+    // Add event listeners for dynamically created elements
+    querySnapshot.forEach((doc) => {
+
+      //Checkbox for public holiday
+      const publicHolidayCheckbox = document.getElementById(`publicHoliday-${doc.id}`);
+      const publicHolidayDays = document.getElementById(`publicHolidayDays-${doc.id}`);
+
+      //Checkbox for public holiday
+      const overtimeCheckbox = document.getElementById(`overtime-${doc.id}`);
+      const overtimeHours = document.getElementById(`overtimeHours-${doc.id}`);
+
+      //Checkbox for unpaid leave
+      const unpaidLeaveCheckbox = document.getElementById(`unpaidLeave-${doc.id}`);
+      const unpaidLeaveDays = document.getElementById(`unpaidLeaveDays-${doc.id}`);
+
+      //Button to calculate salary
+      const calcButton = document.getElementById(`calcStaffBtn-${doc.id}`);
+      const totalSpan = document.getElementById(`staffOT-${doc.id}`);
+
+      publicHolidayCheckbox.addEventListener('change', function() {
+        publicHolidayDays.classList.toggle('hidden', !this.checked);
+      });
+
+      overtimeCheckbox.addEventListener('change', function() {
+        overtimeHours.classList.toggle('hidden', !this.checked);
+      });
+
+      unpaidLeaveCheckbox.addEventListener('change', function() {
+        unpaidLeaveDays.classList.toggle('hidden', !this.checked);
+      });
+
+      calcButton.addEventListener('click', function() {
+        let salary = calcStaffOT(1700); // Base salary after deductions
+        if (publicHolidayCheckbox.checked) {
+          salary = publlicHoliday(salary, parseFloat(publicHolidayDays.value || 0));
+        }
+        if (overtimeCheckbox.checked) {
+          salary = overTime(salary, parseFloat(overtimeHours.value || 0));
+        }
+        if (unpaidLeaveCheckbox.checked) {
+          salary = unpaidLeave(salary, parseFloat(unpaidLeaveDays.value || 0));
+        }
+        totalSpan.textContent = salary.toFixed(2);
+      });
     });
 
-    unpaidLeaveCheckbox.addEventListener('change', function() {
-      unpaidLeaveDays.classList.toggle('hidden', !this.checked);
+    // Part-time salary calculation
+    const partTimeHoursInput = document.getElementById('partTimeHours');
+    const partTimeTotalSpan = document.getElementById('partTime');
+    const calcPartTimeButton = document.getElementById('calcPartTimeBtn');
+
+    calcPartTimeButton.addEventListener('click', function () {
+      const hoursWorked = parseFloat(partTimeHoursInput.value || 0);
+      const totalPartTimeSalary = calcPartTime(hoursWorked);
+      partTimeTotalSpan.textContent = totalPartTimeSalary.toFixed(2);
     });
-  });
+  }
+
+  fetchEmployeeCards();
 </script>
 </body>
 </html>
