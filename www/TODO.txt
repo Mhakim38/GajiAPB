@@ -6,8 +6,10 @@ Part 1 (Staff List)
 - [x] Add placeholder untuk gambar Staff - List Staff
 - [x] Add placeholder untuk gambar Staff - details Staff 
 - [x] Edit Add Staff Page UI/UX
-- [] Adjst the latest database
-- [] Display the latest data and Photo
+- [x] Adjst the latest database
+- [x] Display the latest data 
+- [] Edit the firebase data variable name for Household Name and phone Number 
+- [] Display the latest Photo
 - [x] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
 
 Part 2 (Salary Management)
