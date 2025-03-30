@@ -1,5 +1,5 @@
 # Project To-Do List
-
+Color palette: 808097, 2f5e2c, d1121f, f5a391, 8bc53f
 Part 1 (Staff List)
 - [x] Remove ID from display in StaffList.html
 - [x] Address is missing after put <br> tag on Edetail - There some address are missing DONE
@@ -12,11 +12,12 @@ Part 1 (Staff List)
 - [] Display the latest Photo - need firebase Storage (PAY)
 - [] Add more information on ADD STAFF page
 - [x] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
+- [] Add delete and Update button on Edetail.html
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff
-- [] Ajust the UI/UX
-- [] Check function Calculation using real data for confirmation
+- [x] Ajust the UI/UX
+- [x] Check function Calculation using real data for confirmation
 - [] In Database, update the salary record for each Staff
 - [] Add Report page using only table for printing the report. 
 
