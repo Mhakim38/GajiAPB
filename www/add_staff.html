@@ -45,7 +45,7 @@
             color: #212529; /* Adjust text color for contrast */
             border-radius: 20px;
             box-sizing: border-box;
-            height: 750px;
+            height: 1450px;
             padding: 20px;
             width: 400px;
             margin: auto; /* Center horizontally */
@@ -250,6 +250,60 @@
                                     <label for="address" class="placeholder">Address</label>
                                 </div>
 
+                                <div class="input-container ic2">
+                                    <input id="bankName" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="bankName" class="placeholder">Bank Name</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="bankNumber" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="bankNumber" class="placeholder">Bank Number</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="phoneNumber" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="phoneNumber" class="placeholder">Phone Number</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="householdName" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="householdName" class="placeholder">Household Name</label>
+                                </div>
+                                
+                                <div class="input-container ic2">
+                                    <input id="householdPhone" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="householdPhone" class="placeholder">Household phone nmber</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="kidsCount" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="kidsCount" class="placeholder">How many Kids ?</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="parentName" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="parentName" class="placeholder">Father/mother name</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="parentPhone" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="parentPhone" class="placeholder">Father/mother phone number</label>
+                                </div>
+
+                                <div class="input-container ic2">
+                                    <input id="disease" class="input" type="text" placeholder=" " />
+                                    <div class="cut"></div>
+                                    <label for="disease" class="placeholder">Disease</label>
+                                </div>
+
                                 <button type="submit" class="submit">Submit</button>
                             </form>
                         </div>
@@ -294,19 +348,47 @@
     document.getElementById('addStaffForm').addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        let name = document.getElementById('name').value;
-        name = name.toUpperCase(); // Convert name to uppercase
-        const id = document.getElementById('id').value;
-        const ic = document.getElementById('ic').value;
-        const kwsp = document.getElementById('kwsp').value;
-        const email = document.getElementById('email').value;
-        const address = document.getElementById('address').value || "";
+        let Nama = document.getElementById('name').value;
+        Nama = Nama.toUpperCase(); // Convert name to uppercase
 
-        const newStaff = { name, id, ic, kwsp, email, address };
+        const id = document.getElementById('id').value;
+        const IC = document.getElementById('ic').value;
+        const KWSP = document.getElementById('kwsp').value;
+        const Email = document.getElementById('email').value;
+        const Address = document.getElementById('address').value || "";
+
+        let Bank = document.getElementById('bankName').value || "";
+        Bank = Bank.toUpperCase(); // Convert bank name to uppercase
+
+        const Nombor_Bank = document.getElementById('bankNumber').value || "";
+        const Phone_Number = document.getElementById('phoneNumber').value || "";
+        
+        let Nama_Suami_Istri = document.getElementById('householdName').value || "";
+        Nama_Suami_Istri = Nama_Suami_Istri.toUpperCase(); // Convert household name to uppercase
+
+        const Nombor_Telefon_Suami_Istri = document.getElementById('householdPhone').value || "";
+        const Bilangan_Anak = document.getElementById('kidsCount').value || "";
+
+        let Nama_Pewaris_Ibu_Ayah = document.getElementById('parentName').value || "";
+        Nama_Pewaris_Ibu_Ayah = Nama_Pewaris_Ibu_Ayah.toUpperCase(); // Convert parent name to uppercase
+
+        const Nombor_Telefon_Pewaris_Ibu_Ayah = document.getElementById('parentPhone').value || "";
+        const Penyakit = document.getElementById('disease').value || "";
+
+        const newStaff = { 
+            Nama, IC, KWSP, Email, Address, 
+            Bank, "Nombor Bank": Nombor_Bank, "Phone Number": Phone_Number, 
+            "Nama ( Suami/Istri )": Nama_Suami_Istri, 
+            "Nombor telefon ( Suami/Istri )": Nombor_Telefon_Suami_Istri, 
+            "Bilangan Anak": Bilangan_Anak, 
+            "Nama Pewaris (Ibu/Ayah)": Nama_Pewaris_Ibu_Ayah, 
+            "Nombor telefon Pewaris (Ibu/Ayah)": Nombor_Telefon_Pewaris_Ibu_Ayah, 
+            Penyakit 
+        };
 
         try {
             const docRef = await addDoc(collection(db, "employees"), newStaff);
-            alert("Successfully added Staff: " + name);
+            alert("Successfully added Staff: " + Nama);
             document.getElementById('addStaffForm').reset();
             window.location.href = "StaffList.html"; // Redirect to StaffList.html
         } catch (error) {

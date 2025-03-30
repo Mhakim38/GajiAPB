@@ -17,7 +17,7 @@ const db = getFirestore(app);
 // Salary rates and constants
 const StaffSalary = 1700;
 const PartTimeSalary = 8.17;
-const PH = 54.40;
+const PH = 65.40;
 const OT = 12.26;
 const UPL = 65.40;
 
