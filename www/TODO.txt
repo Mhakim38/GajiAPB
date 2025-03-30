@@ -10,7 +10,8 @@ Part 1 (Staff List)
 - [x] Display the latest data 
 - [] Edit the firebase data variable name for Household Name and phone Number 
 - [] Display the latest Photo - need firebase Storage (PAY)
-- [] Add more information on ADD STAFF page
+- [x] Add more information on ADD STAFF page
+- [] Adjust the CSS for add_staff where in the input error width
 - [x] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
 - [] Add delete and Update button on Edetail.html
 
