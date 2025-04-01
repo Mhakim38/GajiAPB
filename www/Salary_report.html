@@ -46,6 +46,48 @@
             opacity: 0.8;
         }
     </style>
+    <script type="module">
+        import { db } from './calculation.js';
+        import { getDocs, collection } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+
+        const salariesRef = collection(db, 'salaries'); // Reference to the salaries collection
+
+        // Salary Deduction Constants
+        const S_KWSP = 187;
+        const S_socso = 8.25;
+        const S_EIS = 3.30;
+
+        async function fetchSalaryReport() {
+            const querySnapshot = await getDocs(salariesRef);
+            let tableRows = '';
+
+            querySnapshot.forEach((doc) => {
+                const salaryData = doc.data();
+                tableRows += `
+                    <tr>
+                        <td>${salaryData.employeeId}</td>
+                        <td>${salaryData.nama}</td>
+                        <td>RM 1700</td> <!-- Base salary -->
+                        <td>${salaryData.unpaidLeave || 0}</td>
+                        <td>RM ${S_KWSP.toFixed(2)}</td>
+                        <td>RM ${S_socso.toFixed(2)}</td>
+                        <td>RM ${S_EIS.toFixed(2)}</td>
+                        <td>${salaryData.publicHoliday || 0}</td>
+                        <td>${salaryData.overtime || 0}</td>
+                        <td>RM ${(salaryData.overtime * 10 || 0).toFixed(2)}</td> <!-- Overtime total -->
+                        <td>RM ${salaryData.totalSalary}</td>
+                    </tr>
+                `;
+            });
+
+            document.querySelector('tbody').innerHTML = tableRows;
+
+            // Notify the parent window that the report is ready
+            window.opener.postMessage('reportReady', '*');
+        }
+
+        fetchSalaryReport();
+    </script>
 </head>
 <body style="margin: 20px;">
     <div class="header">
@@ -83,33 +125,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>001</td>
-                <td>John Doe</td>
-                <td>Manager</td>
-                <td>January</td>
-                <td>$5,000</td>
-                <td>$5,000</td>
-                <td>$5,000</td>
-                <td>$5,000</td>
-                <td>$5,000</td>
-                <td>$5,000</td>
-                <td>$5,000</td>
-            </tr>
-            <tr>
-                <td>002</td>
-                <td>Jane Smith</td>
-                <td>Developer</td>
-                <td>January</td>
-                <td>$4,000</td>
-                <td>$4,000</td>
-                <td>$4,000</td>
-                <td>$4,000</td>
-                <td>$4,000</td>
-                <td>$4,000</td>
-                <td>$4,000</td>
-            </tr>
-            <!-- Add more rows as needed -->
+            <!-- Rows will be dynamically populated -->
         </tbody>
     </table>
 </body>
