@@ -117,7 +117,10 @@
       // Listen for a message from the report page indicating it is ready
       window.addEventListener('message', function handleMessage(event) {
         if (event.data === 'reportReady') {
-          reportWindow.print();
+          // Use a timeout to ensure compatibility with mobile browsers
+          setTimeout(() => {
+            reportWindow.print();
+          }, 500); // Adjust the delay if necessary
           window.removeEventListener('message', handleMessage); // Clean up the event listener
         }
       });
