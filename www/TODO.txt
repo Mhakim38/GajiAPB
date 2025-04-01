@@ -24,6 +24,7 @@ Part 2 (Salary Management)
 - [x] Add Report page using only table for printing the report. 
 - [x] update the report where display the total RM for UPL, Public Holidays, Total overtime Hours in RM
 - [] Add an if statement for checking the employee exist or not, if exist update, if not create new. 
+- [] How to do, reset the salaries data monthly ????
 
 Part 3 (Login)
 - [] Add Login Page
