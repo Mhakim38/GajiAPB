@@ -20,7 +20,8 @@ Part 2 (Salary Management)
 - [x] Ajust the UI/UX
 - [x] Check function Calculation using real data for confirmation
 - [] In Database, update the salary record for each Staff
-- [] Add Report page using only table for printing the report. 
+- [x] Add Report page using only table for printing the report. 
+- [x] pdate the report where display the total RM for UPL, Public Holidays, Total overtime Hours in RM
 
 Part 3 (Login)
 - [] Add Login Page
@@ -33,7 +34,7 @@ Part 4
 feature to add:
 - [] Hover button on desktop
 - [] Add edit/update page for staff detail
-- [] Add Report for total staff Salary (OT, PH, UPL) in a Month
+- [x] Add Report for total staff Salary (OT, PH, UPL) in a Month
 - [] Add search button/function
 
 Finalised
