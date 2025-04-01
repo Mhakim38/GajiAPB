@@ -83,7 +83,9 @@
             document.querySelector('tbody').innerHTML = tableRows;
 
             // Notify the parent window that the report is ready
-            window.opener.postMessage('reportReady', '*');
+            setTimeout(() => {
+                window.opener.postMessage('reportReady', '*');
+            }, 500); // Add a slight delay to ensure rendering is complete
         }
 
         fetchSalaryReport();
