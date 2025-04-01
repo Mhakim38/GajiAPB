@@ -105,6 +105,25 @@
   </aside>
   <!-- /.control-sidebar -->
 
+  <!-- Centered Print Report Button -->
+  <div class="d-flex justify-content-center mb-3">
+    <button class="btn btn-custom" onclick="printReport()">Print Report</button>
+  </div>
+
+  <script>
+    function printReport() {
+      const reportWindow = window.open('Salary_report.html', '_blank');
+
+      // Listen for a message from the report page indicating it is ready
+      window.addEventListener('message', function handleMessage(event) {
+        if (event.data === 'reportReady') {
+          reportWindow.print();
+          window.removeEventListener('message', handleMessage); // Clean up the event listener
+        }
+      });
+    }
+  </script>
+
   <!-- Main Footer -->
   <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
     <!-- Default to the left -->
@@ -115,10 +134,11 @@
 
 <script type="module">
   import { db, calcStaffOT, publlicHoliday, overTime, unpaidLeave, calcPartTime } from './calculation.js';
-  import { getDocs, collection } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+  import { getDocs, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
   // Reference to the employees collection in Firestore
   const employeesRef = collection(db, 'employees');
+  const salariesRef = collection(db, 'salaries'); // Reference to the salaries collection
 
   // Fetch employee data and display each employee in its own card
   async function fetchEmployeeCards() {
@@ -161,31 +181,17 @@
       `;
     });
 
-    // Add part-time salary calculation card
-    employeeCards += `
-      <div class="col-lg-6 col-md-6 col-sm-12 mb-3">
-        <div class="card card-primary border-primary">
-          <div class="card-body">
-            <h2>Part-Time Salary</h2>
-            <label for="partTimeHours">Hours Worked:</label>
-            <input type="number" id="partTimeHours" class="input" placeholder="Enter hours worked">
-            <p class="mt-3">Total Part-Time Salary: RM <span id="partTime">0</span></p>
-            <button id="calcPartTimeBtn" class="btn btn-custom mt-2">Calculate Part-Time Salary</button>
-          </div>
-        </div>
-      </div>
-    `;
-
     document.querySelector('.container .row').innerHTML = employeeCards;
 
     // Add event listeners for dynamically created elements
     querySnapshot.forEach((doc) => {
+      const employeeData = doc.data(); // Ensure employeeData is scoped here
 
       //Checkbox for public holiday
       const publicHolidayCheckbox = document.getElementById(`publicHoliday-${doc.id}`);
       const publicHolidayDays = document.getElementById(`publicHolidayDays-${doc.id}`);
 
-      //Checkbox for public holiday
+      //Checkbox for overtime
       const overtimeCheckbox = document.getElementById(`overtime-${doc.id}`);
       const overtimeHours = document.getElementById(`overtimeHours-${doc.id}`);
 
@@ -209,7 +215,7 @@
         unpaidLeaveDays.classList.toggle('hidden', !this.checked);
       });
 
-      calcButton.addEventListener('click', function() {
+      calcButton.addEventListener('click', async function() {
         let salary = calcStaffOT(1700); // Base salary after deductions
         if (publicHolidayCheckbox.checked) {
           salary = publlicHoliday(salary, parseFloat(publicHolidayDays.value || 0));
@@ -221,18 +227,23 @@
           salary = unpaidLeave(salary, parseFloat(unpaidLeaveDays.value || 0));
         }
         totalSpan.textContent = salary.toFixed(2);
+
+        // Save data to Firebase
+        try {
+          await addDoc(salariesRef, {
+            employeeId: doc.id,
+            nama: employeeData.Nama, // Use employeeData scoped here
+            publicHoliday: publicHolidayCheckbox.checked ? parseFloat(publicHolidayDays.value || 0) : 0,
+            overtime: overtimeCheckbox.checked ? parseFloat(overtimeHours.value || 0) : 0,
+            unpaidLeave: unpaidLeaveCheckbox.checked ? parseFloat(unpaidLeaveDays.value || 0) : 0,
+            totalSalary: salary.toFixed(2)
+          });
+          alert('Salary details saved successfully!');
+        } catch (error) {
+          console.error('Error saving salary details:', error);
+          alert('Failed to save salary details.');
+        }
       });
-    });
-
-    // Part-time salary calculation
-    const partTimeHoursInput = document.getElementById('partTimeHours');
-    const partTimeTotalSpan = document.getElementById('partTime');
-    const calcPartTimeButton = document.getElementById('calcPartTimeBtn');
-
-    calcPartTimeButton.addEventListener('click', function () {
-      const hoursWorked = parseFloat(partTimeHoursInput.value || 0);
-      const totalPartTimeSalary = calcPartTime(hoursWorked);
-      partTimeTotalSpan.textContent = totalPartTimeSalary.toFixed(2);
     });
   }
 
