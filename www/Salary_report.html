@@ -63,10 +63,6 @@
             th, td {
                 padding: 4px; /* Reduce padding for better fit */
             }
-
-            .header {
-                display: none; /* Hide the header when printing */
-            }
         }
     </style>
     <script type="module">
@@ -97,17 +93,17 @@
                     <tr>
                         <td>${salaryData.employeeId}</td>
                         <td>${salaryData.nama}</td>
-                        <td>RM ${StaffSalary.toFixed(2)}</td> <!-- Base salary -->
+                        <td>${StaffSalary.toFixed(2)}</td> <!-- Base salary -->
                         <td>${salaryData.unpaidLeave || 0}</td> <!-- Days for Unpaid Leave -->
-                        <td>RM ${Math.abs(unpaidLeaveDeduction).toFixed(2)}</td>
-                        <td>RM ${S_KWSP.toFixed(2)}</td>
-                        <td>RM ${S_socso.toFixed(2)}</td>
-                        <td>RM ${S_EIS.toFixed(2)}</td>
+                        <td>${Math.abs(unpaidLeaveDeduction).toFixed(2)}</td>
+                        <td>${S_KWSP.toFixed(2)}</td>
+                        <td>${S_socso.toFixed(2)}</td>
+                        <td>${S_EIS.toFixed(2)}</td>
                         <td>${salaryData.publicHoliday || 0}</td> <!-- Days for Public Holiday -->
-                        <td>RM ${publicHolidayAddition.toFixed(2)}</td>
+                        <td>${publicHolidayAddition.toFixed(2)}</td>
                         <td>${salaryData.overtime || 0}</td>
-                        <td>RM ${overtimeAddition.toFixed(2)}</td>
-                        <td>RM ${salaryData.totalSalary}</td>
+                        <td>${overtimeAddition.toFixed(2)}</td>
+                        <td>${salaryData.totalSalary}</td>
                     </tr>
                 `;
             });
@@ -134,13 +130,15 @@
                 <h5 class="m-1" style="font-size: small;">Phone : 016-410 3533 / 011-2337 1228</h5>
             </div>
         </div>
-    </div>
+        <h5 class="font-weight-bold" style="font-size: medium; text-align: right;" id="dateIssued">Date issued: </h5>
+    </div><br>
+    <h2 class="text-center font-weight-bold">Monthly Salary Report</h2>
     <table>
         <thead>
             <tr>
                 <th rowspan="3">Employee ID</th>
                 <th rowspan="3">Name</th>
-                <th rowspan="3">Base Salary</th>
+                <th rowspan="3">Base <br>Salary</th>
                 <th colspan="5">Deduction</th>
                 <th colspan="4">Addition</th>
                 <th rowspan="3">Total Salary</th>
@@ -175,5 +173,15 @@
             <!-- Rows will be dynamically populated -->
         </tbody>
     </table>
+    <script>
+        // Dynamically set the current date
+        const dateElement = document.getElementById('dateIssued');
+        const currentDate = new Date().toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+        dateElement.textContent += currentDate;
+    </script>
 </body>
 </html>
