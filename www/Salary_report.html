@@ -28,8 +28,7 @@
         th, td {
             border: 1px solid #000;
             padding: 8px;
-            text-align: left;
-            white-space: nowrap; /* Prevent content from wrapping */
+            text-align: center;
         }
         th {
             background-color: #f2f2f2;
@@ -45,9 +44,33 @@
             object-fit: contain;
             opacity: 0.8;
         }
+
+        @media print {
+            @page {
+                size: landscape; /* Set the page orientation to landscape */
+                margin: 1cm; /* Adjust margins for better fit */
+            }
+
+            body {
+                font-size: 10px; /* Reduce font size for printing */
+            }
+
+            table {
+                width: 100%; /* Ensure the table spans the full width */
+                font-size: 9px; /* Reduce table font size */
+            }
+
+            th, td {
+                padding: 4px; /* Reduce padding for better fit */
+            }
+
+            .header {
+                display: none; /* Hide the header when printing */
+            }
+        }
     </style>
     <script type="module">
-        import { db } from './calculation.js';
+        import { db, publlicHoliday, overTime, unpaidLeave } from './calculation.js';
         import { getDocs, collection } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
         const salariesRef = collection(db, 'salaries'); // Reference to the salaries collection
@@ -56,6 +79,7 @@
         const S_KWSP = 187;
         const S_socso = 8.25;
         const S_EIS = 3.30;
+        const StaffSalary = 1700;
 
         async function fetchSalaryReport() {
             const querySnapshot = await getDocs(salariesRef);
@@ -63,18 +87,26 @@
 
             querySnapshot.forEach((doc) => {
                 const salaryData = doc.data();
+                console.log(salaryData);
+                // Calculate values using imported functions
+                const unpaidLeaveDeduction = unpaidLeave(StaffSalary, salaryData.unpaidLeave || 0) - StaffSalary;
+                const publicHolidayAddition = publlicHoliday(0, salaryData.publicHoliday || 0);
+                const overtimeAddition = overTime(0, salaryData.overtime || 0);
+
                 tableRows += `
                     <tr>
                         <td>${salaryData.employeeId}</td>
                         <td>${salaryData.nama}</td>
-                        <td>RM 1700</td> <!-- Base salary -->
-                        <td>${salaryData.unpaidLeave || 0}</td>
+                        <td>RM ${StaffSalary.toFixed(2)}</td> <!-- Base salary -->
+                        <td>${salaryData.unpaidLeave || 0}</td> <!-- Days for Unpaid Leave -->
+                        <td>RM ${Math.abs(unpaidLeaveDeduction).toFixed(2)}</td>
                         <td>RM ${S_KWSP.toFixed(2)}</td>
                         <td>RM ${S_socso.toFixed(2)}</td>
                         <td>RM ${S_EIS.toFixed(2)}</td>
-                        <td>${salaryData.publicHoliday || 0}</td>
+                        <td>${salaryData.publicHoliday || 0}</td> <!-- Days for Public Holiday -->
+                        <td>RM ${publicHolidayAddition.toFixed(2)}</td>
                         <td>${salaryData.overtime || 0}</td>
-                        <td>RM ${(salaryData.overtime * 10 || 0).toFixed(2)}</td> <!-- Overtime total -->
+                        <td>RM ${overtimeAddition.toFixed(2)}</td>
                         <td>RM ${salaryData.totalSalary}</td>
                     </tr>
                 `;
@@ -109,20 +141,33 @@
                 <th rowspan="3">Employee ID</th>
                 <th rowspan="3">Name</th>
                 <th rowspan="3">Base Salary</th>
-                <th colspan="4" class="text-center">Deduction</th>
-                <th colspan="3" class="text-center">Addition</th>
+                <th colspan="5">Deduction</th>
+                <th colspan="4">Addition</th>
                 <th rowspan="3">Total Salary</th>
             </tr>
             <tr>
-                <th rowspan="2">Unpaid Leave</th>
+                <th colspan="2">Unpaid Leave <!--Closing th tag is under-->
+                    <div class="">
+                        <h5 class="text-muted text-center mb-0 mt-2" style="font-size: smaller;">65.40/day</h5>
+                    </div></th>
                 <th rowspan="2">KWSP</th>
                 <th rowspan="2">SOCSO</th>
                 <th rowspan="2">EIS</th>
-                <th rowspan="2">Public Holiday</th>
-                <th colspan="2">Overtime</th>
+                <th colspan="2">Public Holiday <!--Closing th tag is under-->
+                <div class="">
+                    <h5 class="text-muted text-center mb-0 mt-2" style="font-size: smaller;">65.40/day</h5>
+                </div></th>
+                <th colspan="2">Overtime 
+                <div class="">
+                    <h5 class="text-muted text-center mb-0 mt-2" style="font-size: smaller;">12.26/hrs</h5>
+                </div></th>
             </tr>
             <tr>
-                <th>Hours</th>
+                <th>Days</th> <!--For Unpaid Leave-->
+                <th>Total</th>
+                <th>Days</th> <!--For Public Holidays-->
+                <th>Total</th>
+                <th>Hours</th><!--For Overtime-->
                 <th>Total</th>
             </tr>
         </thead>
