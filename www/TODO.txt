@@ -14,14 +14,16 @@ Part 1 (Staff List)
 - [] Adjust the CSS for add_staff where in the input error width
 - [x] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
 - [] Add delete and Update button on Edetail.html
+- [] Add toupper on employeeID in add_staff and edit/update
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff
 - [x] Ajust the UI/UX
 - [x] Check function Calculation using real data for confirmation
-- [] In Database, update the salary record for each Staff
+- [x] In Database, update the salary record for each Staff
 - [x] Add Report page using only table for printing the report. 
-- [x] pdate the report where display the total RM for UPL, Public Holidays, Total overtime Hours in RM
+- [x] update the report where display the total RM for UPL, Public Holidays, Total overtime Hours in RM
+- [] Add an if statement for checking the employee exist or not, if exist update, if not create new. 
 
 Part 3 (Login)
 - [] Add Login Page
