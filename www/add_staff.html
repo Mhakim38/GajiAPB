@@ -198,9 +198,6 @@
             margin: 0;
         }
 
-        input[type="number"] {
-            -moz-appearance: textfield; /* For Firefox */
-        }
     </style>
 </head>
 <body class="hold-transition sidebar-collapse layout-top-nav">
@@ -250,14 +247,14 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-container ic2">
-                                            <input id="ic" class="input" type="number" placeholder=" " required />
+                                            <input id="ic" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " required />
                                             <div class="cut"></div>
                                             <label for="ic" class="placeholder">IC</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-container ic2">
-                                            <input id="kwsp" class="input" type="number" placeholder=" " required />
+                                            <input id="kwsp" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " required />
                                             <div class="cut"></div>
                                             <label for="kwsp" class="placeholder">KWSP</label>
                                         </div>
@@ -291,7 +288,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-container ic2">
-                                            <input id="bankNumber" class="input" type="number" placeholder=" " />
+                                            <input id="bankNumber" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
                                             <div class="cut"></div>
                                             <label for="bankNumber" class="placeholder">Bank Number</label>
                                         </div>
@@ -301,7 +298,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-container ic2">
-                                            <input id="phoneNumber" class="input" type="number" placeholder=" " />
+                                            <input id="phoneNumber" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
                                             <div class="cut"></div>
                                             <label for="phoneNumber" class="placeholder">Phone Number</label>
                                         </div>
@@ -320,7 +317,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-container ic2">
-                                            <input id="householdPhone" class="input" type="number" placeholder=" " />
+                                            <input id="householdPhone" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
                                             <div class="cut"></div>
                                             <label for="householdPhone" class="placeholder">Household phone nmber</label>
                                         </div>
@@ -330,7 +327,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-container ic2">
-                                            <input id="kidsCount" class="input" type="number" placeholder=" " />
+                                            <input id="kidsCount" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
                                             <div class="cut"></div>
                                             <label for="kidsCount" class="placeholder">How many Kids ?</label>
                                         </div>
@@ -347,7 +344,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-container ic2">
-                                            <input id="parentPhone" class="input" type="number" placeholder=" " />
+                                            <input id="parentPhone" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
                                             <div class="cut"></div>
                                             <label for="parentPhone" class="placeholder">Father/mother phone number</label>
                                         </div>
