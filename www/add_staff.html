@@ -131,12 +131,21 @@
             top: -20px;
             transform: translateY(0);
             transition: transform 200ms;
-            width: 76px;
+            width: 495px;
         }
 
         .cut-short {
-            width: 50px;
+            width: 65px;
         }
+
+        .cut-medium {
+            width: 120px;
+        }
+        
+        .cut-long {
+            width: 180px;
+        }
+
 
         .input:focus ~ .cut,
         .input:not(:placeholder-shown) ~ .cut {
@@ -318,7 +327,7 @@
                                             <option value="single">Single</option>
                                             <option value="married">Married</option>
                                         </select>
-                                        <div class="cut"></div>
+                                        <div class="cut cut-medium"></div>
                                         <label for="maritalStatus" class="placeholder">Marital Status</label>
                                     </div>
                                 </div>
@@ -338,14 +347,14 @@
                                         <div class="input-container ic2">
                                             <input id="householdPhone" class="input" type="number" 
                                                    pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                            <div class="cut"></div>
+                                            <div class="cut cut-long"></div>
                                             <label for="householdPhone" class="placeholder">Household phone number</label>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="input-container ic2">
                                             <input id="kidsCount" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                            <div class="cut"></div>
+                                            <div class="cut cut-medium"></div>
                                             <label for="kidsCount" class="placeholder">How many Kids?</label>
                                         </div>
                                     </div>
@@ -381,7 +390,7 @@
                                             <option value="no">No</option>
                                             <option value="yes">Yes</option>
                                         </select>
-                                        <div class="cut"></div>
+                                        <div class="cut cut-short"></div>
                                         <label for="hasDisease" class="placeholder">Disease</label>
                                     </div>
                                 </div>
