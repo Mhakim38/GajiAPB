@@ -8,14 +8,14 @@ Part 1 (Staff List)
 - [x] Edit Add Staff Page UI/UX
 - [x] Adjst the latest database
 - [x] Display the latest data 
-- [] Edit the firebase data variable name for Household Name and phone Number 
+- [x] Edit the firebase data variable name for Household Name and phone Number 
 - [] Display the latest Photo - need firebase Storage (PAY)
 - [x] Add more information on ADD STAFF page
 - [] Adjust the CSS for add_staff where in the input error width
 - [x] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
-- [] Add delete and Update button on Edetail.html
+- [x] Add delete and Update button on Edetail.html
 - [] The delete button on StaffList.html need to delete ALL the data in salaries and employes collection
-- [] Add toupper on employeeID in add_staff and edit/update
+- [x] Add toupper on employeeID in add_staff and edit/update
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff
@@ -25,8 +25,8 @@ Part 2 (Salary Management)
 - [x] Add Report page using only table for printing the report. 
 - [x] update the report where display the total RM for UPL, Public Holidays, Total overtime Hours in RM
 - [] Add an if statement for checking the employee exist or not, if exist update, if not create new. 
-- [] How to do, reset the salaries data monthly ????
-- [] Make sure that every staff have an staff_id, if not salary cant be save
+- [] How to do, reset the salaries data monthly ???? -- bu using update only and chek if the user data exist or not
+- [x] Make sure that every staff have an staff_id, if not salary cant be save -- New data incoming with new column name
 
 Part 3 (Login)
 - [] Add Login Page
@@ -37,10 +37,11 @@ Part 4
 - [] Finalised The User Interface 
 
 feature to add:
-- [] Hover button on desktop
-- [] Add edit/update page for staff detail
+- [x] Hover button on desktop
+- [x] Add edit/update page for staff detail
 - [x] Add Report for total staff Salary (OT, PH, UPL) in a Month
 - [] Add search button/function
+- [] Add salary payment detail for each staff - Slip Gaji
 
 Finalised
 - [] Double Check Function on Salary Management
