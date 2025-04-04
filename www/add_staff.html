@@ -216,97 +216,116 @@
     <!-- /.navbar -->
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper border-0" style="background-color: white;">
-        <!-- Main content container-->
-        <div class="content">
-            <div class="container">
-                <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
-                    <div class="col-lg-12 text-center"> <!-- Change col-lg-6 to col-lg-12 -->
-                        <div class="form">
-                            <div class="title">Staff Information</div>
-                            <div class="subtitle">Fill out the form</div>
+<div class="content-wrapper border-0" style="background-color: white;">
+    <!-- Main content container-->
+    <div class="content">
+        <div class="container">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-12 text-center">
+                    <div class="form">
+                        <div class="title">Staff Information</div>
+                        <div class="subtitle">Fill out the form</div>
 
-                            <form id="addStaffForm">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-container ic1">
-                                            <input id="name" class="input" type="text" placeholder=" " required />
-                                            <div class="cut"></div>
-                                            <label for="name" class="placeholder">Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-container ic1">
-                                            <input id="id" class="input" type="text" placeholder=" " required />
-                                            <div class="cut"></div>
-                                            <label for="id" class="placeholder">Staff ID</label>
-                                        </div>
+                        <form id="addStaffForm">
+                            <!-- Existing form fields remain the same until Family Related section -->
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-container ic1">
+                                        <input id="name" class="input" type="text" placeholder=" " required />
+                                        <div class="cut"></div>
+                                        <label for="name" class="placeholder">Name</label>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="ic" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " required />
-                                            <div class="cut"></div>
-                                            <label for="ic" class="placeholder">IC</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="kwsp" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " required />
-                                            <div class="cut"></div>
-                                            <label for="kwsp" class="placeholder">KWSP</label>
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="input-container ic1">
+                                        <input id="id" class="input" type="text" placeholder=" "/>
+                                        <div class="cut"></div>
+                                        <label for="id" class="placeholder">Staff ID</label>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="email" class="input" type="email" placeholder=" " required />
-                                            <div class="cut"></div>
-                                            <label for="email" class="placeholder">Email</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="address" class="input" type="text" placeholder=" " />
-                                            <div class="cut"></div>
-                                            <label for="address" class="placeholder">Address</label>
-                                        </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <input id="ic" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " required />
+                                        <div class="cut"></div>
+                                        <label for="ic" class="placeholder">IC</label>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="bankName" class="input" type="text" placeholder=" " />
-                                            <div class="cut"></div>
-                                            <label for="bankName" class="placeholder">Bank Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="bankNumber" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                            <div class="cut"></div>
-                                            <label for="bankNumber" class="placeholder">Bank Number</label>
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <input id="kwsp" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" "
+                                            required />
+                                        <div class="cut"></div>
+                                        <label for="kwsp" class="placeholder">KWSP</label>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="phoneNumber" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                            <div class="cut"></div>
-                                            <label for="phoneNumber" class="placeholder">Phone Number</label>
-                                        </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <input id="email" class="input" type="email" placeholder=" " required />
+                                        <div class="cut"></div>
+                                        <label for="email" class="placeholder">Email</label>
                                     </div>
-                                </div><br>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <input id="address" class="input" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="address" class="placeholder">Address</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <input id="bankName" class="input" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="bankName" class="placeholder">Bank Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <input id="bankNumber" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="bankNumber" class="placeholder">Bank Number</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <input id="phoneNumber" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="phoneNumber" class="placeholder">Phone Number</label>
+                                    </div>
+                                </div>
+                            </div><br>
+                            
+                            <div class="subtitle"><strong>Family Related</strong></div>
 
-                                <div class="subtitle"><strong>Family Related</strong></div>
+                            <!-- Marital Status -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-container ic2 justify-content-center">
+                                        <select id="maritalStatus" class="input text-center" required>
+                                            <option value="single">Single</option>
+                                            <option value="married">Married</option>
+                                        </select>
+                                        <div class="cut"></div>
+                                        <label for="maritalStatus" class="placeholder">Marital Status</label>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- Family Fields -->
+                            <div id="familyFields" style="display: none;">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="input-container ic2">
@@ -315,87 +334,86 @@
                                             <label for="householdName" class="placeholder">Household Name</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="input-container ic2">
-                                            <input id="householdPhone" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
+                                            <input id="householdPhone" class="input" type="number" 
+                                                   pattern="[0-9]*" inputmode="numeric" placeholder=" " />
                                             <div class="cut"></div>
-                                            <label for="householdPhone" class="placeholder">Household phone nmber</label>
+                                            <label for="householdPhone" class="placeholder">Household phone number</label>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="input-container ic2">
                                             <input id="kidsCount" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
                                             <div class="cut"></div>
-                                            <label for="kidsCount" class="placeholder">How many Kids ?</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="parentName" class="input" type="text" placeholder=" " />
-                                            <div class="cut"></div>
-                                            <label for="parentName" class="placeholder">Father/mother name</label>
+                                            <label for="kidsCount" class="placeholder">How many Kids?</label>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="parentPhone" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                            <div class="cut"></div>
-                                            <label for="parentPhone" class="placeholder">Father/mother phone number</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <label for="hasDisease" class="placeholder"></label>
-                                            <select id="hasDisease" class="input" required>
-                                                <option value="no">No</option>
-                                                <option value="yes">Yes</option>
-                                            </select>
-                                        </div>
+                            <!-- Parent Information -->
+                             <br>
+                            <div class="subtitle mt-2"><strong>Relatives Related</strong></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <input id="parentName" class="input" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="parentName" class="placeholder">Father/mother name</label>
                                     </div>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6" id="diseaseNameContainer" style="display: none;">
-                                        <div class="input-container ic2">
-                                            <input id="diseaseName" class="input" type="text" placeholder=" " />
-                                            <div class="cut"></div>
-                                            <label for="diseaseName" class="placeholder">Disease Name</label>
-                                        </div>
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <input id="parentPhone" class="input" type="number" 
+                                               pattern="[0-9]*" inputmode="numeric" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="parentPhone" class="placeholder">Father/mother phone number</label>
                                     </div>
                                 </div>
+                            </div>
 
-                                <button type="submit" class="submit">Submit</button>
-                            </form>
-                        </div>
+                            <!-- Disease Section -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <select id="hasDisease" class="input" required>
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                        <div class="cut"></div>
+                                        <label for="hasDisease" class="placeholder">Disease</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" id="diseaseNameContainer" style="display: none;">
+                                    <div class="input-container ic2">
+                                        <input id="diseaseName" class="input" type="text" placeholder=" " />
+                                        <div class="cut"></div>
+                                        <label for="diseaseName" class="placeholder">Disease Name</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit">Submit</button>
+                        </form>
                     </div>
-                    <!-- /.col-md-12 -->
                 </div>
-                <!-- /.row -->
-            </div><!-- /.container-fluid -->
+            </div>
         </div>
-        <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
+</div>
 
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Control sidebar content goes here -->
     </aside>
     <!-- /.control-sidebar -->
-
+    
     <!-- Main Footer -->
     <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
         <!-- Default to the left -->
         <strong><a href="https://github.com/Mhakim38">MyGaji v1.0</a><br>by Hakim</strong>
     </footer>
-</div>
-<!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 
@@ -422,6 +440,35 @@
         }
     });
 
+    // Toggle family fields based on marital status
+    document.getElementById('maritalStatus').addEventListener('change', (event) => {
+        const familyFields = document.getElementById('familyFields');
+        const isMarried = event.target.value === 'married';
+
+        // Toggle visibility
+        familyFields.style.display = isMarried ? 'block' : 'none';
+
+        // Toggle required attributes
+        const familyInputs = document.querySelectorAll('#familyFields input');
+        familyInputs.forEach(input => {
+            input.required = isMarried;
+        });
+    });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const maritalStatus = document.getElementById('maritalStatus');
+        const familyFields = document.getElementById('familyFields');
+        const isInitiallyMarried = maritalStatus.value === 'married';
+
+        familyFields.style.display = isInitiallyMarried ? 'block' : 'none';
+
+        const familyInputs = document.querySelectorAll('#familyFields input');
+        familyInputs.forEach(input => {
+            input.required = isInitiallyMarried;
+        });
+    });
+
     // Disable changing the value of number inputs on scroll
     document.querySelectorAll('input[type="number"]').forEach((input) => {
         input.addEventListener('wheel', (event) => {
@@ -435,7 +482,9 @@
         let Nama = document.getElementById('name').value;
         Nama = Nama.toUpperCase(); // Convert name to uppercase
 
-        const id = document.getElementById('id').value;
+        let id = document.getElementById('id').value || '000';
+        id = id.toUpperCase();
+        
         const IC = document.getElementById('ic').value;
         const KWSP = document.getElementById('kwsp').value;
         const Email = document.getElementById('email').value;
@@ -458,19 +507,25 @@
 
         const Nombor_Telefon_Pewaris_Ibu_Ayah = document.getElementById('parentPhone').value || "";
         const hasDisease = document.getElementById('hasDisease').value;
-        const Penyakit = hasDisease === 'yes' ? document.getElementById('diseaseName').value : "None";
+
+        // Save the Penyakit field only if the user selects "Yes"
+        const Penyakit = hasDisease === 'yes' ? document.getElementById('diseaseName').value : "";
 
         const newStaff = { 
             Nama, id, IC, KWSP, Email, Address, 
-            Bank, "Nombor Bank": Nombor_Bank, "Phone Number": Phone_Number, 
-            "Nama ( Suami/Istri )": Nama_Suami_Istri, 
-            "Nombor telefon ( Suami/Istri )": Nombor_Telefon_Suami_Istri, 
-            "Bilangan Anak": Bilangan_Anak, 
-            "Nama Pewaris (Ibu/Ayah)": Nama_Pewaris_Ibu_Ayah, 
-            "Nombor telefon Pewaris (Ibu/Ayah)": Nombor_Telefon_Pewaris_Ibu_Ayah, 
-            Penyakit 
+            Bank, Nombor_Bank, Phone_Number, 
+            Nama_Suami_Istri, 
+            Nombor_Telefon_Suami_Istri, 
+            Bilangan_Anak, 
+            Nama_Pewaris_Ibu_Ayah, 
+            Nombor_Telefon_Pewaris_Ibu_Ayah, 
         };
 
+        // Add the Penyakit field only if it is not empty
+        if (Penyakit) {
+            newStaff.Penyakit = Penyakit;
+        }
+    
         try {
             const docRef = await addDoc(collection(db, "employees"), newStaff);
             alert("Successfully added Staff: " + Nama);
@@ -481,6 +536,6 @@
             alert("Error adding staff: " + error.message);
         }
     });
-</script>
+    </script>
 </body>
 </html>
