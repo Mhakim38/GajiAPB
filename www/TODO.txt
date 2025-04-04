@@ -14,6 +14,7 @@ Part 1 (Staff List)
 - [] Adjust the CSS for add_staff where in the input error width
 - [x] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
 - [] Add delete and Update button on Edetail.html
+- [] The delete button on StaffList.html need to delete ALL the data in salaries and employes collection
 - [] Add toupper on employeeID in add_staff and edit/update
 
 Part 2 (Salary Management)

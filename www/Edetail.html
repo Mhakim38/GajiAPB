@@ -94,6 +94,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <p><strong>Father/Mother Name:</strong> <span id="employee-Fname"></span></p>
                 <p><strong>Father/Mother Number:</strong> <span id="employee-FphoneNo"></span></p>
                 <p><strong>Disease:</strong> <span id="employee-disease"></span></p>
+                <button id="delete-staff-btn" class="btn btn-danger mt-3">Delete Staff</button>
+                <button id="update-staff-btn" class="btn btn-custom mt-3">Update Staff</button> <!-- New Update Button -->
               </div>
           </div>
           <!-- /.col-md-6 -->
@@ -133,7 +135,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Import Firebase setup from calculation.js -->
 <script type="module">
     import { db } from './calculation.js';
-    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
   
     // Function to get query parameter by name
     function getQueryParam(param) {
@@ -148,44 +150,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
   
       if (employeeId) {
         try {
-          const employeeRef = doc(db, 'employees', employeeId); // Get the document reference
-          const employeeDoc = await getDoc(employeeRef); // Fetch the document
-  
+          // Fetch the document directly using the employeeId
+          const employeeDoc = await getDoc(doc(db, 'employees', employeeId));
+
           if (employeeDoc.exists()) {
             const employeeData = employeeDoc.data();
             console.log("Fetched Employee Data:", employeeData); // Debugging output
-  
-            document.getElementById('employee-id').innerText = employeeData.id;
-            document.getElementById('employee-name').innerText = employeeData.Nama;
-            document.getElementById('employee-address').innerText = employeeData.Address;
-            document.getElementById('employee-email').innerText = employeeData.Email;
-            document.getElementById('employee-ic').innerText = employeeData.IC;
-            document.getElementById('employee-kwsp').innerText = employeeData.KWSP;
-            document.getElementById('employee-bank').innerText = employeeData.Bank;
-            
-            const bankNumber = employeeData["Nombor Bank"]; // Correctly access the field
-            document.getElementById('employee-bankNo').innerText = bankNumber;
 
-            const phoneNumber = employeeData["Phone Number"];
-            document.getElementById('employee-phoneNo').innerText = phoneNumber;
+            // Populate the fields with the fetched data
+            document.getElementById('employee-id').innerText = employeeData.id || employeeDoc.id; // Use Firestore document ID as fallback
+            document.getElementById('employee-name').innerText = employeeData.Nama || '';
+            document.getElementById('employee-address').innerText = employeeData.Address || '';
+            document.getElementById('employee-email').innerText = employeeData.Email || '';
+            document.getElementById('employee-ic').innerText = employeeData.IC || '';
+            document.getElementById('employee-kwsp').innerText = employeeData.KWSP || '';
+            document.getElementById('employee-bank').innerText = employeeData.Bank || '';
+            document.getElementById('employee-bankNo').innerText = employeeData.Nombor_Bank || '';
+            document.getElementById('employee-phoneNo').innerText = employeeData.Phone_Number || '';
 
-            //TODO: Add the rest of the fields
-            const Hname = employeeData["[Nama ( Suami/Istri )/n]"]; 
-            document.getElementById('employee-Hname').innerText = Hname;
+            // Family Related
+            document.getElementById('employee-Hname').innerText = employeeData.Nama_Suami_Istri || '';
+            document.getElementById('employee-Hkids').innerText = employeeData.Bilangan_Anak || '';
+            document.getElementById('employee-HphoneNo').innerText = employeeData.Nombor_Telefon_Suami_Istri || '';
+            document.getElementById('employee-Fname').innerText = employeeData.Nama_Pewaris_Ibu_Ayah || '';
+            document.getElementById('employee-FphoneNo').innerText = employeeData.Nombor_Telefon_Pewaris_Ibu_Ayah || '';
 
-            const Hkids = employeeData["Bilangan Anak"];
-            document.getElementById('employee-Hkids').innerText = Hkids;
-
-            //TODO: Add the rest of the fields
-            document.getElementById('employee-HphoneNo').innerText = employeeData.householdPhoneNumber;
-
-            const parentName = employeeData["Nama Pewaris (Ibu/Ayah)"];
-            document.getElementById('employee-Fname').innerText = parentName;
-
-            const FphoneNo = employeeData["Nombor telefon Pewaris (Ibu/Ayah)"];
-            document.getElementById('employee-FphoneNo').innerText = FphoneNo;
-
-            const disease = employeeData["Penyakit"];
+            const disease = employeeData["Penyakit"] || 'None';
             document.getElementById('employee-disease').innerText = disease;
           } else {
             console.log("No such document exists in Firestore!");
@@ -197,6 +187,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
         console.log("No employee ID provided in the URL.");
       }
     }
+
+    // Function to delete employee details
+    async function deleteEmployee() {
+      const employeeId = getQueryParam('id');
+      if (employeeId) {
+        try {
+          const employeeRef = doc(db, 'employees', employeeId);
+          await deleteDoc(employeeRef);
+          alert('Employee record deleted successfully!');
+          window.location.href = 'StaffList.html'; // Redirect to another page after deletion
+        } catch (error) {
+          console.error('Error deleting document:', error);
+          alert('Failed to delete employee record.');
+        }
+      } else {
+        alert('No employee ID provided in the URL.');
+      }
+    }
+
+    // Attach event listener to the delete button
+    document.getElementById('delete-staff-btn').addEventListener('click', () => {
+      if (confirm('Are you sure you want to delete this employee?')) {
+        deleteEmployee();
+      }
+    });
+
+    // Attach event listener to the update button
+    document.getElementById('update-staff-btn').addEventListener('click', () => {
+      const employeeId = getQueryParam('id');
+      if (employeeId) {
+        window.location.href = `update_Edetail.html?id=${employeeId}`; // Redirect to update page with employee ID
+      } else {
+        alert('No employee ID provided in the URL.');
+      }
+    });
   
     fetchEmployeeDetails();
   </script>

@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -33,4 +33,4 @@ const publlicHoliday = (salary, days) => salary + (PH * days);
 const overTime = (salary, hours) => salary + (OT * hours);
 const unpaidLeave = (salary, days) => salary - (UPL * days);
 
-export { calcStaffOT, calcPartTime, publlicHoliday, overTime, unpaidLeave, db, addDoc, collection };
+export { calcStaffOT, calcPartTime, publlicHoliday, overTime, unpaidLeave, db, addDoc, getDoc , collection, doc, updateDoc };

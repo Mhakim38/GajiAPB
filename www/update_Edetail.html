@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyGaji</title>
+    <link rel="icon" href="src/APB.png">
+    <link rel="apple-touch-icon" href="src/APB.png">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="css/css/all.min.css">
+    <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
+    <!-- Theme style -->
+    <link rel="stylesheet" href="css/adminlte.min.css">
+    <style>
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: auto;
+            padding: 0; /* Remove padding that might restrict width */
+        }
+
+        .content {
+            width: 100%;
+            padding: 0; /* Remove padding to allow full-width content */
+        }
+
+        .btn-custom {
+            background-color: #8bc53f; /* Lime Green */
+            color: white;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        /* Start from form CSS */
+        .form {
+            background-color: #f5a391; /* Peachy Light Orange */
+            color: #212529; /* Adjust text color for contrast */
+            border-radius: 20px;
+            box-sizing: border-box;
+            height: auto;
+            padding: 20px;
+            width: 1200px !important; /* Ensure this width takes precedence */
+            max-width: 100%; /* Prevent overflow on smaller screens */
+        }
+
+        @media (max-width: 768px) {
+            .form {
+                width: 90%; /* Adjust width for smaller screens */
+                height: auto; /* Allow height to adjust based on content */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form {
+                padding: 15px; /* Reduce padding for very small screens */
+            }
+
+            .title {
+                font-size: 28px; /* Adjust title size */
+            }
+
+            .subtitle {
+                font-size: 14px; /* Adjust subtitle size */
+            }
+        }
+
+        .title {
+            color: #46453a; /* Dark Gray */
+            font-family: sans-serif;
+            font-size: 36px;
+            font-weight: 600;
+            margin-top: 30px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #46453a; /* Dark Gray */
+            font-family: sans-serif;
+            font-size: 16px;
+            margin-top: 10px;
+            letter-spacing: 2px;
+        }
+
+        .input-container {
+            height: 50px;
+            position: relative;
+            width: 100%;
+        }
+
+        .ic1 {
+            margin-top: 40px;
+        }
+
+        .ic2 {
+            margin-top: 30px;
+        }
+
+        .input {
+            background-color: #ffffff; /* White */
+            border-radius: 12px;
+            border: 0;
+            box-sizing: border-box;
+            color: #212529; /* Adjust text color */
+            font-size: 18px;
+            height: 100%;
+            outline: 0;
+            padding: 4px 20px 0;
+            width: 100%;
+        }
+
+        select.input {
+            color: #6c757d; /* Adjust placeholder color for better visibility */
+            font-family: sans-serif; /* Apply sans-serif font */
+            appearance: none; /* Remove default dropdown styling */
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .cut {
+            background-color: #f5a391; /* Dark Gray */
+            border-radius: 10px;
+            height: 20px;
+            left: 20px;
+            position: absolute;
+            top: -20px;
+            transform: translateY(0);
+            transition: transform 200ms;
+            width: 76px;
+        }
+
+        .cut-short {
+            width: 50px;
+        }
+
+        .input:focus ~ .cut,
+        .input:not(:placeholder-shown) ~ .cut {
+            transform: translateY(8px);
+        }
+
+        .placeholder {
+            color: #6c757d; /* Adjust placeholder color for better visibility */
+            font-family: sans-serif;
+            left: 20px;
+            line-height: 14px;
+            pointer-events: none;
+            position: absolute;
+            transform-origin: 0 50%;
+            transition: transform 200ms, color 200ms;
+            top: 20px;
+        }
+
+        .input:focus ~ .placeholder,
+        .input:not(:placeholder-shown) ~ .placeholder {
+            transform: translateY(-30px) translateX(10px) scale(0.75);
+        }
+
+        .input:not(:placeholder-shown) ~ .placeholder {
+            color: #808097;
+        }
+
+        .input:focus ~ .placeholder {
+            color: #495057; /* Adjust focus color */
+        }
+
+        .submit {
+            background-color: #2f5e2c; /* Red */
+            border-radius: 12px;
+            border: 0;
+            box-sizing: border-box;
+            color: #ffffff; /* Ensure text is readable */
+            cursor: pointer;
+            font-size: 18px;
+            height: 50px;
+            margin-top: 38px;
+            outline: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        .submit:hover {
+            background-color: #d1121f; /* Darker Red on hover */
+        }
+        .submit:active {
+            background-color: #d1121f; /* Darker Red on active */
+        }
+        /* End form CSS */
+
+        /* Remove the up and down buttons for number inputs */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body class="hold-transition sidebar-collapse layout-top-nav">
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
+        <div class="container justify-content-center"> <!-- Center the container content -->
+            <!-- Logo -->
+            <a href="../../index3.html" class="navbar-brand">
+                <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
+            </a>
+            <!-- end logo -->
+        </div>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper border-0" style="background-color: white;">
+        <!-- Main content container-->
+        <div class="content">
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-lg-12 text-center">
+                        <div class="form">
+                            <div class="title">Staff Information</div>
+                            <div class="subtitle">Fill out the form</div>
+    
+                            <form id="addStaffForm">
+                                <!-- Existing form fields remain the same until Family Related section -->
+    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-container ic1">
+                                            <input id="employee-name" class="input" type="text" placeholder=" " required />
+                                            <div class="cut"></div>
+                                            <label for="name" class="placeholder">Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-container ic1">
+                                            <input id="employee-id" class="input" type="text" placeholder=" " />
+                                            <div class="cut"></div>
+                                            <label for="id" class="placeholder">Staff ID</label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <input id="ic" class="input" type="number" pattern="[0-9]*" inputmode="numeric"
+                                                placeholder=" " required />
+                                            <div class="cut"></div>
+                                            <label for="ic" class="placeholder">IC</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <input id="kwsp" class="input" type="number" pattern="[0-9]*"
+                                                inputmode="numeric" placeholder=" " required />
+                                            <div class="cut"></div>
+                                            <label for="kwsp" class="placeholder">KWSP</label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <input id="email" class="input" type="email" placeholder=" " required />
+                                            <div class="cut"></div>
+                                            <label for="email" class="placeholder">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <input id="address" class="input" type="text" placeholder=" " />
+                                            <div class="cut"></div>
+                                            <label for="address" class="placeholder">Address</label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <input id="bankName" class="input" type="text" placeholder=" " />
+                                            <div class="cut"></div>
+                                            <label for="bankName" class="placeholder">Bank Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <input id="bankNumber" class="input" type="number" pattern="[0-9]*"
+                                                inputmode="numeric" placeholder=" " />
+                                            <div class="cut"></div>
+                                            <label for="bankNumber" class="placeholder">Bank Number</label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <input id="phoneNumber" class="input" type="number" pattern="[0-9]*"
+                                                inputmode="numeric" placeholder=" " />
+                                            <div class="cut"></div>
+                                            <label for="phoneNumber" class="placeholder">Phone Number</label>
+                                        </div>
+                                    </div>
+                                </div><br>
+    
+                                <div class="subtitle"><strong>Family Related</strong></div>
+    
+                                <!-- Marital Status -->
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-container ic2 justify-content-center">
+                                            <select id="maritalStatus" class="input text-center" required>
+                                                <option value="single">Single</option>
+                                                <option value="married">Married</option>
+                                            </select>
+                                            <div class="cut"></div>
+                                            <label for="maritalStatus" class="placeholder">Marital Status</label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <!-- Family Fields -->
+                                <div id="familyFields" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-container ic2">
+                                                <input id="householdName" class="input" type="text" placeholder=" " />
+                                                <div class="cut"></div>
+                                                <label for="householdName" class="placeholder">Household Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-container ic2">
+                                                <input id="householdPhone" class="input" type="number" pattern="[0-9]*"
+                                                    inputmode="numeric" placeholder=" " />
+                                                <div class="cut"></div>
+                                                <label for="householdPhone" class="placeholder">Household phone
+                                                    number</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-container ic2">
+                                                <input id="kidsCount" class="input" type="number" pattern="[0-9]*"
+                                                    inputmode="numeric" placeholder=" " />
+                                                <div class="cut"></div>
+                                                <label for="kidsCount" class="placeholder">How many Kids?</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <!-- Parent Information -->
+                                <br>
+                                <div class="subtitle mt-2"><strong>Relatives Related</strong></div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <input id="parentName" class="input" type="text" placeholder=" " />
+                                            <div class="cut"></div>
+                                            <label for="parentName" class="placeholder">Father/mother name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <input id="parentPhone" class="input" type="number" pattern="[0-9]*"
+                                                inputmode="numeric" placeholder=" " />
+                                            <div class="cut"></div>
+                                            <label for="parentPhone" class="placeholder">Father/mother phone number</label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <!-- Disease Section -->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <select id="hasDisease" class="input" required>
+                                                <option value="no">No</option>
+                                                <option value="yes">Yes</option>
+                                            </select>
+                                            <div class="cut"></div>
+                                            <label for="hasDisease" class="placeholder">Disease</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="diseaseNameContainer" style="display: none;">
+                                        <div class="input-container ic2">
+                                            <input id="diseaseName" class="input" type="text" placeholder=" " />
+                                            <div class="cut"></div>
+                                            <label for="diseaseName" class="placeholder">Disease Name</label>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <button type="submit" class="submit" id="update-staff-btn">Update</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
+        <!-- Default to the left -->
+        <strong><a href="https://github.com/Mhakim38">MyGaji v1.0</a><br>by Hakim</strong>
+    </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="js/demo.js"></script>
+
+<script type="module">
+// Import Firestore functions
+import { db, doc, getDoc, updateDoc } from './calculation.js';
+
+    // Function to fetch a specific employee by ID
+    async function fetchEmployeeById(employeeId) {
+        try {
+            const employeeDoc = await getDoc(doc(db, 'employees', employeeId));
+
+            if (employeeDoc.exists()) {
+                const employeeData = employeeDoc.data();
+                console.log(`Employee ID: ${employeeDoc.id}`, employeeData);
+
+                // Populate main fields
+                document.getElementById('employee-id').value = employeeData.id || '';
+                document.getElementById('employee-name').value = employeeData.Nama || '';
+                document.getElementById('address').value = employeeData.Address || '';
+                document.getElementById('email').value = employeeData.Email || '';
+                document.getElementById('ic').value = employeeData.IC || '';
+                document.getElementById('kwsp').value = employeeData.KWSP || '';
+                document.getElementById('bankName').value = employeeData.Bank || '';
+                document.getElementById('bankNumber').value = employeeData.Nombor_Bank || '';
+                document.getElementById('phoneNumber').value = employeeData.Phone_Number || '';
+
+                // Handle marital status and family fields
+                const maritalStatus = document.getElementById('maritalStatus');
+                const hasFamilyData = employeeData.Nama_Suami_Istri?.trim() !== '';
+
+                // Set marital status and trigger updates
+                maritalStatus.value = hasFamilyData ? 'married' : 'single';
+                maritalStatus.dispatchEvent(new Event('change'));
+
+                // Populate family fields
+                document.getElementById('householdName').value = employeeData.Nama_Suami_Istri || '';
+                document.getElementById('householdPhone').value = employeeData.Nombor_Telefon_Suami_Istri || '';
+                document.getElementById('kidsCount').value = employeeData.Bilangan_Anak || '';
+
+                // Parent information
+                document.getElementById('parentName').value = employeeData.Nama_Pewaris_Ibu_Ayah || '';
+                document.getElementById('parentPhone').value = employeeData.Nombor_Telefon_Pewaris_Ibu_Ayah || '';
+
+                // Handle disease information
+                const hasDiseaseSelect = document.getElementById('hasDisease');
+                const diseaseContainer = document.getElementById('diseaseNameContainer');
+                const diseaseName = employeeData.Penyakit || '';
+
+                if (diseaseName) {
+                    hasDiseaseSelect.value = "yes";
+                    diseaseContainer.style.display = "block";
+                    document.getElementById('diseaseName').value = diseaseName;
+                } else {
+                    hasDiseaseSelect.value = "no";
+                    diseaseContainer.style.display = "none";
+                    document.getElementById('diseaseName').value = '';
+                }
+                hasDiseaseSelect.dispatchEvent(new Event('change'));
+
+                // Trigger validation updates
+                setTimeout(() => {
+                    document.querySelectorAll('input, select').forEach(element => {
+                        element.dispatchEvent(new Event('input'));
+                    });
+                }, 100);
+
+            } else {
+                console.log("No such document!");
+            }
+        } catch (error) {
+            console.error("Error fetching employee: ", error);
+        }
+    }
+
+   // Attach event listener to the update button
+    document.getElementById('update-staff-btn').addEventListener('click', async (event) => {
+        event.preventDefault(); // Prevent form submission that reloads the page
+
+        if (confirm('Double check the input before updating?')) {
+            try {
+                const employeeDoc = await getDoc(doc(db, 'employees', employeeId));
+                const employeeData = employeeDoc.data();
+                console.log(`Employee ID: ${employeeDoc.id}`, employeeData);
+
+                // Get updated values from form
+                const updateData = {
+                    Nama: document.getElementById('employee-name').value.trim().toUpperCase(),
+                    id: document.getElementById('employee-id').value.trim().toUpperCase() || '0',
+                    IC: document.getElementById('ic').value.trim(),
+                    KWSP: document.getElementById('kwsp').value.trim(),
+                    Email: document.getElementById('email').value.trim(),
+                    Address: document.getElementById('address').value.trim(),
+                    Bank: document.getElementById('bankName').value.trim().toUpperCase(),
+                    Nombor_Bank: document.getElementById('bankNumber').value.trim(),
+                    Phone_Number: document.getElementById('phoneNumber').value.trim(),
+                    Nama_Suami_Istri: document.getElementById('householdName').value.trim().toUpperCase(),
+                    Nombor_Telefon_Suami_Istri: document.getElementById('householdPhone').value.trim(),
+                    Bilangan_Anak: document.getElementById('kidsCount').value.trim(),
+
+                    Penyakit: document.getElementById('hasDisease').value === 'yes'
+                        ? document.getElementById('diseaseName').value.trim()
+                        : '',
+                    hasDisease: document.getElementById('hasDisease').value
+                };
+
+                // Validate required fields
+                if (!updateData.Nama || !updateData.IC || !updateData.KWSP || !updateData.Email) {
+                    throw new Error('Please fill in all required fields');
+                }
+
+                // Update Firestore document
+                await updateDoc(doc(db, "employees", employeeId), updateData);
+                alert('Staff details updated successfully!');
+                window.location.href = `Edetail.html?id=${employeeId}`;
+
+            } catch (error) {
+                console.error("Update error:", error);
+                alert(`Update failed: ${error.message}`);
+            }
+        }
+    });
+
+
+    // Function to get query parameter by name
+    function getQueryParam(param) {
+        return new URLSearchParams(window.location.search).get(param);
+    }
+
+// Call the function with the employee ID from the URL
+const employeeId = getQueryParam('id'); // Dynamically fetch the employee ID from the URL
+
+if (employeeId) {
+    fetchEmployeeById(employeeId); // Fetch details for the specific employee
+} else {
+    console.error("No employee ID provided in the URL.");
+}
+
+//toggle family fields based on marital status
+    document.getElementById('maritalStatus').addEventListener('change', (event) => {
+        const familyFields = document.getElementById('familyFields');
+        const isMarried = event.target.value === 'married';
+
+        // Toggle the display of family fields based on marital status
+        familyFields.style.display = isMarried ? 'block' : 'none';
+
+        // If not married, clear the family fields
+        if (!isMarried) {
+            document.getElementById('householdName').value = '';
+            document.getElementById('householdPhone').value = '';
+            document.getElementById('kidsCount').value = '';
+        }
+
+        // Toggle required attribute for each input if married
+        document.querySelectorAll('#familyFields input').forEach(input => {
+            input.required = isMarried && !input.value;
+        });
+    });
+
+
+    // Disease handling
+        document.getElementById('hasDisease').addEventListener('change', (event) => {
+            const diseaseContainer = document.getElementById('diseaseNameContainer');
+            if (event.target.value === 'yes') {
+                diseaseContainer.style.display = 'block';
+            } else {
+                diseaseContainer.style.display = 'none';
+                document.getElementById('diseaseName').value = '';
+            }
+        });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        const maritalStatus = document.getElementById('maritalStatus');
+        const familyFields = document.getElementById('familyFields');
+        const isInitiallyMarried = maritalStatus.value === 'married';
+
+        familyFields.style.display = isInitiallyMarried ? 'block' : 'none';
+
+        const familyInputs = document.querySelectorAll('#familyFields input');
+        familyInputs.forEach(input => {
+            input.required = isInitiallyMarried;
+        });
+        
+    });
+
+    // Initialize disease field on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const hasDisease = document.getElementById('hasDisease');
+            const diseaseContainer = document.getElementById('diseaseNameContainer');
+
+            if (hasDisease.value === 'no') {
+                diseaseContainer.style.display = 'none';
+                document.getElementById('diseaseName').value = '';
+            }
+        });
+</script>
+</body>
+</html>
