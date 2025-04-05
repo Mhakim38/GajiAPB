@@ -11,7 +11,7 @@ Part 1 (Staff List)
 - [x] Edit the firebase data variable name for Household Name and phone Number 
 - [] Display the latest Photo - need firebase Storage (PAY)
 - [x] Add more information on ADD STAFF page
-- [] Adjust the CSS for add_staff where in the input error width
+- [x] Adjust the CSS for add_staff where in the input error width
 - [x] The ID for staff ID are wrong, it display the firebase ID instead of Staff_id
 - [x] Add delete and Update button on Edetail.html
 - [] The delete button on StaffList.html need to delete ALL the data in salaries and employes collection
@@ -42,6 +42,7 @@ feature to add:
 - [x] Add Report for total staff Salary (OT, PH, UPL) in a Month
 - [] Add search button/function
 - [] Add salary payment detail for each staff - Slip Gaji
+- [] Add hours total calculation for staff - start and end time (puch card)
 
 Finalised
 - [] Double Check Function on Salary Management
