@@ -1,125 +1,111 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Page</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <style>
-        @import "bourbon";
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: url('src/soft-yellowbg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            width: 100vw;
+            
+        }
 
-// Colors
-$greenSeaweed: rgba(2, 128, 144, 1);
-$blueQueen: rgba(69, 105, 144, 1);
-$redFire: rgba(244, 91, 105, 1);
+        .login-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
 
-// Fonts
-$fontAsap: "Asap", sans-serif;
+        .login-title {
+            text-align: center;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 20px;
+        }
 
-body {
-  background-color: $redFire;
-  font-family: $fontAsap;
-}
+        label {
+            color: #000;
+        }
 
-.login {
-  overflow: hidden;
-  background-color: white;
-  padding: 40px 30px 30px 30px;
-  border-radius: 10px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  @include transform(translate(-50%, -50%));
-  @include transition(transform 300ms, box-shadow 300ms);
-  box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+        .form-control::placeholder {
+            color: #999;
+        }
 
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    width: 600px;
-    height: 600px;
-    border-top-left-radius: 40%;
-    border-top-right-radius: 45%;
-    border-bottom-left-radius: 35%;
-    border-bottom-right-radius: 40%;
-    z-index: -1;
-  }
+        .show-password {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 10px;
+        }
 
-  &::before {
-    left: 40%;
-    bottom: -130%;
-    background-color: rgba($blueQueen, 0.15);
-    @include animation(wawes 6s infinite linear);
-  }
-
-  &::after {
-    left: 35%;
-    bottom: -125%;
-    background-color: rgba($greenSeaweed, 0.2);
-    @include animation(wawes 7s infinite);
-  }
-
-  > input {
-    font-family: $fontAsap;
-    display: block;
-    border-radius: 5px;
-    font-size: 16px;
-    background: white;
-    width: 100%;
-    border: 0;
-    padding: 10px 10px;
-    margin: 15px -10px;
-  }
-
-  > button {
-    font-family: $fontAsap;
-    cursor: pointer;
-    color: #fff;
-    font-size: 16px;
-    text-transform: uppercase;
-    width: 80px;
-    border: 0;
-    padding: 10px 0;
-    margin-top: 10px;
-    margin-left: -5px;
-    border-radius: 5px;
-    background-color: $redFire;
-    @include transition(background-color 300ms);
-
-    &:hover {
-      background-color: darken($redFire, 5%);
-    }
-  }
-}
-
-@include keyframes(wawes) {
-  from {
-    @include transform(rotate(0));
-  }
-  to {
-    @include transform(rotate(360deg));
-  }
-}
-
-a {
-  text-decoration: none;
-  color: rgba(white, 0.6);
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  font-size: 12px;
-}
-
+        .form-wrapper {
+            position: relative;
+            z-index: 1;
+        }
     </style>
 </head>
+
 <body>
-    <form class="login">
-        <input type="text" placeholder="Username">
-        <input type="password" placeholder="Password">
-        <button>Login</button>
-    </form>
-    
-    <a href="https://codepen.io/davinci/" target="_blank">check my other pens</a>
+
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-5 form-wrapper">
+            <form class="login-box" name="loginForm" method="post" action="loginEngine.php"
+                onsubmit="return validateForm()">
+                <h3 class="login-title">Login</h3>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Email or Phone">
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div>
+
+                <div class="form-check show-password">
+                    <input class="form-check-input" type="checkbox" id="showPass" onclick="togglePassword()">
+                    <label class="form-check-label" for="showPass">Show password</label>
+                </div>
+
+                <input type="hidden" name="option" value="U">
+                <button type="submit" class="btn btn-light w-100 mt-4">Log In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            passwordField.type = (passwordField.type === "password") ? "text" : "password";
+        }
+
+        function validateForm() {
+            var password = document.forms["loginForm"]["password"].value;
+            if (password == "") {
+                alert("Please insert password...");
+                return false;
+            }
+        }
+    </script>
 </body>
+
 </html>
