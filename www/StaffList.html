@@ -6,10 +6,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
   <meta name="description" content="Ayam Penyet Best Salary Management System">
-  <meta name="author" content="Hakim">
-  <title>MyGaji - Staff Management</title>
+  <meta name="theme-color" content="#ffcc09">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>MyGaji - Staff</title>
   <link rel="icon" href="src/APB.png">
   <link rel="apple-touch-icon" href="src/APB.png">
 
@@ -33,17 +35,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
       --highlight: #2f5e2c;
       --danger: #d1121f;
       --soft: #f5a391;
-      --light: #fffdf5;
+      --light: #f8f9fa;
       --dark: #212529;
-      --card-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      --hover-transform: translateY(-3px);
+      --card-shadow: 0 3px 8px rgba(0,0,0,0.08);
       --transition-speed: 0.3s;
+    }
+    
+    * {
+      -webkit-tap-highlight-color: transparent;
     }
     
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: var(--light);
+      background-color: #ffffff;
       color: var(--dark);
+      overflow-x: hidden;
     }
     
     .wrapper {
@@ -52,121 +58,160 @@ scratch. This page gets rid of all links and provides the needed markup only.
       flex-direction: column;
     }
     
-    .main-header {
-      box-shadow: 0 2px 10px rgba(255,204,9,0.2);
-      position: relative;
-      z-index: 10;
+    /* App-like Header */
+    .app-header {
+      padding: 15px 20px;
       background-color: white;
-    }
-    
-    .navbar-brand img {
-      transition: transform 0.3s ease;
-    }
-    
-    .navbar-brand:hover img {
-      transform: scale(1.05);
-    }
-    
-    .content-wrapper {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-color: var(--light);
-      min-height: calc(100vh - 180px);
-    }
-    
-    .content {
-      width: 100%;
-      max-width: 1200px;
-      padding: 2rem;
-    }
-    
-    .page-header {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    
-    .page-title {
-      color: var(--highlight);
-      font-weight: 600;
-      position: relative;
-      padding-bottom: 10px;
-      margin-bottom: 0;
-    }
-    
-    .page-title:after {
-      content: "";
-      position: absolute;
-      bottom: 0;
+      position: sticky;
+      top: 0;
       left: 0;
-      width: 60px;
-      height: 4px;
-      background: var(--primary);
-      border-radius: 2px;
+      right: 0;
+      z-index: 100;
     }
     
-    .btn-add-staff {
-      background-color: var(--primary);
-      color: var(--dark);
-      border: none;
-      border-radius: 50px;
-      padding: 0.6rem 1.5rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
+    .header-left {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     
-    .btn-add-staff:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(255,204,9,0.2);
-      background-color: #f0c000;
+    .header-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin: 0;
       color: var(--dark);
+      margin-left: 15px;
     }
     
-    .btn-add-staff i {
+    .header-logo {
+      height: 35px;
+      width: auto;
+    }
+    
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+      color: var(--dark);
+      border: none;
+      transition: all 0.2s ease;
+    }
+    
+    .back-btn:hover {
+      background-color: #e9e9e9;
+    }
+    
+    /* Main Content */
+    .content-wrapper {
+      flex: 1;
+      width: 100%;
+      max-width: 768px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-bottom: 80px; /* Space for bottom nav */
+    }
+    
+    /* Search Bar */
+    .search-container {
+      margin-bottom: 20px;
+    }
+    
+    .search-input {
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      border-radius: 50px;
+      border: none;
+      background-color: #f5f7fa;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255,204,9,0.3);
+    }
+    
+    .search-icon-container {
+      position: relative;
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #adadad;
       font-size: 0.9rem;
+      z-index: 10;
     }
     
-    .staff-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 1.2rem;
+    /* Employee List Section */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    
+    .section-title {
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--dark);
+      margin: 0;
+    }
+    
+    .staff-counter {
+      background-color: var(--primary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--dark);
+      padding: 3px 10px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .staff-counter i {
+      margin-right: 5px;
+    }
+    
+    /* Staff Card */
+    .staff-list {
+      margin-top: 10px;
     }
     
     .staff-card {
       background: white;
       border-radius: 12px;
-      box-shadow: var(--card-shadow);
-      transition: all var(--transition-speed) ease;
-      overflow: hidden;
-      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      padding: 1rem;
-      gap: 1rem;
-      border-left: 4px solid var(--accent);
+      padding: 15px;
+      gap: 15px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      position: relative;
     }
     
     .staff-card:hover {
-      transform: var(--hover-transform);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
     }
     
     .staff-avatar {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       overflow: hidden;
       flex-shrink: 0;
-      border: 2px solid var(--primary);
     }
     
     .staff-avatar img {
@@ -181,253 +226,419 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
     .staff-name {
       font-weight: 600;
-      margin-bottom: 0.25rem;
+      margin-bottom: 2px;
+      font-size: 1rem;
       color: var(--dark);
+      text-transform: uppercase;
     }
     
     .staff-position {
       color: var(--secondary);
-      font-size: 0.9rem;
-      margin-bottom: 0;
+      font-size: 0.85rem;
+      margin-bottom: 5px;
     }
     
-    .staff-status {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
+    .status-label {
       font-size: 0.75rem;
       font-weight: 500;
-      background-color: #e6f7e6;
-      color: var(--highlight);
-    }
-    
-    .back-home {
-      display: inline-flex;
-      align-items: center;
-      color: var(--secondary);
-      text-decoration: none;
-      margin-bottom: 1rem;
-      transition: color 0.3s ease;
-      font-weight: 500;
-      gap: 0.5rem;
-    }
-    
-    .back-home:hover {
-      color: var(--highlight);
-      text-decoration: none;
-    }
-    
-    .main-footer {
-      padding: 1rem;
-      background: white;
-      box-shadow: 0 -2px 10px rgba(255,204,9,0.1);
-    }
-    
-    .version-badge {
-      display: inline-block;
-      background: var(--primary);
-      color: var(--dark);
-      padding: 0.25rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      margin-left: 0.5rem;
-      font-weight: 600;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    .search-container {
-      position: relative;
-      margin-bottom: 1.5rem;
-    }
-    
-    .search-input {
-      width: 100%;
-      padding: 0.75rem 1rem 0.75rem 3rem;
+      padding: 2px 8px;
       border-radius: 50px;
-      border: 2px solid #e6e6e6;
-      background-color: white;
-      transition: all 0.3s ease;
-      font-family: 'Poppins', sans-serif;
+      display: inline-block;
     }
     
-    .search-input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(255, 204, 9, 0.2);
+    .status-active {
+      background-color: rgba(139, 197, 63, 0.15);
+      color: #65a30d;
     }
     
-    .search-icon {
-      position: absolute;
-      left: 1.2rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--secondary);
+    .staff-chevron {
+      color: #d4d4d4;
+      font-size: 0.9rem;
     }
     
-    .no-staff {
-      text-align: center;
-      padding: 2rem;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: var(--card-shadow);
-      margin-top: 2rem;
-    }
-    
-    .no-staff i {
-      font-size: 3rem;
-      color: var(--secondary);
-      opacity: 0.5;
-      margin-bottom: 1rem;
-    }
-    
-    .staff-count {
+    /* Floating Action Button */
+    .fab {
+      position: fixed;
+      right: 25px;
+      bottom: 90px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
       background-color: var(--primary);
       color: var(--dark);
-      font-weight: 600;
-      border-radius: 50px;
-      padding: 0.3rem 1rem;
-      font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    
-    .staff-count i {
-      font-size: 0.8rem;
-    }
-    
-    .section-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+      border: none;
+      transition: all 0.3s ease;
+      z-index: 900;
+      font-size: 1.5rem;
     }
     
-    @media (max-width: 768px) {
-      .content {
-        padding: 1.5rem;
-      }
-      
-      .page-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-      
-      .page-title {
-        font-size: 1.5rem;
-      }
-      
-      .staff-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .staff-card {
-        width: 100%;
-      }
-      
-      .navbar-brand img {
-        width: 250px !important;
-        height: 70px !important;
-      }
+    .fab:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 12px rgba(0,0,0,0.25);
     }
     
-    @media (max-width: 576px) {
-      .content {
-        padding: 1rem;
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+      z-index: 900;
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px 0;
+      color: var(--secondary);
+      border: none;
+      background: transparent;
+      width: 70px;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-item:hover {
+      color: var(--primary);
+    }
+    
+    .nav-item.active {
+      color: var(--primary);
+    }
+    
+    .nav-item i {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .nav-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    /* Empty State */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    
+    .empty-illustration {
+      width: 100px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+    
+    .empty-illustration i {
+      font-size: 2.5rem;
+      color: #adadad;
+    }
+    
+    .empty-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    
+    .empty-text {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      max-width: 250px;
+    }
+    
+    .empty-btn {
+      background-color: var(--primary);
+      color: var(--dark);
+      border: none;
+      border-radius: 50px;
+      padding: 10px 25px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    /* Loading Skeleton */
+    .skeleton-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      gap: 15px;
+    }
+    
+    .skeleton-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+    
+    .skeleton-info {
+      flex: 1;
+    }
+    
+    .skeleton-name {
+      height: 14px;
+      width: 70%;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    
+    .skeleton-position {
+      height: 10px;
+      width: 50%;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    /* Sidebar for web */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background-color: white;
+      width: 0;
+      transition: width 0.3s ease;
+      overflow: hidden;
+      z-index: 1000;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+      padding-top: 60px;
+    }
+    
+    .sidebar.active {
+      width: 240px;
+    }
+    
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      color: var(--dark);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border-left: 4px solid transparent;
+    }
+    
+    .sidebar-item:hover {
+      background-color: #f8f9fa;
+      text-decoration: none;
+      color: var(--primary);
+    }
+    
+    .sidebar-item.active {
+      border-left-color: var(--primary);
+      background-color: #f8f9fa;
+      color: var(--primary);
+    }
+    
+    .sidebar-icon {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    /* Responsive Adjustments */
+    @media (min-width: 992px) {
+      .app-header {
+        padding-left: 40px;
+        padding-right: 40px;
       }
       
-      .page-title {
-        font-size: 1.3rem;
-      }
-      
-      .staff-card {
-        padding: 0.8rem;
-      }
-      
-      .staff-avatar {
-        width: 50px;
-        height: 50px;
-      }
-      
-      .navbar-brand img {
-        width: 200px !important;
-        height: 60px !important;
-      }
-      
-      .btn-add-staff {
-        width: 100%;
-        justify-content: center;
+      .content-wrapper {
+        max-width: 900px;
+        padding-left: 40px;
+        padding-right: 40px;
       }
       
       .search-container {
-        margin-bottom: 1rem;
+        max-width: 500px;
+        margin: 0 auto 30px;
+      }
+      
+      .staff-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .staff-card {
+        margin-bottom: 0;
+      }
+      
+      .bottom-nav {
+        max-width: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px 10px 0 0;
+        bottom: 10px;
+      }
+      
+      .fab {
+        right: calc(50% - 240px);
+        bottom: 80px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .bottom-nav {
+        padding: 5px 0;
+      }
+      
+      .nav-item {
+        padding: 5px 0;
+        width: 60px;
+      }
+      
+      .nav-item i {
+        font-size: 1.1rem;
+        margin-bottom: 3px;
+      }
+      
+      .nav-label {
+        font-size: 0.7rem;
+      }
+      
+      .fab {
+        width: 50px;
+        height: 50px;
+        right: 20px;
+        bottom: 80px;
       }
     }
   </style>
 
 </head>
-<body class="hold-transition layout-top-nav">
+<body>
 <div class="wrapper">
-
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
-    <div class="container">
-      <!-- Logo -->
-      <a href="index.html" class="navbar-brand d-flex justify-content-center w-100">
-        <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="Logo-container" style="width: 300px; height: 75px; object-fit: contain;">
-      </a>
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <button class="back-btn" onclick="location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h1 class="header-title">Staff</h1>
     </div>
-  </nav>
-  <!-- /.navbar -->
+    <img src="src/APB.png" alt="Logo" class="header-logo">
+  </header>
 
   <!-- Content Wrapper -->
-  <div class="content-wrapper border-0">
-    <div class="content">
-      <a href="menu.html" class="back-home">
-        <i class="fas fa-arrow-left"></i> Back to Dashboard
-      </a>
-      
-      <div class="page-header">
-        <h1 class="page-title">Staff Management</h1>
-        <button class="btn btn-add-staff" onclick="location.href='add_staff.html'">
-          <i class="fas fa-plus"></i> Add New Staff
-        </button>
-      </div>
-      
-      <div class="search-container">
+  <div class="content-wrapper">
+    <!-- Search Bar -->
+    <div class="search-container">
+      <div class="search-icon-container">
         <i class="fas fa-search search-icon"></i>
         <input type="text" class="search-input" id="searchStaff" placeholder="Search staff by name..." oninput="filterStaff()">
       </div>
-      
-      <div class="section-header">
-        <h5 class="mb-0">Employee List</h5>
-        <div class="staff-count">
-          <i class="fas fa-users"></i> <span id="staffCount">0</span> Staff Members
-        </div>
-      </div>
-      
-      <div id="employee-names" class="staff-grid">
-        <!-- Employee cards will be inserted here by the script -->
-      </div>
-      
-      <div id="noStaffMessage" class="no-staff" style="display: none;">
-        <i class="fas fa-user-slash"></i>
-        <h4>No Staff Found</h4>
-        <p>No staff members match your search criteria or no staff has been added yet.</p>
-        <button class="btn btn-add-staff mt-3" onclick="location.href='add_staff.html'">
-          <i class="fas fa-plus"></i> Add New Staff
-        </button>
+    </div>
+    
+    <!-- Section Header -->
+    <div class="section-header">
+      <h2 class="section-title">Employee List</h2>
+      <div class="staff-counter">
+        <i class="fas fa-users"></i> <span id="staffCount">1</span>
       </div>
     </div>
+    
+    <!-- Staff List -->
+    <div id="employee-names" class="staff-list">
+      <!-- Loading skeletons will appear here while data loads -->
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-info">
+          <div class="skeleton-name"></div>
+          <div class="skeleton-position"></div>
+        </div>
+      </div>
+      <div class="skeleton-card">
+        <div class="skeleton-avatar"></div>
+        <div class="skeleton-info">
+          <div class="skeleton-name"></div>
+          <div class="skeleton-position"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Empty State -->
+    <div id="noStaffMessage" class="empty-state" style="display: none;">
+      <div class="empty-illustration">
+        <i class="fas fa-user-slash"></i>
+      </div>
+      <h3 class="empty-title">No Staff Found</h3>
+      <p class="empty-text">No staff members match your search criteria or no staff has been added yet.</p>
+      <button class="empty-btn" onclick="location.href='add_staff.html'">
+        <i class="fas fa-plus"></i> Add Staff
+      </button>
+    </div>
   </div>
-
-  <!-- Main Footer -->
-  <footer class="main-footer border-0 text-center">
-    <strong style="color: #2f5e2c;">MyGaji <span class="version-badge">v1.0</span></strong>
-    <p class="mb-0" style="color: #808097;">Ayam Penyet Best Salary Management System</p>
-    <small style="color: #808097;">Developed by Hakim</small>
-  </footer>
+  
+  <!-- Floating Action Button -->
+  <button class="fab" onclick="location.href='add_staff.html'" id="addStaffBtn">
+    <i class="fas fa-plus"></i>
+  </button>
+  
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item" onclick="location.href='index.html'">
+      <i class="fas fa-home"></i>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item active">
+      <i class="fas fa-users"></i>
+      <span class="nav-label">Staff</span>
+    </button>
+    <button class="nav-item" onclick="location.href='Msalary.html'">
+      <i class="fas fa-hand-holding-dollar"></i>
+      <span class="nav-label">Salary</span>
+    </button>
+    <button class="nav-item">
+      <i class="fas fa-user"></i>
+      <span class="nav-label">Profile</span>
+    </button>
+  </nav>
 </div>
 
 <!-- REQUIRED SCRIPTS -->
@@ -443,14 +654,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   // Reference to the employees collection in Firestore
   const employeesRef = collection(db, 'employees');
   let allEmployees = [];
+  let isLoading = true;
 
-  // Fetch employee data and display names in a responsive grid
+  // Fetch employee data and display names in the staff list
   async function fetchEmployeeNames() {
     try {
+      // Show loading state
+      document.getElementById('employee-names').innerHTML = generateSkeletons(2);
+      
       const querySnapshot = await getDocs(employeesRef);
       let employeeCards = '';
       allEmployees = [];
       
+      // Process the data
       querySnapshot.forEach((doc) => {
         const employeeData = doc.data();
         allEmployees.push({
@@ -461,38 +677,66 @@ scratch. This page gets rid of all links and provides the needed markup only.
         // Generate a random position if not available in the data
         const position = employeeData.Position || getRandomPosition();
         
-        employeeCards += `
-          <div class="staff-card" onclick="location.href='Edetail.html?id=${doc.id}'">
-            <div class="staff-avatar">
-              <img src="src/me.jpg" alt="${employeeData.Nama}'s Picture">
-            </div>
-            <div class="staff-info">
-              <h5 class="staff-name">${employeeData.Nama}</h5>
-              <p class="staff-position">${position}</p>
-            </div>
-          </div>
-        `;
+        employeeCards += generateEmployeeCard(doc.id, employeeData.Nama, position);
       });
       
+      // Update the UI
       const employeeCount = allEmployees.length;
       document.getElementById('staffCount').textContent = employeeCount;
       
       if (employeeCount > 0) {
         document.getElementById('employee-names').innerHTML = employeeCards;
-        document.getElementById('employee-names').style.display = 'grid';
+        document.getElementById('employee-names').style.display = 'block';
         document.getElementById('noStaffMessage').style.display = 'none';
       } else {
         document.getElementById('employee-names').style.display = 'none';
-        document.getElementById('noStaffMessage').style.display = 'block';
+        document.getElementById('noStaffMessage').style.display = 'flex';
       }
+      
+      isLoading = false;
     } catch (error) {
       console.error("Error fetching employees: ", error);
       document.getElementById('employee-names').innerHTML = `
-        <div class="alert alert-danger" role="alert">
-          Error loading employee data. Please try again later.
+        <div class="alert alert-danger" role="alert" style="border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+          <i class="fas fa-exclamation-circle mr-2"></i> Error loading employee data. Please try again.
+        </div>
+      `;
+      isLoading = false;
+    }
+  }
+
+  // Function to generate employee card HTML
+  function generateEmployeeCard(id, name, position) {
+    return `
+      <div class="staff-card" onclick="location.href='Edetail.html?id=${id}'">
+        <div class="staff-avatar">
+          <img src="src/me.jpg" alt="${name}'s Picture">
+        </div>
+        <div class="staff-info">
+          <h5 class="staff-name">${name}</h5>
+          <p class="staff-position">${position}</p>
+          <span class="status-label status-active">Active</span>
+        </div>
+        <i class="fas fa-chevron-right staff-chevron"></i>
+      </div>
+    `;
+  }
+  
+  // Function to generate skeleton loaders
+  function generateSkeletons(count) {
+    let skeletons = '';
+    for (let i = 0; i < count; i++) {
+      skeletons += `
+        <div class="skeleton-card">
+          <div class="skeleton-avatar"></div>
+          <div class="skeleton-info">
+            <div class="skeleton-name"></div>
+            <div class="skeleton-position"></div>
+          </div>
         </div>
       `;
     }
+    return skeletons;
   }
 
   // Function to get a random position for demo purposes
@@ -508,7 +752,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   window.filterStaff = function() {
     const searchTerm = document.getElementById('searchStaff').value.toLowerCase();
     
-    if (!allEmployees || allEmployees.length === 0) return;
+    if (isLoading || !allEmployees || allEmployees.length === 0) return;
     
     const filteredEmployees = allEmployees.filter(emp => 
       emp.Nama.toLowerCase().includes(searchTerm)
@@ -518,27 +762,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
     filteredEmployees.forEach(emp => {
       const position = emp.Position || getRandomPosition();
-      
-      employeeCards += `
-        <div class="staff-card" onclick="location.href='Edetail.html?id=${emp.id}'">
-          <div class="staff-avatar">
-            <img src="src/me.jpg" alt="${emp.Nama}'s Picture">
-          </div>
-          <div class="staff-info">
-            <h5 class="staff-name">${emp.Nama}</h5>
-            <p class="staff-position">${position}</p>
-          </div>
-        </div>
-      `;
+      employeeCards += generateEmployeeCard(emp.id, emp.Nama, position);
     });
     
     if (filteredEmployees.length > 0) {
       document.getElementById('employee-names').innerHTML = employeeCards;
-      document.getElementById('employee-names').style.display = 'grid';
+      document.getElementById('employee-names').style.display = 'block';
       document.getElementById('noStaffMessage').style.display = 'none';
     } else {
       document.getElementById('employee-names').style.display = 'none';
-      document.getElementById('noStaffMessage').style.display = 'block';
+      document.getElementById('noStaffMessage').style.display = 'flex';
     }
     
     document.getElementById('staffCount').textContent = filteredEmployees.length;
@@ -547,61 +780,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
   // Initialize the page
   fetchEmployeeNames();
   
-  // Add animations for page elements
-  document.addEventListener('DOMContentLoaded', function() {
-    // Detect if mobile
-    const isMobile = window.innerWidth <= 768;
-    
-    // Animate elements on page load
-    setTimeout(() => {
-      const pageHeader = document.querySelector('.page-header');
-      const searchContainer = document.querySelector('.search-container');
-      const sectionHeader = document.querySelector('.section-header');
-      
-      pageHeader.style.opacity = '0';
-      searchContainer.style.opacity = '0';
-      sectionHeader.style.opacity = '0';
-      
-      pageHeader.style.transform = 'translateY(-20px)';
-      searchContainer.style.transform = 'translateY(-15px)';
-      sectionHeader.style.transform = 'translateY(-10px)';
-      
-      pageHeader.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      searchContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      sectionHeader.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      
-      setTimeout(() => {
-        pageHeader.style.opacity = '1';
-        pageHeader.style.transform = 'translateY(0)';
-        
-        setTimeout(() => {
-          searchContainer.style.opacity = '1';
-          searchContainer.style.transform = 'translateY(0)';
-          
-          setTimeout(() => {
-            sectionHeader.style.opacity = '1';
-            sectionHeader.style.transform = 'translateY(0)';
-          }, 100);
-        }, 100);
-      }, 100);
-    }, 100);
-    
-    // Add touch effect for mobile devices
-    if (isMobile) {
-      document.addEventListener('click', function(e) {
-        if (e.target.closest('.staff-card')) {
-          const card = e.target.closest('.staff-card');
-          card.style.transform = 'scale(0.98)';
-          card.style.opacity = '0.9';
-          
-          setTimeout(() => {
-            card.style.transform = '';
-            card.style.opacity = '';
-          }, 150);
-        }
-      });
-    }
-  });
+  // Check for desktop view and handle sidebar toggling
+  const isDesktop = window.innerWidth >= 992;
+  if (isDesktop) {
+    // Add event listener for sidebar toggle
+    document.querySelector('.back-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('.sidebar').classList.toggle('active');
+    });
+  }
 </script>
 
 </body>
