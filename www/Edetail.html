@@ -6,226 +6,677 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MyGaji</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+  <meta name="description" content="Ayam Penyet Best Salary Management System">
+  <meta name="theme-color" content="#ffcc09">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>MyGaji - Employee Details</title>
   <link rel="icon" href="src/APB.png">
   <link rel="apple-touch-icon" href="src/APB.png">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="css/css/all.min.css">
+  <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
+  
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.min.css">
 
   <style>
-    .content-wrapper {
+    :root {
+      --primary: #ffcc09;
+      --secondary: #808097;
+      --accent: #8bc53f;
+      --highlight: #2f5e2c;
+      --danger: #d1121f;
+      --soft: #f5a391;
+      --light: #f5f6f9;
+      --dark: #212529;
+      --card-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      --transition-speed: 0.3s;
+    }
+    
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+    
+    .wrapper {
+      min-height: 100vh;
       display: flex;
-      flex-direction: column; /* Ensure content is stacked vertically */
-      justify-content: flex-start; /* Align content to the top */
+      flex-direction: column;
+    }
+    
+    /* App-like Header */
+    .app-header {
+      padding: 15px 20px;
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      min-height: 100vh; /* Ensure it takes the full height of the viewport */
-      overflow: hidden; /* Prevent scrolling */
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
     }
-    .content {
+    
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+    
+    .header-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin: 0;
+      color: var(--dark);
+      margin-left: 15px;
+    }
+    
+    .header-logo {
+      height: 35px;
+      width: auto;
+    }
+    
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+      color: var(--dark);
+      border: none;
+      transition: all 0.2s ease;
+    }
+    
+    .back-btn:hover {
+      background-color: #e9e9e9;
+    }
+    
+    /* Main Content */
+    .content-wrapper {
+      flex: 1;
       width: 100%;
-      padding: 20px; /* Add some padding for better spacing */
-      flex: 1; /* Allow content to grow and fill the space */
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0;
+      padding-bottom: 80px; /* Space for bottom nav */
+      background-color: var(--light);
     }
-    .content-header {
+    
+    .content-container {
+      padding: 20px;
+    }
+    
+    /* Profile Section */
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border: 3px solid white;
+    }
+    
+    .profile-avatar img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
-    .btn-custom {
-      background-color: #007bff;
-      color: white;
-      border-radius: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
+    
+    .profile-name {
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 5px;
+      color: var(--dark);
+      text-align: center;
+    }
+    
+    .profile-position {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      text-align: center;
+    }
+    
+    /* Info Section */
+    .info-section {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .section-title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--highlight);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .section-title i {
+      margin-right: 10px;
+      color: var(--primary);
+    }
+    
+    .info-item {
+      display: flex;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    
+    .info-label {
+      font-weight: 600;
+      color: var(--dark);
+      flex: 0 0 140px;
+      margin-bottom: 5px;
+    }
+    
+    .info-value {
+      flex: 1;
+      color: var(--secondary);
+      word-break: break-word;
+    }
+    
+    /* Action Buttons */
+    .action-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .btn-update {
+      flex: 1;
+      background-color: var(--primary);
+      color: var(--dark);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 15px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .btn-update:hover, .btn-update:focus {
+      background-color: #e6b800;
+      color: var(--dark);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+    
+    .btn-delete {
+      flex: 1;
+      background-color: white;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      border-radius: 8px;
+      padding: 12px 15px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-delete:hover, .btn-delete:focus {
+      background-color: #fff1f1;
+      color: var(--danger);
+    }
+    
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+      z-index: 900;
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px 0;
+      color: var(--secondary);
+      border: none;
+      background: transparent;
+      width: 70px;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-item:hover {
+      color: var(--primary);
+    }
+    
+    .nav-item.active {
+      color: var(--primary);
+    }
+    
+    .nav-item i {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .nav-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    /* Responsive Adjustments */
+    @media (min-width: 768px) {
+      .content-container {
+        padding: 30px;
+      }
+      
+      .profile-section {
+        padding: 30px;
+      }
+      
+      .profile-avatar {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .profile-name {
+        font-size: 1.5rem;
+      }
+      
+      .section-title {
+        font-size: 1.2rem;
+      }
+      
+      .bottom-nav {
+        max-width: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px 10px 0 0;
+        bottom: 10px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .content-container {
+        padding: 15px;
+      }
+      
+      .profile-section {
+        padding: 20px;
+      }
+      
+      .info-section {
+        padding: 15px;
+      }
+      
+      .info-label {
+        flex: 0 0 120px;
+      }
+      
+      .bottom-nav {
+        padding: 5px 0;
+      }
+      
+      .nav-item {
+        padding: 5px 0;
+        width: 60px;
+      }
+      
+      .nav-item i {
+        font-size: 1.1rem;
+        margin-bottom: 3px;
+      }
+      
+      .nav-label {
+        font-size: 0.7rem;
+      }
+    }
+    
+    /* Loading Skeleton */
+    .skeleton-profile {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      margin-bottom: 15px;
+    }
+    
+    .skeleton-name {
+      height: 24px;
+      width: 160px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      margin-bottom: 8px;
+    }
+    
+    .skeleton-position {
+      height: 16px;
+      width: 120px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+    
+    .skeleton-item {
+      height: 16px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      margin-bottom: 12px;
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
     }
   </style>
 
 </head>
-<body class="hold-transition sidebar-collapse layout-top-nav">
+<body>
 <div class="wrapper">
-
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
-    <div class="container justify-content-center"> <!-- Center the container content -->
-      <!-- Logo -->
-      <a href="../../index3.html" class="navbar-brand">
-        <img src="src/APB.png" alt="AdminLTE Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
-      </a>
-      <!-- end logo -->
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <button class="back-btn" onclick="location.href='StaffList.html'">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h1 class="header-title">Employee Details</h1>
     </div>
-  </nav>
-  <!-- /.navbar -->
+    <img src="src/APB.png" alt="Logo" class="header-logo">
+  </header>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper border-0" style="background-color: white;">
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container">
-        <div class="row justify-content-center mb-4 mt-2"> <!-- Add a new row for the button -->
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <div class="content-container">
+      <!-- Profile Section -->
+      <div class="profile-section" id="profile-section">
+        <div class="profile-avatar">
+          <img src="src/me.jpg" alt="Employee Picture" id="employee-image">
         </div>
-        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
-          <div class="col-lg-6">
-            <h3><strong>Employee</strong></h3>
-              <div class="card-body text-center">
-                <div style="border-radius: 100px; overflow: hidden; width: 200px; height: 200px; margin: 0 auto;">
-                  <img src="src/me.jpg" alt="Employee Picture" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <h5 class="card-title mt-3" id="employee-name"><strong>Employee Name</strong></h5>
-              </div>
-              <div class="card-body">
-                <br><p><strong>Address:</strong> <span id="employee-address"></span></p>
-                <p><strong>Email:</strong> <span id="employee-email"></span></p>
-                <p><strong>IC:</strong> <span id="employee-ic"></span></p>
-                <p><strong>Employee ID:</strong> <span id="employee-id"></span></p>
-                <p><strong>KWSP:</strong> <span id="employee-kwsp"></span></p>
-                <p><strong>Bank Name:</strong> <span id="employee-bank"></span></p>
-                <p><strong>Bank Number:</strong> <span id="employee-bankNo"></span></p>
-                <p><strong>Phone Number:</strong> <span id="employee-phoneNo"></span></p>
-
-                <h3 class="text-center"><strong>Family Related section</strong></h3>
-                <p><strong>Household Name:</strong> <span id="employee-Hname"></span></p>
-                <p><strong>Number of Kids:</strong> <span id="employee-Hkids"></span></p>
-                <p><strong>Household Phone Number:</strong> <span id="employee-HphoneNo"></span></p>
-                <p><strong>Father/Mother Name:</strong> <span id="employee-Fname"></span></p>
-                <p><strong>Father/Mother Number:</strong> <span id="employee-FphoneNo"></span></p>
-                <p><strong>Disease:</strong> <span id="employee-disease"></span></p>
-                <button id="delete-staff-btn" class="btn btn-danger mt-3">Delete Staff</button>
-                <button id="update-staff-btn" class="btn btn-custom mt-3">Update Staff</button> <!-- New Update Button -->
-              </div>
-          </div>
-          <!-- /.col-md-6 -->
+        <h2 class="profile-name" id="employee-name">Loading...</h2>
+        <p class="profile-position" id="employee-position">Staff</p>
+      </div>
+      
+      <!-- Personal Information Section -->
+      <div class="info-section">
+        <h3 class="section-title">
+          <i class="fas fa-user-circle"></i>Personal Information
+        </h3>
+        <div class="info-item">
+          <div class="info-label">Employee ID</div>
+          <div class="info-value" id="employee-id">-</div>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+        <div class="info-item">
+          <div class="info-label">IC Number</div>
+          <div class="info-value" id="employee-ic">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Address</div>
+          <div class="info-value" id="employee-address">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value" id="employee-email">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Phone Number</div>
+          <div class="info-value" id="employee-phoneNo">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Medical Issues</div>
+          <div class="info-value" id="employee-disease">-</div>
+        </div>
+      </div>
+      
+      <!-- Finance Information Section -->
+      <div class="info-section">
+        <h3 class="section-title">
+          <i class="fas fa-wallet"></i>Financial Information
+        </h3>
+        <div class="info-item">
+          <div class="info-label">KWSP</div>
+          <div class="info-value" id="employee-kwsp">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Bank Name</div>
+          <div class="info-value" id="employee-bank">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Bank Number</div>
+          <div class="info-value" id="employee-bankNo">-</div>
+        </div>
+      </div>
+      
+      <!-- Family Information Section -->
+      <div class="info-section">
+        <h3 class="section-title">
+          <i class="fas fa-home"></i>Family Information
+        </h3>
+        <div class="info-item">
+          <div class="info-label">Spouse Name</div>
+          <div class="info-value" id="employee-Hname">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Number of Kids</div>
+          <div class="info-value" id="employee-Hkids">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Spouse Phone</div>
+          <div class="info-value" id="employee-HphoneNo">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Parent/Guardian</div>
+          <div class="info-value" id="employee-Fname">-</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Parent Phone</div>
+          <div class="info-value" id="employee-FphoneNo">-</div>
+        </div>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn-update" id="update-staff-btn">
+          <i class="fas fa-edit"></i> Update Information
+        </button>
+        <button class="btn-delete" id="delete-staff-btn">
+          <i class="fas fa-trash-alt"></i> Delete
+        </button>
+      </div>
     </div>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
-    <!-- Default to the left -->
-    <strong><a href="https://adminlte.io">MyGaji v1.0</a><br>by Hakim</strong>
-  </footer>
+  
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item" onclick="location.href='menu.html'">
+      <i class="fas fa-home"></i>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item active">
+      <i class="fas fa-users"></i>
+      <span class="nav-label">Staff</span>
+    </button>
+    <button class="nav-item" onclick="location.href='Msalary.html'">
+      <i class="fas fa-hand-holding-dollar"></i>
+      <span class="nav-label">Salary</span>
+    </button>
+    <button class="nav-item">
+      <i class="fas fa-user"></i>
+      <span class="nav-label">Profile</span>
+    </button>
+  </nav>
 </div>
-<!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
 <script src="jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
 
 <!-- Import Firebase setup from calculation.js -->
 <script type="module">
-    import { db } from './calculation.js';
-    import { doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-  
-    // Function to get query parameter by name
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
-  
-    // Fetch employee details and display them
-    async function fetchEmployeeDetails() {
-      const employeeId = getQueryParam('id');
-      console.log("Employee ID from URL:", employeeId); // Debugging output
-  
-      if (employeeId) {
-        try {
-          // Fetch the document directly using the employeeId
-          const employeeDoc = await getDoc(doc(db, 'employees', employeeId));
+  import { db } from './calculation.js';
+  import { doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-          if (employeeDoc.exists()) {
-            const employeeData = employeeDoc.data();
-            console.log("Fetched Employee Data:", employeeData); // Debugging output
+  // Show loading state
+  function showLoading() {
+    document.getElementById('profile-section').innerHTML = `
+      <div class="skeleton-profile"></div>
+      <div class="skeleton-name"></div>
+      <div class="skeleton-position"></div>
+    `;
+  }
 
-            // Populate the fields with the fetched data
-            document.getElementById('employee-id').innerText = employeeData.id || employeeDoc.id; // Use Firestore document ID as fallback
-            document.getElementById('employee-name').innerText = employeeData.Nama || '';
-            document.getElementById('employee-address').innerText = employeeData.Address || '';
-            document.getElementById('employee-email').innerText = employeeData.Email || '';
-            document.getElementById('employee-ic').innerText = employeeData.IC || '';
-            document.getElementById('employee-kwsp').innerText = employeeData.KWSP || '';
-            document.getElementById('employee-bank').innerText = employeeData.Bank || '';
-            document.getElementById('employee-bankNo').innerText = employeeData.Nombor_Bank || '';
-            document.getElementById('employee-phoneNo').innerText = employeeData.Phone_Number || '';
+  // Function to get query parameter by name
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
 
-            // Family Related
-            document.getElementById('employee-Hname').innerText = employeeData.Nama_Suami_Istri || '';
-            document.getElementById('employee-Hkids').innerText = employeeData.Bilangan_Anak || '';
-            document.getElementById('employee-HphoneNo').innerText = employeeData.Nombor_Telefon_Suami_Istri || '';
-            document.getElementById('employee-Fname').innerText = employeeData.Nama_Pewaris_Ibu_Ayah || '';
-            document.getElementById('employee-FphoneNo').innerText = employeeData.Nombor_Telefon_Pewaris_Ibu_Ayah || '';
+  // Fetch employee details and display them
+  async function fetchEmployeeDetails() {
+    showLoading();
+    
+    const employeeId = getQueryParam('id');
+    console.log("Employee ID from URL:", employeeId);
 
-            const disease = employeeData["Penyakit"] || 'None';
-            document.getElementById('employee-disease').innerText = disease;
-          } else {
-            console.log("No such document exists in Firestore!");
+    if (employeeId) {
+      try {
+        // Fetch the document directly using the employeeId
+        const employeeDoc = await getDoc(doc(db, 'employees', employeeId));
+
+        if (employeeDoc.exists()) {
+          const employeeData = employeeDoc.data();
+          console.log("Fetched Employee Data:", employeeData);
+
+          // Reset profile section
+          document.getElementById('profile-section').innerHTML = `
+            <div class="profile-avatar">
+              <img src="src/me.jpg" alt="Employee Picture" id="employee-image">
+            </div>
+            <h2 class="profile-name" id="employee-name">${employeeData.Nama || 'Unknown Name'}</h2>
+            <p class="profile-position" id="employee-position">Staff</p>
+          `;
+
+          // Populate the fields with the fetched data
+          document.getElementById('employee-id').innerText = employeeData.id || employeeDoc.id;
+          document.getElementById('employee-address').innerText = employeeData.Address || 'Not provided';
+          document.getElementById('employee-email').innerText = employeeData.Email || 'Not provided';
+          document.getElementById('employee-ic').innerText = employeeData.IC || 'Not provided';
+          document.getElementById('employee-kwsp').innerText = employeeData.KWSP || 'Not provided';
+          document.getElementById('employee-bank').innerText = employeeData.Bank || 'Not provided';
+          document.getElementById('employee-bankNo').innerText = employeeData.Nombor_Bank || 'Not provided';
+          document.getElementById('employee-phoneNo').innerText = employeeData.Phone_Number || 'Not provided';
+
+          // Family Related
+          document.getElementById('employee-Hname').innerText = employeeData.Nama_Suami_Istri || 'Not provided';
+          document.getElementById('employee-Hkids').innerText = employeeData.Bilangan_Anak || '0';
+          document.getElementById('employee-HphoneNo').innerText = employeeData.Nombor_Telefon_Suami_Istri || 'Not provided';
+          document.getElementById('employee-Fname').innerText = employeeData.Nama_Pewaris_Ibu_Ayah || 'Not provided';
+          document.getElementById('employee-FphoneNo').innerText = employeeData.Nombor_Telefon_Pewaris_Ibu_Ayah || 'Not provided';
+
+          const disease = employeeData["Penyakit"] || 'None';
+          document.getElementById('employee-disease').innerText = disease;
+          
+          // Set a position if available
+          if (employeeData.Position) {
+            document.getElementById('employee-position').innerText = employeeData.Position;
           }
-        } catch (error) {
-          console.error("Error fetching document:", error);
+        } else {
+          console.log("No such document exists in Firestore!");
+          alert("Employee not found!");
         }
-      } else {
-        console.log("No employee ID provided in the URL.");
+      } catch (error) {
+        console.error("Error fetching document:", error);
+        alert("Error loading employee data. Please try again.");
       }
+    } else {
+      console.log("No employee ID provided in the URL.");
+      alert("No employee ID provided!");
     }
+  }
 
-    // Function to delete employee details
-    async function deleteEmployee() {
-      const employeeId = getQueryParam('id');
-      if (employeeId) {
-        try {
-          const employeeRef = doc(db, 'employees', employeeId);
-          await deleteDoc(employeeRef);
-          alert('Employee record deleted successfully!');
-          window.location.href = 'StaffList.html'; // Redirect to another page after deletion
-        } catch (error) {
-          console.error('Error deleting document:', error);
-          alert('Failed to delete employee record.');
-        }
-      } else {
-        alert('No employee ID provided in the URL.');
+  // Function to delete employee details
+  async function deleteEmployee() {
+    const employeeId = getQueryParam('id');
+    if (employeeId) {
+      try {
+        const employeeRef = doc(db, 'employees', employeeId);
+        await deleteDoc(employeeRef);
+        alert('Employee record deleted successfully!');
+        window.location.href = 'StaffList.html'; // Redirect to staff list after deletion
+      } catch (error) {
+        console.error('Error deleting document:', error);
+        alert('Failed to delete employee record.');
       }
+    } else {
+      alert('No employee ID provided in the URL.');
     }
+  }
 
-    // Attach event listener to the delete button
-    document.getElementById('delete-staff-btn').addEventListener('click', () => {
-      if (confirm('Are you sure you want to delete this employee?')) {
-        deleteEmployee();
-      }
-    });
+  // Attach event listener to the delete button
+  document.getElementById('delete-staff-btn').addEventListener('click', () => {
+    if (confirm('Are you sure you want to delete this employee? This action cannot be undone.')) {
+      deleteEmployee();
+    }
+  });
 
-    // Attach event listener to the update button
-    document.getElementById('update-staff-btn').addEventListener('click', () => {
-      const employeeId = getQueryParam('id');
-      if (employeeId) {
-        window.location.href = `update_Edetail.html?id=${employeeId}`; // Redirect to update page with employee ID
-      } else {
-        alert('No employee ID provided in the URL.');
-      }
-    });
-  
-    fetchEmployeeDetails();
-  </script>
-  
+  // Attach event listener to the update button
+  document.getElementById('update-staff-btn').addEventListener('click', () => {
+    const employeeId = getQueryParam('id');
+    if (employeeId) {
+      window.location.href = `update_Edetail.html?id=${employeeId}`; // Redirect to update page with employee ID
+    } else {
+      alert('No employee ID provided in the URL.');
+    }
+  });
+
+  // Initialize the page
+  fetchEmployeeDetails();
+</script>
 
 </body>
 </html>
