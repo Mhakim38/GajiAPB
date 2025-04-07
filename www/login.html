@@ -68,6 +68,13 @@
             margin-bottom: 1.5rem;
         }
 
+        .form-button:hover {
+            background-color: #e6b800; /* Slightly darker shade of #ffcc09 */
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+
+
         .footer-text {
             font-size: 0.9rem;
             color: #6c757d;
@@ -90,14 +97,15 @@
 
         .form-link {
             margin-bottom: 1rem;
-            color: #ffcc09;
+            color: #353430a8;
             text-decoration: none;
             font-weight: 600;
         }
 
         .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
+            width: 600px;
+            height: 200px;
+            object-fit: contain;
             margin-bottom: 1rem;
         }
 
@@ -111,14 +119,43 @@
             color: #6c757d;
             margin-bottom: 2rem;
         }
+
+        @media (max-width: 480px) {
+            .form-input {
+                max-width: 280px;
+                font-size: 0.875rem;
+                padding: 0.6rem;
+            }
+
+            .form-button {
+                max-width: 280px;
+                font-size: 0.875rem;
+                padding: 0.6rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                width: 180px;
+                height: auto;
+            }
+
+            body::before {
+            background-position: right center;
+            transform: rotate(180deg);
+            z-index: -1;
+            }
+        }
     </style>
 </head>
 
 <body>
     <!-- Login Page -->
-    <div class="logo">SM</div>
-    <h1>Welcome to StaffPro</h1>
-    <p class="subtitle">Manage your team efficiently</p>
+    <img class="logo" src="src/APB.png" alt="APB Logo">
+    <h1 style="font-weight: bolder;">Welcome to MyGaji</h1>
+    <p class="subtitle">Staff Management</p>
 
     <form action="/login" method="post">
         <input type="email" class="form-input" placeholder="Email" name="email" required />
@@ -127,7 +164,7 @@
     </form>
 
     <a href="Menu.html" class="form-link">Forgot password?</a>
-    <p class="footer-text">Don't have an account? <a href="#" class="footer-link">Register!</a></p>
+    <!-- <p class="footer-text">Don't have an account? <a href="#" class="footer-link">Register!</a></p> -->
 </body>
 
 <!-- Bootstrap JS Bundle -->
