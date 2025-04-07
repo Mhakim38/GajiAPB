@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<style>
+  body {
+    background-color: #fffdf5;
+  }
+</style><!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -6,146 +10,396 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MyGaji</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Ayam Penyet Best Salary Management System">
+  <meta name="author" content="Hakim">
+  <title>MyGaji - Ayam Penyet Best Salary Management</title>
   <link rel="icon" href="src/APB.png">
   <link rel="apple-touch-icon" href="src/APB.png">
 
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="css/css/all.min.css">
   <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
+  
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.min.css">
 
   <style>
-
-        /* body {
-            background-color: #ffffff;
-            color: #212529;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('src/soft-yellowbg.jpg');
-            background-size: cover;
-            background-position: left center;
-            transform: rotate(180deg);
-            z-index: -1;
-        } */
-
-    .content-wrapper {
+    :root {
+      --primary: #ffcc09;
+      --secondary: #808097;
+      --accent: #8bc53f;
+      --highlight: #2f5e2c;
+      --danger: #d1121f;
+      --soft: #f5a391;
+      --light: #fffdf5;
+      --dark: #212529;
+      --card-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      --hover-transform: translateY(-3px);
+      --transition-speed: 0.3s;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+    }
+    
+    .wrapper {
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+    }
+    
+    .main-header {
+      box-shadow: 0 2px 10px rgba(255,204,9,0.2);
+      position: relative;
+      z-index: 10;
+      background-color: white;
+    }
+    
+    .navbar-brand img {
+      transition: transform 0.3s ease;
+    }
+    
+    .navbar-brand:hover img {
+      transform: scale(1.05);
+    }
+    
+    .content-wrapper {
+      flex: 1;
+      display: flex;
       align-items: center;
-      min-height: 100vh; /* Ensure it takes the full height of the viewport */
-      overflow: hidden; /* Prevent scrolling */
+      justify-content: center;
+      background-color: #fffdf5;
+      min-height: calc(100vh - 180px);
     }
-    .content {
+    
+    .menu-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
       width: 100%;
-      padding: 20px; /* Add some padding for better spacing */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .content-header {
+    
+    .page-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--highlight);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    
+    .page-title:after {
+      content: "";
       position: absolute;
-      top: 0;
-      width: 100%;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
     }
-    .btn-custom {
-      background-color: #007bff;
+    
+    .menu-card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all var(--transition-speed) ease;
+      overflow: hidden;
+      height: 130px;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .menu-card:hover {
+      transform: var(--hover-transform);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .menu-icon {
+      width: 30%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
       color: white;
+      font-size: 2rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+    
+    .menu-staff .menu-icon {
+      background: linear-gradient(135deg, #ccd115, #8bc53f);
+    }
+    
+    .menu-salary .menu-icon {
+      background: linear-gradient(135deg, #ffcc09, #f5a391);
+    }
+    
+    .menu-content {
+      padding: 1.5rem;
+      flex: 1;
+    }
+    
+    .menu-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+    
+    .menu-description {
+      color: #6c757d;
+      font-size: 0.95rem;
+    }
+    
+    .menu-arrow {
+      position: absolute;
+      right: 20px;
+      color: var(--primary);
+      opacity: 0;
+      transition: all var(--transition-speed) ease;
+    }
+    
+    .menu-card:hover .menu-arrow {
+      opacity: 1;
+      right: 15px;
+    }
+    
+    .main-footer {
+      padding: 1rem;
+      background: white;
+      box-shadow: 0 -2px 10px rgba(255,204,9,0.1);
+    }
+    
+    .version-badge {
+      display: inline-block;
+      background: var(--primary);
+      color: var(--dark);
+      padding: 0.25rem 0.75rem;
       border-radius: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
+      font-size: 0.75rem;
+      margin-left: 0.5rem;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    @media (max-width: 768px) {
+      .menu-card {
+        height: auto;
+        flex-direction: column;
+      }
+      
+      .menu-icon {
+        width: 100%;
+        height: 100px;
+      }
+      
+      .menu-content {
+        width: 100%;
+        text-align: center;
+        padding: 1.5rem 1rem;
+      }
+      
+      .menu-arrow {
+        display: none;
+      }
+      
+      .page-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+      }
+      
+      .navbar-brand img {
+        width: 250px !important;
+        height: 70px !important;
+      }
+      
+      .menu-container {
+        padding: 1rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .menu-card {
+        margin-bottom: 1.5rem;
+      }
+      
+      .menu-icon {
+        height: 80px;
+        font-size: 2rem;
+      }
+      
+      .menu-title {
+        font-size: 1.2rem;
+      }
+      
+      .menu-description {
+        font-size: 0.85rem;
+      }
+      
+      .navbar-brand img {
+        width: 200px !important;
+        height: 60px !important;
+      }
+      
+      .page-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .page-title:after {
+        width: 60px;
+        height: 3px;
+      }
+      
+      .version-badge {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+      }
     }
   </style>
-
 </head>
-<body class="hold-transition sidebar-collapse layout-top-nav">
+<body class="hold-transition layout-top-nav">
 <div class="wrapper">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
-    <div class="container justify-content-center"> <!-- Center the container content -->
+    <div class="container">
       <!-- Logo -->
-      <a href="../../index3.html" class="navbar-brand">
-        <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
+      <a href="index.html" class="navbar-brand d-flex justify-content-center w-100">
+        <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="Logo-container" style="width: 300px; height: 75px; object-fit: contain;">
       </a>
-      <!-- end logo -->
     </div>
   </nav>
   <!-- /.navbar -->
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper border-0" style="background-color: white;">
-
-    <!-- Main content -->
+  <!-- Content Wrapper -->
+  <div class="content-wrapper border-0">
     <div class="content">
       <div class="container">
-        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
-          <div class="col-lg-6">
+        <div class="menu-container">
+          <h1 class="page-title" style="color: #2f5e2c;">Salary Management System</h1>
+          
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="menu-card menu-staff" onclick="location.href='StaffList.html'">
+                <div class="menu-icon">
+                  <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="menu-content">
+                  <h3 class="menu-title">Staff Management</h3>
+                  <p class="menu-description">View, add, and manage staff information and profiles</p>
+                </div>
+                <i class="fas fa-chevron-right menu-arrow"></i>
+              </div>
+            </div>
             
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-info"><i class="fa-solid fa-users" onclick="location.href='StaffList.html'"></i></span>
-              <div class="info-box-content">
-                <a href="StaffList.html" class="info-box-text">List Staff</a>
+            <div class="col-12 col-md-6">
+              <div class="menu-card menu-salary" onclick="location.href='Msalary.html'">
+                <div class="menu-icon">
+                  <i class="fa-solid fa-hand-holding-dollar"></i>
+                </div>
+                <div class="menu-content">
+                  <h3 class="menu-title">Salary Management</h3>
+                  <p class="menu-description">Process payroll, manage compensation and benefits</p>
+                </div>
+                <i class="fas fa-chevron-right menu-arrow"></i>
               </div>
             </div>
-
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-info"><i class="fa-solid fa-hand-holding-dollar" onclick="location.href='Msalary.html'"></i></span>
-              <div class="info-box-content">
-                <a href="Msalary.html" class="info-box-text">Salary Management</a>
-              </div>
-            </div>
-
           </div>
-          <!-- /.col-md-6 -->
+          </div>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </div>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
-    <!-- Default to the left -->
-    <strong><a href="https://adminlte.io">MyGaji v1.0</a><br>by Hakim</strong>
+  <footer class="main-footer border-0 text-center">
+    <strong style="color: #2f5e2c;">MyGaji <span class="version-badge">v1.0</span></strong>
+    <p class="mb-0" style="color: #808097;">Ayam Penyet Best Salary Management System</p>
+    <small style="color: #808097;">Developed by Hakim</small>
   </footer>
 </div>
-<!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
 <script src="jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
+
+<script>
+  // Add some subtle animations and interactions
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if we're on a mobile device
+    const isMobile = window.innerWidth <= 768;
+    
+    // Animate cards on page load
+    const cards = document.querySelectorAll('.menu-card');
+    cards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        card.style.transition = 'all 0.5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100 * (index + 1));
+    });
+    
+    // Add hover effect for better feedback (only on desktop)
+    if (!isMobile) {
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-5px)';
+          this.style.boxShadow = '0 15px 30px rgba(255,204,9,0.15)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+          this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.05)';
+        });
+      });
+    }
+    
+    // Add touch feedback for mobile
+    if (isMobile) {
+      cards.forEach(card => {
+        card.addEventListener('touchstart', function() {
+          this.style.transform = 'scale(0.98)';
+          this.style.opacity = '0.9';
+        }, {passive: true});
+        
+        card.addEventListener('touchend', function() {
+          this.style.transform = 'scale(1)';
+          this.style.opacity = '1';
+        }, {passive: true});
+      });
+    }
+    
+    // Handle window resize events
+    window.addEventListener('resize', function() {
+      const isNowMobile = window.innerWidth <= 768;
+      
+      // Only update if mobile status has changed
+      if (isNowMobile !== isMobile) {
+        location.reload();
+      }
+    });
+  });
+</script>
 </body>
 </html>
