@@ -7,6 +7,7 @@
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -39,7 +40,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       --highlight: #2f5e2c;
       --danger: #d1121f;
       --soft: #f5a391;
-      --light: #f8f9fa;
+      --light: #f5f6f9;
       --dark: #212529;
       --card-shadow: 0 3px 8px rgba(0,0,0,0.08);
       --transition-speed: 0.3s;
@@ -51,7 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #ffffff;
+      background-color: var(--light);
       color: var(--dark);
       overflow-x: hidden;
     }
@@ -86,16 +87,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .content-wrapper {
       flex: 1;
       width: 100%;
-      max-width: 768px;
+      max-width: 850px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 0;
       padding-bottom: 80px; /* Space for bottom nav */
+      background-color: var(--light);
+    }
+    
+    .content-container {
+      padding: 20px 40px;
     }
     
     /* Page Title */
     .page-title {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
       color: var(--highlight);
       font-weight: 600;
       position: relative;
@@ -117,35 +123,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
     /* Menu Cards */
     .menu-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 15px;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
       margin-bottom: 25px;
     }
     
     .menu-card {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
       overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       cursor: pointer;
       position: relative;
       display: flex;
       align-items: center;
+      height: 100px;
     }
     
     .menu-card:hover {
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-      transform: translateY(-2px);
-    }
-    
-    .menu-card:active {
-      transform: scale(0.98);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     }
     
     .menu-icon {
-      width: 80px;
-      height: 80px;
+      width: 84px;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -171,12 +173,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
     .menu-description {
       color: var(--secondary);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       margin-bottom: 0;
+      line-height: 1.3;
     }
     
     .menu-staff .menu-icon {
-      background: linear-gradient(135deg, #ccd115, #8bc53f);
+      background: linear-gradient(135deg, #b1c834, #8bc53f);
     }
     
     .menu-salary .menu-icon {
@@ -184,22 +187,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
     
     .menu-reports .menu-icon {
-      background: linear-gradient(135deg, #ccd115, #808097);
+      background: linear-gradient(135deg, #b1c834, #808097);
     }
     
     .menu-settings .menu-icon {
-      background: linear-gradient(135deg, #ffcc09, #d1121f);
+      background: linear-gradient(135deg, #ffcc09, #f5a391);
     }
     
     .coming-soon-badge {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 12px;
+      right: 12px;
       background-color: var(--primary);
       color: var(--dark);
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 600;
-      padding: 3px 8px;
+      padding: 2px 8px;
       border-radius: 50px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
@@ -254,43 +257,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
       padding: 15px;
       color: var(--secondary);
       font-size: 0.9rem;
+      margin-top: 20px;
     }
     
     .app-footer strong {
       color: var(--highlight);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .version-badge {
       display: inline-block;
       background-color: var(--primary);
       color: var(--dark);
-      padding: 3px 8px;
+      padding: 2px 8px;
       border-radius: 50px;
       font-size: 0.7rem;
       font-weight: 600;
       margin-left: 5px;
     }
     
+    .app-footer p {
+      margin-bottom: 2px;
+    }
+    
+    .app-footer small {
+      color: var(--secondary);
+      font-size: 0.75rem;
+    }
+    
     /* Responsive Adjustments */
     @media (min-width: 768px) {
-      .menu-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
       .content-wrapper {
-        padding-top: 30px;
-      }
-      
-      .bottom-nav {
-        max-width: 500px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-radius: 10px 10px 0 0;
-        bottom: 10px;
+        padding-top: 0;
       }
     }
     
     @media (max-width: 767px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
       .bottom-nav {
         padding: 5px 0;
       }
@@ -308,6 +317,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       .nav-label {
         font-size: 0.7rem;
       }
+      
+      .content-container {
+        padding: 15px;
+      }
     }
   </style>
 
@@ -319,64 +332,65 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="header-logo">
   </header>
 
-  <!-- Content Wrapper -->
   <div class="content-wrapper">
-    <h1 class="page-title">Salary Management System</h1>
-    
-    <!-- Menu Grid -->
-    <div class="menu-grid">
-      <!-- Staff Management Card -->
-      <div class="menu-card menu-staff" onclick="location.href='StaffList.html'">
-        <div class="menu-icon">
-          <i class="fas fa-users"></i>
+    <div class="content-container">
+      <h1 class="page-title">Salary Management System</h1>
+      
+      <!-- Menu Grid -->
+      <div class="menu-grid">
+        <!-- Staff Management Card -->
+        <div class="menu-card menu-staff" onclick="location.href='StaffList.html'">
+          <div class="menu-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="menu-content">
+            <h3 class="menu-title">Staff Management</h3>
+            <p class="menu-description">View, add, and manage staff information and profiles</p>
+          </div>
         </div>
-        <div class="menu-content">
-          <h3 class="menu-title">Staff Management</h3>
-          <p class="menu-description">View, add, and manage staff information and profiles</p>
+        
+        <!-- Salary Management Card -->
+        <div class="menu-card menu-salary" onclick="location.href='Msalary.html'">
+          <div class="menu-icon">
+            <i class="fas fa-hand-holding-dollar"></i>
+          </div>
+          <div class="menu-content">
+            <h3 class="menu-title">Salary Management</h3>
+            <p class="menu-description">Process payroll, manage compensation and benefits</p>
+          </div>
+        </div>
+        
+        <!-- Reports Card (Coming Soon) -->
+        <div class="menu-card menu-reports" onclick="alert('Coming soon in the next update!')">
+          <div class="menu-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="menu-content">
+            <h3 class="menu-title">Reports & Analytics</h3>
+            <p class="menu-description">View financial reports and salary analytics</p>
+          </div>
+          <span class="coming-soon-badge">Coming Soon</span>
+        </div>
+        
+        <!-- Settings Card (Coming Soon) -->
+        <div class="menu-card menu-settings" onclick="alert('Coming soon in the next update!')">
+          <div class="menu-icon">
+            <i class="fas fa-gear"></i>
+          </div>
+          <div class="menu-content">
+            <h3 class="menu-title">System Settings</h3>
+            <p class="menu-description">Configure system preferences and user access</p>
+          </div>
+          <span class="coming-soon-badge">Coming Soon</span>
         </div>
       </div>
       
-      <!-- Salary Management Card -->
-      <div class="menu-card menu-salary" onclick="location.href='Msalary.html'">
-        <div class="menu-icon">
-          <i class="fas fa-hand-holding-dollar"></i>
-        </div>
-        <div class="menu-content">
-          <h3 class="menu-title">Salary Management</h3>
-          <p class="menu-description">Process payroll, manage compensation and benefits</p>
-        </div>
+      <!-- Footer -->
+      <div class="app-footer">
+        <strong>MyGaji <span class="version-badge">v1.0</span></strong>
+        <p>Ayam Penyet Best Salary Management System</p>
+        <small>Developed by Hakim</small>
       </div>
-      
-      <!-- Reports Card (Coming Soon) -->
-      <div class="menu-card menu-reports" onclick="alert('Coming soon in the next update!')">
-        <div class="menu-icon">
-          <i class="fas fa-chart-line"></i>
-        </div>
-        <div class="menu-content">
-          <h3 class="menu-title">Reports & Analytics</h3>
-          <p class="menu-description">View financial reports and salary analytics</p>
-        </div>
-        <span class="coming-soon-badge">Coming Soon</span>
-      </div>
-      
-      <!-- Settings Card (Coming Soon) -->
-      <div class="menu-card menu-settings" onclick="alert('Coming soon in the next update!')">
-        <div class="menu-icon">
-          <i class="fas fa-gear"></i>
-        </div>
-        <div class="menu-content">
-          <h3 class="menu-title">System Settings</h3>
-          <p class="menu-description">Configure system preferences and user access</p>
-        </div>
-        <span class="coming-soon-badge">Coming Soon</span>
-      </div>
-    </div>
-    
-    <!-- Footer -->
-    <div class="app-footer">
-      <strong>MyGaji <span class="version-badge">v1.0</span></strong>
-      <p class="mb-0">Ayam Penyet Best Salary Management System</p>
-      <small>Developed by Hakim</small>
     </div>
   </div>
   
