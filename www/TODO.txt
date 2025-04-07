@@ -32,6 +32,7 @@ Part 3 (Login)
 - [] Add Login Page
 - [] Add session for every page
 - [] Add User Restriction
+- [] Add forgot password recovery
 
 Part 4
 - [] Finalised The User Interface 
