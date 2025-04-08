@@ -2,255 +2,909 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MyGaji</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+  <meta name="description" content="Ayam Penyet Best Salary Management System">
+  <meta name="theme-color" content="#ffcc09">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>MyGaji - Salary Management</title>
   <link rel="icon" href="src/APB.png">
   <link rel="apple-touch-icon" href="src/APB.png">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="css/css/all.min.css">
   <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
+  
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.min.css">
 
-  <!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
-<script type="module" src="calculation.js"></script>
-<script type="module" src="handle_input.js"></script>
-
   <style>
-    .content-wrapper {
+    :root {
+      --primary: #ffcc09;
+      --secondary: #808097;
+      --accent: #8bc53f;
+      --highlight: #2f5e2c;
+      --danger: #d1121f;
+      --soft: #f5a391;
+      --light: #f5f6f9;
+      --dark: #212529;
+      --card-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      --transition-speed: 0.3s;
+    }
+    
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+    
+    .wrapper {
+      min-height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: top;
-      min-height: 100vh; /* Ensure it takes the full height of the viewport */
-      overflow: hidden; /* Prevent scrolling */
+      flex-direction: column;
     }
-    .content {
-      width: 100%;
-      padding: 20px; /* Add some padding for better spacing */
-    }
-    .content-header {
-      position: absolute;
+    
+    /* App-like Header */
+    .app-header {
+      padding: 15px 20px;
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
       top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+    
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+    
+    .header-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin: 0;
+      color: var(--dark);
+      margin-left: 15px;
+    }
+    
+    .header-logo {
+      height: 35px;
+      width: auto;
+    }
+    
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+      color: var(--dark);
+      border: none;
+      transition: all 0.2s ease;
+    }
+    
+    .back-btn:hover {
+      background-color: #e9e9e9;
+    }
+    
+    /* Main Content */
+    .content-wrapper {
+      flex: 1;
       width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0;
+      padding-bottom: 80px; /* Space for bottom nav */
     }
-    .btn-custom {
-      background-color: #8bc53f; /* Lime Green */
-      color: rgb(19, 18, 18);
-      border-radius: 20px;
+    
+    .content-container {
+      padding: 20px;
+    }
+    
+    /* Page Actions */
+    .page-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+    
+    .btn-print {
+      background-color: var(--primary);
+      color: var(--dark);
+      border: none;
+      border-radius: 50px;
       padding: 10px 20px;
-      font-size: 16px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
     }
+    
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* Salary Cards */
+    .salary-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .salary-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    
+    .salary-header {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--soft), #fff7f5);
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .salary-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 15px;
+      flex-shrink: 0;
+      border: 2px solid white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .salary-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .salary-name {
+      font-weight: 600;
+      margin-bottom: 3px;
+      color: var(--dark);
+      font-size: 1.1rem;
+    }
+    
+    .salary-id {
+      color: var(--secondary);
+      font-size: 0.8rem;
+    }
+    
+    .salary-body {
+      padding: 15px;
+    }
+    
+    .salary-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .option-group {
+      margin-bottom: 10px;
+    }
+    
+    .option-label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    .option-checkbox {
+      display: inline-block;
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background-color: white;
+      border: 2px solid #ddd;
+      margin-right: 8px;
+      cursor: pointer;
+      vertical-align: middle;
+      transition: all 0.2s ease;
+    }
+    
+    .option-checkbox:before {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      background-color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    
+    input[type="checkbox"]:checked + .option-checkbox:before {
+      opacity: 1;
+    }
+    
+    input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+    
+    .option-input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+      background-color: #f9f9f9;
+      transition: all 0.3s ease;
+    }
+    
+    .option-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(139, 197, 63, 0.1);
+    }
+    
+    .option-input::placeholder {
+      color: #bbb;
+    }
+    
+    /* Number inputs */
+    input[type="number"] {
+      -moz-appearance: textfield; /* Firefox */
+    }
+    
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    .salary-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 15px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #f0f0f0;
+      border-radius: 0 0 12px 12px;
+    }
+    
+    .total-label {
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .total-value {
+      font-weight: 700;
+      color: var(--highlight);
+      font-size: 1.1rem;
+    }
+    
+    .btn-calculate {
+      width: 100%;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      font-weight: 500;
+      margin-top: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-calculate:hover {
+      background-color: #7ab130;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* Hidden class for conditionally showing inputs */
     .hidden {
       display: none;
     }
-    .input {
+    
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+      z-index: 900;
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px 0;
+      color: var(--secondary);
+      border: none;
+      background: transparent;
       width: 70px;
+      transition: color 0.2s ease;
     }
-    .card-primary {
-      background-color: #f5a391; /* Peachy Light Orange */
-      color: #212529; /* Adjust text color for contrast */
+    
+    .nav-item:hover {
+      color: var(--primary);
+    }
+    
+    .nav-item.active {
+      color: var(--primary);
+    }
+    
+    .nav-item i {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .nav-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    /* Toast messages */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+    
+    .toast {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      transform: translateX(120%);
+      transition: transform 0.3s ease;
+      max-width: 300px;
+    }
+    
+    .toast.show {
+      transform: translateX(0);
+    }
+    
+    .toast-success {
+      border-left: 4px solid var(--accent);
+    }
+    
+    .toast-error {
+      border-left: 4px solid var(--danger);
+    }
+    
+    .toast-icon {
+      margin-right: 12px;
+      font-size: 1.2rem;
+    }
+    
+    .toast-success .toast-icon {
+      color: var(--accent);
+    }
+    
+    .toast-error .toast-icon {
+      color: var(--danger);
+    }
+    
+    .toast-message {
+      flex: 1;
+      font-size: 0.9rem;
+      color: var(--dark);
+    }
+    
+    /* Loading Skeleton */
+    .skeleton-card {
+      background: white;
       border-radius: 12px;
-      border: 1px solid #e0e0e0; /* Subtle border */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a soft shadow */
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
     }
-    .card-primary .btn-custom:hover {
-      background-color: #2f5e2c; /* Darker Green on hover */
-      color: white;
+    
+    .skeleton-header {
+      display: flex;
+      align-items: center;
+      padding: 15px;
+      background: #f9f9f9;
+    }
+    
+    .skeleton-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      margin-right: 15px;
+    }
+    
+    .skeleton-name {
+      height: 20px;
+      width: 150px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    
+    .skeleton-id {
+      height: 14px;
+      width: 100px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+    }
+    
+    .skeleton-body {
+      padding: 15px;
+    }
+    
+    .skeleton-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .skeleton-option {
+      height: 20px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    
+    .skeleton-button {
+      height: 38px;
+      width: 100%;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    /* Responsive Adjustments */
+    @media (min-width: 768px) {
+      .content-container {
+        padding: 30px;
+      }
+      
+      .salary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .bottom-nav {
+        max-width: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px 10px 0 0;
+        bottom: 10px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .content-container {
+        padding: 15px;
+      }
+      
+      .salary-options {
+        grid-template-columns: 1fr;
+      }
+      
+      .bottom-nav {
+        padding: 5px 0;
+      }
+      
+      .nav-item {
+        padding: 5px 0;
+        width: 60px;
+      }
+      
+      .nav-item i {
+        font-size: 1.1rem;
+        margin-bottom: 3px;
+      }
+      
+      .nav-label {
+        font-size: 0.7rem;
+      }
     }
   </style>
 
 </head>
-<body class="hold-transition sidebar-collapse layout-top-nav">
+<body>
 <div class="wrapper">
-
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
-    <div class="container justify-content-center"> <!-- Center the container content -->
-      <!-- Logo -->
-      <a href="index.html" class="navbar-brand">
-        <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
-      </a>
-      <!-- end logo -->
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <button class="back-btn" onclick="location.href='index.html'">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h1 class="header-title">Salary Management</h1>
     </div>
-  </nav>
-  <!-- /.navbar -->
+    <img src="src/APB.png" alt="Logo" class="header-logo">
+  </header>
 
-    <!-- Main content -->
-    <div class="content">
-      <div class="container">
-        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
+  <!-- Toast Container for Notifications -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <div class="content-container">
+      <!-- Page Actions -->
+      <div class="page-actions">
+        <button class="btn-print" onclick="printReport()">
+          <i class="fas fa-print"></i> Print Report
+        </button>
+      </div>
+      
+      <!-- Salary Cards Container -->
+      <div class="salary-grid" id="salary-grid">
+        <!-- Loading skeleton will appear here while data loads -->
+        <div class="skeleton-card">
+          <div class="skeleton-header">
+            <div class="skeleton-avatar"></div>
+            <div>
+              <div class="skeleton-name"></div>
+              <div class="skeleton-id"></div>
+            </div>
+          </div>
+          <div class="skeleton-body">
+            <div class="skeleton-options">
+              <div class="skeleton-option"></div>
+              <div class="skeleton-option"></div>
+              <div class="skeleton-option"></div>
+              <div class="skeleton-option"></div>
+            </div>
+            <div class="skeleton-button"></div>
+          </div>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+        
+        <div class="skeleton-card">
+          <div class="skeleton-header">
+            <div class="skeleton-avatar"></div>
+            <div>
+              <div class="skeleton-name"></div>
+              <div class="skeleton-id"></div>
+            </div>
+          </div>
+          <div class="skeleton-body">
+            <div class="skeleton-options">
+              <div class="skeleton-option"></div>
+              <div class="skeleton-option"></div>
+              <div class="skeleton-option"></div>
+              <div class="skeleton-option"></div>
+            </div>
+            <div class="skeleton-button"></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Centered Print Report Button -->
-  <div class="d-flex justify-content-center mb-3">
-    <button class="btn btn-custom" onclick="printReport()">Print Report</button>
-  </div>
-
-  <script>
-    function printReport() {
-      const reportWindow = window.open('Salary_report.html', '_blank');
-
-      // Listen for a message from the report page indicating it is ready
-      window.addEventListener('message', function handleMessage(event) {
-        if (event.data === 'reportReady') {
-          // Use a timeout to ensure compatibility with mobile browsers
-          setTimeout(() => {
-            reportWindow.print();
-          }, 500); // Adjust the delay if necessary
-          window.removeEventListener('message', handleMessage); // Clean up the event listener
-        }
-      });
-    }
-  </script>
-
-  <!-- Main Footer -->
-  <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
-    <!-- Default to the left -->
-    <strong><a href="https://adminlte.io">MyGaji v1.0</a><br>by Hakim</strong>
-  </footer>
+  
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item" onclick="location.href='index.html'">
+      <i class="fas fa-home"></i>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item" onclick="location.href='StaffList.html'">
+      <i class="fas fa-users"></i>
+      <span class="nav-label">Staff</span>
+    </button>
+    <button class="nav-item active">
+      <i class="fas fa-hand-holding-dollar"></i>
+      <span class="nav-label">Salary</span>
+    </button>
+    <button class="nav-item">
+      <i class="fas fa-user"></i>
+      <span class="nav-label">Profile</span>
+    </button>
+  </nav>
 </div>
-<!-- ./wrapper -->
 
+<!-- REQUIRED SCRIPTS -->
+<script src="jquery/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="js/adminlte.min.js"></script>
+
+<!-- Import Firebase setup from calculation.js -->
 <script type="module">
   import { db, calcStaffOT, publlicHoliday, overTime, unpaidLeave, calcPartTime } from './calculation.js';
   import { getDocs, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-  // Reference to the employees collection in Firestore
+  // References to Firebase collections
   const employeesRef = collection(db, 'employees');
-  const salariesRef = collection(db, 'salaries'); // Reference to the salaries collection
-
-  // Fetch employee data and display each employee in its own card
-  async function fetchEmployeeCards() {
-    const querySnapshot = await getDocs(employeesRef);
-    let employeeCards = '';
-    querySnapshot.forEach((doc) => {
-      const employeeData = doc.data();
-      employeeCards += `
-        <div class="col-lg-6 col-md-6 col-sm-12 mb-3"> <!-- 2x2 grid on desktop, full width on mobile -->
-          <div class="card card-primary border-primary">
-            <div class="card-body">
-              <div class="d-flex align-items-center mb-3">
-                <div class="info-box-icon" style="border-radius: 100px; overflow: hidden; width: 60px; height: 60px; margin-right: 15px;">
-                  <img src="src/me.jpg" alt="Employee Picture" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div>
-                  <h4 class="card-title mb-0"><strong>${employeeData.Nama}</strong></h4>
-                </div>
-              </div>
-              <label>
-                <input type="checkbox" id="publicHoliday-${doc.id}"> Public Holiday
-              </label>
-              <input type="number" id="publicHolidayDays-${doc.id}" class="hidden input" pattern="[0-9]*" inputmode="numeric" placeholder="days"><br>
-              
-              <label>
-                <input type="checkbox" id="overtime-${doc.id}"> Overtime
-              </label>
-              <input type="number" id="overtimeHours-${doc.id}" class="hidden input" pattern="[0-9]*" inputmode="numeric" placeholder="hours"><br>
-              
-              <label>
-                <input type="checkbox" id="unpaidLeave-${doc.id}"> Unpaid Leave
-              </label>
-              <input type="number" id="unpaidLeaveDays-${doc.id}" class="hidden input" pattern="[0-9]*" inputmode="numeric" placeholder="days"><br>
-              <p class="mt-3">Total Staff Salary: RM <span id="staffOT-${doc.id}">0</span></p>
-                            
-              <button id="calcStaffBtn-${doc.id}" class="btn btn-custom mt-2">Calculate Staff Salary</button>
-            </div>
-          </div>
-        </div>
-      `;
-    });
-
-    document.querySelector('.container .row').innerHTML = employeeCards;
-
-    // Add event listeners for dynamically created elements
-    querySnapshot.forEach((doc) => {
-      const employeeData = doc.data(); // Ensure employeeData is scoped here
-
-      //Checkbox for public holiday
-      const publicHolidayCheckbox = document.getElementById(`publicHoliday-${doc.id}`);
-      const publicHolidayDays = document.getElementById(`publicHolidayDays-${doc.id}`);
-
-      //Checkbox for overtime
-      const overtimeCheckbox = document.getElementById(`overtime-${doc.id}`);
-      const overtimeHours = document.getElementById(`overtimeHours-${doc.id}`);
-
-      //Checkbox for unpaid leave
-      const unpaidLeaveCheckbox = document.getElementById(`unpaidLeave-${doc.id}`);
-      const unpaidLeaveDays = document.getElementById(`unpaidLeaveDays-${doc.id}`);
-
-      //Button to calculate salary
-      const calcButton = document.getElementById(`calcStaffBtn-${doc.id}`);
-      const totalSpan = document.getElementById(`staffOT-${doc.id}`);
-
-      publicHolidayCheckbox.addEventListener('change', function() {
-        publicHolidayDays.classList.toggle('hidden', !this.checked);
-      });
-
-      overtimeCheckbox.addEventListener('change', function() {
-        overtimeHours.classList.toggle('hidden', !this.checked);
-      });
-
-      unpaidLeaveCheckbox.addEventListener('change', function() {
-        unpaidLeaveDays.classList.toggle('hidden', !this.checked);
-      });
-
-      calcButton.addEventListener('click', async function() {
-        let salary = calcStaffOT(1700); // Base salary after deductions
-        if (publicHolidayCheckbox.checked) {
-          salary = publlicHoliday(salary, parseFloat(publicHolidayDays.value || 0));
-        }
-        if (overtimeCheckbox.checked) {
-          salary = overTime(salary, parseFloat(overtimeHours.value || 0));
-        }
-        if (unpaidLeaveCheckbox.checked) {
-          salary = unpaidLeave(salary, parseFloat(unpaidLeaveDays.value || 0));
-        }
-        totalSpan.textContent = salary.toFixed(2);
-
-        // Save data to Firebase
-        try {
-          await addDoc(salariesRef, {
-            employeeId: employeeData.id,
-            nama: employeeData.Nama, // Use employeeData scoped here
-            publicHoliday: publicHolidayCheckbox.checked ? parseFloat(publicHolidayDays.value || 0) : 0,
-            overtime: overtimeCheckbox.checked ? parseFloat(overtimeHours.value || 0) : 0,
-            unpaidLeave: unpaidLeaveCheckbox.checked ? parseFloat(unpaidLeaveDays.value || 0) : 0,
-            totalSalary: salary.toFixed(2)
-          });
-          alert('Salary details saved successfully!');
-        } catch (error) {
-          console.error('Error saving salary details:', error);
-          alert('Failed to save salary details.');
-        }
-      });
-    });
+  const salariesRef = collection(db, 'salaries');
+  
+  // Show toast notification
+  function showToast(message, type = 'success') {
+    const toastContainer = document.getElementById('toastContainer');
+    
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    
+    const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+    
+    toast.innerHTML = `
+      <i class="fas fa-${icon} toast-icon"></i>
+      <div class="toast-message">${message}</div>
+    `;
+    
+    toastContainer.appendChild(toast);
+    
+    // Force a reflow to enable the transition
+    toast.offsetHeight;
+    
+    // Show the toast
+    setTimeout(() => {
+      toast.classList.add('show');
+    }, 10);
+    
+    // Remove the toast after 3 seconds
+    setTimeout(() => {
+      toast.classList.remove('show');
+      
+      // Remove from DOM after transition completes
+      setTimeout(() => {
+        toastContainer.removeChild(toast);
+      }, 300);
+    }, 3000);
   }
 
-  fetchEmployeeCards();
+  // Print report function
+  window.printReport = function() {
+    const reportWindow = window.open('Salary_report.html', '_blank');
+
+    // Listen for a message from the report page indicating it is ready
+    window.addEventListener('message', function handleMessage(event) {
+      if (event.data === 'reportReady') {
+        // Use a timeout to ensure compatibility with mobile browsers
+        setTimeout(() => {
+          reportWindow.print();
+        }, 500);
+        window.removeEventListener('message', handleMessage); // Clean up the event listener
+      }
+    });
+  };
+
+  // Fetch and display employee salary cards
+  async function fetchEmployeeCards() {
+    try {
+      const querySnapshot = await getDocs(employeesRef);
+      let employeeCards = '';
+      
+      if (querySnapshot.empty) {
+        document.getElementById('salary-grid').innerHTML = `
+          <div class="text-center p-4 bg-white rounded-lg shadow">
+            <i class="fas fa-users text-secondary mb-3" style="font-size: 3rem;"></i>
+            <h4>No employees found</h4>
+            <p class="text-muted">Add employees in the Staff Management section first.</p>
+          </div>
+        `;
+        return;
+      }
+      
+      querySnapshot.forEach((doc) => {
+        const employeeData = doc.data();
+        const employeeId = doc.id;
+        
+        employeeCards += `
+          <div class="salary-card">
+            <div class="salary-header">
+              <div class="salary-avatar">
+                <img src="src/me.jpg" alt="${employeeData.Nama}'s Picture">
+              </div>
+              <div>
+                <h3 class="salary-name">${employeeData.Nama}</h3>
+                <div class="salary-id">ID: ${employeeData.id || employeeId}</div>
+              </div>
+            </div>
+            
+            <div class="salary-body">
+              <div class="salary-options">
+                <div class="option-group">
+                  <label class="option-label">
+                    <input type="checkbox" id="publicHoliday-${employeeId}">
+                    <span class="option-checkbox"></span>
+                    Public Holiday
+                  </label>
+                  <input type="number" id="publicHolidayDays-${employeeId}" 
+                    class="option-input hidden" pattern="[0-9]*" inputmode="numeric" 
+                    placeholder="Number of days">
+                </div>
+                
+                <div class="option-group">
+                  <label class="option-label">
+                    <input type="checkbox" id="overtime-${employeeId}">
+                    <span class="option-checkbox"></span>
+                    Overtime
+                  </label>
+                  <input type="number" id="overtimeHours-${employeeId}" 
+                    class="option-input hidden" pattern="[0-9]*" inputmode="numeric" 
+                    placeholder="Number of hours">
+                </div>
+                
+                <div class="option-group">
+                  <label class="option-label">
+                    <input type="checkbox" id="unpaidLeave-${employeeId}">
+                    <span class="option-checkbox"></span>
+                    Unpaid Leave
+                  </label>
+                  <input type="number" id="unpaidLeaveDays-${employeeId}" 
+                    class="option-input hidden" pattern="[0-9]*" inputmode="numeric" 
+                    placeholder="Number of days">
+                </div>
+              </div>
+              
+              <button id="calcStaffBtn-${employeeId}" class="btn-calculate">
+                <i class="fas fa-calculator"></i> Calculate Salary
+              </button>
+            </div>
+            
+            <div class="salary-total">
+              <div class="total-label">Total Salary:</div>
+              <div class="total-value">RM <span id="staffOT-${employeeId}">0.00</span></div>
+            </div>
+          </div>
+        `;
+      });
+      
+      document.getElementById('salary-grid').innerHTML = employeeCards;
+      
+      // Add event listeners for dynamically created elements
+      querySnapshot.forEach((doc) => {
+        const employeeData = doc.data();
+        const employeeId = doc.id;
+        
+        // Public Holiday checkbox and input
+        const publicHolidayCheckbox = document.getElementById(`publicHoliday-${employeeId}`);
+        const publicHolidayDays = document.getElementById(`publicHolidayDays-${employeeId}`);
+        
+        // Overtime checkbox and input
+        const overtimeCheckbox = document.getElementById(`overtime-${employeeId}`);
+        const overtimeHours = document.getElementById(`overtimeHours-${employeeId}`);
+        
+        // Unpaid Leave checkbox and input
+        const unpaidLeaveCheckbox = document.getElementById(`unpaidLeave-${employeeId}`);
+        const unpaidLeaveDays = document.getElementById(`unpaidLeaveDays-${employeeId}`);
+        
+        // Calculate button and total span
+        const calcButton = document.getElementById(`calcStaffBtn-${employeeId}`);
+        const totalSpan = document.getElementById(`staffOT-${employeeId}`);
+        
+        // Toggle input visibility based on checkbox state
+        publicHolidayCheckbox.addEventListener('change', function() {
+          publicHolidayDays.classList.toggle('hidden', !this.checked);
+        });
+        
+        overtimeCheckbox.addEventListener('change', function() {
+          overtimeHours.classList.toggle('hidden', !this.checked);
+        });
+        
+        unpaidLeaveCheckbox.addEventListener('change', function() {
+          unpaidLeaveDays.classList.toggle('hidden', !this.checked);
+        });
+        
+        // Calculate salary and save to Firebase
+        calcButton.addEventListener('click', async function() {
+          try {
+            // Animation to indicate calculation is happening
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Calculating...';
+            this.disabled = true;
+            
+            let salary = calcStaffOT(1700); // Base salary after deductions
+            
+            if (publicHolidayCheckbox.checked) {
+              const days = parseFloat(publicHolidayDays.value || 0);
+              if (days > 0) {
+                salary = publlicHoliday(salary, days);
+              }
+            }
+            
+            if (overtimeCheckbox.checked) {
+              const hours = parseFloat(overtimeHours.value || 0);
+              if (hours > 0) {
+                salary = overTime(salary, hours);
+              }
+            }
+            
+            if (unpaidLeaveCheckbox.checked) {
+              const days = parseFloat(unpaidLeaveDays.value || 0);
+              if (days > 0) {
+                salary = unpaidLeave(salary, days);
+              }
+            }
+            
+            // Update the total
+            totalSpan.textContent = salary.toFixed(2);
+            
+            // Save data to Firebase
+            await addDoc(salariesRef, {
+              employeeId: employeeId,
+              nama: employeeData.Nama,
+              publicHoliday: publicHolidayCheckbox.checked ? parseFloat(publicHolidayDays.value || 0) : 0,
+              overtime: overtimeCheckbox.checked ? parseFloat(overtimeHours.value || 0) : 0,
+              unpaidLeave: unpaidLeaveCheckbox.checked ? parseFloat(unpaidLeaveDays.value || 0) : 0,
+              totalSalary: salary.toFixed(2),
+              timestamp: new Date()
+            });
+            
+            // Show success notification
+            showToast('Salary calculated and saved successfully!', 'success');
+          } catch (error) {
+            console.error('Error calculating or saving salary:', error);
+            showToast('Failed to save salary details.', 'error');
+          } finally {
+            // Reset button state
+            this.innerHTML = '<i class="fas fa-calculator"></i> Calculate Salary';
+            this.disabled = false;
+          }
+        });
+      });
+    } catch (error) {
+      console.error('Error fetching employees:', error);
+      document.getElementById('salary-grid').innerHTML = `
+        <div class="alert alert-danger" role="alert">
+          <i class="fas fa-exclamation-circle mr-2"></i> Error loading employee data. Please try again.
+        </div>
+      `;
+    }
+  }
+
+  // Initialize the page
+  window.addEventListener('DOMContentLoaded', () => {
+    fetchEmployeeCards();
+  });
 </script>
+
 </body>
 </html>
