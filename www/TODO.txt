@@ -33,9 +33,11 @@ Part 3 (Login)
 - [] Add session for every page
 - [] Add User Restriction
 - [] Add forgot password recovery
+- [] Dont zoom in focus on input when in mobile (Press login with no input)
 
 Part 4
 - [] Finalised The User Interface 
+- [] Check for session in each page 
 
 feature to add:
 - [x] Hover button on desktop
