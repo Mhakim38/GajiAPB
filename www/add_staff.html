@@ -1,549 +1,829 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyGaji</title>
-    <link rel="icon" href="src/APB.png">
-    <link rel="apple-touch-icon" href="src/APB.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+  <meta name="description" content="Ayam Penyet Best Salary Management System">
+  <meta name="theme-color" content="#ffcc09">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>MyGaji - Add Staff</title>
+  <link rel="icon" href="src/APB.png">
+  <link rel="apple-touch-icon" href="src/APB.png">
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="css/css/all.min.css">
-    <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="css/adminlte.min.css">
-    <style>
-        .content-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: auto;
-            padding: 0; /* Remove padding that might restrict width */
-        }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="css/css/all.min.css">
+  <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
+  
+  <!-- Theme style -->
+  <link rel="stylesheet" href="css/adminlte.min.css">
 
-        .content {
-            width: 100%;
-            padding: 0; /* Remove padding to allow full-width content */
-        }
+  <style>
+    :root {
+      --primary: #ffcc09;
+      --secondary: #808097;
+      --accent: #8bc53f;
+      --highlight: #2f5e2c;
+      --danger: #ffcc09;
+      --soft: #f5ed91;
+      --light: #f5f6f9;
+      --dark: #212529;
+      --card-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      --transition-speed: 0.3s;
+    }
+    
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+    
+    .wrapper {
+      min-height: 100%;
+      position: relative;
+    }
+    
+    /* App-like Header */
+    .app-header {
+      padding: 15px 20px;
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+    
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+    
+    .header-title {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin: 0;
+      color: var(--dark);
+      margin-left: 15px;
+    }
+    
+    .header-logo {
+      height: 35px;
+      width: auto;
+    }
+    
+    .back-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f5f5f5;
+      color: var(--dark);
+      border: none;
+      transition: all 0.2s ease;
+    }
+    
+    .back-btn:hover {
+      background-color: #e9e9e9;
+    }
+    
+    /* Content with centering */
+    .page-content {
+      position: relative;
+      min-height: calc(100vh - 66px - 66px); /* Adjust for header and footer heights */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      padding-bottom: 80px; /* Space for bottom nav */
+    }
+    
+    /* Form Card */
+    .form-card {
+      background: white;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 550px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    
+    .form-header {
+      background: var(--soft);
+      padding: 25px 20px;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .form-title {
+      color: var(--highlight);
+      font-weight: 600;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+    
+    .form-subtitle {
+      color: #808097;
+      font-size: 1rem;
+    }
+    
+    .form-body {
+      padding: 25px;
+    }
+    
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--highlight);
+      margin: 0 0 20px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--primary);
+      display: inline-block;
+    }
+    
+    /* Form Group */
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+    
+    .required-field {
+      color: var(--primary);
+      margin-left: 3px;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      background-color: white;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(139, 197, 63, 0.1);
+    }
+    
+    /* Number inputs */
+    input[type="number"] {
+      -moz-appearance: textfield; /* Firefox */
+    }
+    
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    
+    /* Select Control */
+    select.form-control {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23808097' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 16px;
+      padding-right: 40px;
+    }
+    
+    /* Submit Button */
+    .btn-submit {
+      width: 100%;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-submit:hover, .btn-submit:focus {
+      background-color: #7ab130;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+    
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
+      .form-row {
+        display: flex;
+        margin: 0 -10px;
+      }
+      
+      .form-col {
+        padding: 0 10px;
+        flex: 1;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .form-card {
+        margin: 10px;
+      }
+      
+      .form-header {
+        padding: 20px 15px;
+      }
+      
+      .form-title {
+        font-size: 1.3rem;
+      }
+      
+      .form-body {
+        padding: 20px 15px;
+      }
+      
+      .section-title {
+        font-size: 1.1rem;
+      }
+      
+      .form-group {
+        margin-bottom: 15px;
+      }
+      
+      .form-control {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+      }
+      
+      .btn-submit {
+        padding: 12px;
+        font-size: 1rem;
+      }
+    }
+    
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+      z-index: 900;
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 6px 0;
+      color: var(--secondary);
+      border: none;
+      background: transparent;
+      width: 70px;
+      transition: color 0.2s ease;
+    }
+    
+    .nav-item:hover {
+      color: var(--primary);
+    }
+    
+    .nav-item.active {
+      color: var(--primary);
+    }
+    
+    .nav-item i {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .nav-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    /* Loading indicator */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .loading-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(139, 197, 63, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--accent);
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Toast notification */
+    .toast-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+    
+    .toast {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      transform: translateX(120%);
+      transition: transform 0.3s ease;
+      max-width: 300px;
+    }
+    
+    .toast.show {
+      transform: translateX(0);
+    }
+    
+    .toast-success {
+      border-left: 4px solid var(--accent);
+    }
+    
+    .toast-error {
+      border-left: 4px solid var(--primary);
+    }
+    
+    .toast-icon {
+      margin-right: 12px;
+      font-size: 1.2rem;
+    }
+    
+    .toast-success .toast-icon {
+      color: var(--accent);
+    }
+    
+    .toast-error .toast-icon {
+      color: var(--primary);
+    }
+    
+    .toast-message {
+      flex: 1;
+      font-size: 0.9rem;
+      color: var(--dark);
+    }
+    
+    /* Special Responsive Bottom Nav */
+    @media (min-width: 768px) {
+      .bottom-nav {
+        max-width: 500px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px 10px 0 0;
+        bottom: 10px;
+      }
+    }
+    
+    @media (max-width: 767px) {
+      .bottom-nav {
+        padding: 5px 0;
+      }
+      
+      .nav-item {
+        padding: 5px 0;
+        width: 60px;
+      }
+      
+      .nav-item i {
+        font-size: 1.1rem;
+        margin-bottom: 3px;
+      }
+      
+      .nav-label {
+        font-size: 0.7rem;
+      }
+    }
+  </style>
 
-        .btn-custom {
-            background-color: #8bc53f; /* Lime Green */
-            color: white;
-            border-radius: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-
-        /* Start from form CSS */
-        .form {
-            background-color: #f5a391; /* Peachy Light Orange */
-            color: #212529; /* Adjust text color for contrast */
-            border-radius: 20px;
-            box-sizing: border-box;
-            height: auto;
-            padding: 20px;
-            width: 1200px !important; /* Ensure this width takes precedence */
-            max-width: 100%; /* Prevent overflow on smaller screens */
-        }
-
-        @media (max-width: 768px) {
-            .form {
-                width: 90%; /* Adjust width for smaller screens */
-                height: auto; /* Allow height to adjust based on content */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .form {
-                padding: 15px; /* Reduce padding for very small screens */
-            }
-
-            .title {
-                font-size: 28px; /* Adjust title size */
-            }
-
-            .subtitle {
-                font-size: 14px; /* Adjust subtitle size */
-            }
-        }
-
-        .title {
-            color: #46453a; /* Dark Gray */
-            font-family: sans-serif;
-            font-size: 36px;
-            font-weight: 600;
-            margin-top: 30px;
-            letter-spacing: 2px;
-        }
-
-        .subtitle {
-            color: #46453a; /* Dark Gray */
-            font-family: sans-serif;
-            font-size: 16px;
-            margin-top: 10px;
-            letter-spacing: 2px;
-        }
-
-        .input-container {
-            height: 50px;
-            position: relative;
-            width: 100%;
-        }
-
-        .ic1 {
-            margin-top: 40px;
-        }
-
-        .ic2 {
-            margin-top: 30px;
-        }
-
-        .input {
-            background-color: #ffffff; /* White */
-            border-radius: 12px;
-            border: 0;
-            box-sizing: border-box;
-            color: #212529; /* Adjust text color */
-            font-size: 18px;
-            height: 100%;
-            outline: 0;
-            padding: 4px 20px 0;
-            width: 100%;
-        }
-
-        select.input {
-            color: #6c757d; /* Adjust placeholder color for better visibility */
-            font-family: sans-serif; /* Apply sans-serif font */
-            appearance: none; /* Remove default dropdown styling */
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .cut {
-            background-color: #f5a391; /* Dark Gray */
-            border-radius: 10px;
-            height: 20px;
-            left: 20px;
-            position: absolute;
-            top: -20px;
-            transform: translateY(0);
-            transition: transform 200ms;
-            width: 495px;
-        }
-
-        .cut-short {
-            width: 65px;
-        }
-
-        .cut-medium {
-            width: 120px;
-        }
-        
-        .cut-long {
-            width: 180px;
-        }
-
-
-        .input:focus ~ .cut,
-        .input:not(:placeholder-shown) ~ .cut {
-            transform: translateY(8px);
-        }
-
-        .placeholder {
-            color: #6c757d; /* Adjust placeholder color for better visibility */
-            font-family: sans-serif;
-            left: 20px;
-            line-height: 14px;
-            pointer-events: none;
-            position: absolute;
-            transform-origin: 0 50%;
-            transition: transform 200ms, color 200ms;
-            top: 20px;
-        }
-
-        .input:focus ~ .placeholder,
-        .input:not(:placeholder-shown) ~ .placeholder {
-            transform: translateY(-30px) translateX(10px) scale(0.75);
-        }
-
-        .input:not(:placeholder-shown) ~ .placeholder {
-            color: #808097;
-        }
-
-        .input:focus ~ .placeholder {
-            color: #495057; /* Adjust focus color */
-        }
-
-        .submit {
-            background-color: #2f5e2c; /* Red */
-            border-radius: 12px;
-            border: 0;
-            box-sizing: border-box;
-            color: #ffffff; /* Ensure text is readable */
-            cursor: pointer;
-            font-size: 18px;
-            height: 50px;
-            margin-top: 38px;
-            outline: 0;
-            text-align: center;
-            width: 100%;
-        }
-
-        .submit:hover {
-            background-color: #d1121f; /* Darker Red on hover */
-        }
-        .submit:active {
-            background-color: #d1121f; /* Darker Red on active */
-        }
-        /* End form CSS */
-
-        /* Remove the up and down buttons for number inputs */
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-    </style>
 </head>
-<body class="hold-transition sidebar-collapse layout-top-nav">
+<body>
 <div class="wrapper">
-
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
-        <div class="container justify-content-center"> <!-- Center the container content -->
-            <!-- Logo -->
-            <a href="../../index3.html" class="navbar-brand">
-                <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
-            </a>
-            <!-- end logo -->
-        </div>
-    </nav>
-    <!-- /.navbar -->
-
-    <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper border-0" style="background-color: white;">
-    <!-- Main content container-->
-    <div class="content">
-        <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-lg-12 text-center">
-                    <div class="form">
-                        <div class="title">Staff Information</div>
-                        <div class="subtitle">Fill out the form</div>
-
-                        <form id="addStaffForm">
-                            <!-- Existing form fields remain the same until Family Related section -->
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-container ic1">
-                                        <input id="name" class="input" type="text" placeholder=" " required />
-                                        <div class="cut cut-short"></div>
-                                        <label for="name" class="placeholder">Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-container ic1">
-                                        <input id="id" class="input" type="text" placeholder=" "/>
-                                        <div class="cut cut-short"></div>
-                                        <label for="id" class="placeholder">Staff ID</label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <input id="ic" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " required />
-                                        <div class="cut cut-short"></div>
-                                        <label for="ic" class="placeholder">IC</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <input id="kwsp" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " required />
-                                        <div class="cut cut-short"></div>
-                                        <label for="kwsp" class="placeholder">KWSP</label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <input id="email" class="input" type="email" placeholder=" " required />
-                                        <div class="cut cut-short"></div>
-                                        <label for="email" class="placeholder">Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <input id="address" class="input" type="text" placeholder=" " />
-                                        <div class="cut cut-short"></div>
-                                        <label for="address" class="placeholder">Address</label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <input id="bankName" class="input" type="text" placeholder=" " />
-                                        <div class="cut cut-medium"></div>
-                                        <label for="bankName" class="placeholder">Bank Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <input id="bankNumber" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                        <div class="cut cut-medium"></div>
-                                        <label for="bankNumber" class="placeholder">Bank Number</label>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <input id="phoneNumber" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                        <div class="cut cut-medium"></div>
-                                        <label for="phoneNumber" class="placeholder">Phone Number</label>
-                                    </div>
-                                </div>
-                            </div><br>
-                            
-                            <div class="subtitle"><strong>Family Related</strong></div>
-
-                            <!-- Marital Status -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="input-container ic2 justify-content-center">
-                                        <select id="maritalStatus" class="input text-center" required>
-                                            <option value="single">Single</option>
-                                            <option value="married">Married</option>
-                                        </select>
-                                        <div class="cut cut-medium"></div>
-                                        <label for="maritalStatus" class="placeholder">Marital Status</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Family Fields -->
-                            <div id="familyFields" style="display: none;">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="input-container ic2">
-                                            <input id="householdName" class="input" type="text" placeholder=" " />
-                                            <div class="cut cut-medium"></div>
-                                            <label for="householdName" class="placeholder">Household Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="input-container ic2">
-                                            <input id="householdPhone" class="input" type="number" 
-                                                   pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                            <div class="cut cut-long"></div>
-                                            <label for="householdPhone" class="placeholder">Household phone number</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="input-container ic2">
-                                            <input id="kidsCount" class="input" type="number" pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                            <div class="cut cut-medium"></div>
-                                            <label for="kidsCount" class="placeholder">How many Kids?</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Parent Information -->
-                             <br>
-                            <div class="subtitle mt-2"><strong>Relatives Related</strong></div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <input id="parentName" class="input" type="text" placeholder=" " />
-                                        <div class="cut cut-long"></div>
-                                        <label for="parentName" class="placeholder">Father/mother name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <input id="parentPhone" class="input" type="number" 
-                                               pattern="[0-9]*" inputmode="numeric" placeholder=" " />
-                                        <div class="cut cut-long"></div>
-                                        <label for="parentPhone" class="placeholder">Father/mother phone number</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Disease Section -->
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="input-container ic2">
-                                        <select id="hasDisease" class="input" required>
-                                            <option value="no">No</option>
-                                            <option value="yes">Yes</option>
-                                        </select>
-                                        <div class="cut cut-short"></div>
-                                        <label for="hasDisease" class="placeholder">Disease</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6" id="diseaseNameContainer" style="display: none;">
-                                    <div class="input-container ic2">
-                                        <input id="diseaseName" class="input" type="text" placeholder=" " />
-                                        <div class="cut cut-medium"></div>
-                                        <label for="diseaseName" class="placeholder">Disease Name</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="submit">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <button class="back-btn" onclick="location.href='StaffList.html'">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <h1 class="header-title">Add New Staff</h1>
     </div>
+    <img src="src/APB.png" alt="Logo" class="header-logo">
+  </header>
+  
+  <!-- Toast Container for Notifications -->
+  <div class="toast-container" id="toastContainer"></div>
+  
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Content with form in the middle -->
+  <div class="page-content">
+    <div class="form-card">
+      <div class="form-header">
+        <h2 class="form-title">Staff Information</h2>
+        <p class="form-subtitle">Please fill all required fields</p>
+      </div>
+      
+      <div class="form-body">
+        <form id="addStaffForm">
+          <!-- Personal Information Section -->
+          <h3 class="section-title">Personal Details</h3>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">Full Name <span class="required-field">*</span></label>
+                <input type="text" id="name" class="form-control" required>
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">Staff ID</label>
+                <input type="text" id="id" class="form-control">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">IC Number <span class="required-field">*</span></label>
+                <input type="number" id="ic" class="form-control" pattern="[0-9]*" inputmode="numeric" required>
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">KWSP Number <span class="required-field">*</span></label>
+                <input type="number" id="kwsp" class="form-control" pattern="[0-9]*" inputmode="numeric" required>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">Email Address <span class="required-field">*</span></label>
+                <input type="email" id="email" class="form-control" required>
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="number" id="phoneNumber" class="form-control" pattern="[0-9]*" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Home Address</label>
+            <input type="text" id="address" class="form-control">
+          </div>
+          
+          <!-- Financial Information -->
+          <h3 class="section-title">Financial Details</h3>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">Bank Name</label>
+                <input type="text" id="bankName" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">Bank Account Number</label>
+                <input type="number" id="bankNumber" class="form-control" pattern="[0-9]*" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Family Information -->
+          <h3 class="section-title">Family Information</h3>
+          
+          <div class="form-group">
+            <label class="form-label">Marital Status</label>
+            <select id="maritalStatus" class="form-control">
+              <option value="single">Single</option>
+              <option value="married">Married</option>
+            </select>
+          </div>
+          
+          <div id="familyFields" style="display: none;">
+            <div class="form-row">
+              <div class="form-col">
+                <div class="form-group">
+                  <label class="form-label">Spouse Name</label>
+                  <input type="text" id="householdName" class="form-control">
+                </div>
+              </div>
+              
+              <div class="form-col">
+                <div class="form-group">
+                  <label class="form-label">Spouse Phone Number</label>
+                  <input type="number" id="householdPhone" class="form-control" pattern="[0-9]*" inputmode="numeric">
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Number of Children</label>
+              <input type="number" id="kidsCount" class="form-control" pattern="[0-9]*" inputmode="numeric" min="0">
+            </div>
+          </div>
+          
+          <!-- Emergency Contact -->
+          <h3 class="section-title">Emergency Contact</h3>
+          
+          <div class="form-row">
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">Parent/Guardian Name</label>
+                <input type="text" id="parentName" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-col">
+              <div class="form-group">
+                <label class="form-label">Parent/Guardian Phone</label>
+                <input type="number" id="parentPhone" class="form-control" pattern="[0-9]*" inputmode="numeric">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Medical Information -->
+          <h3 class="section-title">Medical Information</h3>
+          
+          <div class="form-group">
+            <label class="form-label">Any Medical Conditions?</label>
+            <select id="hasDisease" class="form-control">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          
+          <div id="diseaseNameContainer" style="display: none;">
+            <div class="form-group">
+              <label class="form-label">Specify Medical Condition</label>
+              <input type="text" id="diseaseName" class="form-control">
+            </div>
+          </div>
+          
+          <button type="submit" class="btn-submit">
+            <i class="fas fa-save mr-2"></i> Save Staff Information
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button class="nav-item" onclick="location.href='index.html'">
+      <i class="fas fa-home"></i>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item active">
+      <i class="fas fa-users"></i>
+      <span class="nav-label">Staff</span>
+    </button>
+    <button class="nav-item" onclick="location.href='Msalary.html'">
+      <i class="fas fa-hand-holding-dollar"></i>
+      <span class="nav-label">Salary</span>
+    </button>
+    <button class="nav-item">
+      <i class="fas fa-user"></i>
+      <span class="nav-label">Profile</span>
+    </button>
+  </nav>
 </div>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-    
-    <!-- Main Footer -->
-    <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
-        <!-- Default to the left -->
-        <strong><a href="https://github.com/Mhakim38">MyGaji v1.0</a><br>by Hakim</strong>
-    </footer>
-
 <!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
 <script src="jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
 
 <script type="module">
-    import { db, addDoc, collection } from './calculation.js';
-
-    // Show or hide the disease name input based on the dropdown selection
-    document.getElementById('hasDisease').addEventListener('change', (event) => {
-        const diseaseNameContainer = document.getElementById('diseaseNameContainer');
-        if (event.target.value === 'yes') {
-            diseaseNameContainer.style.display = 'block';
-        } else {
-            diseaseNameContainer.style.display = 'none';
-            document.getElementById('diseaseName').value = ''; // Clear the input
-        }
-    });
-
-    // Toggle family fields based on marital status
-    document.getElementById('maritalStatus').addEventListener('change', (event) => {
-        const familyFields = document.getElementById('familyFields');
-        const isMarried = event.target.value === 'married';
-
-        // Toggle visibility
-        familyFields.style.display = isMarried ? 'block' : 'none';
-
-        // Toggle required attributes
-        const familyInputs = document.querySelectorAll('#familyFields input');
-        familyInputs.forEach(input => {
-            input.required = isMarried;
-        });
-    });
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        const maritalStatus = document.getElementById('maritalStatus');
-        const familyFields = document.getElementById('familyFields');
-        const isInitiallyMarried = maritalStatus.value === 'married';
-
-        familyFields.style.display = isInitiallyMarried ? 'block' : 'none';
-
-        const familyInputs = document.querySelectorAll('#familyFields input');
-        familyInputs.forEach(input => {
-            input.required = isInitiallyMarried;
-        });
-    });
-
-    // Disable changing the value of number inputs on scroll
-    document.querySelectorAll('input[type="number"]').forEach((input) => {
-        input.addEventListener('wheel', (event) => {
-            event.preventDefault();
-        });
-    });
-
-    document.getElementById('addStaffForm').addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        let Nama = document.getElementById('name').value;
-        Nama = Nama.toUpperCase(); // Convert name to uppercase
-
-        let id = document.getElementById('id').value || '000';
-        id = id.toUpperCase();
-        
-        const IC = document.getElementById('ic').value;
-        const KWSP = document.getElementById('kwsp').value;
-        const Email = document.getElementById('email').value;
-        const Address = document.getElementById('address').value || "";
-
-        let Bank = document.getElementById('bankName').value || "";
-        Bank = Bank.toUpperCase(); // Convert bank name to uppercase
-
-        const Nombor_Bank = document.getElementById('bankNumber').value || "";
-        const Phone_Number = document.getElementById('phoneNumber').value || "";
-
-        let Nama_Suami_Istri = document.getElementById('householdName').value || "";
-        Nama_Suami_Istri = Nama_Suami_Istri.toUpperCase(); // Convert household name to uppercase
-
-        const Nombor_Telefon_Suami_Istri = document.getElementById('householdPhone').value || "";
-        const Bilangan_Anak = document.getElementById('kidsCount').value || "";
-
-        let Nama_Pewaris_Ibu_Ayah = document.getElementById('parentName').value || "";
-        Nama_Pewaris_Ibu_Ayah = Nama_Pewaris_Ibu_Ayah.toUpperCase(); // Convert parent name to uppercase
-
-        const Nombor_Telefon_Pewaris_Ibu_Ayah = document.getElementById('parentPhone').value || "";
-        const hasDisease = document.getElementById('hasDisease').value;
-
-        // Save the Penyakit field only if the user selects "Yes"
-        const Penyakit = hasDisease === 'yes' ? document.getElementById('diseaseName').value : "";
-
-        const newStaff = { 
-            Nama, id, IC, KWSP, Email, Address, 
-            Bank, Nombor_Bank, Phone_Number, 
-            Nama_Suami_Istri, 
-            Nombor_Telefon_Suami_Istri, 
-            Bilangan_Anak, 
-            Nama_Pewaris_Ibu_Ayah, 
-            Nombor_Telefon_Pewaris_Ibu_Ayah, 
-        };
-
-        // Add the Penyakit field only if it is not empty
-        if (Penyakit) {
-            newStaff.Penyakit = Penyakit;
-        }
+  import { db, addDoc, collection } from './calculation.js';
+  
+  // Show toast notification
+  function showToast(message, type = 'success') {
+    const toastContainer = document.getElementById('toastContainer');
     
-        try {
-            const docRef = await addDoc(collection(db, "employees"), newStaff);
-            alert("Successfully added Staff: " + Nama);
-            document.getElementById('addStaffForm').reset();
-            window.location.href = "StaffList.html"; // Redirect to StaffList.html
-        } catch (error) {
-            console.error("Error adding staff: ", error);
-            alert("Error adding staff: " + error.message);
-        }
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    
+    const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+    
+    toast.innerHTML = `
+      <i class="fas fa-${icon} toast-icon"></i>
+      <div class="toast-message">${message}</div>
+    `;
+    
+    toastContainer.appendChild(toast);
+    
+    // Force a reflow to enable the transition
+    toast.offsetHeight;
+    
+    // Show the toast
+    setTimeout(() => {
+      toast.classList.add('show');
+    }, 10);
+    
+    // Remove the toast after 3 seconds
+    setTimeout(() => {
+      toast.classList.remove('show');
+      
+      // Remove from DOM after transition completes
+      setTimeout(() => {
+        toastContainer.removeChild(toast);
+      }, 300);
+    }, 3000);
+  }
+  
+  // Show or hide loading overlay
+  function toggleLoading(show) {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (show) {
+      loadingOverlay.classList.add('show');
+    } else {
+      loadingOverlay.classList.remove('show');
+    }
+  }
+
+  // Show or hide the disease name input based on the dropdown selection
+  document.getElementById('hasDisease').addEventListener('change', (event) => {
+    const diseaseNameContainer = document.getElementById('diseaseNameContainer');
+    if (event.target.value === 'yes') {
+      diseaseNameContainer.style.display = 'block';
+    } else {
+      diseaseNameContainer.style.display = 'none';
+      document.getElementById('diseaseName').value = ''; // Clear the input
+    }
+  });
+
+  // Toggle family fields based on marital status
+  document.getElementById('maritalStatus').addEventListener('change', (event) => {
+    const familyFields = document.getElementById('familyFields');
+    const isMarried = event.target.value === 'married';
+
+    // Toggle visibility
+    familyFields.style.display = isMarried ? 'block' : 'none';
+  });
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const maritalStatus = document.getElementById('maritalStatus');
+    const familyFields = document.getElementById('familyFields');
+    const isInitiallyMarried = maritalStatus.value === 'married';
+
+    familyFields.style.display = isInitiallyMarried ? 'block' : 'none';
+  });
+
+  // Disable changing the value of number inputs on scroll
+  document.querySelectorAll('input[type="number"]').forEach((input) => {
+    input.addEventListener('wheel', (event) => {
+      event.preventDefault();
     });
-    </script>
+  });
+
+  document.getElementById('addStaffForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    
+    try {
+      // Show loading spinner
+      toggleLoading(true);
+
+      let Nama = document.getElementById('name').value;
+      Nama = Nama.toUpperCase(); // Convert name to uppercase
+
+      let id = document.getElementById('id').value || '000';
+      id = id.toUpperCase();
+      
+      const IC = document.getElementById('ic').value;
+      const KWSP = document.getElementById('kwsp').value;
+      const Email = document.getElementById('email').value;
+      const Address = document.getElementById('address').value || "";
+
+      let Bank = document.getElementById('bankName').value || "";
+      Bank = Bank.toUpperCase(); // Convert bank name to uppercase
+
+      const Nombor_Bank = document.getElementById('bankNumber').value || "";
+      const Phone_Number = document.getElementById('phoneNumber').value || "";
+
+      let Nama_Suami_Istri = document.getElementById('householdName').value || "";
+      Nama_Suami_Istri = Nama_Suami_Istri.toUpperCase(); // Convert household name to uppercase
+
+      const Nombor_Telefon_Suami_Istri = document.getElementById('householdPhone').value || "";
+      const Bilangan_Anak = document.getElementById('kidsCount').value || "";
+
+      let Nama_Pewaris_Ibu_Ayah = document.getElementById('parentName').value || "";
+      Nama_Pewaris_Ibu_Ayah = Nama_Pewaris_Ibu_Ayah.toUpperCase(); // Convert parent name to uppercase
+
+      const Nombor_Telefon_Pewaris_Ibu_Ayah = document.getElementById('parentPhone').value || "";
+      const hasDisease = document.getElementById('hasDisease').value;
+
+      // Save the Penyakit field only if the user selects "Yes"
+      const Penyakit = hasDisease === 'yes' ? document.getElementById('diseaseName').value : "";
+
+      const newStaff = { 
+          Nama, id, IC, KWSP, Email, Address, 
+          Bank, Nombor_Bank, Phone_Number, 
+          Nama_Suami_Istri, 
+          Nombor_Telefon_Suami_Istri, 
+          Bilangan_Anak, 
+          Nama_Pewaris_Ibu_Ayah, 
+          Nombor_Telefon_Pewaris_Ibu_Ayah
+      };
+
+      // Add the Penyakit field only if it is not empty
+      if (Penyakit) {
+          newStaff.Penyakit = Penyakit;
+      }
+  
+      const docRef = await addDoc(collection(db, "employees"), newStaff);
+      
+      // Show success message
+      showToast(`Staff ${Nama} added successfully!`, 'success');
+      
+      // Reset form and redirect after a short delay
+      setTimeout(() => {
+        document.getElementById('addStaffForm').reset();
+        window.location.href = "StaffList.html";
+      }, 1500);
+      
+    } catch (error) {
+      console.error("Error adding staff: ", error);
+      showToast(`Error adding staff: ${error.message}`, 'error');
+    } finally {
+      // Hide loading spinner
+      toggleLoading(false);
+    }
+  });
+</script>
+
 </body>
 </html>
