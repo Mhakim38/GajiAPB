@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<style>
+  body {
+    background-color: #fffdf5;
+  }
+</style><!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
@@ -6,146 +11,473 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MyGaji</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+  <meta name="description" content="Ayam Penyet Best Salary Management System">
+  <meta name="theme-color" content="#ffcc09">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>MyGaji - Dashboard</title>
   <link rel="icon" href="src/APB.png">
   <link rel="apple-touch-icon" href="src/APB.png">
 
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="css/css/all.min.css">
   <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
+  
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.min.css">
 
   <style>
-
-        /* body {
-            background-color: #ffffff;
-            color: #212529;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('src/soft-yellowbg.jpg');
-            background-size: cover;
-            background-position: left center;
-            transform: rotate(180deg);
-            z-index: -1;
-        } */
-
-    .content-wrapper {
+    :root {
+      --primary: rgb(255, 204, 9);
+      --secondary: #808097;
+      --accent: #8bc53f;
+      --highlight: #2f5e2c;
+      --danger: #d1121f;
+      --soft: #f5a391;
+      --light: #f5f6f9;
+      --dark: #212529;
+      --card-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      --transition-speed: 0.3s;
+    }
+    
+    * {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+    
+    .wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* App-like Header */
+    .app-header {
+      padding: 5px;
+      background-image: url('src/Header.png');
+      background-size: auto;
+      border-radius: 0 0 15px 15px; /* Apply radius only to the bottom corners */
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh; /* Ensure it takes the full height of the viewport */
-      overflow: hidden; /* Prevent scrolling */
-    }
-    .content {
-      width: 100%;
-      padding: 20px; /* Add some padding for better spacing */
-    }
-    .content-header {
-      position: absolute;
+      position: sticky;
       top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+    
+    .header-logo {
+      height: 90px;
+      width: auto;
+      object-fit: contain;
+    }
+    
+    /* Main Content */
+    .content-wrapper {
+      flex: 1;
       width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 0;
+      padding-bottom: 80px; /* Space for bottom nav */
+      background-color: var(--light);
     }
-    .btn-custom {
-      background-color: #007bff;
+    
+    .content-container {
+      padding: 20px
+    }
+    
+    /* Page Title */
+    .page-title {
+      text-align: center;
+      margin-bottom: 45px;
+      color: var(--highlight);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .page-title:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+    
+    /* Menu Cards */
+    .menu-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      /* overflow: hidden; */
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100px; /* Increased height for the cards */
+      margin: 10px;
+    }
+    
+    .menu-card:hover {
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    
+    .menu-icon {
+      width: 84px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: white;
-      border-radius: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
+      flex-shrink: 0;
     }
+    
+    .menu-icon i {
+      font-size: 1.8rem;
+    }
+    
+    .menu-content {
+      padding: 15px;
+      flex: 1;
+    }
+    
+    .menu-title {
+      font-weight: 600;
+      margin-bottom: 5px;
+      font-size: 1rem;
+      color: var(--dark);
+    }
+    
+    .menu-description {
+      color: var(--secondary);
+      font-size: 0.8rem;
+      margin-bottom: 0;
+      line-height: 1.3;
+    }
+    
+    .menu-staff .menu-icon {
+      height: 100px;
+      background: linear-gradient(135deg,#b1c834, #8bc53f);
+      border-radius: 5px;
+    }
+    
+    .menu-salary .menu-icon {
+      height: 100px;
+      background: linear-gradient(135deg, #ffcc09, #f5a391);
+      border-radius: 5px;
+    }
+    
+    .menu-reports .menu-icon {
+      height: 100px;
+      background: linear-gradient(135deg, #b1c834, #8bc53f);
+      border-radius: 5px;
+    }
+    
+    .menu-settings .menu-icon {
+      height: 100px;
+      background: linear-gradient(135deg, #ffcc09, #f5a391);
+      border-radius: 5px;
+    }
+    
+    .coming-soon-badge {
+      background-color: var(--primary);
+      color: var(--dark);
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 50px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+    }
+    
+    /* Bottom Navigation */
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      background-image: url('src/Header.png');
+      background-size: auto;
+      backdrop-filter: blur(40px); /* Blur effect for matte glass */
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      box-shadow: 2px 0px 67px -25px rgba(0,0,0,0.75);
+      z-index: 900;
+      bottom: 0px; /* Default for desktop */
+      border-radius: 0; /* Default for desktop */
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 6px; /* Adjusted padding-top */
+      padding-bottom: 0; /* Removed bottom padding for consistency */
+      color: var(--secondary);
+      border: none;
+      background: rgba(255, 255, 255, 0); /* Transparent white background */
+    }
+    
+    .nav-item:hover {
+      color: #f83939b6;
+    }
+    
+    .nav-item.active {
+      color: #f83939b6;
+    }
+    
+    .nav-item i {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .nav-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    /* Footer */
+    .app-footer {
+      text-align: center;
+      padding: 15px;
+      color: var(--secondary);
+      font-size: 0.9rem;
+      margin-top: 20px;
+      margin-bottom: 90px;
+      position: relative; /* Maintain its flow in the document */
+    }
+    
+    .app-footer strong {
+      color: var(--highlight);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .version-badge {
+      display: inline-block;
+      background-color: var(--primary);
+      color: var(--dark);
+      padding: 2px 8px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: 5px;
+    }
+    
+    .app-footer p {
+      margin-bottom: 2px;
+    }
+    
+    .app-footer small {
+      color: var(--secondary);
+      font-size: 0.75rem;
+    }
+
+    /* for mobile */
+    @media (max-width: 767px) {
+      .page-title {
+        font-size: 1.8rem; /* Smaller font size for the page title */
+      }
+  
+      .menu-title {
+        font-size: 1.1rem; /* Smaller font size for menu titles */
+      }
+  
+      .menu-description {
+        font-size: 0.75rem; /* Smaller font size for menu descriptions */
+      }
+  
+      .nav-label {
+        font-size: 0.65rem; /* Smaller font size for bottom nav labels */
+      }
+  
+      .app-footer {
+        font-size: 0.8rem; /* Smaller font size for footer text */
+      }
+  
+      .version-badge {
+        font-size: 0.6rem; /* Smaller font size for version badge */
+      }
+
+      .app-header {
+        background-size: cover; /* Remove cover on mobile */
+      }
+  
+      .bottom-nav {
+        background-size: cover; /* Remove cover on mobile */
+        bottom: 5px; /* Adjusted for mobile */
+        border-radius: 100px; /* Rounded corners for mobile */
+      }
+    }
+
   </style>
 
 </head>
-<body class="hold-transition sidebar-collapse layout-top-nav">
+<body>
 <div class="wrapper">
+  <!-- App Header -->
+  <header class="app-header">
+      <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="header-logo">
+    </header>
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
-    <div class="container justify-content-center"> <!-- Center the container content -->
-      <!-- Logo -->
-      <a href="../../index3.html" class="navbar-brand">
-        <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
-      </a>
-      <!-- end logo -->
-    </div>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper border-0" style="background-color: white;">
-
-    <!-- Main content -->
-    <div class="content">
+    <div class="content-container justify-content-center align-items-center mb-5">
+      <h1 class="page-title">Salary Management System</h1>
+      
+      <!-- Menu Grid -->
       <div class="container">
-        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
-          <div class="col-lg-6">
-            
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-info"><i class="fa-solid fa-users" onclick="location.href='StaffList.html'"></i></span>
-              <div class="info-box-content">
-                <a href="StaffList.html" class="info-box-text">List Staff</a>
+        <div class="row">
+          <!-- Staff Management Card -->
+          <div class="col-md-6 mb-0">
+            <div class="menu-card menu-staff border" onclick="location.href='StaffList.html'">
+              <div class="card-body d-flex align-items-center  p-0">
+                <div class="menu-icon bg-success text-white d-flex justify-content-center align-items-center">
+                  <i class="fas fa-solid fa-users"></i>
+                </div>
+                <div class="menu-content ms-3">
+                  <h3 class="menu-title">Staff Management </h3>
+                  <p class="menu-description">View, add, edit and delete staff information</p>
+                </div>
               </div>
             </div>
-
-            <div class="info-box mb-3">
-              <span class="info-box-icon bg-info"><i class="fa-solid fa-hand-holding-dollar" onclick="location.href='Msalary.html'"></i></span>
-              <div class="info-box-content">
-                <a href="Msalary.html" class="info-box-text">Salary Management</a>
-              </div>
-            </div>
-
           </div>
-          <!-- /.col-md-6 -->
+          
+          <!-- Salary Management Card -->
+          <div class="col-md-6 mb-0">
+            <div class="menu-card menu-salary border" onclick="location.href='Msalary.html'">
+              <div class="card-body d-flex align-items-center  p-0">
+                <div class="menu-icon bg-warning text-white d-flex justify-content-center align-items-center">
+                  <i class="fas fa-hand-holding-dollar"></i>
+                </div>
+                <div class="menu-content ms-3">
+                  <h3 class="menu-title">Salary Management</h3>
+                  <p class="menu-description">Process payroll, manage compensation and benefits</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Reports Card (Coming Soon) -->
+          <div class="col-md-6 mb-0">
+            <div class="menu-card menu-reports border" onclick="alert('Coming soon in the next update!')">
+              <div class="card-body d-flex align-items-center  p-0">
+                <div class="menu-icon bg-success text-white d-flex justify-content-center align-items-center">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="menu-content ms-3">
+                  <span class="coming-soon-badge">Coming Soon</span>
+                  <h3 class="menu-title">Reports & Analytics </h3>
+                  <p class="menu-description">View financial reports and salary analytics</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Settings Card (Coming Soon) -->
+          <div class="col-md-6 mb-0">
+            <div class="menu-card menu-settings border" onclick="alert('Coming soon in the next update!')">
+              <div class="card-body d-flex align-items-center  p-0">
+                <div class="menu-icon bg-warning text-white d-flex justify-content-center align-items-center">
+                  <i class="fas fa-gear"></i>
+                </div>
+                <div class="menu-content ms-3">
+                  <span class="coming-soon-badge">Coming Soon</span>
+                  <h3 class="menu-title">System Settings</h3>
+                  <p class="menu-description">Configure system preferences and user access</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
+      
     </div>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
-    <!-- Default to the left -->
-    <strong><a href="https://adminlte.io">MyGaji v1.0</a><br>by Hakim</strong>
-  </footer>
+    <!-- Footer -->
+    <!-- <div class="app-footer">
+      <strong>MyGaji <span class="version-badge">v1.0</span></strong>
+      <p>Ayam Penyet Best Salary Management System</p>
+      <small>Developed by Hakim</small>
+    </div> -->
+  
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-item active">
+        <i class="fas fa-home"></i>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-item" onclick="location.href='StaffList.html'">
+        <i class="fas fa-users"></i>
+        <span class="nav-label">Staff</span>
+      </button>
+      <button class="nav-item" onclick="location.href='Msalary.html'">
+        <i class="fas fa-hand-holding-dollar"></i>
+        <span class="nav-label">Salary</span>
+      </button>
+      <button class="nav-item" onclick="alert('Coming soon in the next update!')">
+        <i class="fas fa-user"></i>
+        <span class="nav-label">Profile</span>
+      </button>
+    </nav>
 </div>
-<!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
 <script src="jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="js/demo.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add entrance animations for menu cards
+    const menuCards = document.querySelectorAll('.menu-card');
+    
+    menuCards.forEach((card, index) => {
+      // Set initial state
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      
+      // Animate entrance with delay based on index
+      setTimeout(() => {
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, 100 * (index + 1));
+    });
+    
+    // Add touch effect for mobile
+    if ('ontouchstart' in window) {
+      menuCards.forEach(card => {
+        card.addEventListener('touchstart', function() {
+          this.style.transform = 'scale(0.98)';
+          this.style.opacity = '0.95';
+        }, { passive: true });
+        
+        card.addEventListener('touchend', function() {
+          this.style.transform = '';
+          this.style.opacity = '';
+        }, { passive: true });
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
