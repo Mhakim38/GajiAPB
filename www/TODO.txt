@@ -38,6 +38,7 @@ Part 3 (Login)
 Part 4
 - [] Finalised The User Interface 
 - [] Check for session in each page 
+- [] Haloooo
 
 feature to add:
 - [x] Hover button on desktop
