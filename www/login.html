@@ -165,7 +165,7 @@
         <button type="submit" class="form-button">LOGIN</button>
     </form>
 
-    <a href="Menu.html" class="form-link">Forgot password?</a>
+    <a href="Menu.html" class="form-link" onclick="navigateTo('Menu.html'); return false;">Forgot password?</a>
     <!-- <p class="footer-text">Don't have an account? <a href="#" class="footer-link">Register!</a></p> -->
 </body>
 
@@ -184,6 +184,10 @@
             alert("Please insert password...");
             return false;
         }
+    }
+
+    function navigateTo(url) {
+        window.location.replace(url); // Use replace to navigate while preserving full-screen mode
     }
 </script>
 
