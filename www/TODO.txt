@@ -29,7 +29,7 @@ Part 2 (Salary Management)
 - [x] Make sure that every staff have an staff_id, if not salary cant be save -- New data incoming with new column name
 
 Part 3 (Login)
-- [] Add Login Page
+- [x] Add Login Page
 - [] Add session for every page
 - [] Add User Restriction
 - [] Add forgot password recovery
@@ -38,7 +38,6 @@ Part 3 (Login)
 Part 4
 - [] Finalised The User Interface 
 - [] Check for session in each page 
-- [] Haloooo
 
 feature to add:
 - [x] Hover button on desktop
