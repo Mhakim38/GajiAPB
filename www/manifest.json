@@ -1,0 +1,20 @@
+{
+  "name": "MyGaji",
+  "short_name": "MyGaji",
+  "start_url": "./Menu.html",
+  "display": "standalone",
+  "background_color": "#fffdf5",
+  "theme_color": "#ffcc09",
+  "icons": [
+    {
+      "src": "src/APB.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "src/APB.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
