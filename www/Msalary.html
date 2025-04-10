@@ -59,7 +59,7 @@
       padding: 5px;
       background-image: url('src/Header.png');
       background-size: auto;
-      border-radius: 0 0 15px 15px;
+      border-radius: 0 0 15px 15px; /* Apply radius only to the bottom corners */
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
       display: flex;
       justify-content: center;
@@ -314,25 +314,25 @@
       right: 0;
       background-image: url('src/Header.png');
       background-size: auto;
-      backdrop-filter: blur(40px);
+      backdrop-filter: blur(40px); /* Blur effect for matte glass */
       display: flex;
       justify-content: space-around;
       padding: 10px;
       box-shadow: 2px 0px 67px -25px rgba(0,0,0,0.75);
       z-index: 900;
-      bottom: 0px;
-      border-radius: 0;
+      bottom: 0px; /* Default for desktop */
+      border-radius: 0; /* Default for desktop */
     }
     
     .nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 6px;
-      padding-bottom: 0;
+      padding-top: 6px; /* Adjusted padding-top */
+      padding-bottom: 0; /* Removed bottom padding for consistency */
       color: var(--secondary);
       border: none;
-      background: rgba(255, 255, 255, 0);
+      background: rgba(255, 255, 255, 0); /* Transparent white background */
     }
     
     .nav-item:hover {
@@ -485,51 +485,39 @@
       100% { background-position: -200% 0; }
     }
     
-    /* Responsive Adjustments */
-    @media (min-width: 768px) {
-      .content-container {
-        padding: 30px;
-      }
-      
-      .salary-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-      
-      .bottom-nav {
-        max-width: 500px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-radius: 10px 10px 0 0;
-        bottom: 10px;
-      }
-    }
-    
     @media (max-width: 767px) {
-      .content-container {
-        padding: 15px;
+      .page-title {
+        font-size: 1.8rem; /* Smaller font size for the page title */
       }
-      
-      .salary-options {
-        grid-template-columns: 1fr;
+  
+      .menu-title {
+        font-size: 1.1rem; /* Smaller font size for menu titles */
       }
-      
-      .bottom-nav {
-        padding: 5px 0;
+  
+      .menu-description {
+        font-size: 0.75rem; /* Smaller font size for menu descriptions */
       }
-      
-      .nav-item {
-        padding: 5px 0;
-        width: 60px;
-      }
-      
-      .nav-item i {
-        font-size: 1.1rem;
-        margin-bottom: 3px;
-      }
-      
+  
       .nav-label {
-        font-size: 0.7rem;
+        font-size: 0.65rem; /* Smaller font size for bottom nav labels */
+      }
+  
+      .app-footer {
+        font-size: 0.8rem; /* Smaller font size for footer text */
+      }
+  
+      .version-badge {
+        font-size: 0.6rem; /* Smaller font size for version badge */
+      }
+
+      .app-header {
+        background-size: cover; /* Remove cover on mobile */
+      }
+  
+      .bottom-nav {
+        background-size: cover; /* Remove cover on mobile */
+        bottom: 5px; /* Adjusted for mobile */
+        border-radius: 100px; /* Rounded corners for mobile */
       }
     }
   </style>
