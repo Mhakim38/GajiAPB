@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0 viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Ayam Penyet Best Salary Management System">
   <meta name="theme-color" content="#ffcc09">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -34,6 +34,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="css/adminlte.min.css">
 
   <style>
+
+    /* Footer Styling (fixed position) */
+    footer {
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
+      position: fixed; /* Keeps it fixed at the bottom of the screen */
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      text-align: center;
+      z-index: 1000; /* Keeps it above other content */
+    }
+
     :root {
       --primary: rgb(255, 204, 9);
       --secondary: #808097;
@@ -67,6 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     /* App-like Header */
     .app-header {
       padding: 5px;
+      padding-top: calc(env(safe-area-inset-top, 0px) + 5px); /* Add safe area inset for iPhone notch */
       background-image: url('src/Header.png');
       background-size: auto;
       border-radius: 0 0 15px 15px; /* Apply radius only to the bottom corners */
