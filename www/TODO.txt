@@ -51,3 +51,4 @@ Finalised
 - [] Double Check Function on Salary Management
 - [] Double Check Function CRUD that are available
 - [] Double Check UI/UX
+- [] Adjust the layout and grid for Msalary and StaffList for Dektop
