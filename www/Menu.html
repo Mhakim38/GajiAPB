@@ -34,6 +34,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="css/adminlte.min.css">
 
   <style>
+
+    /* Footer Styling (fixed position) */
+    footer {
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
+      position: fixed; /* Keeps it fixed at the bottom of the screen */
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      text-align: center;
+      z-index: 1000; /* Keeps it above other content */
+    }
+
     :root {
       --primary: rgb(255, 204, 9);
       --secondary: #808097;
