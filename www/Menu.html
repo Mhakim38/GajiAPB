@@ -235,6 +235,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       display: flex;
       justify-content: space-around;
       padding: 10px;
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); /* Add safe area inset for navbar */
       box-shadow: 2px 0px 67px -25px rgba(0,0,0,0.75);
       z-index: 900;
       bottom: 0px; /* Default for desktop */
