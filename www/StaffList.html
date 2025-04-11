@@ -60,7 +60,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     .app-header {
       padding: 5px;
-      padding-top: calc(env(safe-area-inset-top, 0px) + 5px); /* Add safe area inset for iPhone notch */
+      padding-top: calc(env(safe-area-inset-top, 0px)); /* Add safe area inset for iPhone notch */
       background-image: url('src/Header.png');
       background-size: auto;
       border-radius: 0 0 15px 15px;
@@ -275,7 +275,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       flex-direction: column;
       align-items: center;
       padding-top: 6px; /* Adjusted padding-top */
-      padding-bottom: 0; /* Removed bottom padding for consistency */
+      padding-bottom: 10px; /* Removed bottom padding for consistency */
       color: var(--secondary);
       border: none;
       background: rgba(255, 255, 255, 0); /* Transparent white background */
@@ -486,7 +486,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   
       .bottom-nav {
         background-size: cover; /* Remove cover on mobile */
-        bottom: 5px; /* Adjusted for mobile */
+        bottom: 0px; /* Adjusted for mobile */
         border-radius: 100px; /* Rounded corners for mobile */
       }
     }
