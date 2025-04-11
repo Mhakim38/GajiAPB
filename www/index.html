@@ -25,6 +25,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="manifest" href="manifest.json">
 
   <style>
+
+        /* Combined styles for header and footer */
+    header, footer {
+      padding-left: env(safe-area-inset-left, 0px);
+      padding-right: env(safe-area-inset-right, 0px);
+      background-color: #fff; /* Example background */
+      width: 100%; /* Ensures full width */
+      z-index: 1000; /* Keeps it above other content */
+    }
+    
+    /* Specific header styling */
+    header {
+      padding-top: calc(env(safe-area-inset-top, 0px) + 10px); /* Add space for the notch */
+      position: sticky; /* Makes it stick to the top while scrolling */
+      top: 0;
+    }
+    
+    /* Specific footer styling */
+    footer {
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); /* Add space for the home bar */
+      position: sticky; /* Makes it stick to the bottom while scrolling */
+      bottom: 0;
+    }
+
     .content-wrapper {
       display: flex;
       justify-content: center;
