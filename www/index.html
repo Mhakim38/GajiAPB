@@ -48,6 +48,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
       padding: 10px 20px;
       font-size: 16px;
     }
+    .navbar {
+      padding-top: calc(env(safe-area-inset-top, 0px) + 5px); /* Add safe area inset for iPhone notch */
+    }
   </style>
 
 </head>
