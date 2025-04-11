@@ -1,12 +1,8 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0 viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"> <!-- Corrected meta tag -->
   <title>MyGaji</title>
   <link rel="icon" href="src/APB.png">
   <link rel="apple-touch-icon" href="src/APB.png">
@@ -18,35 +14,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.min.css">
-<!-- Enable full-screen mode for web apps -->
+  <!-- Enable full-screen mode for web apps -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="manifest.json">
 
   <style>
-
-        /* Combined styles for header and footer */
+    /* Combined styles for header and footer */
     header, footer {
       padding-left: env(safe-area-inset-left, 0px);
       padding-right: env(safe-area-inset-right, 0px);
-      background-color: #fff; /* Example background */
-      width: 100%; /* Ensures full width */
-      z-index: 1000; /* Keeps it above other content */
+      background-color: #fff;
+      width: 100%;
+      z-index: 1000;
     }
-    
+
     /* Specific header styling */
     header {
-      padding-top: calc(env(safe-area-inset-top, 0px) + 10px); /* Add space for the notch */
+      padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
       position: sticky; /* Makes it stick to the top while scrolling */
       top: 0;
+      z-index: 1000; /* Ensure it stays above other content */
     }
-    
-    /* Specific footer styling */
+
+    /* Footer Styling (fixed position) */
     footer {
-      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); /* Add space for the home bar */
-      position: sticky; /* Makes it stick to the bottom while scrolling */
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px);
+      position: fixed; /* Keeps it fixed at the bottom of the screen */
       bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      text-align: center;
+      z-index: 1000; /* Keeps it above other content */
     }
 
     .content-wrapper {
@@ -54,17 +55,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
       justify-content: center;
       align-items: center;
       min-height: 100vh; /* Ensure it takes the full height of the viewport */
-      overflow: hidden; /* Prevent scrolling */
+      margin-bottom: 60px; /* Avoid content overlap with fixed footer */
     }
+
     .content {
       width: 100%;
-      padding: 20px; /* Add some padding for better spacing */
+      padding: 20px;
     }
+
     .content-header {
       position: absolute;
       top: 0;
       width: 100%;
     }
+
     .btn-custom {
       background-color: #007bff;
       color: white;
@@ -73,7 +77,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       font-size: 16px;
     }
   </style>
-
 </head>
 <body class="hold-transition sidebar-collapse layout-top-nav">
 <div class="wrapper">
@@ -85,70 +88,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <a href="../../index.html" class="navbar-brand">
         <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
       </a>
-      <!-- end logo -->
     </div>
   </nav>
-  <!-- /.navbar -->
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper border-0" style="background-color: white;">
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container">
-        <div class="row mb-2 justify-content-center"> <!-- Center the row content -->
-          <div class="col-sm-6 text-center"> <!-- Center the text -->
+        <div class="row mb-2 justify-content-center">
+          <div class="col-sm-6 text-center">
             <h1 class="m-0"> MENU</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-header -->
 
     <!-- Main content container-->
     <div class="content">
       <div class="container">
-        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
+        <div class="row justify-content-center align-items-center">
           <div class="col-lg-6 text-center">
             <h1 class="font-weight-bold">- WELCOME -<br>Mama</h1>
             <button class="btn btn-custom mt-4" onclick="navigateTo('login.html')">More - - ></button>
           </div>
-          <!-- /.col-md-6 -->
         </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
     </div>
-    <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
-    <!-- Default to the left -->
+  <footer class="main-footer">
     <strong><a href="https://github.com/Mhakim38">MyGaji v1.0</a><br>by Hakim</strong>
   </footer>
 </div>
-<!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
 <script src="jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
 <script src="js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
 <script src="js/demo.js"></script>
 <script>
   function navigateTo(url) {
-    window.location.replace(url); // Use replace to navigate while preserving full-screen mode
+    window.location.replace(url);
   }
 </script>
+
 </body>
 </html>
