@@ -11,15 +11,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="description" content="Ayam Penyet Best Salary Management System">
   <meta name="theme-color" content="#ffcc09">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no"> <!---prevent zooming on mobile devices ->
+
   <title>MyGaji - Dashboard</title>
+
   <link rel="icon" href="src/APB.png">
   <link rel="apple-touch-icon" href="src/APB.png">
   <link rel="manifest" href="manifest.json">
@@ -28,12 +28,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome Icons -->
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="css/css/all.min.css">
   <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
-  
-  <!-- Theme style -->
+
+  <!-- AdminLTE Theme -->
   <link rel="stylesheet" href="css/adminlte.min.css">
 
   <style>
@@ -67,11 +67,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       -webkit-tap-highlight-color: transparent;
     }
     
-    body {
+    body, html {
       font-family: 'Poppins', sans-serif;
       background-color: var(--light);
       color: var(--dark);
       overflow-x: hidden;
+      margin: 0;
+      padding: 0;
     }
     
     .wrapper {
@@ -105,7 +107,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
 
     .header-under-cover {
-      margin-top: calc(env(safe-area-inset-top, 0px));
+      padding-top: constant(safe-area-inset-top, 20px);
+      padding-top: env(safe-area-inset-top, 20px);
     }
     
     /* Main Content */
@@ -113,7 +116,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       flex: 1;
       width: 100%;
       max-width: 850px;
-      margin: 0 auto;
+      margin-top: 100px; /* Match your header height + safe inset */
       padding: 0;
       padding-bottom: 80px; /* Space for bottom nav */
       background-color: var(--light);
