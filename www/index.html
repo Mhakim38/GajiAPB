@@ -6,7 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <title>MyGaji</title>
   <link rel="icon" href="src/APB.png">
   <link rel="apple-touch-icon" href="src/APB.png">
@@ -51,11 +51,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .navbar {
       padding-top: calc(env(safe-area-inset-top, 0px) + 5px); /* Add safe area inset for iPhone notch */
     }
+    .header-under-cover {
+      padding-top: constant(safe-area-inset-top, 20px);
+      padding-top: env(safe-area-inset-top, 20px);
+    }
   </style>
 
 </head>
 <body class="hold-transition sidebar-collapse layout-top-nav">
 <div class="wrapper">
+  <div class="header-under-cover"></div> <!-- Added for spacing -->
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
@@ -128,6 +133,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
   function navigateTo(url) {
     window.location.replace(url); // Use replace to navigate while preserving full-screen mode
   }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const appHeader = document.querySelector('.navbar');
+    const headerUnderCover = document.querySelector('.header-under-cover');
+    
+    if (appHeader && headerUnderCover) {
+      const headerHeight = appHeader.offsetHeight;
+      headerUnderCover.style.height = `${headerHeight}px`;
+    }
+  });
 </script>
 </body>
 </html>
