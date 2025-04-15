@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="description" content="Ayam Penyet Best Salary Management System">
   <meta name="theme-color" content="#ffcc09">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -76,6 +76,11 @@
       height: 90px;
       width: auto;
       object-fit: contain;
+    }
+    
+    .header-under-cover {
+      padding-top: constant(safe-area-inset-top, 20px);
+      padding-top: env(safe-area-inset-top, 20px);
     }
     
     /* Main Content */
@@ -526,6 +531,7 @@
 </head>
 <body>
 <div class="wrapper">
+  <div class="header-under-cover"></div> <!-- Added for spacing -->
   <!-- App Header -->
   <header class="app-header">
     <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="header-logo">
@@ -539,7 +545,7 @@
     <div class="content-container">
       <!-- Page Actions -->
       <div class="page-actions">
-        <button class="btn-print" style="margin-top: 90px;" onclick="printReport()">
+        <button class="btn-print" onclick="printReport()">
           <i class="fas fa-print"></i> Print Report
         </button>
       </div>
@@ -861,6 +867,16 @@
   // Initialize the page
   window.addEventListener('DOMContentLoaded', () => {
     fetchEmployeeCards();
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const appHeader = document.querySelector('.app-header');
+    const headerUnderCover = document.querySelector('.header-under-cover');
+    
+    if (appHeader && headerUnderCover) {
+      const headerHeight = appHeader.offsetHeight;
+      headerUnderCover.style.height = `${headerHeight}px`;
+    }
   });
 </script>
 
