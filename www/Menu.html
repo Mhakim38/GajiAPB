@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, viewport-fit=cover">
   <meta name="description" content="Ayam Penyet Best Salary Management System">
   <meta name="theme-color" content="#ffcc09">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -71,7 +71,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
       background-color: var(--light);
       color: var(--dark);
       overflow-x: hidden;
-      margin-top: calc(env(safe-area-inset-top, 0px));
     }
     
     .wrapper {
@@ -102,6 +101,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
       height: 90px;
       width: auto;
       object-fit: contain;
+    }
+
+    .header-under-cover {
+      margin-top: calc(env(safe-area-inset-top, 0px));
     }
     
     /* Main Content */
@@ -353,13 +356,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body>
 <div class="wrapper">
+  <div class="header-under-cover">Test</div>
   <!-- App Header -->
   <header class="app-header">
       <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="header-logo">
     </header>
 
     <div class="content-container justify-content-center align-items-center mb-5">
-      <h1 class="page-title" style="margin-top: 90px;">Salary Management System</h1>
+      <h1 class="page-title">Salary Management System</h1>
       
       <!-- Menu Grid -->
       <div class="container">
@@ -493,6 +497,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
           this.style.opacity = '';
         }, { passive: true });
       });
+    }
+
+    // Set the height of .header-under-cover to match .app-header
+    const appHeader = document.querySelector('.app-header');
+    const headerUnderCover = document.querySelector('.header-under-cover');
+    
+    if (appHeader && headerUnderCover) {
+      const headerHeight = appHeader.offsetHeight;
+      headerUnderCover.style.height = `${headerHeight}px`;
     }
   });
 </script>
