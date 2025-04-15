@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
   <meta name="description" content="Ayam Penyet Best Salary Management System">
   <meta name="theme-color" content="#ffcc09">
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>MyGaji - Salary Management</title>
   <link rel="icon" href="src/APB.png">
@@ -709,7 +709,7 @@
               </div>
               <div>
                 <h3 class="salary-name">${employeeData.Nama}</h3>
-                <div class="salary-id">ID: ${employeeData.id || employeeId}</div>
+                <div class="salary-id">ID: ${employeeData.id}</div>
               </div>
             </div>
             
@@ -833,7 +833,7 @@
             
             // Save data to Firebase
             await addDoc(salariesRef, {
-              employeeId: employeeId,
+              employeeId: employeeData.id,
               nama: employeeData.Nama,
               publicHoliday: publicHolidayCheckbox.checked ? parseFloat(publicHolidayDays.value || 0) : 0,
               overtime: overtimeCheckbox.checked ? parseFloat(overtimeHours.value || 0) : 0,
