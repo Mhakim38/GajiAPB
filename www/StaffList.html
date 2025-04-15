@@ -45,11 +45,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       -webkit-tap-highlight-color: transparent;
     }
 
-    body {
+    body, html {
       font-family: 'Poppins', sans-serif;
       background-color: var(--light);
       color: var(--dark);
       overflow-x: hidden;
+      margin: 0;
+      padding: 0;
     }
 
     .wrapper {
@@ -60,7 +62,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     .app-header {
       padding: 5px;
-      padding-top: calc(env(safe-area-inset-top, 0px)); /* Add safe area inset for iPhone notch */
+      padding-top: calc(env(safe-area-inset-top, 0px));
       background-image: url('src/Header.png');
       background-size: auto;
       border-radius: 0 0 15px 15px;
@@ -81,6 +83,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
       object-fit: contain;
     }
 
+    .header-under-cover {
+      padding-top: constant(safe-area-inset-top, 20px);
+      padding-top: env(safe-area-inset-top, 20px);
+    }
+
     .content-wrapper {
       flex: 1;
       width: 100%;
@@ -93,7 +100,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     /* Search Bar */
     .search-container {
       margin-bottom: 20px;
-      margin-top: 90px;
     }
     
     .search-input {
@@ -496,6 +502,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 </head>
 <body>
 <div class="wrapper">
+  <div class="header-under-cover"></div>
   <!-- App Header -->
   <header class="app-header">
     <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="header-logo">
@@ -727,6 +734,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
       document.querySelector('.sidebar').classList.toggle('active');
     });
   }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const appHeader = document.querySelector('.app-header');
+    const headerUnderCover = document.querySelector('.header-under-cover');
+    
+    if (appHeader && headerUnderCover) {
+      const headerHeight = appHeader.offsetHeight;
+      headerUnderCover.style.height = `${headerHeight}px`;
+    }
+  });
 </script>
 
 </body>
