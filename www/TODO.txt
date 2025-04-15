@@ -27,9 +27,10 @@ Part 2 (Salary Management)
 - [] Add an if statement for checking the employee exist or not, if exist update, if not create new. 
 - [] How to do, reset the salaries data monthly ???? -- bu using update only and chek if the user data exist or not
 - [x] Make sure that every staff have an staff_id, if not salary cant be save -- New data incoming with new column name
+- [x] Make sure that the salary Report shows the staff id and not collection id
 
 Part 3 (Login)
-- [] Add Login Page
+- [x] Add Login Page
 - [] Add session for every page
 - [] Add User Restriction
 - [] Add forgot password recovery
@@ -46,6 +47,8 @@ feature to add:
 - [] Add search button/function
 - [] Add salary payment detail for each staff - Slip Gaji
 - [] Add hours total calculation for staff - start and end time (puch card)
+- [] Add Skeleton/prevent to avoid displacement (Subtle) when reload the header-cover-under - QOL!!!!!!!!!
+- [] Avoid using image in css instead use in body - performance issue (Header, nabvar, login)
 
 Finalised
 - [] Double Check Function on Salary Management
