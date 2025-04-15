@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>MyGaji</title>
@@ -212,10 +212,16 @@
             padding-top: calc(env(safe-area-inset-top, 0px) + 5px); /* Add safe area inset for iPhone notch */
         }
 
+        .header-under-cover {
+            padding-top: constant(safe-area-inset-top, 20px);
+            padding-top: env(safe-area-inset-top, 20px);
+        }
+
     </style>
 </head>
 <body class="hold-transition sidebar-collapse layout-top-nav">
 <div class="wrapper">
+    <div class="header-under-cover"></div> <!-- Added for spacing -->
 
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
@@ -641,6 +647,16 @@ if (employeeId) {
                 document.getElementById('diseaseName').value = '';
             }
         });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const appHeader = document.querySelector('.navbar');
+        const headerUnderCover = document.querySelector('.header-under-cover');
+        
+        if (appHeader && headerUnderCover) {
+            const headerHeight = appHeader.offsetHeight;
+            headerUnderCover.style.height = `${headerHeight}px`;
+        }
+    });
 </script>
 </body>
 </html>
