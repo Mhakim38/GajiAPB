@@ -622,8 +622,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         
         // Generate a random position if not available in the data
         const position = employeeData.Position || getRandomPosition();
+        const employeeId = employeeData.id || doc.id; // Use the `id` field from the document data
+        // console.log(employeeId);
         
-        employeeCards += generateEmployeeCard(doc.id, employeeData.Nama, position);
+        employeeCards += generateEmployeeCard(doc.id, employeeData.Nama, position, employeeId);
       });
       
       // Update the UI
@@ -652,7 +654,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   }
 
   // Function to generate employee card HTML
-  function generateEmployeeCard(id, name, position) {
+  function generateEmployeeCard(id, name, position, employeeId) {
     return `
       <div class="staff-card" onclick="location.href='Edetail.html?id=${id}'">
         <div class="staff-avatar">
@@ -660,7 +662,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         <div class="staff-info">
           <h5 class="staff-name">${name}</h5>
-          <p class="staff-position">${position}</p>
+          <p class="staff-position">ID: ${employeeId}</p> <!-- Display employee ID from the document -->
           <span class="status-label status-active">Active</span>
         </div>
         <i class="fas fa-chevron-right staff-chevron"></i>
@@ -708,7 +710,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     
     filteredEmployees.forEach(emp => {
       const position = emp.Position || getRandomPosition();
-      employeeCards += generateEmployeeCard(emp.id, emp.Nama, position);
+      const employeeId = emp.id || emp.id; // Use the `id` field from the document data
+      employeeCards += generateEmployeeCard(emp.id, emp.Nama, position, employeeId);
     });
     
     if (filteredEmployees.length > 0) {
