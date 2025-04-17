@@ -39,6 +39,7 @@ Part 3 (Login)
 Part 4
 - [] Finalised The User Interface 
 - [] Check for session in each page 
+- [] Check for session in each page 
 
 feature to add:
 - [x] Hover button on desktop
