@@ -39,7 +39,6 @@ Part 3 (Login)
 Part 4
 - [] Finalised The User Interface 
 - [] Check for session in each page 
-- [] Check for session in each page 
 
 feature to add:
 - [x] Hover button on desktop
@@ -56,3 +55,6 @@ Finalised
 - [] Double Check Function CRUD that are available
 - [] Double Check UI/UX
 - [] Adjust the layout and grid for Msalary and StaffList for Dektop
+
+Security feature
+- [] Send the data using AJAX to the server (php ?) for more secure
