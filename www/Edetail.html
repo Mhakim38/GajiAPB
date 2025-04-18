@@ -99,6 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <p><strong>Disease:</strong> <span id="employee-disease"></span></p>
                 <button id="delete-staff-btn" class="btn btn-danger mt-3">Delete Staff</button>
                 <button id="update-staff-btn" class="btn btn-custom mt-3">Update Staff</button> <!-- New Update Button -->
+                
               </div>
           </div>
           <!-- /.col-md-6 -->
@@ -138,7 +139,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Import Firebase setup from calculation.js -->
 <script type="module">
     import { db } from './calculation.js';
-    import { doc, getDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { doc, getDoc, deleteDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
   
     // Function to get query parameter by name
     function getQueryParam(param) {
@@ -158,7 +159,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           if (employeeDoc.exists()) {
             const employeeData = employeeDoc.data();
-            console.log("Fetched Employee Data:", employeeData); // Debugging output
+            //console.log("Fetched Employee Data:", employeeData); // Debugging output
 
             // Populate the fields with the fetched data
             document.getElementById('employee-id').innerText = employeeData.id || employeeDoc.id; // Use Firestore document ID as fallback
@@ -196,13 +197,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
       const employeeId = getQueryParam('id');
       if (employeeId) {
         try {
+          // Fetch employee data
+          const employeeDoc = await getDoc(doc(db, 'employees', employeeId));
+          const employeeData = employeeDoc.data();
+
+          // Delete related salaries
+          const salariesQuery = await getDocs(query(collection(db, 'salaries'), where('employeeId', '==', employeeData.id)));
+          const deletePromises = salariesQuery.docs.map((doc) => deleteDoc(doc.ref));
+          await Promise.all(deletePromises);
+          console.log('Related salaries deleted successfully!');
+
+          // Delete the employee document
           const employeeRef = doc(db, 'employees', employeeId);
           await deleteDoc(employeeRef);
-          alert('Employee record deleted successfully!');
+
+          alert('Employee record and related salaries deleted successfully!');
           window.location.href = 'StaffList.html'; // Redirect to another page after deletion
         } catch (error) {
-          console.error('Error deleting document:', error);
-          alert('Failed to delete employee record.');
+          console.error('Error deleting documents:', error);
+          alert('Failed to delete employee record and related salaries.');
         }
       } else {
         alert('No employee ID provided in the URL.');
