@@ -16,6 +16,7 @@ Part 1 (Staff List)
 - [x] Add delete and Update button on Edetail.html
 - [] The delete button on StaffList.html need to delete ALL the data in salaries and employes collection
 - [x] Add toupper on employeeID in add_staff and edit/update
+- [] Add checking on Staff ID to be unique
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff
@@ -34,7 +35,7 @@ Part 3 (Login)
 - [] Add session for every page
 - [] Add User Restriction
 - [] Add forgot password recovery
-- [] Dont zoom in focus on input when in mobile (Press login with no input)
+- [x] Dont zoom in focus on input when in mobile (Press login with no input)
 
 Part 4
 - [] Finalised The User Interface 
