@@ -596,6 +596,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="module">
   import { db } from './calculation.js';
   import { getDocs, collection } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      // Redirect to login page if not authenticated
+      location.href = 'login.html';
+    }
+  });
 
   // Reference to the employees collection in Firestore
   const employeesRef = collection(db, 'employees');
@@ -733,10 +742,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
   const isDesktop = window.innerWidth >= 992;
   if (isDesktop) {
     // Add event listener for sidebar toggle
-    document.querySelector('.back-btn').addEventListener('click', function(e) {
-      e.preventDefault();
-      document.querySelector('.sidebar').classList.toggle('active');
-    });
+    const backBtn = document.querySelector('.back-btn');
+    if (backBtn) { // Ensure the element exists
+      backBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector('.sidebar').classList.toggle('active');
+      });
+    }
   }
 </script>
 

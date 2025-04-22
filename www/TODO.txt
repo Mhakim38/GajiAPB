@@ -29,6 +29,7 @@ Part 2 (Salary Management)
 - [] How to do, reset the salaries data monthly ???? -- by using update only and chek if the user data exist or not
 - [x] Make sure that every staff have an staff_id, if not salary cant be save -- New data incoming with new column name
 - [x] Make sure that the salary Report shows the staff id and not collection id
+- [x] There is an error on displaying the salaries record on salary report
 
 Part 3 (Login)
 - [x] Add Login Page

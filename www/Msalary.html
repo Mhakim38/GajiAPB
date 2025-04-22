@@ -624,6 +624,15 @@
 <script type="module">
   import { db, calcStaffOT, publlicHoliday, overTime, unpaidLeave, calcPartTime } from './calculation.js';
   import { getDocs, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // Redirect to login page if not authenticated
+    location.href = 'login.html';
+  }
+});
 
   // References to Firebase collections
   const employeesRef = collection(db, 'employees');

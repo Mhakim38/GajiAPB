@@ -71,6 +71,16 @@
         import { db, publlicHoliday, overTime, unpaidLeave } from './calculation.js';
         import { getDocs, collection } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // Redirect to login page if not authenticated
+    location.href = 'login.html';
+  }
+});
+
         const salariesRef = collection(db, 'salaries'); // Reference to the salaries collection
 
         // Salary Deduction Constants
