@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="viewport" content="width=device-width, viewport-fit=cover, user-scalable=no">
 
     
     <meta name="mobile-web-app-capable" content="yes">
@@ -176,12 +176,61 @@
         <button type="submit" class="form-button">LOGIN</button>
     </form>
 
-    <a href="Menu.html" class="form-link" onclick="navigateTo('Menu.html'); return false;">Forgot password?</a>
+    <a href="Menu.html" class="form-link" return false;">Forgot password?</a>
     <!-- <p class="footer-text">Don't have an account? <a href="#" class="footer-link">Register!</a></p> -->
 </body>
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Firebase App (required) and Firebase Authentication -->
+<script type="module">
+  // Import Firebase modules and configuration from calculation.js
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+  import { db } from './calculation.js';
+
+  // Initialize Firebase Authentication
+  const auth = getAuth();
+
+  // Handle login form submission
+  const loginForm = document.querySelector("form");
+  loginForm.addEventListener("submit", async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const email = loginForm.email.value;
+    const password = loginForm.password.value;
+
+    try {
+      // Sign in with Firebase Authentication
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Redirect to the menu page after successful login
+      alert("Login successful!");
+      window.location.href = "Menu.html";
+    } catch (error) {
+      console.error("Error during login:", error);
+
+      // Handle specific Firebase authentication errors
+      switch (error.code) {
+        case "auth/invalid-email":
+          alert("Invalid email format. Please check your email.");
+          break;
+        case "auth/user-not-found":
+          alert("No user found with this email. Please register first.");
+          break;
+        case "auth/wrong-password":
+          alert("Incorrect password. Please try again.");
+          break;
+        case "auth/too-many-requests":
+          alert("Too many failed login attempts. Please try again later.");
+          break;
+        default:
+          alert("Login failed: " + error.message);
+      }
+    }
+  });
+</script>
 
 <script>
     function togglePassword() {

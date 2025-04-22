@@ -457,6 +457,15 @@
 <script type="module">
 // Import Firestore functions
 import { db, doc, getDoc, updateDoc } from './calculation.js';
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // Redirect to login page if not authenticated
+    location.href = 'login.html';
+  }
+});
 
     // Function to fetch a specific employee by ID
     async function fetchEmployeeById(employeeId) {
