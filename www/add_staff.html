@@ -448,6 +448,15 @@
 
 <script type="module">
     import { db, addDoc, collection } from './calculation.js';
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    // Redirect to login page if not authenticated
+    location.href = 'login.html';
+  }
+});
 
     // Show or hide the disease name input based on the dropdown selection
     document.getElementById('hasDisease').addEventListener('change', (event) => {
