@@ -31,12 +31,14 @@ Part 2 (Salary Management)
 - [x] Make sure that every staff have an staff_id, if not salary cant be save -- New data incoming with new column name
 - [x] Make sure that the salary Report shows the staff id and not collection id
 - [x] There is an error on displaying the salaries record on salary report
+- [] Add search function in #Msalary.html 
 
 Part 3 (Login)
 - [x] Add Login Page
 - [x] Add session for every page
 - [] Add User Restriction
 - [] Add forgot password recovery
+- [] Add timeout for logged in user
 - [x] Dont zoom in focus on input when in mobile (Press login with no input)
 
 Part 3.3 (Interface)
@@ -53,7 +55,7 @@ feature to add:
 - [x] Hover button on desktop
 - [x] Add edit/update page for staff detail
 - [x] Add Report for total staff Salary (OT, PH, UPL) in a Month
-- [] Add search button/function
+- [x] Add search button/function
 - [] Add salary payment detail for each staff - Slip Gaji
 - [] Add hours total calculation for staff - start and end time (puch card)
 - [] Add Skeleton/prevent to avoid displacement (Subtle) when reload the header-cover-under - QOL!!!!!!!!!
