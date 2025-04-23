@@ -448,14 +448,15 @@
 <script type="module">
     import { db, addDoc, collection } from './calculation.js';
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
-const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    // Redirect to login page if not authenticated
-    location.href = 'login.html';
-  }
-});
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // Redirect to login page if not authenticated
+        location.href = 'login.html';
+      }
+    });
 
     // Show or hide the disease name input based on the dropdown selection
     document.getElementById('hasDisease').addEventListener('change', (event) => {
@@ -555,10 +556,19 @@ onAuthStateChanged(auth, (user) => {
         }
     
         try {
-            const docRef = await addDoc(collection(db, "employees"), newStaff);
+            const staffRef = doc(db, "employees", id); // Use the entered ID as the document ID
+            const staffSnap = await getDoc(staffRef);  // Check if it already exists
+
+            if (staffSnap.exists()) {
+                alert("Error: Staff ID already exists. Please use a different ID.");
+                return; // Stop the submission if ID exists
+            }
+        
+            await setDoc(staffRef, newStaff); // Add staff with custom ID
+        
             alert("Successfully added Staff: " + Nama);
             document.getElementById('addStaffForm').reset();
-            window.location.href = "StaffList.html"; // Redirect to StaffList.html
+            window.location.href = "StaffList.html"; // Redirect after success
         } catch (error) {
             console.error("Error adding staff: ", error);
             alert("Error adding staff: " + error.message);

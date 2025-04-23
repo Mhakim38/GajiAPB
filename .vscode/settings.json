@@ -1,0 +1,41 @@
+{
+    "todo-tree.tree.showBadges": true,
+    "todo-tree.tree.showCountsInTree": true,
+    "todo-tree.regex.regex": "(//|#|<!--|;|/?\\*|^|^[ \\t]*(-|\\d+.))\\s*($TAGS)",
+
+    "todo-tree.general.tags": [
+      "TODO",
+      "[x]",
+      "[]",
+
+    //PHP
+      "@todo",
+      "TODO",
+      "FIXME"
+    ],
+
+    "todo-tree.highlights.customHighlight": {
+        "BUG": {
+            "icon": "bug"
+        },
+        "HACK": {
+            "icon": "tools"
+        },
+        "FIXME": {
+            "icon": "flame"
+        },
+        "XXX": {
+            "icon": "x"
+        },
+        "[]": {
+            "icon": "issue-draft",
+            "iconColour": "#ffffff",
+            "background": "#ffffff00",
+        },
+        "[x]": {
+            "icon": "issue-closed",
+            "hideFromTree": true
+        }
+    }
+    
+}
