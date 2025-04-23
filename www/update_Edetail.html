@@ -259,7 +259,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="input-container ic1">
-                                            <input id="employee-id" class="input" type="text" placeholder=" " />
+                                            <input id="employee-id" class="input" type="text" placeholder=" " readonly/>
                                             <div class="cut cut-short"></div>
                                             <label for="id" class="placeholder">Staff ID</label>
                                         </div>
@@ -459,13 +459,13 @@
 import { db, doc, getDoc, updateDoc } from './calculation.js';
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    // Redirect to login page if not authenticated
-    location.href = 'login.html';
-  }
-});
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // Redirect to login page if not authenticated
+        location.href = 'login.html';
+      }
+    });
 
     // Function to fetch a specific employee by ID
     async function fetchEmployeeById(employeeId) {
@@ -477,7 +477,7 @@ onAuthStateChanged(auth, (user) => {
                 console.log(`Employee ID: ${employeeDoc.id}`, employeeData);
 
                 // Populate main fields
-                document.getElementById('employee-id').value = employeeData.id || '';
+                document.getElementById('employee-id').value = employeeDoc.id || '';
                 document.getElementById('employee-name').value = employeeData.Nama || '';
                 document.getElementById('address').value = employeeData.Address || '';
                 document.getElementById('email').value = employeeData.Email || '';
@@ -543,7 +543,7 @@ onAuthStateChanged(auth, (user) => {
             try {
                 const employeeDoc = await getDoc(doc(db, 'employees', employeeId));
                 const employeeData = employeeDoc.data();
-                console.log(`Employee ID: ${employeeDoc.id}`, employeeData);
+                //console.log(`Employee ID: ${employeeDoc.id}`, employeeData);
 
                 // Get updated values from form
                 const updateData = {
@@ -570,6 +570,13 @@ onAuthStateChanged(auth, (user) => {
                 if (!updateData.Nama || !updateData.IC || !updateData.KWSP || !updateData.Email) {
                     throw new Error('Please fill in all required fields');
                 }
+
+                await updateDoc(doc(db, "employees", employeeId), updateData);
+
+                // Also update corresponding document in 'salaries' collection
+                await updateDoc(doc(db, "salaries", employeeDoc.id), {
+                    nama: updateData.Nama,
+                });
 
                 // Update Firestore document
                 await updateDoc(doc(db, "employees", employeeId), updateData);
