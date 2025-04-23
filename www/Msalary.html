@@ -623,16 +623,16 @@
 <!-- Import Firebase setup from calculation.js -->
 <script type="module">
   import { db, calcStaffOT, publlicHoliday, overTime, unpaidLeave, calcPartTime } from './calculation.js';
-  import { getDocs, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+  import { getDocs, collection, addDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    // Redirect to login page if not authenticated
-    location.href = 'login.html';
-  }
-});
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      // Redirect to login page if not authenticated
+      location.href = 'login.html';
+    }
+  });
 
   // References to Firebase collections
   const employeesRef = collection(db, 'employees');
@@ -706,9 +706,9 @@ onAuthStateChanged(auth, (user) => {
         return;
       }
       
-      querySnapshot.forEach((doc) => {
-        const employeeData = doc.data();
-        const employeeId = doc.id;
+      querySnapshot.forEach((docSnap) => {
+        const employeeData = docSnap.data();
+        const employeeId = docSnap.id;
         
         employeeCards += `
           <div class="salary-card">
@@ -774,9 +774,9 @@ onAuthStateChanged(auth, (user) => {
       document.getElementById('salary-grid').innerHTML = employeeCards;
       
       // Add event listeners for dynamically created elements
-      querySnapshot.forEach((doc) => {
-        const employeeData = doc.data();
-        const employeeId = doc.id;
+      querySnapshot.forEach((docSnap) => {
+        const employeeData = docSnap.data();
+        const employeeId = docSnap.id;
         
         // Public Holiday checkbox and input
         const publicHolidayCheckbox = document.getElementById(`publicHoliday-${employeeId}`);
@@ -839,9 +839,10 @@ onAuthStateChanged(auth, (user) => {
             
             // Update the total
             totalSpan.textContent = salary.toFixed(2);
-            
-            // Save data to Firebase
-            await addDoc(salariesRef, {
+
+            // Save data to Firebase using custom document ID
+            const salaryRef = doc(db, "salaries", employeeData.id); // use employee's ID as doc ID
+            await setDoc(salaryRef, {
               employeeId: employeeData.id,
               nama: employeeData.Nama,
               publicHoliday: publicHolidayCheckbox.checked ? parseFloat(publicHolidayDays.value || 0) : 0,
@@ -850,6 +851,7 @@ onAuthStateChanged(auth, (user) => {
               totalSalary: salary.toFixed(2),
               timestamp: new Date()
             });
+
             
             // Show success notification
             showToast('Salary calculated and saved successfully!', 'success');
