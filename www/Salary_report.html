@@ -70,16 +70,40 @@
     <script type="module">
         import { db, publlicHoliday, overTime, unpaidLeave } from './calculation.js';
         import { getDocs, collection } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+        const auth = getAuth();
 
-const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    // Redirect to login page if not authenticated
-    location.href = 'login.html';
-  }
-});
+        onAuthStateChanged(auth, (user) => {
+          if (!user) {
+            // User not logged in
+            location.href = 'login.html';
+            return;
+          }
+      
+          const loginTime = parseInt(localStorage.getItem('loginTime'), 10);
+          const currentTime = Date.now();
+          const sessionDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
+      
+          if (!loginTime || currentTime - loginTime > sessionDuration) {
+            // Session expired
+            localStorage.removeItem('loginTime');
+            signOut(auth).then(() => {
+              //alert("Session expired. Please log in again.");
+              location.href = 'login.html';
+            });
+          }
+        });
+
+        // USER ACTIVITY DETECTION TO REFRESH SESSION
+        function refreshSessionTimer() {
+          localStorage.setItem('loginTime', Date.now().toString());
+        }
+    
+        window.addEventListener('mousemove', refreshSessionTimer);
+        window.addEventListener('keydown', refreshSessionTimer);
+        window.addEventListener('click', refreshSessionTimer);
+
 
         const salariesRef = collection(db, 'salaries'); // Reference to the salaries collection
 
@@ -138,13 +162,13 @@ onAuthStateChanged(auth, (user) => {
             <h1 class="mb-5px font-weight-bold">Ayam Penyet Best</h1>
             <h5 class="m-1" style="font-size: small;">Address: L3-33A, 3rd Floor Mayang Mall, 20000 Kuala Terengganu, Terengganu</h5>
             <div style="display: flex; gap: 76px;">
-                <h5 class="m-1" style="font-size: small;">Email : hahha@gamil.com</h5>
+                <h5 class="m-1" style="font-size: small;">Email : apbmayang@gmail.com</h5>
                 <h5 class="m-1" style="font-size: small;">Phone : 016-410 3533 / 011-2337 1228</h5>
             </div>
         </div>
         <h5 class="font-weight-bold" style="font-size: medium; text-align: right;" id="dateIssued">Date issued: </h5>
     </div><br>
-    <h2 class="text-center font-weight-bold">Monthly Salary Report</h2>
+    <h2 class="text-center font-weight-bold mt-3" id="monthElement"></h2>
     <table>
         <thead>
             <tr>
@@ -186,14 +210,26 @@ onAuthStateChanged(auth, (user) => {
         </tbody>
     </table>
     <script>
-        // Dynamically set the current date
+        const monthElement = document.getElementById('monthElement');
         const dateElement = document.getElementById('dateIssued');
-        const currentDate = new Date().toLocaleDateString('en-GB', {
+
+        // Get the current date
+        const now = new Date();
+
+        // Format month name (e.g., "April")
+        const monthName = now.toLocaleDateString('en-GB', { month: 'long' });
+        
+        // Format full date (e.g., "23/04/2025")
+        const fullDate = now.toLocaleDateString('en-GB', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric'
         });
-        dateElement.textContent += currentDate;
+        
+        // Set the content
+        monthElement.textContent = monthName + " Salary Report";
+        dateIssued.textContent += fullDate;
+
     </script>
 </body>
 </html>
