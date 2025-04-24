@@ -26,8 +26,8 @@ Part 2 (Salary Management)
 - [x] In Database, update the salary record for each Staff
 - [x] Add Report page using only table for printing the report. 
 - [x] update the report where display the total RM for UPL, Public Holidays, Total overtime Hours in RM
-- [ ] Add an if statement for checking the employee exist or not, if exist update, if not create new. 
-- [ ] How to do, reset the salaries data monthly ???? -- by using update only and chek if the user data exist or not
+- [] Add an if statement for checking the employee exist or not, if exist update, if not create new. 
+- [] How to do, reset the salaries data monthly ???? -- by using update only and chek if the user data exist or not
 - [x] Make sure that every staff have an staff_id, if not salary cant be save -- New data incoming with new column name
 - [x] Make sure that the salary Report shows the staff id and not collection id
 - [x] There is an error on displaying the salaries record on salary report
@@ -50,6 +50,7 @@ Part 3.3 (Interface)
 Part 4
 - [] Finalised The User Interface 
 - [] Check for session in each page 
+- [] Remove the Scroll UI on the right using CSS only
 
 feature to add:
 - [x] Hover button on desktop
