@@ -659,7 +659,7 @@
   <form method="dialog" style="user-select: none !important;">
     <h3>Monthly Update</h3>
     <h1 id="dateIssued" class="salary-id mt-0">Date: </h1>
-    <img src="src/Asset 1.svg" alt="">
+    <img src="src/popup.svg" alt="">
     <p>It is time to Calculate your staffs' salary, Good Luck & Don't Stress</p>
     <button id="confirmReset" value="confirm" class="btn-print">Continue</button>
   </form>
@@ -764,7 +764,7 @@
 <!-- Import Firebase setup from calculation.js -->
 <script type="module">
   import { db, calcStaffOT, publlicHoliday, overTime, unpaidLeave, calcPartTime } from './calculation.js';
-  import { getDocs, collection, addDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+  import { getDocs, collection, addDoc, setDoc, doc, serverTimestamp, writeBatch } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
   const auth = getAuth();
@@ -845,10 +845,10 @@
     // Listen for a message from the report page indicating it is ready
     window.addEventListener('message', function handleMessage(event) {
       if (event.data === 'reportReady') {
-        // Use a timeout to ensure compatibility with mobile browsers
-        // setTimeout(() => {
-        //   reportWindow.print();
-        // });
+        //Use a timeout to ensure compatibility with mobile browsers
+        setTimeout(() => {
+          reportWindow.print();
+        }, 500);
         window.removeEventListener('message', handleMessage); // Clean up the event listener
       }
     });
@@ -1040,6 +1040,29 @@
     }
   }
 
+    // 1. Define the reset action
+  async function performMonthlyReset() {
+    // a) Delete all salary docs
+    const salariesSnapshot = await getDocs(collection(db, "salaries"));
+    const batch = writeBatch(db);
+    salariesSnapshot.forEach(snap => batch.delete(snap.ref));
+    await batch.commit();
+
+    // b) Mark this month as reset
+    const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
+    await setDoc(
+      doc(db, "system_reset", "global_monthly_reset"),
+      { last_reset: currentMonth, timestamp: serverTimestamp() },
+      { merge: true }
+    );
+  }
+
+  // 2. Hook up the modal’s confirm button
+  document.getElementById("confirmReset").addEventListener("click", async () => {
+    await performMonthlyReset();
+    document.getElementById("monthlyResetModal").close(); // hide the <dialog>
+  });
+
   // Initialize the page
   window.addEventListener('DOMContentLoaded', () => {
     fetchEmployeeCards();
@@ -1071,41 +1094,47 @@
   });
 
 
-  const resetDocRef = doc(db, "system_reset", "global_monthly_reset");
+    const resetDocRef = doc(db, "system_reset", "global_monthly_reset");
 
-  import { getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"; // add this at the top if not imported
+    import { getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"; // add this at the top if not imported
 
-  async function checkAndShowResetModal() {
-  const resetDocRef = doc(db, "system_reset", "global_monthly_reset");
-  const resetSnap = await getDoc(resetDocRef);
+    async function checkAndShowResetModal() {
+    const resetDocRef = doc(db, "system_reset", "global_monthly_reset");
+    const resetSnap = await getDoc(resetDocRef);
 
-  const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
+    const now = new Date();
+    const currentMonth = now.toISOString().slice(0, 7); // "YYYY-MM"
+    const currentDay = now.getDate(); // 1 to 31
 
-  if (resetSnap.exists()) {
-    const lastReset = resetSnap.data().last_reset;
-    console.log('Last Reset:', lastReset); // Log the last reset
+    if (resetSnap.exists()) {
+      const lastReset = resetSnap.data().last_reset;
+      console.log('Last Reset:', lastReset);
 
-    if (lastReset !== currentMonth) {
-      // Show modal only if not reset yet this month
-      document.getElementById("monthlyResetModal").showModal();
+      // Show modal only if today is 18th or later and the reset hasn't been done yet this month
+      if (lastReset !== currentMonth && currentDay >= 18) {
+        const modal = document.getElementById("monthlyResetModal");
+        if (modal && !modal.open) {
+          modal.showModal();
+        }
+      }
     }
   }
-}
 
-const dateElement = document.getElementById('dateIssued');
 
-// Get the current date
-const now = new Date();
+  const dateElement = document.getElementById('dateIssued');
 
-// Format month name (e.g., "April")
-const monthName = now.toLocaleDateString('en-GB', { month: 'long' });
+  // Get the current date
+  const now = new Date();
 
-// Format full date (e.g., "23/04/2025")
-const fullDate = now.toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-});
+  // Format month name (e.g., "April")
+  const monthName = now.toLocaleDateString('en-GB', { month: 'long' });
+
+  // Format full date (e.g., "23/04/2025")
+  const fullDate = now.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+  });
 
 // Set the content
 dateIssued.textContent += fullDate;

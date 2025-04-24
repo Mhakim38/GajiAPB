@@ -18,6 +18,7 @@ Part 1 (Staff List)
 - [x] Add toupper on employeeID in add_staff and edit/update
 - [x] Add checking on Staff ID to be unique
 - [x] Make sure that staff detail is also updated in Salaries collection
+- [] If user want to update staff, but no salaries record an error appear - Add checking to salaries collection
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff
@@ -26,20 +27,20 @@ Part 2 (Salary Management)
 - [x] In Database, update the salary record for each Staff
 - [x] Add Report page using only table for printing the report. 
 - [x] update the report where display the total RM for UPL, Public Holidays, Total overtime Hours in RM
-- [] Add an if statement for checking the employee exist or not, if exist update, if not create new. 
-- [] How to do, reset the salaries data monthly ???? -- by using update only and chek if the user data exist or not
+- [x] Add an if statement for checking the employee exist or not, if exist update, if not create new. 
+- [x] How to do, reset the salaries data monthly ???? -- by using update only and check if the user data exist or not (Every => 18th/monthly = reset)
 - [x] Make sure that every staff have an staff_id, if not salary cant be save -- New data incoming with new column name
 - [x] Make sure that the salary Report shows the staff id and not collection id
 - [x] There is an error on displaying the salaries record on salary report
 - [] Add search function in #Msalary.html 
-- [] Enable background graphics for printing report
+- [] Enable background graphics for printing report - maybe x perlu ???
 
 Part 3 (Login)
 - [x] Add Login Page
 - [x] Add session for every page
-- [] Add User Restriction
-- [] Add forgot password recovery
-- [] Add timeout for logged in user
+- [] Add User Restriction - do i need ???
+- [] Add forgot password recovery do i need ???
+- [] Add timeout for logged in user - debug for mobile
 - [x] Dont zoom in focus on input when in mobile (Press login with no input)
 
 Part 3.3 (Interface)
