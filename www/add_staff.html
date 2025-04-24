@@ -447,7 +447,6 @@
 
 <script type="module">
     import { db, addDoc, collection } from './calculation.js';
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
     const auth = getAuth();
@@ -467,7 +466,7 @@
         // Session expired
         localStorage.removeItem('loginTime');
         signOut(auth).then(() => {
-          alert("Session expired. Please log in again.");
+          //alert("Session expired. Please log in again.");
           location.href = 'login.html';
         });
       }
