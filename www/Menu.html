@@ -491,7 +491,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       // Session expired
       localStorage.removeItem('loginTime');
       signOut(auth).then(() => {
-        alert("Session expired. Please log in again.");
+        //alert("Session expired. Please log in again.");
         location.href = 'login.html';
       });
     }
