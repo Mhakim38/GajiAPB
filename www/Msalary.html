@@ -691,7 +691,7 @@
       // Session expired
       localStorage.removeItem('loginTime');
       signOut(auth).then(() => {
-        alert("Session expired. Please log in again.");
+        //alert("Session expired. Please log in again.");
         location.href = 'login.html';
       });
     }
