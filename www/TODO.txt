@@ -32,6 +32,7 @@ Part 2 (Salary Management)
 - [x] Make sure that the salary Report shows the staff id and not collection id
 - [x] There is an error on displaying the salaries record on salary report
 - [] Add search function in #Msalary.html 
+- [] Enable background graphics for printing report
 
 Part 3 (Login)
 - [x] Add Login Page
