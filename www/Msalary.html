@@ -27,7 +27,7 @@
     :root {
       --primary: #ffcc09;
       --secondary: #808097;
-      --accent: #8bc53f;
+      --accent: rgb(139, 197, 63);
       --highlight: #2f5e2c;
       --danger: #d1121f;
       --soft: #f5a391;
@@ -47,6 +47,69 @@
       color: var(--dark);
       overflow-x: hidden;
     }
+
+    dialog::backdrop {
+      background-color: rgba(0, 0, 0, 0.288); /* Darker background when dialog is open */
+      backdrop-filter: blur(3px); /* Blur effect for the background */
+    }
+
+    dialog#monthlyResetModal {
+      width: 100vw;
+      height: 60vh;
+      padding: 25px;
+      background-color: var(--light);
+      border: none;
+      border-radius: 15px;
+      box-shadow: var(--card-shadow);
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      transition: opacity var(--transition-speed) ease;
+    }
+
+    #monthlyResetModal h3 {
+      color: var(--highlight);
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    #monthlyResetModal h1.salary-id {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      margin: 0 0 10px;
+    }
+
+    #monthlyResetModal img {
+      width: 300px;
+      height: auto;
+      margin: 20px auto;
+      display: block;
+    }
+
+    #monthlyResetModal p {
+      font-size: 0.95rem;
+      color: var(--dark);
+      margin: 15px 0 25px;
+    }
+
+    #monthlyResetModal .btn-print {
+      background-color: var(--primary);
+      color: var(--dark);
+      border: 1px;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color var(--transition-speed), transform var(--transition-speed);
+      display: block;
+      margin: 0 auto;
+      /* margin-top: 5px; */
+    }
+
+    #monthlyResetModal .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
     
     .wrapper {
       min-height: 100vh;
@@ -572,6 +635,17 @@
 
 </head>
 <body>
+
+<dialog id="monthlyResetModal">
+  <form method="dialog">
+    <h3>Monthly Update</h3>
+    <h1 id="dateIssued" class="salary-id mt-0">Date: </h1>
+    <img src="src/Asset 1.svg" alt="">
+    <p>It is time to Calculate your staffs' salary, Good Luck & Don't Stress</p>
+    <button id="confirmReset" value="confirm" class="btn-print">Continue</button>
+  </form>
+</dialog>
+
 <div class="wrapper">
   <div class="header-under-cover"></div> <!-- Added for spacing -->
   <!-- App Header -->
@@ -950,6 +1024,7 @@
   // Initialize the page
   window.addEventListener('DOMContentLoaded', () => {
     fetchEmployeeCards();
+    checkAndShowResetModal();
   });
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -972,6 +1047,49 @@
     });
   });
 
+  document.getElementById("confirmReset").addEventListener("click", () => {
+  performMonthlyReset(); // This is Step 3
+  });
+
+
+  const resetDocRef = doc(db, "system_reset", "global_monthly_reset");
+
+  import { getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"; // add this at the top if not imported
+
+  async function checkAndShowResetModal() {
+  const resetDocRef = doc(db, "system_reset", "global_monthly_reset");
+  const resetSnap = await getDoc(resetDocRef);
+
+  const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
+
+  if (resetSnap.exists()) {
+    const lastReset = resetSnap.data().last_reset;
+    console.log('Last Reset:', lastReset); // Log the last reset
+
+    if (lastReset !== currentMonth) {
+      // Show modal only if not reset yet this month
+      document.getElementById("monthlyResetModal").showModal();
+    }
+  }
+}
+
+const dateElement = document.getElementById('dateIssued');
+
+// Get the current date
+const now = new Date();
+
+// Format month name (e.g., "April")
+const monthName = now.toLocaleDateString('en-GB', { month: 'long' });
+
+// Format full date (e.g., "23/04/2025")
+const fullDate = now.toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+});
+
+// Set the content
+dateIssued.textContent += fullDate;
 </script>
 
 </body>
