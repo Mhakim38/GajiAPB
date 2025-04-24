@@ -140,15 +140,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="module">
     import { db } from './calculation.js';
     import { doc, getDoc, deleteDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
     const auth = getAuth();
+
     onAuthStateChanged(auth, (user) => {
       if (!user) {
-        // Redirect to login page if not authenticated
+        // User not logged in
         location.href = 'login.html';
+        return;
+      }
+    
+      const loginTime = parseInt(localStorage.getItem('loginTime'), 10);
+      const currentTime = Date.now();
+      const sessionDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
+    
+      if (!loginTime || currentTime - loginTime > sessionDuration) {
+        // Session expired
+        localStorage.removeItem('loginTime');
+        signOut(auth).then(() => {
+          alert("Session expired. Please log in again.");
+          location.href = 'login.html';
+        });
       }
     });
+
+    // USER ACTIVITY DETECTION TO REFRESH SESSION
+    function refreshSessionTimer() {
+      localStorage.setItem('loginTime', Date.now().toString());
+    }
+
+    window.addEventListener('mousemove', refreshSessionTimer);
+    window.addEventListener('keydown', refreshSessionTimer);
+    window.addEventListener('click', refreshSessionTimer);
     
     // Function to get query parameter by name
     function getQueryParam(param) {
