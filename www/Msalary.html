@@ -53,23 +53,6 @@
       user-select: none;
     }
 
-    /* Prevent text highlighting inside dialog */
-    dialog#monthlyResetModal * {
-      user-select: none;
-    }
-
-    /* Fade-in animation */
-    @keyframes fadeInDialog {
-      from {
-        opacity: 0;
-        transform: translate(-50%, -45%);
-      }
-      to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-      }
-    }
-
     dialog::backdrop {
       background-color: rgba(0, 0, 0, 0.288); /* Darker background when dialog is open */
       backdrop-filter: blur(3px); /* Blur effect for the background */
@@ -77,7 +60,7 @@
 
     dialog#monthlyResetModal {
       width: 100vw;
-      height: 60vh;
+      height: 65vh;
       padding: 25px;
       background-color: var(--light);
       border: none;
@@ -116,8 +99,8 @@
     #monthlyResetModal .btn-print {
       background-color: var(--primary);
       color: var(--dark);
-      border: 1px;
       padding: 10px 25px;
+      border: none;
       border-radius: 25px;
       font-weight: 600;
       cursor: pointer;
@@ -131,6 +114,11 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     } */
+
+     #monthlyResetModal .btn-print:focus {
+      outline-color: rgba(255, 255, 255, 0);
+      box-shadow: 0 0 0 0px rgba(255, 204, 9, 0.3);
+    } 
 
     
     .wrapper {
@@ -652,14 +640,23 @@
       .btn-print{
         font-size: 0.9rem;
       }
+
+      #monthlyResetModal img {
+        width: 70%;
+      }
+
+      dialog#monthlyResetModal {
+      height: 55vh;
+    }
+
     }
   </style>
 
 </head>
 <body>
 
-<dialog id="monthlyResetModal">
-  <form method="dialog">
+<dialog id="monthlyResetModal" style="overflow: hidden;">
+  <form method="dialog" style="user-select: none !important;">
     <h3>Monthly Update</h3>
     <h1 id="dateIssued" class="salary-id mt-0">Date: </h1>
     <img src="src/Asset 1.svg" alt="">
