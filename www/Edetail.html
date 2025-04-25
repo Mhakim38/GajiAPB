@@ -76,7 +76,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <h3><strong>Employee</strong></h3>
               <div class="card-body text-center">
                 <div style="border-radius: 100px; width: 200px; height: 200px; margin: 0 auto; object-fit: cover;">
-                  <img src="src/me.jpg" alt="Employee Picture placeholder" style="width: 100%; height: 100%; object-fit: cover;">
+                  <img id="profile-preview" src="src/me.jpg" alt="Employee Picture placeholder"  style="width: 100%; height: 100%; object-fit: cover;">
                   <input type="file" id="profile-input" accept="image/*">
                   <button onclick="uploadProfileImage()">Upload</button>
                 </div>
@@ -218,6 +218,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             const disease = employeeData["Penyakit"] || 'None';
             document.getElementById('employee-disease').innerText = disease;
+
+            // Check if there is a profileImage URL and update the profile preview
+            if (employeeData.profileImage) {
+              document.getElementById("profile-preview").src = employeeData.profileImage;
+            }
+
           } else {
             console.log("No such document exists in Firestore!");
           }
