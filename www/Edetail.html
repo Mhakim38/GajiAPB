@@ -4,128 +4,141 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>MyGaji</title>
-  <link rel="icon" href="src/APB.png">
-  <link rel="apple-touch-icon" href="src/APB.png">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MyGaji — Employee Details</title>
+    <link rel="icon" href="src/APB.png">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="css/css/all.min.css">
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <!-- AdminLTE -->
+    <link rel="stylesheet" href="css/adminlte.min.css">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="css/css/all.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="css/adminlte.min.css">
+    <style>
+    :root {
+      --primary: rgb(255, 204, 9);
+      --secondary: #808097;
+      --accent: #8bc53f;
+      --highlight: #2f5e2c;
+      --danger: #d1121f;
+      --soft: #f5a391;
+      --light: #f5f6f9;
+      --dark: #212529;
+      --card-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      --transition-speed: 0.3s;
+    }
 
-  <style>
-    .content-wrapper {
-      display: flex;
-      flex-direction: column; /* Ensure content is stacked vertically */
-      justify-content: flex-start; /* Align content to the top */
-      align-items: center;
-      min-height: 100vh; /* Ensure it takes the full height of the viewport */
-      overflow: hidden; /* Prevent scrolling */
+    body, html {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
     }
-    .content {
-      width: 100%;
-      padding: 20px; /* Add some padding for better spacing */
-      flex: 1; /* Allow content to grow and fill the space */
-    }
-    .content-header {
-      width: 100%;
-    }
-    .btn-custom {
-      background-color: #007bff;
-      color: white;
-      border-radius: 20px;
+
+    .btn-print {
+      background-color: var(--primary);
+      color: var(--dark);
+      border: none;
+      border-radius: 50px;
       padding: 10px 20px;
-      font-size: 16px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      white-space: nowrap;
     }
-    .navbar {
-      padding-top: calc(env(safe-area-inset-top, 0px) + 5px); /* Add safe area inset for iPhone notch */
+    
+    .btn-print:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
-  </style>
+    </style>
 
-</head>
-<body class="hold-transition sidebar-collapse layout-top-nav">
-<div class="wrapper">
-
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
-    <div class="container justify-content-center"> <!-- Center the container content -->
-      <!-- Logo -->
-      <a href="../../index3.html" class="navbar-brand">
-        <img src="src/APB.png" alt="AdminLTE Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
-      </a>
-      <!-- end logo -->
+  </head>
+  <body class="hold-transition layout-top-nav">
+  
+  <div class="wrapper">
+  
+    <!-- Header with back arrow -->
+    <nav class="main-header navbar navbar-expand navbar-white border-0">
+      <div class="container" style="display: flex; justify-content: center; align-items: center;">
+        <!-- <span class="mx-auto font-weight-bold h5 mb-0">Employee Details</span> -->
+        <img src="src/APB.png" alt="Logo" style="height: 90px; width: auto; object-fit: contain;">
+      </div>
+    </nav>
+    
+    <div class="container mt-3 mb-2 d-flex justify-content-between align-items-center">
+      <button class="btn-print" onclick="location.href='staffList.html'">
+        <i class="fas fa-arrow-left fa-lg text-dark"></i>
+      </button>
+      <button class="btn-print">Print Paycheck</button>
     </div>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper border-0" style="background-color: white;">
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container">
-        <div class="row justify-content-center mb-4 mt-2"> <!-- Add a new row for the button -->
+    <!-- Content -->
+    <div class="content px-3 mt-3">
+      <!-- Profile Card -->
+      <div class="card mb-4 p-3 text-center">
+        <img id="profile-preview" src="src/me.jpg" alt="Profile" class="rounded-circle mx-auto mb-3" style="width: 120px; height: 120px; object-fit: cover;">
+        <div class="mt-2">
+          <input type="file" id="profile-input" accept="image/*" class="form-control-file">
+          <button onclick="uploadProfileImage()" class="btn btn-sm btn-success mt-2">Upload</button>
         </div>
-        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
-          <div class="col-lg-6">
-            <h3><strong>Employee</strong></h3>
-              <div class="card-body text-center">
-                <div style="border-radius: 100px; width: 200px; height: 200px; margin: 0 auto; object-fit: cover;">
-                  <img id="profile-preview" src="src/me.jpg" alt="Employee Picture placeholder"  style="width: 100%; height: 100%; object-fit: cover;">
-                  <input type="file" id="profile-input" accept="image/*">
-                  <button onclick="uploadProfileImage()">Upload</button>
-                </div>
-                <h5 class="card-title mt-3" id="employee-name"><strong></strong></h5>
-              </div>
-              <div class="card-body">
-                <br><p><strong>Address:</strong> <span id="employee-address"></span></p>
-                <p><strong>Email:</strong> <span id="employee-email"></span></p>
-                <p><strong>IC:</strong> <span id="employee-ic"></span></p>
-                <p><strong>Employee ID:</strong> <span id="employee-id"></span></p>
-                <p><strong>KWSP:</strong> <span id="employee-kwsp"></span></p>
-                <p><strong>Bank Name:</strong> <span id="employee-bank"></span></p>
-                <p><strong>Bank Number:</strong> <span id="employee-bankNo"></span></p>
-                <p><strong>Phone Number:</strong> <span id="employee-phoneNo"></span></p>
-
-                <h3 class="text-center"><strong>Family Related section</strong></h3>
-                <p><strong>Household Name:</strong> <span id="employee-Hname"></span></p>
-                <p><strong>Number of Kids:</strong> <span id="employee-Hkids"></span></p>
-                <p><strong>Household Phone Number:</strong> <span id="employee-HphoneNo"></span></p>
-                <p><strong>Father/Mother Name:</strong> <span id="employee-Fname"></span></p>
-                <p><strong>Father/Mother Number:</strong> <span id="employee-FphoneNo"></span></p>
-                <p><strong>Disease:</strong> <span id="employee-disease"></span></p>
-                <button id="delete-staff-btn" class="btn btn-danger mt-3">Delete Staff</button>
-                <button id="update-staff-btn" class="btn btn-custom mt-3">Update Staff</button> <!-- New Update Button -->
-                
-              </div>
-          </div>
-          <!-- /.col-md-6 -->
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+        <h5 class="mt-3" id="employee-name"><strong></strong></h5>
+      </div>
+  
+      <!-- Personal Info Card -->
+      <div class="card mb-4 p-3" style="border-radius: 12px;">
+        <h6 class="text-success"><i class="fas fa-user mr-1"></i> Personal Information</h6>
+        <p><strong>Employee ID:</strong> <span id="employee-id">-</span></p>
+        <p><strong>IC Number:</strong> <span id="employee-ic">-</span></p>
+        <p><strong>Address:</strong> <span id="employee-address">-</span></p>
+        <p><strong>Email:</strong> <span id="employee-email">-</span></p>
+        <p><strong>Phone Number:</strong> <span id="employee-phoneNo">-</span></p>
+        <p><strong>Medical Issues:</strong> <span id="employee-disease">-</span></p>
+      </div>
+  
+      <!-- Financial Info Card -->
+      <div class="card mb-4 p-3" style="border-radius: 12px;">
+        <h6 class="text-warning"><i class="fas fa-credit-card mr-1"></i> Financial Information</h6>
+        <p><strong>KWSP:</strong> <span id="employee-kwsp">-</span></p>
+        <p><strong>Bank Name:</strong> <span id="employee-bank">-</span></p>
+        <p><strong>Bank Number:</strong> <span id="employee-bankNo">-</span></p>
+      </div>
+  
+      <!-- Family Info Card -->
+      <div class="card mb-5 p-3" style="border-radius: 12px;">
+        <h6 class="text-info"><i class="fas fa-home mr-1"></i> Family Details</h6>
+        <p><strong>Household Name:</strong> <span id="employee-Hname">-</span></p>
+        <p><strong>Number of Kids:</strong> <span id="employee-Hkids">-</span></p>
+        <p><strong>Household Phone:</strong> <span id="employee-HphoneNo">-</span></p>
+        <p><strong>Next of Kin:</strong> <span id="employee-Fname">-</span></p>
+        <p><strong>KIN Phone:</strong> <span id="employee-FphoneNo">-</span></p>
+  
+      </div>
+      <div class="d-flex justify-content-between mt-3" style="border-radius: 12px;">
+        <button id="delete-staff-btn" class="btn btn-danger flex-fill mr-2" style="border-radius: 50px;">Delete</button>
+        <button id="update-staff-btn" class="btn btn-success flex-fill ml-2" style="border-radius: 50px;">Update</button>
+      </div>
     </div>
-    <!-- /.content -->
+  
+    <!-- Bottom Tab Bar -->
+    <div class="fixed-bottom bg-light shadow-sm">
+      <div class="d-flex justify-content-around py-2">
+        <a href="home.html" class="text-center text-muted"><i class="fas fa-home fa-lg"></i><br>Home</a>
+        <a href="staffList.html" class="text-center text-muted"><i class="fas fa-users fa-lg"></i><br>Staff</a>
+        <a href="salary.html" class="text-center text-muted"><i class="fas fa-money-bill-wave fa-lg"></i><br>Salary</a>
+        <a href="profile.html" class="text-center text-muted"><i class="fas fa-user-circle fa-lg"></i><br>Profile</a>
+      </div>
+    </div>
+  
   </div>
-  <!-- /.content-wrapper -->
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
-    <!-- Default to the left -->
-    <strong><a href="https://adminlte.io">MyGaji v1.0</a><br>by Hakim</strong>
-  </footer>
-</div>
-<!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 
