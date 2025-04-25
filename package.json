@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "@capacitor/android": "^5.7.8",
+    "@capacitor/app": "5.0",
     "@capacitor/cli": "^5.7.8",
     "@capacitor/core": "^5.7.8",
     "@capacitor/preferences": "^5.0.8",
