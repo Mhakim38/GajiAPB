@@ -283,33 +283,83 @@ scratch. This page gets rid of all links and provides the needed markup only.
     });
 
     window.uploadProfileImage = async function () {
-      const file = document.getElementById("profile-input").files[0];
-      const employeeId = getQueryParam('id');
+  const file = document.getElementById("profile-input").files[0];
+  const employeeId = getQueryParam('id');
 
-      if (!file || !employeeId) {
-        alert("No file selected or employee ID missing.");
-        return;
-      }
+  if (!file || !employeeId) {
+    alert("No file selected or employee ID missing.");
+    return;
+  }
+
+  // Create a new image element
+  const img = new Image();
+  
+  // Create a file reader to read the uploaded file
+  const reader = new FileReader();
+  
+  reader.onload = function(e) {
+    img.src = e.target.result; // Set the image source to the file content
     
-      const storageRef = ref(storage, `profile_photos/${employeeId}.jpg`);
-    
-      try {
-        // Upload image
-        await uploadBytes(storageRef, file);
-        const downloadURL = await getDownloadURL(storageRef);
-      
-        // Update Firestore with profileImage URL
-        const employeeRef = doc(db, 'employees', employeeId);
-        await updateDoc(employeeRef, { profileImage: downloadURL });
-      
-        // Update image preview
-        document.getElementById("profile-preview").src = downloadURL;
-        alert("Profile picture updated!");
-      } catch (error) {
-        console.error("Error uploading image:", error);
-        alert("Failed to upload image.");
+    img.onload = function() {
+      // Resize the image and compress it directly using a canvas
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      const maxWidth = 800; // Max width (resize limit)
+      const maxHeight = 800; // Max height (resize limit)
+      let width = img.width;
+      let height = img.height;
+
+      // Resize the image to fit within max dimensions
+      if (width > height) {
+        if (width > maxWidth) {
+          height = height * maxWidth / width;
+          width = maxWidth;
+        }
+      } else {
+        if (height > maxHeight) {
+          width = width * maxHeight / height;
+          height = maxHeight;
+        }
       }
+
+      // Set canvas size and draw the image
+      canvas.width = width;
+      canvas.height = height;
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Compress and upload the image
+      canvas.toBlob(async function(blob) {
+        if (blob.size > 1024 * 1024) {
+          alert("Image is too large. Please select a smaller image.");
+          return;
+        }
+
+        // Upload to Firebase Storage
+        const storageRef = ref(storage, `profile_photos/${employeeId}.jpg`);
+        try {
+          await uploadBytes(storageRef, blob);
+          const downloadURL = await getDownloadURL(storageRef);
+
+          // Update Firestore with the image URL
+          const employeeRef = doc(db, 'employees', employeeId);
+          await updateDoc(employeeRef, { profileImage: downloadURL });
+
+          // Update the image preview
+          document.getElementById("profile-preview").src = downloadURL;
+          alert("Profile picture updated!");
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          alert("Failed to upload image.");
+        }
+      }, 'image/jpeg', 0.8); // 80% quality for JPEG
     };
+  };
+
+  // Trigger the file reader to load the image
+  reader.readAsDataURL(file);
+};
+
   
     fetchEmployeeDetails();
   </script>
