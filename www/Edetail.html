@@ -75,10 +75,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <div class="col-lg-6">
             <h3><strong>Employee</strong></h3>
               <div class="card-body text-center">
-                <div style="border-radius: 100px; overflow: hidden; width: 200px; height: 200px; margin: 0 auto;">
-                  <img src="src/me.jpg" alt="Employee Picture" style="width: 100%; height: 100%; object-fit: cover;">
+                <div style="border-radius: 100px; width: 200px; height: 200px; margin: 0 auto; object-fit: cover;">
+                  <img src="src/me.jpg" alt="Employee Picture placeholder" style="width: 100%; height: 100%; object-fit: cover;">
+                  <input type="file" id="profile-input" accept="image/*">
+                  <button onclick="uploadProfileImage()">Upload</button>
                 </div>
-                <h5 class="card-title mt-3" id="employee-name"><strong>Employee Name</strong></h5>
+                <h5 class="card-title mt-3" id="employee-name"><strong></strong></h5>
               </div>
               <div class="card-body">
                 <br><p><strong>Address:</strong> <span id="employee-address"></span></p>
@@ -138,11 +140,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- Import Firebase setup from calculation.js -->
 <script type="module">
-    import { db } from './calculation.js';
-    import { doc, getDoc, deleteDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { db, app } from './calculation.js';
+    import { doc, getDoc, deleteDoc, collection, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-storage.js";
 
     const auth = getAuth();
+    const storage = getStorage(app);
 
     onAuthStateChanged(auth, (user) => {
       if (!user) {
@@ -271,6 +275,35 @@ scratch. This page gets rid of all links and provides the needed markup only.
         alert('No employee ID provided in the URL.');
       }
     });
+
+    window.uploadProfileImage = async function () {
+      const file = document.getElementById("profile-input").files[0];
+      const employeeId = getQueryParam('id');
+
+      if (!file || !employeeId) {
+        alert("No file selected or employee ID missing.");
+        return;
+      }
+    
+      const storageRef = ref(storage, `profile_photos/${employeeId}.jpg`);
+    
+      try {
+        // Upload image
+        await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(storageRef);
+      
+        // Update Firestore with profileImage URL
+        const employeeRef = doc(db, 'employees', employeeId);
+        await updateDoc(employeeRef, { profileImage: downloadURL });
+      
+        // Update image preview
+        document.getElementById("profile-preview").src = downloadURL;
+        alert("Profile picture updated!");
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        alert("Failed to upload image.");
+      }
+    };
   
     fetchEmployeeDetails();
   </script>
