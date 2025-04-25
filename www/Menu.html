@@ -477,6 +477,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   const auth = getAuth();
 
+  // Front-end session check on page load
   onAuthStateChanged(auth, (user) => {
     if (!user) {
       location.href = 'login.html';
@@ -485,7 +486,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     const loginTime = parseInt(localStorage.getItem('loginTime'), 10);
     const currentTime = Date.now();
-    const sessionDuration = 30 * 60 * 1000;
+    const sessionDuration = 30 * 60 * 1000; // 30 minutes
+    //const sessionDuration = 10 * 1000; // 10 minutes
 
     if (!loginTime || currentTime - loginTime > sessionDuration) {
       localStorage.removeItem('loginTime');
@@ -495,6 +497,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
   });
 
+  // Reset session timer on user interaction
   function refreshSessionTimer() {
     localStorage.setItem('loginTime', Date.now().toString());
   }
@@ -503,7 +506,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   window.addEventListener('keydown', refreshSessionTimer);
   window.addEventListener('click', refreshSessionTimer);
 
-  // Setup Capacitor-based background check
+  // Setup Capacitor-based background/foreground checker
   setupCapacitorSessionChecker();
 </script>
 
