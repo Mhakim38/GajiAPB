@@ -473,33 +473,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="module">
   import { db, doc, getDoc, updateDoc } from './calculation.js';
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
-  //import { App } from '@capacitor/app';
+  import { setupCapacitorSessionChecker } from './js/sessionCapacitor.js';
 
   const auth = getAuth();
-  
+
   onAuthStateChanged(auth, (user) => {
     if (!user) {
-      // User not logged in
       location.href = 'login.html';
       return;
     }
-  
+
     const loginTime = parseInt(localStorage.getItem('loginTime'), 10);
     const currentTime = Date.now();
-    const sessionDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
-  
+    const sessionDuration = 30 * 60 * 1000;
+
     if (!loginTime || currentTime - loginTime > sessionDuration) {
-      // Session expired
       localStorage.removeItem('loginTime');
       signOut(auth).then(() => {
-        //alert("Session expired. Please log in again.");
         location.href = 'login.html';
       });
     }
   });
 
-    // USER ACTIVITY DETECTION TO REFRESH SESSION
-    function refreshSessionTimer() {
+  function refreshSessionTimer() {
     localStorage.setItem('loginTime', Date.now().toString());
   }
 
@@ -507,7 +503,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   window.addEventListener('keydown', refreshSessionTimer);
   window.addEventListener('click', refreshSessionTimer);
 
+  // Setup Capacitor-based background check
+  setupCapacitorSessionChecker();
 </script>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {

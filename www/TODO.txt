@@ -40,7 +40,7 @@ Part 3 (Login)
 - [x] Add session for every page
 - [] Add User Restriction - do i need ???
 - [] Add forgot password recovery do i need ???
-- [] Add timeout for logged in user - debug for mobile
+- [] Add timeout for logged in user - debug for mobile Use @capasitor/app 
 - [x] Dont zoom in focus on input when in mobile (Press login with no input)
 
 Part 3.3 (Interface)
