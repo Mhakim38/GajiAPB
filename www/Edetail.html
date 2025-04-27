@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="css/css/all.min.css">
+    <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
     <!-- Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <!-- AdminLTE -->
@@ -63,6 +64,159 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
+
+        /* App-like Header */
+        .app-header {
+      padding: 5px;
+      padding-top: calc(env(safe-area-inset-top, 0px)); /* Add safe area inset for iPhone notch */
+      background-image: url('src/Header.png');
+      background-size: auto;
+      border-radius: 0 0 15px 15px; /* Apply radius only to the bottom corners */
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+    
+    .header-logo {
+      height: 90px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .header-under-cover {
+      padding-top: constant(safe-area-inset-top, 20px);
+      padding-top: env(safe-area-inset-top, 20px);
+    }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      background-image: url('src/Header.png');
+      background-size: auto;
+      backdrop-filter: blur(40px); /* Blur effect for matte glass */
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      box-shadow: 2px 0px 67px -25px rgba(0,0,0,0.75);
+      z-index: 900;
+      bottom: 0px; /* Default for desktop */
+      border-radius: 0; /* Default for desktop */
+    }
+    
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 6px; /* Adjusted padding-top */
+      padding-bottom: 10px; /* Removed bottom padding for consistency */
+      color: var(--secondary);
+      border: none;
+      background: rgba(255, 255, 255, 0); /* Transparent white background */
+    }
+    
+    .nav-item:hover {
+      color: #f83939b6;
+    }
+    
+    .nav-item.active {
+      color: #f83939b6;
+    }
+    
+    .nav-item i {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+    
+    .nav-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .head-finance {
+      color: var(--highlight);
+    }
+
+    .emp-name{
+      letter-spacing: 1.5px;
+    }
+
+    .profile-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    
+    .profile-label {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: block;
+      cursor: pointer;
+    }
+    
+    .profile-hover-text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s;
+      border-radius: 50%;
+    }
+
+    /* Hover effect only on large screens */
+    @media (min-width: 768px) {
+      .profile-label:hover .profile-hover-text {
+        opacity: 1;
+      }
+    }
+
+    /* Mobile: Show small "Edit" badge */
+    .profile-edit-badge {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: #ffc107;
+      color: black;
+      padding: 2px 6px;
+      font-size: 10px;
+      border-radius: 12px;
+    }
+
+    /* Desktop: Hide badge */
+    @media (min-width: 768px) {
+      .profile-edit-badge {
+        display: none;
+      }
+    }
+
+
+    @media (max-width: 768px) {
+      .app-header {
+        background-size: cover; /* Remove cover on mobile */
+      }
+
+      .bottom-nav {
+        background-size: cover; /* Remove cover on mobile */
+        bottom: 0px; /* Adjusted for mobile */
+        border-radius: 100px; /* Rounded corners for mobile */
+      }
+    }
     </style>
 
   </head>
@@ -71,34 +225,44 @@
   <div class="wrapper">
   
     <!-- Header with back arrow -->
-    <nav class="main-header navbar navbar-expand navbar-white border-0">
-      <div class="container" style="display: flex; justify-content: center; align-items: center;">
-        <!-- <span class="mx-auto font-weight-bold h5 mb-0">Employee Details</span> -->
-        <img src="src/APB.png" alt="Logo" style="height: 90px; width: auto; object-fit: contain;">
-      </div>
-    </nav>
+    <div class="header-under-cover"></div>
+    <!-- App Header -->
+    <header class="app-header">
+        <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="header-logo">
+      </header>
     
     <div class="container mt-3 mb-2 d-flex justify-content-between align-items-center">
       <button class="btn-print" onclick="location.href='StaffList.html'">
-        <i class="fas fa-arrow-left fa-lg text-dark"></i>
+        <i class="fa-solid fa-arrow-left"></i>
       </button>
-      <button class="btn-print">Print Paycheck</button>
+      <button class="btn-print" onclick="location.href='###'">Print Paycheck</button>
     </div>
     <!-- Content -->
     <div class="content px-3 mt-3">
       <!-- Profile Card -->
       <div class="card mb-4 p-3 text-center">
-        <img id="profile-preview" src="src/me.jpg" alt="Profile" class="rounded-circle mx-auto mb-3" style="width: 120px; height: 120px; object-fit: cover;">
-        <div class="mt-2">
-          <input type="file" id="profile-input" accept="image/*" class="form-control-file">
-          <button onclick="uploadProfileImage()" class="btn btn-sm btn-success mt-2">Upload</button>
+        <div class="profile-container mx-auto">
+          <label for="profile-input" class="profile-label">
+            <img id="profile-preview" src="src/default-avatar.png" alt="Profile" 
+                 class="rounded-circle mb-0 profile-hover" 
+                 style="width: 120px; height: 120px; object-fit: cover; cursor: pointer;">
+            
+            <div class="profile-hover-text">Edit</div>
+            <div class="profile-edit-badge">Edit</div> <!-- Mobile badge -->
+          </label>
         </div>
-        <h5 class="mt-3" id="employee-name"><strong></strong></h5>
+    
+        <input type="file" id="profile-input" accept="image/*" 
+               style="display: none;" onchange="uploadProfileImage()">
+    
+        <h5 class="mt-3 font-weight-bold emp-name" id="employee-name"><strong></strong></h5>
       </div>
+    </div>
+    
   
       <!-- Personal Info Card -->
-      <div class="card mb-4 p-3" style="border-radius: 12px;">
-        <h6 class="text-success"><i class="fas fa-user mr-1"></i> Personal Information</h6>
+      <div class="card m-3 mb-4 p-3" style="border-radius: 12px;">
+        <h6 class="text-success font-weight-bold mb-4 text-decoration-underline"><i class="fas fa-user mr-2"></i>Personal Information</h6>
         <p><strong>Employee ID:</strong> <span id="employee-id">-</span></p>
         <p><strong>IC Number:</strong> <span id="employee-ic">-</span></p>
         <p><strong>Address:</strong> <span id="employee-address">-</span></p>
@@ -108,38 +272,46 @@
       </div>
   
       <!-- Financial Info Card -->
-      <div class="card mb-4 p-3" style="border-radius: 12px;">
-        <h6 class="text-warning"><i class="fas fa-credit-card mr-1"></i> Financial Information</h6>
+      <div class="card m-3 mb-4 p-3" style="border-radius: 12px;">
+        <h6 class="font-weight-bold head-finance mb-4 text-decoration-underline"><i class="fas fa-credit-card mr-2"></i>Financial Information</h6>
         <p><strong>KWSP:</strong> <span id="employee-kwsp">-</span></p>
         <p><strong>Bank Name:</strong> <span id="employee-bank">-</span></p>
         <p><strong>Bank Number:</strong> <span id="employee-bankNo">-</span></p>
       </div>
   
       <!-- Family Info Card -->
-      <div class="card mb-5 p-3" style="border-radius: 12px;">
-        <h6 class="text-info"><i class="fas fa-home mr-1"></i> Family Details</h6>
+      <div class="card m-3 mb-4 p-3" style="border-radius: 12px;">
+        <h6 class="text-info font-weight-bold mb-4 text-decoration-underline"><i class="fas fa-home mr-2"></i>Family Details</h6>
         <p><strong>Household Name:</strong> <span id="employee-Hname">-</span></p>
         <p><strong>Number of Kids:</strong> <span id="employee-Hkids">-</span></p>
         <p><strong>Household Phone:</strong> <span id="employee-HphoneNo">-</span></p>
         <p><strong>Next of Kin:</strong> <span id="employee-Fname">-</span></p>
         <p><strong>KIN Phone:</strong> <span id="employee-FphoneNo">-</span></p>
-  
       </div>
-      <div class="d-flex justify-content-between mt-3" style="border-radius: 12px;">
+      <div class="d-flex justify-content-between" style="border-radius: 12px; margin: 5px 20px; margin-bottom: 100px;">
         <button id="delete-staff-btn" class="btn btn-danger flex-fill mr-2" style="border-radius: 50px;">Delete</button>
         <button id="update-staff-btn" class="btn btn-success flex-fill ml-2" style="border-radius: 50px;">Update</button>
       </div>
     </div>
   
-    <!-- Bottom Tab Bar -->
-    <div class="fixed-bottom bg-light shadow-sm">
-      <div class="d-flex justify-content-around py-2">
-        <a href="home.html" class="text-center text-muted"><i class="fas fa-home fa-lg"></i><br>Home</a>
-        <a href="staffList.html" class="text-center text-muted"><i class="fas fa-users fa-lg"></i><br>Staff</a>
-        <a href="salary.html" class="text-center text-muted"><i class="fas fa-money-bill-wave fa-lg"></i><br>Salary</a>
-        <a href="profile.html" class="text-center text-muted"><i class="fas fa-user-circle fa-lg"></i><br>Profile</a>
-      </div>
-    </div>
+    <nav class="bottom-nav">
+      <button class="nav-item active">
+        <i class="fas fa-home"></i>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-item" onclick="location.href='StaffList.html'">
+        <i class="fas fa-users"></i>
+        <span class="nav-label">Staff</span>
+      </button>
+      <button class="nav-item" onclick="location.href='Msalary.html'">
+        <i class="fas fa-hand-holding-dollar"></i>
+        <span class="nav-label">Salary</span>
+      </button>
+      <button class="nav-item" onclick="alert('Coming soon in the next update!')">
+        <i class="fas fa-user"></i>
+        <span class="nav-label">Profile</span>
+      </button>
+    </nav>
   
   </div>
 
@@ -160,6 +332,15 @@
     import { doc, getDoc, deleteDoc, collection, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-storage.js";
+
+    // Set the height of .header-under-cover to match .app-header
+    const appHeader = document.querySelector('.app-header');
+    const headerUnderCover = document.querySelector('.header-under-cover');
+    
+    if (appHeader && headerUnderCover) {
+      const headerHeight = appHeader.offsetHeight;
+      headerUnderCover.style.height = `${headerHeight}px`;
+    }
 
     const auth = getAuth();
     const storage = getStorage(app);
@@ -215,22 +396,22 @@
             //console.log("Fetched Employee Data:", employeeData); // Debugging output
 
             // Populate the fields with the fetched data
-            document.getElementById('employee-id').innerText = employeeData.id || employeeDoc.id; // Use Firestore document ID as fallback
-            document.getElementById('employee-name').innerText = employeeData.Nama || '';
-            document.getElementById('employee-address').innerText = employeeData.Address || '';
-            document.getElementById('employee-email').innerText = employeeData.Email || '';
-            document.getElementById('employee-ic').innerText = employeeData.IC || '';
-            document.getElementById('employee-kwsp').innerText = employeeData.KWSP || '';
-            document.getElementById('employee-bank').innerText = employeeData.Bank || '';
-            document.getElementById('employee-bankNo').innerText = employeeData.Nombor_Bank || '';
-            document.getElementById('employee-phoneNo').innerText = employeeData.Phone_Number || '';
+            document.getElementById('employee-id').innerText = employeeDoc.id; // Use Firestore document ID as fallback
+            document.getElementById('employee-name').innerText = employeeData.Nama || '-';
+            document.getElementById('employee-address').innerText = employeeData.Address || '-';
+            document.getElementById('employee-email').innerText = employeeData.Email || '-';
+            document.getElementById('employee-ic').innerText = employeeData.IC || '-';
+            document.getElementById('employee-kwsp').innerText = employeeData.KWSP || '-';
+            document.getElementById('employee-bank').innerText = employeeData.Bank || '-';
+            document.getElementById('employee-bankNo').innerText = employeeData.Nombor_Bank || '-';
+            document.getElementById('employee-phoneNo').innerText = employeeData.Phone_Number || '-';
 
             // Family Related
-            document.getElementById('employee-Hname').innerText = employeeData.Nama_Suami_Istri || '';
-            document.getElementById('employee-Hkids').innerText = employeeData.Bilangan_Anak || '';
-            document.getElementById('employee-HphoneNo').innerText = employeeData.Nombor_Telefon_Suami_Istri || '';
-            document.getElementById('employee-Fname').innerText = employeeData.Nama_Pewaris_Ibu_Ayah || '';
-            document.getElementById('employee-FphoneNo').innerText = employeeData.Nombor_Telefon_Pewaris_Ibu_Ayah || '';
+            document.getElementById('employee-Hname').innerText = employeeData.Nama_Suami_Istri || 'Not Married';
+            document.getElementById('employee-Hkids').innerText = employeeData.Bilangan_Anak || 'NA';
+            document.getElementById('employee-HphoneNo').innerText = employeeData.Nombor_Telefon_Suami_Istri || 'NA';
+            document.getElementById('employee-Fname').innerText = employeeData.Nama_Pewaris_Ibu_Ayah || '-';
+            document.getElementById('employee-FphoneNo').innerText = employeeData.Nombor_Telefon_Pewaris_Ibu_Ayah || '-';
 
             const disease = employeeData["Penyakit"] || 'None';
             document.getElementById('employee-disease').innerText = disease;
@@ -298,7 +479,7 @@
       }
     });
 
-    window.uploadProfileImage = async function () {
+  window.uploadProfileImage = async function () {
   const file = document.getElementById("profile-input").files[0];
   const employeeId = getQueryParam('id');
 
@@ -375,8 +556,6 @@
   // Trigger the file reader to load the image
   reader.readAsDataURL(file);
 };
-
-  
     fetchEmployeeDetails();
   </script>
   
