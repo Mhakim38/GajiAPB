@@ -599,175 +599,153 @@ scratch. This page gets rid of all links and provides the needed markup only.
   import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
   const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      // User not logged in
-      location.href = 'login.html';
-      return;
-    }
-
-    const loginTime = parseInt(localStorage.getItem('loginTime'), 10);
-    const currentTime = Date.now();
-    const sessionDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
-
-    if (!loginTime || currentTime - loginTime > sessionDuration) {
-      // Session expired
+  onAuthStateChanged(auth, user => {
+    if (!user) return location.href = 'login.html';
+    const t = parseInt(localStorage.getItem('loginTime')||'0',10);
+    if (!t || Date.now()-t > 30*60*1000) {
       localStorage.removeItem('loginTime');
-      signOut(auth).then(() => {
-        //alert("Session expired. Please log in again.");
-        location.href = 'login.html';
-      });
+      return signOut(auth).then(()=> location.href='login.html');
     }
   });
+  ['mousemove','keydown','click'].forEach(e=>window.addEventListener(e,()=>{
+    localStorage.setItem('loginTime', Date.now().toString());
+  }));
 
-  // USER ACTIVITY DETECTION TO REFRESH SESSION
-  function refreshSessionTimer() {
-      localStorage.setItem('loginTime', Date.now().toString());
-    }
+  const employeesRef = collection(db,'employees');
+  let allEmployees = [], isLoading = true;
 
-    window.addEventListener('mousemove', refreshSessionTimer);
-    window.addEventListener('keydown', refreshSessionTimer);
-    window.addEventListener('click', refreshSessionTimer);
+  async function fetchEmployeeNames(){
+    const container = document.getElementById('employee-names');
+    container.innerHTML = generateSkeletons(2);
 
-
-  // Reference to the employees collection in Firestore
-  const employeesRef = collection(db, 'employees');
-  let allEmployees = [];
-  let isLoading = true;
-
-  // Fetch employee data and display names in the staff list
-  async function fetchEmployeeNames() {
     try {
-      // Show loading state
-      document.getElementById('employee-names').innerHTML = generateSkeletons(2);
-      
-      const querySnapshot = await getDocs(employeesRef);
-      let employeeCards = '';
-      allEmployees = [];
-      
-      // Process the data
-      querySnapshot.forEach((doc) => {
-        const employeeData = doc.data();
-        allEmployees.push({
-          id: doc.id,
-          ...employeeData
-        });
-        
-        // Generate a random position if not available in the data
-        const employeeId = employeeData.id || doc.id; // Use the `id` field from the document data
-        const imageUrl = employeeData.profileImage || 'src/default-avatar.png';
+      const snap = await getDocs(employeesRef);
+      allEmployees = snap.docs.map(d=>({ id:d.id, ...d.data() }));
+      document.getElementById('staffCount').textContent = allEmployees.length;
 
-        // console.log(employeeId);
-        
-        employeeCards += generateEmployeeCard(doc.id, employeeData.Nama, employeeId, imageUrl);
-        
-      });
-      
-      // Update the UI
-      const employeeCount = allEmployees.length;
-      document.getElementById('staffCount').textContent = employeeCount;
-      
-      if (employeeCount > 0) {
-        document.getElementById('employee-names').innerHTML = employeeCards;
-        document.getElementById('employee-names').style.display = 'block';
-        document.getElementById('noStaffMessage').style.display = 'none';
+      if (!allEmployees.length) {
+        container.style.display='none';
+        document.getElementById('noStaffMessage').style.display='flex';
       } else {
-        document.getElementById('employee-names').style.display = 'none';
-        document.getElementById('noStaffMessage').style.display = 'flex';
+        container.style.display='block';
+        document.getElementById('noStaffMessage').style.display='none';
+        // batch DOM update
+        container.innerHTML = '';
+        const frag = document.createDocumentFragment();
+        allEmployees.forEach(emp=>{
+          const div = document.createElement('div');
+          div.innerHTML = generateEmployeeCard(
+            emp.id, emp.Nama, emp.id, emp.profileImage || 'src/default-avatar.png'
+          );
+          frag.appendChild(div.firstElementChild);
+        });
+        container.appendChild(frag);
+
+        // now hook up load/error for every avatar img
+        container.querySelectorAll('.staff-avatar img').forEach(img=>{
+          const skeleton = img.parentElement.querySelector('.skeleton-avatar');
+          img.style.display = 'none';
+          img.addEventListener('load', ()=>{
+            img.style.display = 'block';
+            skeleton && skeleton.remove();
+          });
+          img.addEventListener('error', ()=>{
+            console.error('Failed to load', img.src);
+            img.src = 'src/default-avatar.png';
+            img.style.display = 'block';
+            skeleton && skeleton.remove();
+          });
+        });
       }
-      
-      isLoading = false;
-    } catch (error) {
-      console.error("Error fetching employees: ", error);
-      document.getElementById('employee-names').innerHTML = `
-        <div class="alert alert-danger" role="alert" style="border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-          <i class="fas fa-exclamation-circle mr-2"></i> Error loading employee data. Please try again.
-        </div>
-      `;
+    } catch(err) {
+      console.error(err);
+      container.innerHTML = `<div class="alert alert-danger">Error loading employees</div>`;
+    } finally {
       isLoading = false;
     }
   }
 
-  // Function to generate employee card HTML
-  function generateEmployeeCard(id, name, employeeId, imageUrl) {
+  function generateEmployeeCard(id,name,employeeId,imageUrl){
     return `
       <div class="staff-card" onclick="location.href='Edetail.html?id=${id}'">
-        <div class="staff-avatar">
-          <img src="${imageUrl}" alt="Employee pic">
+        <div class="staff-avatar" style="position:relative;width:48px;height:48px;">
+          <div class="skeleton-avatar" 
+               style="position:absolute;top:0;left:0;width:48px;height:48px;
+                      border-radius:50%;background:#eee;">
+          </div>
+          <img src="${imageUrl}"
+               alt="${name}" 
+               style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
         </div>
         <div class="staff-info">
           <h5 class="staff-name">${name}</h5>
-          <p class="staff-position">ID: ${employeeId}</p> <!-- Display employee ID from the document -->
+          <p class="staff-position">ID: ${employeeId}</p>
           <span class="status-label status-active">Active</span>
         </div>
         <i class="fas fa-chevron-right staff-chevron"></i>
-      </div>
-    `;
+      </div>`;
   }
-  
-  // Function to generate skeleton loaders
-  function generateSkeletons(count) {
-    let skeletons = '';
-    for (let i = 0; i < count; i++) {
-      skeletons += `
+
+  function generateSkeletons(count){
+    let s = '';
+    for(let i=0;i<count;i++){
+      s+=`
         <div class="skeleton-card">
           <div class="skeleton-avatar"></div>
           <div class="skeleton-info">
             <div class="skeleton-name"></div>
             <div class="skeleton-position"></div>
           </div>
-        </div>
-      `;
+        </div>`;
     }
-    return skeletons;
+    return s;
   }
 
-  // Make filterStaff function available globally
-  window.filterStaff = function() {
-    const searchTerm = document.getElementById('searchStaff').value.toLowerCase();
-    
-    if (isLoading || !allEmployees || allEmployees.length === 0) return;
-    
-    const filteredEmployees = allEmployees.filter(emp => 
-      emp.Nama.toLowerCase().includes(searchTerm)
-    );
-    
-    let employeeCards = '';
-    
-    filteredEmployees.forEach(emp => {
-      const employeeId = emp.id || emp.id; // Use the `id` field from the document data
-      employeeCards += generateEmployeeCard(emp.id, emp.Nama, employeeId);
-    });
-    
-    if (filteredEmployees.length > 0) {
-      document.getElementById('employee-names').innerHTML = employeeCards;
-      document.getElementById('employee-names').style.display = 'block';
-      document.getElementById('noStaffMessage').style.display = 'none';
+  window.filterStaff = ()=>{
+    const term = document.getElementById('searchStaff').value.toLowerCase();
+    if(isLoading||!allEmployees.length) return;
+    const filtered = allEmployees.filter(e=>e.Nama.toLowerCase().includes(term));
+    document.getElementById('staffCount').textContent = filtered.length;
+
+    const container = document.getElementById('employee-names');
+    if(!filtered.length){
+      container.style.display='none';
+      document.getElementById('noStaffMessage').style.display='flex';
     } else {
-      document.getElementById('employee-names').style.display = 'none';
-      document.getElementById('noStaffMessage').style.display = 'flex';
-    }
-    
-    document.getElementById('staffCount').textContent = filteredEmployees.length;
-  }
+      container.style.display='block';
+      document.getElementById('noStaffMessage').style.display='none';
+      container.innerHTML = '';
+      const frag = document.createDocumentFragment();
+      filtered.forEach(emp=>{
+        const d = document.createElement('div');
+        d.innerHTML = generateEmployeeCard(
+          emp.id, emp.Nama, emp.id, emp.profileImage||'src/default-avatar.png'
+        );
+        frag.appendChild(d.firstElementChild);
+      });
+      container.appendChild(frag);
 
-  // Initialize the page
-  fetchEmployeeNames();
-  
-  // Check for desktop view and handle sidebar toggling
-  const isDesktop = window.innerWidth >= 992;
-  if (isDesktop) {
-    // Add event listener for sidebar toggle
-    const backBtn = document.querySelector('.back-btn');
-    if (backBtn) { // Ensure the element exists
-      backBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector('.sidebar').classList.toggle('active');
+      // re-attach load handlers
+      container.querySelectorAll('.staff-avatar img').forEach(img=>{
+        const sk = img.parentElement.querySelector('.skeleton-avatar');
+        img.style.display='none';
+        img.addEventListener('load',()=>{
+          img.style.display='block';
+          sk && sk.remove();
+        });
+        img.addEventListener('error',()=>{
+          img.src='src/default-avatar.png';
+          img.style.display='block';
+          sk && sk.remove();
+        });
       });
     }
-  }
+  };
+
+  fetchEmployeeNames();
 </script>
+
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
