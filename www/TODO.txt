@@ -33,7 +33,6 @@ Part 2 (Salary Management)
 - [x] Make sure that the salary Report shows the staff id and not collection id
 - [x] There is an error on displaying the salaries record on salary report
 - [] Add search function in #Msalary.html 
-- [] Enable background graphics for printing report - maybe x perlu ???
 
 Part 3 (Login)
 - [x] Add Login Page
@@ -47,7 +46,8 @@ Part 3 (Login)
 Part 3.3 (Interface)
  - [] Design UI in index 
  - [] Design UX in add Staff
- - [] Design UX in Edetail
+ - [] Design UX in Update Staff
+ - [x] Design UX in Edetail
  - [] Design UX in CEO Page
 
 Part 4
