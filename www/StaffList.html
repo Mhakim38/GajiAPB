@@ -655,11 +655,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
         });
         
         // Generate a random position if not available in the data
-        const position = employeeData.Position || getRandomPosition();
         const employeeId = employeeData.id || doc.id; // Use the `id` field from the document data
+        const imageUrl = employeeData.profileImage || 'src/default-avatar.png';
+
         // console.log(employeeId);
         
-        employeeCards += generateEmployeeCard(doc.id, employeeData.Nama, position, employeeId);
+        employeeCards += generateEmployeeCard(doc.id, employeeData.Nama, employeeId, imageUrl);
+        
       });
       
       // Update the UI
@@ -688,11 +690,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   }
 
   // Function to generate employee card HTML
-  function generateEmployeeCard(id, name, position, employeeId) {
+  function generateEmployeeCard(id, name, employeeId, imageUrl) {
     return `
       <div class="staff-card" onclick="location.href='Edetail.html?id=${id}'">
         <div class="staff-avatar">
-          <img src="src/me.jpg" alt="${name}'s Picture">
+          <img src="${imageUrl}" alt="Employee pic">
         </div>
         <div class="staff-info">
           <h5 class="staff-name">${name}</h5>
@@ -721,15 +723,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     return skeletons;
   }
 
-  // Function to get a random position for demo purposes
-  function getRandomPosition() {
-    const positions = [
-      "Kitchen Staff", "Cashier", "Floor Manager", "Chef", 
-      "Assistant Manager", "Server", "Dishwasher", "Host/Hostess"
-    ];
-    return positions[Math.floor(Math.random() * positions.length)];
-  }
-
   // Make filterStaff function available globally
   window.filterStaff = function() {
     const searchTerm = document.getElementById('searchStaff').value.toLowerCase();
@@ -743,9 +736,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     let employeeCards = '';
     
     filteredEmployees.forEach(emp => {
-      const position = emp.Position || getRandomPosition();
       const employeeId = emp.id || emp.id; // Use the `id` field from the document data
-      employeeCards += generateEmployeeCard(emp.id, emp.Nama, position, employeeId);
+      employeeCards += generateEmployeeCard(emp.id, emp.Nama, employeeId);
     });
     
     if (filteredEmployees.length > 0) {
