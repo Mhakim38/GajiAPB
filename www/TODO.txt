@@ -37,8 +37,8 @@ Part 2 (Salary Management)
 Part 3 (Login)
 - [x] Add Login Page
 - [x] Add session for every page
-- [] Add User Restriction - do i need ???
-- [] Add forgot password recovery do i need ???
+- [] Add User Restriction - do i need ??? - IN FUTURE
+- [] Add forgot password recovery do i need ??? - IN FUTURE
 - [x] Add timeout for logged in user - debug for mobile Use @capasitor/app 
 - [] Add timeout for logged in user - debug for PWA
 - [x] Dont zoom in focus on input when in mobile (Press login with no input)
