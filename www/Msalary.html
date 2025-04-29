@@ -938,20 +938,49 @@
   }
 
   // Print report function
-  window.printReport = function() {
-    const reportWindow = window.open('Salary_report.html', '_blank');
+// Print report function
+window.printReport = function() {
+  const reportWindow = window.open('Salary_report.html', '_blank');
 
-    // Listen for a message from the report page indicating it is ready
-    window.addEventListener('message', function handleMessage(event) {
-      if (event.data === 'reportReady') {
-        //Use a timeout to ensure compatibility with mobile browsers
-        setTimeout(() => {
+  // Listen for a message from the report page indicating it is ready
+  window.addEventListener('message', function handleMessage(event) {
+    if (event.data === 'reportReady') {
+      // Use a timeout to ensure compatibility with mobile browsers
+      setTimeout(() => {
+        try {
+          if (!reportWindow.document.execCommand('print', false, null)) {
+            reportWindow.print();
+          }
+        } catch (e) {
           reportWindow.print();
-        }, 500);
-        window.removeEventListener('message', handleMessage); // Clean up the event listener
-      }
-    });
-  };
+        }
+      }, 500);
+      window.removeEventListener('message', handleMessage); // Clean up the event listener
+    }
+  });
+};
+// Print report function
+window.printReport = function() {
+  const reportWindow = window.open('Salary_report.html', '_blank');
+
+  // Listen for a message from the report page indicating it is ready
+  window.addEventListener('message', function handleMessage(event) {
+    if (event.data === 'reportReady') {
+      // Use a timeout to ensure compatibility with mobile browsers
+      setTimeout(() => {
+        try {
+          if (!reportWindow.document.execCommand('print', false, null)) {
+            reportWindow.print();
+          }
+        } catch (e) {
+          reportWindow.print();
+        }
+      }, 500);
+      window.removeEventListener('message', handleMessage); // Clean up the event listener
+    }
+  });
+};
+
 
   // Fetch and display employee salary cards
   async function fetchEmployeeCards() {
