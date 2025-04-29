@@ -16,9 +16,6 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="css/adminlte.min.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -150,9 +147,9 @@
             document.querySelector('tbody').innerHTML = tableRows;
 
             // Notify the parent window that the report is ready
-            // setTimeout(() => {
-            //     window.opener.postMessage('reportReady', '*');
-            // }, 500); // Add a slight delay to ensure rendering is complete
+            setTimeout(() => {
+                window.opener.postMessage('reportReady', '*');
+            }, 500); // Add a slight delay to ensure rendering is complete
         }
 
         fetchSalaryReport();
@@ -234,54 +231,5 @@
         dateIssued.textContent += fullDate;
 
     </script>
-    <script type="module">
-        // Wait for DOM + any async content
-        async function waitForContentToLoad(selector, timeout = 3000) {
-          return new Promise((resolve) => {
-            const check = () => {
-              const el = document.querySelector(selector);
-              if (el && el.innerText.trim() !== '') {
-                resolve();
-              } else {
-                setTimeout(check, 200);
-              }
-            };
-            setTimeout(resolve, timeout); // fallback in case it never loads
-            check();
-          });
-        }
-      
-        window.addEventListener('load', async () => {
-          try {
-            // Wait for your data container to fill in — replace with a relevant selector!
-            await waitForContentToLoad('#salaryTable');
-      
-            const elementToCapture = document.body;
-            const canvas = await html2canvas(elementToCapture);
-      
-            const imgData = canvas.toDataURL('image/png');
-            const { jsPDF } = window.jspdf;
-      
-            // Landscape A4: [width, height]
-            const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-      
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const imgProps = pdf.getImageProperties(imgData);
-            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save('Salary_Report.pdf');
-      
-            // Redirect after a short delay
-            setTimeout(() => {
-              window.location.href = 'Msalary.html';
-            }, 1000);
-          } catch (err) {
-            console.error('PDF generation failed:', err);
-            alert('Failed to download PDF.');
-            window.location.href = 'Msalary.html';
-          }
-        });
-      </script>
 </body>
 </html>
