@@ -32,7 +32,8 @@ Part 2 (Salary Management)
 - [x] Make sure that every staff have an staff_id, if not salary cant be save -- New data incoming with new column name
 - [x] Make sure that the salary Report shows the staff id and not collection id
 - [x] There is an error on displaying the salaries record on salary report
-- [] Add search function in #Msalary.html 
+- [x] Add search function in #Msalary.html 
+- [] Change the print to download - Mobile 
 
 Part 3 (Login)
 - [x] Add Login Page
@@ -70,6 +71,3 @@ Finalised
 - [] Double Check Function CRUD that are available
 - [] Double Check UI/UX
 - [] Adjust the layout and grid for Msalary and StaffList for Dektop
-
-Security feature
-- [] Send the data using AJAX to the server (php ?) for more secure
