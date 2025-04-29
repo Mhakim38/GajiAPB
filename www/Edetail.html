@@ -451,7 +451,7 @@
           const employeeRef = doc(db, 'employees', employeeId);
           await deleteDoc(employeeRef);
 
-          alert('Employee record and related salaries deleted successfully!');
+          alert('Employee record deleted successfully!');
           window.location.href = 'StaffList.html'; // Redirect to another page after deletion
         } catch (error) {
           console.error('Error deleting documents:', error);
