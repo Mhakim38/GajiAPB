@@ -596,6 +596,7 @@
   z-index: 10;
 }
 
+
     
     @keyframes loading {
       0% { background-position: 200% 0; }
@@ -650,6 +651,63 @@
     }
 
     }
+/* Empty State – fully centered container */
+.empty-state {
+  width: 100%;               /* span full parent width */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+/* Illustration circle – make sure the box itself is centered and the icon inside is centered */
+.empty-illustration {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;        /* center the 100×100 box, with 20px bottom gap */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: #f8f9fa;
+  border-radius: 50%;
+}
+
+/* Icon inside the circle */
+.empty-illustration i {
+  font-size: 2.5rem;
+  color: #adadad;
+}
+
+/* Title and text blocks centered */
+.empty-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--dark);
+}
+
+.empty-text {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  max-width: 250px;
+  margin: 20px auto;        /* keep paragraph centered */
+}
+
+/* Button styling */
+.empty-btn {
+  background-color: var(--primary);
+  color: var(--dark);
+  border: none;
+  border-radius: 50px;
+  padding: 10px 25px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  gap: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
   </style>
 
 </head>
@@ -677,13 +735,41 @@
 
   <!-- Content Wrapper -->
   <div class="content-wrapper">
-    <div class="content-container">
+    <div class="content-container justify-content-center align-items-center">
       <!-- Page Actions -->
       <div class="page-actions">
         <div class="search-container">
           <div class="search-icon-container">
             <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" id="searchInput" placeholder="Search staff...">
+            <input type="text" class="search-input" id="searchStaff" placeholder="Search staff by name..." oninput="filterStaff()">
+            <script>
+              function filterStaff() {
+                const input = document.getElementById('searchStaff').value.toLowerCase();
+                const cards = document.querySelectorAll('.salary-card');
+                const noStaffMessage = document.getElementById('noStaffMessage');
+              
+                let anyVisible = false; // to check if at least 1 card is visible
+              
+                cards.forEach(card => {
+                  const nameElement = card.querySelector('.salary-name');
+                  const name = nameElement ? nameElement.textContent.toLowerCase() : '';
+                
+                  if (name.includes(input)) {
+                    card.style.display = 'block';
+                    anyVisible = true;
+                  } else {
+                    card.style.display = 'none';
+                  }
+                });
+              
+                // If no cards are visible, show "No Staff Found" message
+                if (!anyVisible) {
+                  noStaffMessage.style.display = 'block';
+                } else {
+                  noStaffMessage.style.display = 'none';
+                }
+              }
+            </script>
           </div>
         </div>        
         <button class="btn-print" onclick="printReport()">
@@ -691,6 +777,18 @@
         </button>
       </div>
       
+    <!-- Empty State -->
+    <div id="noStaffMessage" class="empty-state" style="display: none;">
+      <div class="empty-illustration">
+        <i class="fas fa-user-slash"></i>
+      </div>
+      <h3 class="empty-title">No Staff Found</h3>
+      <p class="empty-text">No staff members match your search criteria or no staff has been added yet.</p>
+      <button class="empty-btn" onclick="location.href='add_staff.html'">
+        <i class="fas fa-plus"></i> Add Staff
+      </button>
+    </div>
+
       <!-- Salary Cards Container -->
       <div class="salary-grid" id="salary-grid">
         <!-- Loading skeleton will appear here while data loads -->
@@ -733,6 +831,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
   
   <!-- Bottom Navigation -->
@@ -882,7 +981,7 @@
                 <img src="${employeeData.profileImage || 'src/default-avatar.png'}" alt="${employeeData.Nama}'s Picture">
               </div>
               <div>
-                <h3 class="salary-name">${employeeData.Nama}</h3>
+                <h3 class="salary-name" id="employee-names">${employeeData.Nama}</h3>
                 <div class="salary-id">ID: ${employeeData.id}</div>
               </div>
             </div>
@@ -1078,16 +1177,7 @@
       headerUnderCover.style.height = `${headerHeight}px`;
     }
   });
-  
-  document.getElementById("searchInput").addEventListener("input", function () {
-    const filter = this.value.toLowerCase();
-    const staffItems = document.querySelectorAll("#staffList li");
 
-    staffItems.forEach(function (item) {
-      const text = item.textContent.toLowerCase();
-      item.style.display = text.includes(filter) ? "" : "none";
-    });
-  });
 
   document.getElementById("confirmReset").addEventListener("click", () => {
   performMonthlyReset(); // This is Step 3
@@ -1138,6 +1228,8 @@
 
 // Set the content
 dateIssued.textContent += fullDate;
+
+
 </script>
 
 </body>
