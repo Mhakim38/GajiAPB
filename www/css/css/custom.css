@@ -107,7 +107,7 @@ body.fade-out {
 
 /* Logo Styles */
 .logo-container {
-    margin-bottom: 2rem;
+    margin-bottom: 1.3rem;
     opacity: 0;
     transform: scale(0.8);
 }
@@ -120,13 +120,12 @@ body.fade-out {
 
 /* Welcome Text */
 .welcome-text {
-    margin-bottom: 2.5rem;
     position: relative;
 }
 
 .welcome-title {
     font-size: 2.5rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1.3rem;
     color: var(--color-green);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     letter-spacing: 1px;
@@ -135,31 +134,8 @@ body.fade-out {
     position: relative;
 }
 
-.welcome-subtitle {
-    font-size: 1rem;
-    color: var(--color-grey);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    transform: translateY(15px);
-}
-
-/* Spice Icons */
-.spice-icons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: 1.5rem 0;
-}
-
-.spice {
-    font-size: 1.8rem;
-    opacity: 0;
-    transform: translateY(20px) rotate(0deg);
-}
-
 /* Button Styles */
 .button-container {
-    margin-top: 2rem;
     opacity: 0;
     transform: translateY(20px);
 }
@@ -207,10 +183,9 @@ body.fade-out {
 
 .cursor {
     display: inline-block;
-    width: 2px;
-    height: 35px;
+    width: 3px;
+    height: 1.8rem;
     background-color: var(--color-green);
-    margin-left: 2px;
     vertical-align: middle;
     animation: cursor-blink 1s infinite step-end;
 }
