@@ -67,10 +67,9 @@ body::after {
     width: 200px;
     height: 200px;
     background-color: var(--color-primary);
-    background-image: url('../../src/asset.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-image: url('../../src/asset.svg');
     background-position: center;
+    background-size: 200%;
     border-bottom-left-radius: 100%;
     top: 0;
     right: 0;
@@ -83,8 +82,9 @@ body::after {
     width: 300px;
     height: 300px;
     background-color: var(--color-primary);
-    background-image: url('../../src/asset.png');
-    background-position: bottom left;
+    background-image: url('../../src/asset.svg');
+    background-position: center;
+    background-size: 200%;
     border-top-right-radius: 100%;
     bottom: 0;
     left: 0;
@@ -247,19 +247,19 @@ body.fade-out {
         font-size: 1.5rem;
     }
     /* Top right quarter circle */
-.corner-circle-top {
-    width: 130px;
-    height: 130px;
-    background-size:auto;
+    .corner-circle-top {
+        width: 130px;
+        height: 130px;
+        background-size: 300%;
 
-}
-/* Bottom left quarter circle */
-.corner-circle-bottom {
-    width: 200px;
-    height: 200px;
-    background-size:auto;
+    }
+    /* Bottom left quarter circle */
+    .corner-circle-bottom {
+        width: 200px;
+        height: 200px;
+        background-size: 300%;
 
-}
+    }
 }
 
 @media (max-height: 600px) {
@@ -283,17 +283,13 @@ body.fade-out {
         margin: 1rem 0;
     }
         /* Top right quarter circle */
-.corner-circle-top {
-    width: 110px;
-    height: 110px;
-    background-size:auto;
-
-}
+    .corner-circle-top {
+        width: 110px;
+        height: 110px;
+    }
 /* Bottom left quarter circle */
-.corner-circle-bottom {
-    width: 150px;
-    height: 150px;
-    background-size:auto;
-
-}
+    .corner-circle-bottom {
+        width: 150px;
+        height: 150px;
+    }
 }
