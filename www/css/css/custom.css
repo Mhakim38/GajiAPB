@@ -1,0 +1,296 @@
+/* Variables */
+:root {
+    --color-primary: #FFCC09;
+    --color-grey: #808097;
+    --color-green: #2f5e2c;
+    --color-red: #d1121f;
+    --color-peach: #f5a391;
+    --color-lime: #8bc53f;
+    --color-dark: #333333;
+    --color-light: #f8f9fa;
+    --color-white: #ffffff;
+    --font-primary: 'Poppins', sans-serif;
+}
+
+/* Reset & General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: var(--font-primary);;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.6;
+    transition: opacity 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Overlay for better text readability */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Background accent circles */
+body::after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+}
+
+/* Top right quarter circle */
+.corner-circle-top {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: var(--color-primary);
+    background-image: url('../../src/header.png');
+    /* background-size: cover; */
+    background-position: center;
+    border-bottom-left-radius: 100%;
+    top: 0;
+    right: 0;
+    opacity: 1;
+    z-index: -2;
+}
+/* Bottom left quarter circle */
+.corner-circle-bottom {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: var(--color-primary);
+    background-image: url('../../src/header.png');
+    background-position: bottom left;
+    border-top-right-radius: 100%;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    z-index: -2;
+}
+
+body.fade-out {
+    opacity: 0;
+}
+
+/* Welcome Container */
+.welcome-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+}
+
+/* Logo Styles */
+.logo-container {
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.logo {
+    max-width: 180px;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Welcome Text */
+.welcome-text {
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+
+.welcome-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-green);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    letter-spacing: 1px;
+    font-weight: 700;
+    min-height: 3.5rem;
+    position: relative;
+}
+
+.welcome-subtitle {
+    font-size: 1rem;
+    color: var(--color-grey);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+/* Spice Icons */
+.spice-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+}
+
+.spice {
+    font-size: 1.8rem;
+    opacity: 0;
+    transform: translateY(20px) rotate(0deg);
+}
+
+/* Button Styles */
+.button-container {
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.login-button {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    background-color: var(--color-lime);
+    color: var(--color-dark);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-button:hover {
+    background-color: var(--color-white);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px);
+}
+
+.login-button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.login-button:hover::after {
+    left: 100%;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 35px;
+    background-color: var(--color-green);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: cursor-blink 1s infinite step-end;
+}
+
+@keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Media Queries */
+@media (max-width: 480px) {
+    .welcome-container {
+        padding: 1.5rem;
+    }
+    
+    .logo {
+        max-width: 150px;
+    }
+    
+    .welcome-title {
+        font-size: 2.2rem;
+    }
+    
+    .welcome-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .login-button {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .spice {
+        font-size: 1.5rem;
+    }
+    /* Top right quarter circle */
+.corner-circle-top {
+    width: 130px;
+    height: 130px;
+    background-size:auto;
+
+}
+/* Bottom left quarter circle */
+.corner-circle-bottom {
+    width: 200px;
+    height: 200px;
+    background-size:auto;
+
+}
+}
+
+@media (max-height: 600px) {
+    .logo {
+        max-width: 120px;
+    }
+    
+    .welcome-title {
+        font-size: 2rem;
+    }
+    
+    .welcome-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .button-container {
+        margin-top: 1rem;
+    }
+    
+    .spice-icons {
+        margin: 1rem 0;
+    }
+        /* Top right quarter circle */
+.corner-circle-top {
+    width: 110px;
+    height: 110px;
+    background-size:auto;
+
+}
+/* Bottom left quarter circle */
+.corner-circle-bottom {
+    width: 150px;
+    height: 150px;
+    background-size:auto;
+
+}
+}
