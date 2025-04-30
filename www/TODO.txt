@@ -33,7 +33,7 @@ Part 2 (Salary Management)
 - [x] Make sure that the salary Report shows the staff id and not collection id
 - [x] There is an error on displaying the salaries record on salary report
 - [x] Add search function in #Msalary.html 
-- [] Change the print to download - Mobile (Not Working - uses capture canvas)
+- [x] Change the print to download - Mobile (Not Working - uses capture canvas) - Solved Stack Overflow old ways
 
 Part 3 (Login)
 - [x] Add Login Page
