@@ -45,7 +45,7 @@ Part 3 (Login)
 - [x] Dont zoom in focus on input when in mobile (Press login with no input)
 
 Part 3.3 (Interface)
- - [] Design UI in index 
+ - [x] Design UI in index 
  - [] Design UX in add Staff
  - [] Design UX in Update Staff
  - [x] Design UX in Edetail
