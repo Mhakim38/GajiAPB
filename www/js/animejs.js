@@ -1,24 +1,24 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Subtle animation for corner circles
-    anime({
-        targets: '.corner-circle-top',
-        scale: [1, 1.05],
-        rotate: [0, 3],
-        duration: 8000,
-        easing: 'easeInOutSine',
-        direction: 'alternate',
-        loop: true
-    });
+    // // Subtle animation for corner circles
+    // anime({
+    //     targets: '.corner-circle-top',
+    //     scale: [1, 1.05],
+    //     rotate: [0, 3],
+    //     duration: 8000,
+    //     easing: 'easeInOutSine',
+    //     direction: 'alternate',
+    //     loop: true
+    // });
     
-    anime({
-        targets: '.corner-circle-bottom',
-        scale: [1, 1.08],
-        rotate: [0, -3],
-        duration: 9000,
-        easing: 'easeInOutSine',
-        direction: 'alternate',
-        loop: true
-    });
+    // anime({
+    //     targets: '.corner-circle-bottom',
+    //     scale: [1, 1.08],
+    //     rotate: [0, -3],
+    //     duration: 9000,
+    //     easing: 'easeInOutSine',
+    //     direction: 'alternate',
+    //     loop: true
+    // });
     
     // Logo animation
     anime({
