@@ -47,6 +47,11 @@
       color: var(--dark);
       overflow-x: hidden;
       scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
     }
 
     body:has(dialog[open]) {
