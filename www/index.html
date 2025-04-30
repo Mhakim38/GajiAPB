@@ -24,95 +24,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="manifest.json">
 
-  <style>
-    .content-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh; /* Ensure it takes the full height of the viewport */
-      overflow: hidden; /* Prevent scrolling */
-    }
-    .content {
-      width: 100%;
-      padding: 20px; /* Add some padding for better spacing */
-    }
-    .content-header {
-      position: absolute;
-      top: 0;
-      width: 100%;
-    }
-    .btn-custom {
-      background-color: #007bff;
-      color: white;
-      border-radius: 20px;
-      padding: 10px 20px;
-      font-size: 16px;
-    }
-  </style>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/css/custom.css"> 
+  <!-- Anime.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
-<body class="hold-transition sidebar-collapse layout-top-nav">
-<div class="wrapper">
-
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0" style="padding-top: calc(env(safe-area-inset-top, 0px));">
-    <div class="container justify-content-center"> <!-- Center the container content -->
-      <!-- Logo -->
-      <a href="../../index.html" class="navbar-brand">
-        <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
-      </a>
-      <!-- end logo -->
-    </div>
-  </nav>
-  <!-- /.navbar -->
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper border-0" style="background-color: white;">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2 justify-content-center"> <!-- Center the row content -->
-          <div class="col-sm-6 text-center"> <!-- Center the text -->
-            <h1 class="m-0"></h1>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content container-->
-    <div class="content">
-      <div class="container">
-        <div class="row justify-content-center align-items-center"> <!-- Center the row content -->
-          <div class="col-lg-6 text-center">
-            <h1 class="font-weight-bold">- WELCOME -<br>Mama</h1>
-            <button class="btn btn-custom mt-4" onclick="location.href='login.html'">More - - ></button>
-          </div>
-          <!-- /.col-md-6 -->
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+<body>
+  <div class="corner-circle-top"></div>
+  <div class="corner-circle-bottom"></div>
+  <div class="welcome-container">
+      <div class="logo-container">
+          <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="logo">
+      </div>
+      <div class="welcome-text">
+        <h1 class="welcome-title">
+          <span id="typing-title"></span>
+          <span class="cursor"></span>
+      </h1>
+          <!-- <p class="welcome-subtitle">Staff Management System</p> -->
+      </div>
+      <div class="button-container">
+          <a href="login.html" class="login-button">Get Started</a>
+      </div>
   </div>
-  <!-- /.content-wrapper -->
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-  </aside>
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  <footer class="main-footer border-0 mb-0 text-center"> <!-- Add text-center class -->
-    <!-- Default to the left -->
-    <strong><a href="https://github.com/Mhakim38">MyGaji v1.0</a><br>by Hakim</strong>
-  </footer>
-</div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-<script src="jquery/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="js/adminlte.min.js"></script>
-<script src="js/demo.js"></script>
+  <!-- Custom JS -->
+  <script src="js/animejs.js"></script>
 </body>
 </html>
