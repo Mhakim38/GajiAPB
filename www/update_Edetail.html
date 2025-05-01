@@ -17,6 +17,11 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="css/adminlte.min.css">
     <style>
+
+        html, body {
+            overflow-x: hidden;
+            background-color: #fae7c3;
+        }
         .content-wrapper {
             display: flex;
             justify-content: center;
@@ -24,6 +29,7 @@
             min-height: 100vh;
             overflow: auto;
             padding: 0; /* Remove padding that might restrict width */
+            background-image: url('src/soft-yellowbg.jpg');
         }
 
         .content {
@@ -212,19 +218,12 @@
             padding-top: calc(env(safe-area-inset-top, 0px) + 5px); /* Add safe area inset for iPhone notch */
         }
 
-        .header-under-cover {
-            padding-top: constant(safe-area-inset-top, 20px);
-            padding-top: env(safe-area-inset-top, 20px);
-        }
-
     </style>
 </head>
 <body class="hold-transition sidebar-collapse layout-top-nav">
 <div class="wrapper">
-    <div class="header-under-cover"></div> <!-- Added for spacing -->
-
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
+    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0" style="background-image: url('src/soft-yellowbg.jpg');">
         <div class="container justify-content-center"> <!-- Center the container content -->
             <!-- Logo -->
             <a href="../../index3.html" class="navbar-brand">
@@ -418,8 +417,17 @@
                                         </div>
                                     </div>
                                 </div>
-    
-                                <button type="submit" class="submit" id="update-staff-btn">Update</button>
+                                <div class="d-flex justify-content-between">
+                                    <button
+                                    id="cancelButton"
+                                    onmouseover="this.style.backgroundColor='#a8101a';"
+                                    onmouseout="this.style.backgroundColor='var(--danger)';"
+                                    class="submit mr-3"
+                                    style="background-color: var(--danger);">
+                                    Cancel
+                                    </button>
+                                    <button type="submit" class="submit" id="update-staff-btn">Update</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -436,7 +444,7 @@
     <!-- /.control-sidebar -->
 
     <!-- Main Footer -->
-    <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
+    <footer class="main-footer border-0 text-center" style="background-image: url('src/soft-yellowbg.jpg');"> <!-- Add text-center class -->
         <!-- Default to the left -->
         <strong><a href="https://github.com/Mhakim38">MyGaji v1.0</a><br>by Hakim</strong>
     </footer>
@@ -699,5 +707,31 @@ if (employeeId) {
         }
     });
 </script>
+<script type="module">
+    import { db, doc, getDoc } from './calculation.js';
+
+    const cancelButton = document.getElementById('cancelButton');
+
+    cancelButton.addEventListener('click', async () => {
+        const employeeId = new URLSearchParams(window.location.search).get('id');
+        if (!employeeId) {
+            alert('No employee ID found in URL.');
+            return;
+        }
+
+        try {
+            const employeeDocRef = doc(db, 'employees', employeeId);
+            const employeeDoc = await getDoc(employeeDocRef);
+            if (employeeDoc.exists()) {
+                window.location.href = `Edetail.html?id=${employeeId}`;
+            } else {
+                alert('Employee not found');
+            }
+        } catch (error) {
+            console.error('Error retrieving employee:', error);
+        }
+    });
+</script>
+
 </body>
 </html>
