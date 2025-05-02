@@ -199,6 +199,20 @@
             width: 100%;
         }
 
+        .cancel {
+            border-radius: 12px;
+            border: 0;
+            box-sizing: border-box;
+            color: #ffffff; /* Ensure text is readable */
+            cursor: pointer;
+            font-size: 18px;
+            height: 50px;
+            margin-top: 38px;
+            outline: 0;
+            text-align: center;
+            width: 100%;
+        }
+
         .submit:hover {
             background-color: #d1121f; /* Darker Red on hover */
         }
@@ -422,7 +436,7 @@
                                     id="cancelButton"
                                     onmouseover="this.style.backgroundColor='#a8101a';"
                                     onmouseout="this.style.backgroundColor='var(--danger)';"
-                                    class="submit mr-3"
+                                    class="cancel mr-3"
                                     style="background-color: var(--danger);">
                                     Cancel
                                     </button>
@@ -706,12 +720,8 @@ if (employeeId) {
             headerUnderCover.style.height = `${headerHeight}px`;
         }
     });
-</script>
-<script type="module">
-    import { db, doc, getDoc } from './calculation.js';
 
     const cancelButton = document.getElementById('cancelButton');
-
     cancelButton.addEventListener('click', async () => {
         const employeeId = new URLSearchParams(window.location.search).get('id');
         if (!employeeId) {
@@ -731,6 +741,7 @@ if (employeeId) {
             console.error('Error retrieving employee:', error);
         }
     });
+
 </script>
 
 </body>
