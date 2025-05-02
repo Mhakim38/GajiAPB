@@ -723,7 +723,7 @@ if (employeeId) {
 
     const cancelButton = document.getElementById('cancelButton');
     cancelButton.addEventListener('click', async () => {
-        const employeeId = new URLSearchParams(window.location.search).get('id');
+        const employeeId = getQueryParam('id'); // Dynamically fetch the employee ID from the URL
         if (!employeeId) {
             alert('No employee ID found in URL.');
             return;
