@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
@@ -15,11 +16,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="css/css/all.min.css">
   <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
-  
+
   <!-- Theme style -->
   <link rel="stylesheet" href="css/adminlte.min.css">
 
@@ -33,14 +34,14 @@
       --soft: #f5a391;
       --light: #f5f6f9;
       --dark: #212529;
-      --card-shadow: 0 3px 8px rgba(0,0,0,0.08);
+      --card-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
       --transition-speed: 0.3s;
     }
-    
+
     * {
       -webkit-tap-highlight-color: transparent;
     }
-    
+
     body {
       font-family: 'Poppins', sans-serif;
       background-color: var(--light);
@@ -60,8 +61,10 @@
     }
 
     dialog::backdrop {
-      background-color: rgba(0, 0, 0, 0.288); /* Darker background when dialog is open */
-      backdrop-filter: blur(3px); /* Blur effect for the background */
+      background-color: rgba(0, 0, 0, 0.288);
+      /* Darker background when dialog is open */
+      backdrop-filter: blur(3px);
+      /* Blur effect for the background */
     }
 
     dialog#monthlyResetModal {
@@ -113,34 +116,30 @@
       transition: background-color var(--transition-speed), transform var(--transition-speed);
       display: block;
       margin: 0 auto;
-      /* margin-top: 5px; */
     }
 
-    /* #monthlyResetModal .btn-print:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    } */
-
-     #monthlyResetModal .btn-print:focus {
+    #monthlyResetModal .btn-print:focus {
       outline-color: rgba(255, 255, 255, 0);
       box-shadow: 0 0 0 0px rgba(255, 204, 9, 0.3);
-    } 
+    }
 
-    
+
     .wrapper {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
-    
+
     /* App-like Header */
     .app-header {
       padding: 5px;
-      padding-top: calc(env(safe-area-inset-top, 0px)); /* Add safe area inset for iPhone notch */
+      padding-top: calc(env(safe-area-inset-top, 0px));
+      /* Add safe area inset for iPhone notch */
       background-image: url('src/Header.png');
       background-size: auto;
-      border-radius: 0 0 15px 15px; /* Apply radius only to the bottom corners */
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border-radius: 0 0 15px 15px;
+      /* Apply radius only to the bottom corners */
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -150,18 +149,18 @@
       right: 0;
       z-index: 100;
     }
-    
+
     .header-logo {
       height: 90px;
       width: auto;
       object-fit: contain;
     }
-    
+
     .header-under-cover {
       padding-top: constant(safe-area-inset-top, 20px);
       padding-top: env(safe-area-inset-top, 20px);
     }
-    
+
     /* Main Content */
     .content-wrapper {
       flex: 1;
@@ -169,20 +168,21 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 0;
-      padding-bottom: 80px; /* Space for bottom nav */
+      padding-bottom: 80px;
+      /* Space for bottom nav */
     }
-    
+
     .content-container {
       padding: 20px;
     }
-    
+
     /* Page Actions */
     .page-actions {
       display: flex;
       justify-content: flex-end;
       margin-bottom: 20px;
     }
-    
+
     .btn-print {
       background-color: var(--primary);
       color: var(--dark);
@@ -193,16 +193,16 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
       white-space: nowrap;
     }
-    
+
     .btn-print:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
-    
+
     /* Salary Cards */
     .salary-grid {
       display: grid;
@@ -210,14 +210,14 @@
       gap: 15px;
       margin-bottom: 20px;
     }
-    
+
     .salary-card {
       background: white;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
-    
+
     .salary-header {
       display: flex;
       align-items: center;
@@ -225,7 +225,7 @@
       background: linear-gradient(135deg, var(--soft), #fff7f5);
       border-bottom: 1px solid #f0f0f0;
     }
-    
+
     .salary-avatar {
       width: 50px;
       height: 50px;
@@ -234,42 +234,42 @@
       margin-right: 15px;
       flex-shrink: 0;
       border: 2px solid white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    
+
     .salary-avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    
+
     .salary-name {
       font-weight: 600;
       margin-bottom: 3px;
       color: var(--dark);
       font-size: 1.1rem;
     }
-    
+
     .salary-id {
       color: var(--secondary);
       font-size: 0.8rem;
     }
-    
+
     .salary-body {
       padding: 15px;
     }
-    
+
     .salary-options {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-bottom: 15px;
     }
-    
+
     .option-group {
       margin-bottom: 10px;
     }
-    
+
     .option-label {
       display: flex;
       align-items: center;
@@ -277,7 +277,7 @@
       font-weight: 500;
       color: var(--dark);
     }
-    
+
     .option-checkbox {
       display: inline-block;
       position: relative;
@@ -291,7 +291,7 @@
       vertical-align: middle;
       transition: all 0.2s ease;
     }
-    
+
     .option-checkbox:before {
       content: '';
       position: absolute;
@@ -304,11 +304,11 @@
       opacity: 0;
       transition: opacity 0.2s ease;
     }
-    
-    input[type="checkbox"]:checked + .option-checkbox:before {
+
+    input[type="checkbox"]:checked+.option-checkbox:before {
       opacity: 1;
     }
-    
+
     input[type="checkbox"] {
       position: absolute;
       opacity: 0;
@@ -316,7 +316,7 @@
       height: 0;
       width: 0;
     }
-    
+
     .option-input {
       width: 100%;
       padding: 8px 12px;
@@ -327,28 +327,29 @@
       background-color: #f9f9f9;
       transition: all 0.3s ease;
     }
-    
+
     .option-input:focus {
       outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(139, 197, 63, 0.1);
     }
-    
+
     .option-input::placeholder {
       color: #bbb;
     }
-    
+
     /* Number inputs */
     input[type="number"] {
-      -moz-appearance: textfield; /* Firefox */
+      -moz-appearance: textfield;
+      /* Firefox */
     }
-    
+
     input[type="number"]::-webkit-outer-spin-button,
     input[type="number"]::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
-    
+
     .salary-total {
       display: flex;
       justify-content: space-between;
@@ -358,18 +359,18 @@
       border-top: 1px solid #f0f0f0;
       border-radius: 0 0 12px 12px;
     }
-    
+
     .total-label {
       font-weight: 600;
       color: var(--dark);
     }
-    
+
     .total-value {
       font-weight: 700;
       color: var(--highlight);
       font-size: 1.1rem;
     }
-    
+
     .btn-calculate {
       width: 100%;
       background-color: var(--accent);
@@ -379,20 +380,20 @@
       padding: 10px;
       font-weight: 500;
       margin-top: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
     }
-    
+
     .btn-calculate:hover {
       background-color: #7ab130;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
     }
-    
+
     /* Hidden class for conditionally showing inputs */
     .hidden {
       display: none;
     }
-    
+
     /* Bottom Navigation */
     .bottom-nav {
       position: fixed;
@@ -400,45 +401,51 @@
       right: 0;
       background-image: url('src/Header.png');
       background-size: auto;
-      backdrop-filter: blur(40px); /* Blur effect for matte glass */
+      backdrop-filter: blur(40px);
+      /* Blur effect for matte glass */
       display: flex;
       justify-content: space-around;
       padding: 10px;
-      box-shadow: 2px 0px 67px -25px rgba(0,0,0,0.75);
+      box-shadow: 2px 0px 67px -25px rgba(0, 0, 0, 0.75);
       z-index: 900;
-      bottom: 0px; /* Default for desktop */
-      border-radius: 0; /* Default for desktop */
+      bottom: 0px;
+      /* Default for desktop */
+      border-radius: 0;
+      /* Default for desktop */
     }
-    
+
     .nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 6px; /* Adjusted padding-top */
-      padding-bottom: 10px; /* Removed bottom padding for consistency */
+      padding-top: 6px;
+      /* Adjusted padding-top */
+      padding-bottom: 10px;
+      /* Removed bottom padding for consistency */
       color: var(--secondary);
       border: none;
-      background: rgba(255, 255, 255, 0); /* Transparent white background */
+      background: rgba(255, 255, 255, 0);
+      /* Transparent white background */
     }
-    
+
     .nav-item:hover {
       color: #f83939b6;
     }
-    
+
     .nav-item.active {
       color: #f83939b6;
     }
-    
+
     .nav-item i {
       font-size: 1.2rem;
       margin-bottom: 5px;
     }
-    
+
     .nav-label {
       font-size: 0.75rem;
       font-weight: 500;
     }
-    
+
     /* Toast messages */
     .toast-container {
       position: fixed;
@@ -446,11 +453,11 @@
       right: 20px;
       z-index: 9999;
     }
-    
+
     .toast {
       background-color: white;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       padding: 12px 16px;
       margin-bottom: 10px;
       display: flex;
@@ -459,54 +466,54 @@
       transition: transform 0.3s ease;
       max-width: 300px;
     }
-    
+
     .toast.show {
       transform: translateX(0);
     }
-    
+
     .toast-success {
       border-left: 4px solid var(--accent);
     }
-    
+
     .toast-error {
       border-left: 4px solid var(--danger);
     }
-    
+
     .toast-icon {
       margin-right: 12px;
       font-size: 1.2rem;
     }
-    
+
     .toast-success .toast-icon {
       color: var(--accent);
     }
-    
+
     .toast-error .toast-icon {
       color: var(--danger);
     }
-    
+
     .toast-message {
       flex: 1;
       font-size: 0.9rem;
       color: var(--dark);
     }
-    
+
     /* Loading Skeleton */
     .skeleton-card {
       background: white;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       margin-bottom: 15px;
     }
-    
+
     .skeleton-header {
       display: flex;
       align-items: center;
       padding: 15px;
       background: #f9f9f9;
     }
-    
+
     .skeleton-avatar {
       width: 50px;
       height: 50px;
@@ -516,7 +523,7 @@
       animation: loading 1.5s infinite;
       margin-right: 15px;
     }
-    
+
     .skeleton-name {
       height: 20px;
       width: 150px;
@@ -526,7 +533,7 @@
       border-radius: 4px;
       margin-bottom: 8px;
     }
-    
+
     .skeleton-id {
       height: 14px;
       width: 100px;
@@ -535,18 +542,18 @@
       animation: loading 1.5s infinite;
       border-radius: 4px;
     }
-    
+
     .skeleton-body {
       padding: 15px;
     }
-    
+
     .skeleton-options {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
       margin-bottom: 15px;
     }
-    
+
     .skeleton-option {
       height: 20px;
       background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
@@ -555,7 +562,7 @@
       border-radius: 4px;
       margin-bottom: 8px;
     }
-    
+
     .skeleton-button {
       height: 38px;
       width: 100%;
@@ -567,84 +574,99 @@
     }
 
     /* Search Bar */
-.search-container {
-  margin-right: 10px;
-  width: 80%;
-}
-
-.search-input {
-  width: 100%;
-  padding: 12px 15px 12px 40px;
-  border-radius: 50px;
-  border: none;
-  background-color: #f5f7fa;
-  transition: all 0.3s ease;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
-}
-
-.search-input:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(255,204,9,0.3);
-}
-
-.search-icon-container {
-  position: relative;
-}
-
-.search-icon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #adadad;
-  font-size: 0.9rem;
-  z-index: 10;
-}
-
-
-    
-    @keyframes loading {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
+    .search-container {
+      margin-right: 10px;
+      width: 80%;
     }
-    
+
+    .search-input {
+      width: 100%;
+      padding: 12px 15px 12px 40px;
+      border-radius: 50px;
+      border: none;
+      background-color: #f5f7fa;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .search-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 204, 9, 0.3);
+    }
+
+    .search-icon-container {
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #adadad;
+      font-size: 0.9rem;
+      z-index: 10;
+    }
+
+
+
+    @keyframes loading {
+      0% {
+        background-position: 200% 0;
+      }
+
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
     @media (max-width: 767px) {
       .page-title {
-        font-size: 1.8rem; /* Smaller font size for the page title */
+        font-size: 1.8rem;
+        /* Smaller font size for the page title */
       }
-  
+
       .menu-title {
-        font-size: 1.1rem; /* Smaller font size for menu titles */
+        font-size: 1.1rem;
+        /* Smaller font size for menu titles */
       }
-  
+
       .menu-description {
-        font-size: 0.75rem; /* Smaller font size for menu descriptions */
+        font-size: 0.75rem;
+        /* Smaller font size for menu descriptions */
       }
-  
+
       .nav-label {
-        font-size: 0.65rem; /* Smaller font size for bottom nav labels */
+        font-size: 0.65rem;
+        /* Smaller font size for bottom nav labels */
       }
-  
+
       .app-footer {
-        font-size: 0.8rem; /* Smaller font size for footer text */
+        font-size: 0.8rem;
+        /* Smaller font size for footer text */
       }
-  
+
       .version-badge {
-        font-size: 0.6rem; /* Smaller font size for version badge */
+        font-size: 0.6rem;
+        /* Smaller font size for version badge */
       }
 
       .app-header {
-        background-size: cover; /* Remove cover on mobile */
-      }
-  
-      .bottom-nav {
-        background-size: cover; /* Remove cover on mobile */
-        bottom: 0px; /* Adjusted for mobile */
-        border-radius: 100px; /* Rounded corners for mobile */
+        background-size: cover;
+        /* Remove cover on mobile */
       }
 
-      .btn-print{
+      .bottom-nav {
+        background-size: cover;
+        /* Remove cover on mobile */
+        bottom: 0px;
+        /* Adjusted for mobile */
+        border-radius: 100px;
+        /* Rounded corners for mobile */
+      }
+
+      .btn-print {
         font-size: 0.9rem;
       }
 
@@ -653,193 +675,197 @@
       }
 
       dialog#monthlyResetModal {
-      height: 55vh;
-    }
+        height: 55vh;
+      }
 
     }
-/* Empty State – fully centered container */
-.empty-state {
-  width: 100%;               /* span full parent width */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  text-align: center;
-}
 
-/* Illustration circle – make sure the box itself is centered and the icon inside is centered */
-.empty-illustration {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 20px;        /* center the 100×100 box, with 20px bottom gap */
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background-color: #f8f9fa;
-  border-radius: 50%;
-}
+    /* Empty State – fully centered container */
+    .empty-state {
+      width: 100%;
+      /* span full parent width */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
 
-/* Icon inside the circle */
-.empty-illustration i {
-  font-size: 2.5rem;
-  color: #adadad;
-}
+    /* Illustration circle – make sure the box itself is centered and the icon inside is centered */
+    .empty-illustration {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      /* center the 100×100 box, with 20px bottom gap */
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background-color: #f8f9fa;
+      border-radius: 50%;
+    }
 
-/* Title and text blocks centered */
-.empty-title {
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: var(--dark);
-}
+    /* Icon inside the circle */
+    .empty-illustration i {
+      font-size: 2.5rem;
+      color: #adadad;
+    }
 
-.empty-text {
-  color: var(--secondary);
-  font-size: 0.9rem;
-  max-width: 250px;
-  margin: 20px auto;        /* keep paragraph centered */
-}
+    /* Title and text blocks centered */
+    .empty-title {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
 
-/* Button styling */
-.empty-btn {
-  background-color: var(--primary);
-  color: var(--dark);
-  border: none;
-  border-radius: 50px;
-  padding: 10px 25px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  gap: 8px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+    .empty-text {
+      color: var(--secondary);
+      font-size: 0.9rem;
+      max-width: 250px;
+      margin: 20px auto;
+      /* keep paragraph centered */
+    }
 
-
+    /* Button styling */
+    .empty-btn {
+      background-color: var(--primary);
+      color: var(--dark);
+      border: none;
+      border-radius: 50px;
+      padding: 10px 25px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      gap: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
   </style>
 
 </head>
+
 <body>
 
-<dialog id="monthlyResetModal" style="overflow: hidden;">
-  <form method="dialog" style="user-select: none !important;">
-    <h3>Monthly Update</h3>
-    <h1 id="dateIssued" class="salary-id mt-0">Date: </h1>
-    <img src="src/popup.svg" alt="">
-    <p>It is time to Calculate your staffs' salary, Good Luck & Don't Stress</p>
-    <button id="confirmReset" value="confirm" class="btn-print">Continue</button>
-  </form>
-</dialog>
+  <dialog id="monthlyResetModal" style="overflow: hidden;">
+    <form method="dialog" style="user-select: none !important;">
+      <h3>Monthly Update</h3>
+      <h1 id="dateIssued" class="salary-id mt-0">Date: </h1>
+      <img src="src/popup.svg" alt="">
+      <p>It is time to Calculate your staffs' salary, Good Luck & Don't Stress</p>
+      <button id="confirmReset" value="confirm" class="btn-print">Continue</button>
+    </form>
+  </dialog>
 
-<div class="wrapper">
-  <div class="header-under-cover"></div> <!-- Added for spacing -->
-  <!-- App Header -->
-  <header class="app-header">
-    <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="header-logo">
-  </header>
+  <div class="wrapper">
+    <div class="header-under-cover"></div> <!-- Added for spacing -->
+    <!-- App Header -->
+    <header class="app-header">
+      <img src="src/APB.png" alt="Ayam Penyet Best Logo" class="header-logo">
+    </header>
 
-  <!-- Toast Container for Notifications -->
-  <div class="toast-container" id="toastContainer"></div>
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Content Wrapper -->
-  <div class="content-wrapper">
-    <div class="content-container justify-content-center align-items-center">
-      <!-- Page Actions -->
-      <div class="page-actions">
-        <div class="search-container">
-          <div class="search-icon-container">
-            <i class="fas fa-search search-icon"></i>
-            <input type="text" class="search-input" id="searchStaff" placeholder="Search staff..." oninput="filterStaff()">
-            <script>
-              function filterStaff() {
-                const input = document.getElementById('searchStaff').value.toLowerCase();
-                const cards = document.querySelectorAll('.salary-card');
-                const noStaffMessage = document.getElementById('noStaffMessage');
-              
-                let anyVisible = false; // to check if at least 1 card is visible
-              
-                cards.forEach(card => {
-                  const nameElement = card.querySelector('.salary-name');
-                  const name = nameElement ? nameElement.textContent.toLowerCase() : '';
-                
-                  if (name.includes(input)) {
-                    card.style.display = 'block';
-                    anyVisible = true;
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+      <div class="content-container justify-content-center align-items-center">
+        <!-- Page Actions -->
+        <div class="page-actions">
+          <div class="search-container">
+            <div class="search-icon-container">
+              <i class="fas fa-search search-icon"></i>
+              <input type="text" class="search-input" id="searchStaff" placeholder="Search staff..."
+                oninput="filterStaff()">
+              <script>
+                function filterStaff() {
+                  const input = document.getElementById('searchStaff').value.toLowerCase();
+                  const cards = document.querySelectorAll('.salary-card');
+                  const noStaffMessage = document.getElementById('noStaffMessage');
+
+                  let anyVisible = false; // to check if at least 1 card is visible
+
+                  cards.forEach(card => {
+                    const nameElement = card.querySelector('.salary-name');
+                    const name = nameElement ? nameElement.textContent.toLowerCase() : '';
+
+                    if (name.includes(input)) {
+                      card.style.display = 'block';
+                      anyVisible = true;
+                    } else {
+                      card.style.display = 'none';
+                    }
+                  });
+
+                  // If no cards are visible, show "No Staff Found" message
+                  if (!anyVisible) {
+                    noStaffMessage.style.display = 'block';
                   } else {
-                    card.style.display = 'none';
+                    noStaffMessage.style.display = 'none';
                   }
-                });
-              
-                // If no cards are visible, show "No Staff Found" message
-                if (!anyVisible) {
-                  noStaffMessage.style.display = 'block';
-                } else {
-                  noStaffMessage.style.display = 'none';
                 }
-              }
-            </script>
+              </script>
+            </div>
           </div>
-        </div>        
-        <button class="btn-print" onclick="printReport()">
-          <i class="fas fa-print"></i> Print Report
-        </button>
-      </div>
-      
-    <!-- Empty State -->
-    <div id="noStaffMessage" class="empty-state" style="display: none;">
-      <div class="empty-illustration">
-        <i class="fas fa-user-slash"></i>
-      </div>
-      <h3 class="empty-title">No Staff Found</h3>
-      <p class="empty-text">No staff members match your search criteria or no staff has been added yet.</p>
-      <button class="empty-btn" onclick="location.href='add_staff.html'">
-        <i class="fas fa-plus"></i> Add Staff
-      </button>
-    </div>
+          <button class="btn-print" onclick="printReport()">
+            <i class="fas fa-print"></i> Print Report
+          </button>
+        </div>
 
-      <!-- Salary Cards Container -->
-      <div class="salary-grid" id="salary-grid">
-        <!-- Loading skeleton will appear here while data loads -->
-        <div class="skeleton-card">
-          <div class="skeleton-header">
-            <div class="skeleton-avatar"></div>
-            <div>
-              <div class="skeleton-name"></div>
-              <div class="skeleton-id"></div>
-            </div>
+        <!-- Empty State -->
+        <div id="noStaffMessage" class="empty-state" style="display: none;">
+          <div class="empty-illustration">
+            <i class="fas fa-user-slash"></i>
           </div>
-          <div class="skeleton-body">
-            <div class="skeleton-options">
-              <div class="skeleton-option"></div>
-              <div class="skeleton-option"></div>
-              <div class="skeleton-option"></div>
-              <div class="skeleton-option"></div>
-            </div>
-            <div class="skeleton-button"></div>
-          </div>
+          <h3 class="empty-title">No Staff Found</h3>
+          <p class="empty-text">No staff members match your search criteria or no staff has been added yet.</p>
+          <button class="empty-btn" onclick="location.href='add_staff.html'">
+            <i class="fas fa-plus"></i> Add Staff
+          </button>
         </div>
-        
-        <div class="skeleton-card">
-          <div class="skeleton-header">
-            <div class="skeleton-avatar"></div>
-            <div>
-              <div class="skeleton-name"></div>
-              <div class="skeleton-id"></div>
+
+        <!-- Salary Cards Container -->
+        <div class="salary-grid" id="salary-grid">
+          <!-- Loading skeleton will appear here while data loads -->
+          <div class="skeleton-card">
+            <div class="skeleton-header">
+              <div class="skeleton-avatar"></div>
+              <div>
+                <div class="skeleton-name"></div>
+                <div class="skeleton-id"></div>
+              </div>
+            </div>
+            <div class="skeleton-body">
+              <div class="skeleton-options">
+                <div class="skeleton-option"></div>
+                <div class="skeleton-option"></div>
+                <div class="skeleton-option"></div>
+                <div class="skeleton-option"></div>
+              </div>
+              <div class="skeleton-button"></div>
             </div>
           </div>
-          <div class="skeleton-body">
-            <div class="skeleton-options">
-              <div class="skeleton-option"></div>
-              <div class="skeleton-option"></div>
-              <div class="skeleton-option"></div>
-              <div class="skeleton-option"></div>
+
+          <div class="skeleton-card">
+            <div class="skeleton-header">
+              <div class="skeleton-avatar"></div>
+              <div>
+                <div class="skeleton-name"></div>
+                <div class="skeleton-id"></div>
+              </div>
             </div>
-            <div class="skeleton-button"></div>
+            <div class="skeleton-body">
+              <div class="skeleton-options">
+                <div class="skeleton-option"></div>
+                <div class="skeleton-option"></div>
+                <div class="skeleton-option"></div>
+                <div class="skeleton-option"></div>
+              </div>
+              <div class="skeleton-button"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
-  
+
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
     <button class="nav-item" onclick="location.href='Menu.html'">
@@ -859,44 +885,44 @@
       <span class="nav-label">Profile</span>
     </button>
   </nav>
-</div>
+  </div>
 
-<!-- REQUIRED SCRIPTS -->
-<script src="jquery/jquery.min.js"></script>
-<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="js/adminlte.min.js"></script>
+  <!-- REQUIRED SCRIPTS -->
+  <script src="jquery/jquery.min.js"></script>
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="js/adminlte.min.js"></script>
 
-<!-- Import Firebase setup from calculation.js -->
-<script type="module">
-  import { db, calcStaffOT, publlicHoliday, overTime, unpaidLeave, calcPartTime } from './calculation.js';
-  import { getDocs, collection, addDoc, setDoc, doc, serverTimestamp, writeBatch } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
-  import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+  <!-- Import Firebase setup from calculation.js -->
+  <script type="module">
+    import { db, calcStaffOT, publlicHoliday, overTime, unpaidLeave, calcPartTime } from './calculation.js';
+    import { getDocs, collection, addDoc, setDoc, doc, serverTimestamp, writeBatch } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-  const auth = getAuth();
+    const auth = getAuth();
 
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      // User not logged in
-      location.href = 'login.html';
-      return;
-    }
-
-    const loginTime = parseInt(localStorage.getItem('loginTime'), 10);
-    const currentTime = Date.now();
-    const sessionDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
-
-    if (!loginTime || currentTime - loginTime > sessionDuration) {
-      // Session expired
-      localStorage.removeItem('loginTime');
-      signOut(auth).then(() => {
-        //alert("Session expired. Please log in again.");
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // User not logged in
         location.href = 'login.html';
-      });
-    }
-  });
+        return;
+      }
 
-  //USER ACTIVITY DETECTION TO REFRESH SESSION
-   function refreshSessionTimer() {
+      const loginTime = parseInt(localStorage.getItem('loginTime'), 10);
+      const currentTime = Date.now();
+      const sessionDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
+
+      if (!loginTime || currentTime - loginTime > sessionDuration) {
+        // Session expired
+        localStorage.removeItem('loginTime');
+        signOut(auth).then(() => {
+          //alert("Session expired. Please log in again.");
+          location.href = 'login.html';
+        });
+      }
+    });
+
+    //USER ACTIVITY DETECTION TO REFRESH SESSION
+    function refreshSessionTimer() {
       localStorage.setItem('loginTime', Date.now().toString());
     }
 
@@ -904,112 +930,112 @@
     window.addEventListener('keydown', refreshSessionTimer);
     window.addEventListener('click', refreshSessionTimer);
 
-  // References to Firebase collections
-  const employeesRef = collection(db, 'employees');
-  const salariesRef = collection(db, 'salaries');
-  
-  // Show toast notification
-  function showToast(message, type = 'success') {
-    const toastContainer = document.getElementById('toastContainer');
-    
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-    
-    const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
-    
-    toast.innerHTML = `
+    // References to Firebase collections
+    const employeesRef = collection(db, 'employees');
+    const salariesRef = collection(db, 'salaries');
+
+    // Show toast notification
+    function showToast(message, type = 'success') {
+      const toastContainer = document.getElementById('toastContainer');
+
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+
+      const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+
+      toast.innerHTML = `
       <i class="fas fa-${icon} toast-icon"></i>
       <div class="toast-message">${message}</div>
     `;
-    
-    toastContainer.appendChild(toast);
-    
-    // Force a reflow to enable the transition
-    toast.offsetHeight;
-    
-    // Show the toast
-    setTimeout(() => {
-      toast.classList.add('show');
-    }, 10);
-    
-    // Remove the toast after 3 seconds
-    setTimeout(() => {
-      toast.classList.remove('show');
-      
-      // Remove from DOM after transition completes
-      setTimeout(() => {
-        toastContainer.removeChild(toast);
-      }, 300);
-    }, 3000);
-  }
 
-  // Print report function
-// Print report function
-window.printReport = function() {
-  const reportWindow = window.open('Salary_report.html', '_blank');
+      toastContainer.appendChild(toast);
 
-  // Listen for a message from the report page indicating it is ready
-  window.addEventListener('message', function handleMessage(event) {
-    if (event.data === 'reportReady') {
-      // Use a timeout to ensure compatibility with mobile browsers
+      // Force a reflow to enable the transition
+      toast.offsetHeight;
+
+      // Show the toast
       setTimeout(() => {
-        try {
-          if (!reportWindow.document.execCommand('print', false, null)) {
-            reportWindow.print();
-          }
-        } catch (e) {
-          reportWindow.print();
-        }
-      }, 500);
-      window.removeEventListener('message', handleMessage); // Clean up the event listener
+        toast.classList.add('show');
+      }, 10);
+
+      // Remove the toast after 3 seconds
+      setTimeout(() => {
+        toast.classList.remove('show');
+
+        // Remove from DOM after transition completes
+        setTimeout(() => {
+          toastContainer.removeChild(toast);
+        }, 300);
+      }, 3000);
     }
-  });
-};
-// Print report function
-window.printReport = function() {
-  const reportWindow = window.open('Salary_report.html', '_blank');
 
-  // Listen for a message from the report page indicating it is ready
-  window.addEventListener('message', function handleMessage(event) {
-    if (event.data === 'reportReady') {
-      // Use a timeout to ensure compatibility with mobile browsers
-      setTimeout(() => {
-        try {
-          if (!reportWindow.document.execCommand('print', false, null)) {
-            reportWindow.print();
-          }
-        } catch (e) {
-          reportWindow.print();
+    // Print report function
+    // Print report function
+    window.printReport = function () {
+      const reportWindow = window.open('Salary_report.html', '_blank');
+
+      // Listen for a message from the report page indicating it is ready
+      window.addEventListener('message', function handleMessage(event) {
+        if (event.data === 'reportReady') {
+          // Use a timeout to ensure compatibility with mobile browsers
+          setTimeout(() => {
+            try {
+              if (!reportWindow.document.execCommand('print', false, null)) {
+                reportWindow.print();
+              }
+            } catch (e) {
+              reportWindow.print();
+            }
+          }, 500);
+          window.removeEventListener('message', handleMessage); // Clean up the event listener
         }
-      }, 500);
-      window.removeEventListener('message', handleMessage); // Clean up the event listener
-    }
-  });
-};
+      });
+    };
+    // Print report function
+    window.printReport = function () {
+      const reportWindow = window.open('Salary_report.html', '_blank');
+
+      // Listen for a message from the report page indicating it is ready
+      window.addEventListener('message', function handleMessage(event) {
+        if (event.data === 'reportReady') {
+          // Use a timeout to ensure compatibility with mobile browsers
+          setTimeout(() => {
+            try {
+              if (!reportWindow.document.execCommand('print', false, null)) {
+                reportWindow.print();
+              }
+            } catch (e) {
+              reportWindow.print();
+            }
+          }, 500);
+          window.removeEventListener('message', handleMessage); // Clean up the event listener
+        }
+      });
+    };
 
 
-  // Fetch and display employee salary cards
-  async function fetchEmployeeCards() {
-    try {
-      const querySnapshot = await getDocs(employeesRef);
-      let employeeCards = '';
-      
-      if (querySnapshot.empty) {
-        document.getElementById('salary-grid').innerHTML = `
+    // Fetch and display employee salary cards
+    async function fetchEmployeeCards() {
+      try {
+        const querySnapshot = await getDocs(employeesRef);
+        let employeeCards = '';
+
+        if (querySnapshot.empty) {
+          document.getElementById('salary-grid').innerHTML = `
           <div class="text-center p-4 bg-white rounded-lg shadow">
             <i class="fas fa-users text-secondary mb-3" style="font-size: 3rem;"></i>
             <h4>No employees found</h4>
             <p class="text-muted">Add employees in the Staff Management section first.</p>
           </div>
         `;
-        return;
-      }
-      
-      querySnapshot.forEach((docSnap) => {
-        const employeeData = docSnap.data();
-        const employeeId = docSnap.id;
-        
-        employeeCards += `
+          return;
+        }
+
+        querySnapshot.forEach((docSnap) => {
+          const employeeData = docSnap.data();
+          const employeeId = docSnap.id;
+
+          employeeCards += `
           <div class="salary-card">
             <div class="salary-header">
               <div class="salary-avatar">
@@ -1068,155 +1094,155 @@ window.printReport = function() {
             </div>
           </div>
         `;
-      });
-      
-      document.getElementById('salary-grid').innerHTML = employeeCards;
-      
-      // Add event listeners for dynamically created elements
-      querySnapshot.forEach((docSnap) => {
-        const employeeData = docSnap.data();
-        const employeeId = docSnap.id;
-        
-        // Public Holiday checkbox and input
-        const publicHolidayCheckbox = document.getElementById(`publicHoliday-${employeeId}`);
-        const publicHolidayDays = document.getElementById(`publicHolidayDays-${employeeId}`);
-        
-        // Overtime checkbox and input
-        const overtimeCheckbox = document.getElementById(`overtime-${employeeId}`);
-        const overtimeHours = document.getElementById(`overtimeHours-${employeeId}`);
-        
-        // Unpaid Leave checkbox and input
-        const unpaidLeaveCheckbox = document.getElementById(`unpaidLeave-${employeeId}`);
-        const unpaidLeaveDays = document.getElementById(`unpaidLeaveDays-${employeeId}`);
-        
-        // Calculate button and total span
-        const calcButton = document.getElementById(`calcStaffBtn-${employeeId}`);
-        const totalSpan = document.getElementById(`staffOT-${employeeId}`);
-        
-        // Toggle input visibility based on checkbox state
-        publicHolidayCheckbox.addEventListener('change', function() {
-          publicHolidayDays.classList.toggle('hidden', !this.checked);
         });
-        
-        overtimeCheckbox.addEventListener('change', function() {
-          overtimeHours.classList.toggle('hidden', !this.checked);
-        });
-        
-        unpaidLeaveCheckbox.addEventListener('change', function() {
-          unpaidLeaveDays.classList.toggle('hidden', !this.checked);
-        });
-        
-        // Calculate salary and save to Firebase
-        calcButton.addEventListener('click', async function() {
-          try {
-            // Animation to indicate calculation is happening
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Calculating...';
-            this.disabled = true;
-            
-            let salary = calcStaffOT(1700); // Base salary after deductions
-            
-            if (publicHolidayCheckbox.checked) {
-              const days = parseFloat(publicHolidayDays.value || 0);
-              if (days > 0) {
-                salary = publlicHoliday(salary, days);
-              }
-            }
-            
-            if (overtimeCheckbox.checked) {
-              const hours = parseFloat(overtimeHours.value || 0);
-              if (hours > 0) {
-                salary = overTime(salary, hours);
-              }
-            }
-            
-            if (unpaidLeaveCheckbox.checked) {
-              const days = parseFloat(unpaidLeaveDays.value || 0);
-              if (days > 0) {
-                salary = unpaidLeave(salary, days);
-              }
-            }
-            
-            // Update the total
-            totalSpan.textContent = salary.toFixed(2);
 
-            // Save data to Firebase using custom document ID
-            const salaryRef = doc(db, "salaries", employeeData.id); // use employee's ID as doc ID
-            await setDoc(salaryRef, {
-              employeeId: employeeData.id,
-              nama: employeeData.Nama,
-              publicHoliday: publicHolidayCheckbox.checked ? parseFloat(publicHolidayDays.value || 0) : 0,
-              overtime: overtimeCheckbox.checked ? parseFloat(overtimeHours.value || 0) : 0,
-              unpaidLeave: unpaidLeaveCheckbox.checked ? parseFloat(unpaidLeaveDays.value || 0) : 0,
-              totalSalary: salary.toFixed(2),
-              timestamp: new Date()
-            }, { merge: true });
+        document.getElementById('salary-grid').innerHTML = employeeCards;
 
-            
-            // Show success notification
-            showToast('Salary calculated and saved successfully!', 'success');
-          } catch (error) {
-            console.error('Error calculating or saving salary:', error);
-            showToast('Failed to save salary details.', 'error');
-          } finally {
-            // Reset button state
-            this.innerHTML = '<i class="fas fa-calculator"></i> Calculate Salary';
-            this.disabled = false;
-          }
+        // Add event listeners for dynamically created elements
+        querySnapshot.forEach((docSnap) => {
+          const employeeData = docSnap.data();
+          const employeeId = docSnap.id;
+
+          // Public Holiday checkbox and input
+          const publicHolidayCheckbox = document.getElementById(`publicHoliday-${employeeId}`);
+          const publicHolidayDays = document.getElementById(`publicHolidayDays-${employeeId}`);
+
+          // Overtime checkbox and input
+          const overtimeCheckbox = document.getElementById(`overtime-${employeeId}`);
+          const overtimeHours = document.getElementById(`overtimeHours-${employeeId}`);
+
+          // Unpaid Leave checkbox and input
+          const unpaidLeaveCheckbox = document.getElementById(`unpaidLeave-${employeeId}`);
+          const unpaidLeaveDays = document.getElementById(`unpaidLeaveDays-${employeeId}`);
+
+          // Calculate button and total span
+          const calcButton = document.getElementById(`calcStaffBtn-${employeeId}`);
+          const totalSpan = document.getElementById(`staffOT-${employeeId}`);
+
+          // Toggle input visibility based on checkbox state
+          publicHolidayCheckbox.addEventListener('change', function () {
+            publicHolidayDays.classList.toggle('hidden', !this.checked);
+          });
+
+          overtimeCheckbox.addEventListener('change', function () {
+            overtimeHours.classList.toggle('hidden', !this.checked);
+          });
+
+          unpaidLeaveCheckbox.addEventListener('change', function () {
+            unpaidLeaveDays.classList.toggle('hidden', !this.checked);
+          });
+
+          // Calculate salary and save to Firebase
+          calcButton.addEventListener('click', async function () {
+            try {
+              // Animation to indicate calculation is happening
+              this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Calculating...';
+              this.disabled = true;
+
+              let salary = calcStaffOT(1700); // Base salary after deductions
+
+              if (publicHolidayCheckbox.checked) {
+                const days = parseFloat(publicHolidayDays.value || 0);
+                if (days > 0) {
+                  salary = publlicHoliday(salary, days);
+                }
+              }
+
+              if (overtimeCheckbox.checked) {
+                const hours = parseFloat(overtimeHours.value || 0);
+                if (hours > 0) {
+                  salary = overTime(salary, hours);
+                }
+              }
+
+              if (unpaidLeaveCheckbox.checked) {
+                const days = parseFloat(unpaidLeaveDays.value || 0);
+                if (days > 0) {
+                  salary = unpaidLeave(salary, days);
+                }
+              }
+
+              // Update the total
+              totalSpan.textContent = salary.toFixed(2);
+
+              // Save data to Firebase using custom document ID
+              const salaryRef = doc(db, "salaries", employeeData.id); // use employee's ID as doc ID
+              await setDoc(salaryRef, {
+                employeeId: employeeData.id,
+                nama: employeeData.Nama,
+                publicHoliday: publicHolidayCheckbox.checked ? parseFloat(publicHolidayDays.value || 0) : 0,
+                overtime: overtimeCheckbox.checked ? parseFloat(overtimeHours.value || 0) : 0,
+                unpaidLeave: unpaidLeaveCheckbox.checked ? parseFloat(unpaidLeaveDays.value || 0) : 0,
+                totalSalary: salary.toFixed(2),
+                timestamp: new Date()
+              }, { merge: true });
+
+
+              // Show success notification
+              showToast('Salary calculated and saved successfully!', 'success');
+            } catch (error) {
+              console.error('Error calculating or saving salary:', error);
+              showToast('Failed to save salary details.', 'error');
+            } finally {
+              // Reset button state
+              this.innerHTML = '<i class="fas fa-calculator"></i> Calculate Salary';
+              this.disabled = false;
+            }
+          });
         });
-      });
-    } catch (error) {
-      console.error('Error fetching employees:', error);
-      document.getElementById('salary-grid').innerHTML = `
+      } catch (error) {
+        console.error('Error fetching employees:', error);
+        document.getElementById('salary-grid').innerHTML = `
         <div class="alert alert-danger" role="alert">
           <i class="fas fa-exclamation-circle mr-2"></i> Error loading employee data. Please try again.
         </div>
       `;
+      }
     }
-  }
 
     // 1. Define the reset action
-  async function performMonthlyReset() {
-    // a) Delete all salary docs
-    const salariesSnapshot = await getDocs(collection(db, "salaries"));
-    const batch = writeBatch(db);
-    salariesSnapshot.forEach(snap => batch.delete(snap.ref));
-    await batch.commit();
+    async function performMonthlyReset() {
+      // a) Delete all salary docs
+      const salariesSnapshot = await getDocs(collection(db, "salaries"));
+      const batch = writeBatch(db);
+      salariesSnapshot.forEach(snap => batch.delete(snap.ref));
+      await batch.commit();
 
-    // b) Mark this month as reset
-    const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
-    await setDoc(
-      doc(db, "system_reset", "global_monthly_reset"),
-      { last_reset: currentMonth, timestamp: serverTimestamp() },
-      { merge: true }
-    );
-  }
-
-  // 2. Hook up the modal’s confirm button
-  document.getElementById("confirmReset").addEventListener("click", async () => {
-    await performMonthlyReset();
-    document.getElementById("monthlyResetModal").close(); // hide the <dialog>
-  });
-
-  // Initialize the page
-  window.addEventListener('DOMContentLoaded', () => {
-    fetchEmployeeCards();
-    checkAndShowResetModal();
-  });
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const appHeader = document.querySelector('.app-header');
-    const headerUnderCover = document.querySelector('.header-under-cover');
-    
-    if (appHeader && headerUnderCover) {
-      const headerHeight = appHeader.offsetHeight;
-      headerUnderCover.style.height = `${headerHeight}px`;
+      // b) Mark this month as reset
+      const currentMonth = new Date().toISOString().slice(0, 7); // "YYYY-MM"
+      await setDoc(
+        doc(db, "system_reset", "global_monthly_reset"),
+        { last_reset: currentMonth, timestamp: serverTimestamp() },
+        { merge: true }
+      );
     }
-  });
+
+    // 2. Hook up the modal’s confirm button
+    document.getElementById("confirmReset").addEventListener("click", async () => {
+      await performMonthlyReset();
+      document.getElementById("monthlyResetModal").close(); // hide the <dialog>
+    });
+
+    // Initialize the page
+    window.addEventListener('DOMContentLoaded', () => {
+      fetchEmployeeCards();
+      checkAndShowResetModal();
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const appHeader = document.querySelector('.app-header');
+      const headerUnderCover = document.querySelector('.header-under-cover');
+
+      if (appHeader && headerUnderCover) {
+        const headerHeight = appHeader.offsetHeight;
+        headerUnderCover.style.height = `${headerHeight}px`;
+      }
+    });
 
 
-  document.getElementById("confirmReset").addEventListener("click", () => {
-  performMonthlyReset(); // This is Step 3
-  });
+    document.getElementById("confirmReset").addEventListener("click", () => {
+      performMonthlyReset(); // This is Step 3
+    });
 
 
     const resetDocRef = doc(db, "system_reset", "global_monthly_reset");
@@ -1224,48 +1250,49 @@ window.printReport = function() {
     import { getDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js"; // add this at the top if not imported
 
     async function checkAndShowResetModal() {
-    const resetDocRef = doc(db, "system_reset", "global_monthly_reset");
-    const resetSnap = await getDoc(resetDocRef);
+      const resetDocRef = doc(db, "system_reset", "global_monthly_reset");
+      const resetSnap = await getDoc(resetDocRef);
 
-    const now = new Date();
-    const currentMonth = now.toISOString().slice(0, 7); // "YYYY-MM"
-    const currentDay = now.getDate(); // 1 to 31
+      const now = new Date();
+      const currentMonth = now.toISOString().slice(0, 7); // "YYYY-MM"
+      const currentDay = now.getDate(); // 1 to 31
 
-    if (resetSnap.exists()) {
-      const lastReset = resetSnap.data().last_reset;
-      console.log('Last Reset:', lastReset);
+      if (resetSnap.exists()) {
+        const lastReset = resetSnap.data().last_reset;
+        console.log('Last Reset:', lastReset);
 
-      // Show modal only if today is 18th or later and the reset hasn't been done yet this month
-      if (lastReset !== currentMonth && currentDay >= 18) {
-        const modal = document.getElementById("monthlyResetModal");
-        if (modal && !modal.open) {
-          modal.showModal();
+        // Show modal only if today is 18th or later and the reset hasn't been done yet this month
+        if (lastReset !== currentMonth && currentDay >= 18) {
+          const modal = document.getElementById("monthlyResetModal");
+          if (modal && !modal.open) {
+            modal.showModal();
+          }
         }
       }
     }
-  }
 
 
-  const dateElement = document.getElementById('dateIssued');
+    const dateElement = document.getElementById('dateIssued');
 
-  // Get the current date
-  const now = new Date();
+    // Get the current date
+    const now = new Date();
 
-  // Format month name (e.g., "April")
-  const monthName = now.toLocaleDateString('en-GB', { month: 'long' });
+    // Format month name (e.g., "April")
+    const monthName = now.toLocaleDateString('en-GB', { month: 'long' });
 
-  // Format full date (e.g., "23/04/2025")
-  const fullDate = now.toLocaleDateString('en-GB', {
+    // Format full date (e.g., "23/04/2025")
+    const fullDate = now.toLocaleDateString('en-GB', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
-  });
+    });
 
-// Set the content
-dateIssued.textContent += fullDate;
+    // Set the content
+    dateIssued.textContent += fullDate;
 
 
-</script>
+  </script>
 
 </body>
+
 </html>
