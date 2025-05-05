@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>MyGaji</title>
+    <title>MyGaji - Add Staff</title>
     <link rel="icon" href="src/APB.png">
     <link rel="apple-touch-icon" href="src/APB.png">
 
@@ -17,6 +17,25 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="css/adminlte.min.css">
     <style>
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            background-color: #fae7c3;
+        }
+
+        :root {
+          --primary: #ffcc09;
+          --secondary: #808097;
+          --accent: #8bc53f;
+          --highlight: #2f5e2c;
+          --danger: #d1121f;
+          --soft: #f5a391;
+          --light: #f5f6f9;
+          --dark: #212529;
+          --card-shadow: 0 3px 8px rgba(0,0,0,0.08);
+          --transition-speed: 0.3s;
+        }
         .content-wrapper {
             display: flex;
             justify-content: center;
@@ -24,6 +43,7 @@
             min-height: 100vh;
             overflow: auto;
             padding: 0; /* Remove padding that might restrict width */
+            background-image: url('src/soft-yellowbg.jpg');
         }
 
         .content {
@@ -195,10 +215,10 @@
         }
 
         .submit:hover {
-            background-color: #d1121f; /* Darker Red on hover */
+            background-color: #234720; /* Darker Red on hover */
         }
         .submit:active {
-            background-color: #d1121f; /* Darker Red on active */
+            background-color: #234720; /* Darker Red on active */
         }
         /* End form CSS */
 
@@ -207,10 +227,6 @@
         input[type="number"]::-webkit-outer-spin-button {
             -webkit-appearance: none;
             margin: 0;
-        }
-
-        .navbar {
-            padding-top: calc(env(safe-area-inset-top, 0px) + 5px); /* Add safe area inset for iPhone notch */
         }
 
         .header-under-cover {
@@ -224,7 +240,7 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0">
+    <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0" style="background-image: url('src/soft-yellowbg.jpg');">
         <div class="container justify-content-center"> <!-- Center the container content -->
             <!-- Logo -->
             <a href="../../index3.html" class="navbar-brand">
@@ -412,8 +428,18 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <button type="submit" class="submit">Submit</button>
+                            <div class="d-flex justify-content-between">
+                                <button
+                                type="button"
+                                onclick="location.href='StaffList.html'"
+                                onmouseover="this.style.backgroundColor='#a8101a';"
+                                onmouseout="this.style.backgroundColor='var(--danger)';"
+                                class="submit mr-3"
+                                style="background-color: var(--danger);">
+                                Cancel
+                              </button>
+                                <button type="submit" class="submit">Submit</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -429,7 +455,8 @@
     <!-- /.control-sidebar -->
     
     <!-- Main Footer -->
-    <footer class="main-footer border-0 text-center"> <!-- Add text-center class -->
+    <footer class="main-footer border-0 text-center" style="background-image: url('src/soft-yellowbg.jpg');
+"> <!-- Add text-center class -->
         <!-- Default to the left -->
         <strong><a href="https://github.com/Mhakim38">MyGaji v1.0</a><br>by Hakim</strong>
     </footer>
