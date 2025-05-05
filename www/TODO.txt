@@ -52,7 +52,7 @@ Part 3.3 (Interface)
 Part 4
 - [] Finalised The User Interface 
 - [x] Check for session in each page 
-- [] Remove the Scroll UI on the right using CSS only
+- [x] Remove the Scroll UI on the right using CSS only
 
 feature to add:
 - [x] Hover button on desktop
