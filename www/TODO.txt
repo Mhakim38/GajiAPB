@@ -38,16 +38,14 @@ Part 2 (Salary Management)
 Part 3 (Login)
 - [x] Add Login Page
 - [x] Add session for every page
-- [] Add User Restriction - do i need ??? - IN FUTURE
-- [] Add forgot password recovery do i need ??? - IN FUTURE
 - [x] Add timeout for logged in user - debug for mobile Use @capasitor/app 
 - [] Add timeout for logged in user - debug for PWA
 - [x] Dont zoom in focus on input when in mobile (Press login with no input)
 
 Part 3.3 (Interface)
  - [x] Design UI in index 
- - [] Design UX in add Staff
- - [] Design UX in Update Staff
+ - [x] Design UX in add Staff
+ - [x] Design UX in Update Staff
  - [x] Design UX in Edetail
  - [] Design UX in CEO Page
 
@@ -65,6 +63,8 @@ feature to add:
 - [] Add hours total calculation for staff - start and end time (puch card)
 - [] Add Skeleton/prevent to avoid displacement (Subtle) when reload the header-cover-under - QOL!!!!!!!!!
 - [] Avoid using image in css instead use in body - performance issue (Header, nabvar, login)
+- [] Add User Restriction - do i need ??? - IN FUTURE
+- [] Add forgot password recovery do i need ??? - IN FUTURE
 
 Finalised
 - [] Double Check Function on Salary Management

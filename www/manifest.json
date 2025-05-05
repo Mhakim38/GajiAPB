@@ -1,7 +1,7 @@
 {
   "name": "MyGaji",
   "short_name": "MyGaji",
-  "start_url": "./Menu.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fffdf5",
   "theme_color": "#ffcc09",
