@@ -10,13 +10,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
-
     <title>MyGaji - Login</title>
 
     <link rel="icon" href="src/APB.png">
     <link rel="apple-touch-icon" href="src/APB.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="css/css/custom.css"> 
     <style>
         * {
             margin: 0;
@@ -47,11 +46,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('src/soft-yellowbg.jpg');
-            background-size: cover;
-            background-position: left center;
-            transform: rotate(180deg);
-            z-index: -1;
+            z-index: -1;        
         }
 
         .illustration {
@@ -165,6 +160,8 @@
 </head>
 
 <body>
+    <div class="corner-circle-top" style="align-items: start;"></div>
+    <div class="corner-circle-bottom" style="align-items: start;"></div>
     <!-- Login Page -->
     <img class="logo" src="src/logo.svg" alt="APB Logo">
     <h1 style="font-weight: bolder;">Welcome to MyGaji</h1>
@@ -215,20 +212,11 @@
 
       // Handle specific Firebase authentication errors
       switch (error.code) {
-        case "auth/invalid-email":
-          alert("Invalid email format. Please check your email.");
-          break;
-        case "auth/user-not-found":
-          alert("No user found with this email. Please register first.");
-          break;
-        case "auth/wrong-password":
-          alert("Incorrect password. Please try again.");
-          break;
         case "auth/too-many-requests":
           alert("Too many failed login attempts. Please try again later.");
           break;
         default:
-          alert("Login failed: " + error.message);
+          alert("Login failed: Invalid Credentials.");
       }
     }
   });
@@ -240,17 +228,14 @@
         passwordField.type = (passwordField.type === "password") ? "text" : "password";
     }
 
-    function validateForm() {
-        var password = document.forms["loginForm"]["password"].value;
-        if (password == "") {
-            alert("Please insert password...");
-            return false;
-        }
-    }
+    // function validateForm() {
+    //     var password = document.forms["loginForm"]["password"].value;
+    //     if (password == "") {
+    //         alert("Please insert password...");
+    //         return false;
+    //     }
+    // }
 
-    function navigateTo(url) {
-        window.location.replace(url); // Use replace to navigate while preserving full-screen mode
-    }
 </script>
 
 </html>
