@@ -225,12 +225,12 @@
             }
 
             function calcEarnings(){
-                let total = (1700 + salData.overtime * 12.26 + salData.publicHoliday * 65.40 + salData.unpaidLeave * 65.40);
+                let total = (1700 + salData.overtime * 12.26 + salData.publicHoliday * 65.40);
                 return total.toFixed(2);
             }
 
             function calcDeduction(){
-                let total = S_KWSP + S_socso + S_EIS;
+                let total = S_KWSP + S_socso + S_EIS + salData.unpaidLeave * 65.40;
                 return total.toFixed(2);
             }
 
