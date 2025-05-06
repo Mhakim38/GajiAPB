@@ -1,0 +1,277 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>MyGaji - Slip Gaji</title>
+    <link rel="icon" href="src/APB.png">
+    <link rel="apple-touch-icon" href="src/APB.png">
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="css/css/all.min.css">
+    <script src="https://kit.fontawesome.com/b9ae426220.js" crossorigin="anonymous"></script>
+    <!-- Theme style -->
+    <link rel="stylesheet" href="css/adminlte.min.css">
+
+    <style>
+        .header {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        }
+
+        .header img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        opacity: 0.8;
+        }
+    </style>
+
+    </head>
+
+<body style="margin: 20px; font-family: Arial, sans-serif;">
+    <div class="header">
+        <img src="src/APB.png" alt="APB Logo">
+        <div>
+            <h1 class="mb-5px font-weight-bold">Ayam Penyet Best</h1>
+            <h5 class="m-1" style="font-size: small;">Address: L3-33A, 3rd Floor Mayang Mall, 20000 Kuala Terengganu, Terengganu</h5>
+            <div style="display: flex; gap: 76px;">
+                <h5 class="m-1" style="font-size: small;">Email : apbmayang@gmail.com</h5>
+                <h5 class="m-1" style="font-size: small;">Phone : 016-410 3533 / 011-2337 1228</h5>
+            </div>
+        </div>
+        <h5 class="font-weight-bold" style="font-size: medium; text-align: right;" id="monthElement">Payslip For: </h5><br>
+        <h5 class="font-weight-bold" style="font-size: medium; text-align: right;" id="dateIssued">Generated on: </h5>
+    </div><br>
+
+    <table style="font-family: 'Courier New', monospace; font-size: 1rem; border: 1px dotted rgba(0, 0, 0, 0.116); border-collapse: collapse; width: 100%;">
+        <tr>
+            <td style="padding: 5px;">Name</td>
+            <td style="padding: 5px;">: <span id="name">-</span></td>
+            <td style="padding: 5px;">Bank</td>
+            <td style="padding: 5px;">: <span id="bank">-</span></td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">IC</td>
+            <td style="padding: 5px;">: <span id="ic">-</span></td>
+            <td style="padding: 5px;">Bank A/C No.</td>
+            <td style="padding: 5px;">: <span id="bankNo">-</span></td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;">EMP ID</td>
+            <td style="padding: 5px;">: <span id="empID">-</span></td>
+            <td style="padding: 5px;"></td>
+            <td style="padding: 5px;"></td>
+        </tr>
+    </table>
+    
+    
+    
+
+        
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;" border="1">
+        <thead>
+            <tr style="background-color: #f2f2f2;">
+                <th style="padding: 8px;">DESCRIPTION</th>
+                <th style="padding: 8px;">EARNINGS (RM)</th>
+                <th style="padding: 8px;">DEDUCTIONS (RM)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 8px;">Basic Salary</td>
+                <td style="padding: 8px;">1700.00</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">Overtime <span class="text-muted ml-5" style="float: right; font-size: smaller;"> (12.26/hr)</span></td>
+                <td style="padding: 8px;"><span id="OT"></span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">Public Holiday <span class="text-muted" style="float: right; font-size: smaller;"> (65.40/day)</span></td>
+                <td style="padding: 8px;"><span id="PH"></span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">Unpaid Leave <span class="text-muted" style="float: right; font-size: smaller;"> (65.40/day)</span></td>
+                <td style="padding: 8px;"><span id="UPL"></span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">EPF</td>
+                <td></td>
+                <td style="padding: 8px;" id="EPF"></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">SOCSO</td>
+                <td></td>
+                <td style="padding: 8px;" id="SOCSO"></td>
+            </tr>
+            <tr>
+                <td style="padding: 8px;">EIS</td>
+                <td></td>
+                <td style="padding: 8px;" id="EIS"></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr style="font-weight: bold;">
+                <td style="padding: 8px;">TOTAL</td>
+                <td style="padding: 8px;"><span id="totalEarnings"></span></td>
+                <td style="padding: 8px;"><span id="totalDeduction"></span></td>
+            </tr>
+            <tr style="font-weight: bold;">
+                <td colspan="2" style="padding: 8px; text-align: right;">NETT PAY</td>
+                <td style="padding: 8px;"><span id="total"></span></td>
+            </tr>
+        </tfoot>
+    </table>
+    <script type="module">
+        import { db, publlicHoliday, overTime, unpaidLeave, S_EIS, S_socso, S_KWSP } from './calculation.js';
+        import { doc, getDoc, deleteDoc, collection, query, where, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-storage.js";
+
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, (user) => {
+          if (!user) {
+            // User not logged in
+            location.href = 'login.html';
+            return;
+          }
+      
+          const loginTime = parseInt(localStorage.getItem('loginTime'), 10);
+          const currentTime = Date.now();
+          const sessionDuration = 30 * 60 * 1000; // 30 minutes in milliseconds
+      
+          if (!loginTime || currentTime - loginTime > sessionDuration) {
+            // Session expired
+            localStorage.removeItem('loginTime');
+            signOut(auth).then(() => {
+              //alert("Session expired. Please log in again.");
+              location.href = 'login.html';
+            });
+          }
+        });
+
+        // USER ACTIVITY DETECTION TO REFRESH SESSION
+        function refreshSessionTimer() {
+          localStorage.setItem('loginTime', Date.now().toString());
+        }
+    
+        window.addEventListener('mousemove', refreshSessionTimer);
+        window.addEventListener('keydown', refreshSessionTimer);
+        window.addEventListener('click', refreshSessionTimer);
+
+        // Function to get query parameter by name
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const employeeId = getQueryParam('id'); // from the URL, e.g. ?id=abc123
+    console.log("Employee ID from URL:", employeeId);
+
+    if (!employeeId) {
+        alert("No employee ID provided in the URL.");
+    }
+
+    loadData(); // Call the function to load data
+
+        async function loadData() {
+    try {
+        const docRef = doc(db, 'salaries', employeeId);
+        const empRef = doc(db, 'employees', employeeId);
+        const docSnap = await getDoc(docRef);
+        const empSnap = await getDoc(empRef);
+        
+        if (docSnap.exists()) {
+            const salData = docSnap.data();
+            const empData = empSnap.data();
+
+            // Earnings
+            document.getElementById('name').innerText = salData.nama || 'okeii';
+            document.getElementById('empID').innerText = salData.employeeId || 'okeii';
+            document.getElementById('ic').innerText = empData.IC || '-';
+            document.getElementById('bankNo').innerText = empData.Nombor_Bank || '-';
+            document.getElementById('bank').innerText = empData.Bank ||  '-';
+
+            //calculations
+            let OT = salData.overtime != null ? (salData.overtime * 12.26).toFixed(2) : '-';
+            let PH = salData.publicHoliday != null ? (salData.publicHoliday * 65.40).toFixed(2) : '-';
+            let UPL = salData.unpaidLeave != null ? (salData.unpaidLeave * 65.40).toFixed(2) : '-';
+            document.getElementById('OT').innerText = OT;
+            document.getElementById('PH').innerText = PH;
+            document.getElementById('UPL').innerText = UPL;
+
+            // Deduction
+            document.getElementById('EPF').textContent = S_KWSP.toFixed(2);;
+            document.getElementById('SOCSO').textContent = S_socso.toFixed(2);;
+            document.getElementById('EIS').textContent = S_EIS.toFixed(2);
+            
+            document.getElementById('total').textContent = salData.totalSalary;
+            document.getElementById('totalEarnings').textContent = calcEarnings();
+            document.getElementById('totalDeduction').textContent = calcDeduction();
+            
+            function calculateTotal(){
+                let total = (1700 + salData.overtime * 12.26 + salData.publicHoliday * 65.40 + salData.unpaidLeave * 65.40) - S_KWSP - S_socso - S_EIS;
+                return total.toFixed(2);
+            }
+
+            function calcEarnings(){
+                let total = (1700 + salData.overtime * 12.26 + salData.publicHoliday * 65.40 + salData.unpaidLeave * 65.40);
+                return total.toFixed(2);
+            }
+
+            function calcDeduction(){
+                let total = S_KWSP + S_socso + S_EIS;
+                return total.toFixed(2);
+            }
+
+
+        } else {
+            alert("Employee record not found.");
+        }
+    } catch (error) {
+        console.error("Error fetching employee data:", error);
+        alert("Failed to load data.");
+    }
+
+    setTimeout(() => {
+        window.opener.postMessage('reportReady', '*');
+    }, 500); // Add a slight delay to ensure rendering is complete
+}
+
+    </script>
+    <script>
+        const monthElement = document.getElementById('monthElement');
+        const dateElement = document.getElementById('dateIssued');
+    
+        // Get the current date
+        const now = new Date();
+    
+        // Format month name (e.g., "April")
+        const monthName = now.toLocaleDateString('en-GB', { month: 'long' });
+        
+        // Format full date (e.g., "23/04/2025")
+        const fullDate = now.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+        
+        // Set the content
+        monthElement.textContent += monthName;
+        dateIssued.textContent += fullDate;
+    
+    </script>
+</body>
+
+
+</html>
