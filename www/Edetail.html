@@ -318,7 +318,7 @@
       <button class="btn-print" onclick="location.href='StaffList.html'">
         <i class="fa-solid fa-arrow-left"></i>
       </button>
-      <button class="btn-print" onclick="showComingSoon()">Print Paycheck</button>
+      <button class="btn-print" id="paycheck">Print Paycheck</button>
     </div>
 
     <!-- Content -->
@@ -587,6 +587,32 @@
         alert('No employee ID provided in the URL.');
       }
     });
+
+    document.getElementById('paycheck').addEventListener('click', () => {
+  const employeeId = getQueryParam('id');
+  if (employeeId) {
+    const reportWindow = window.open(`paycheck.html?id=${employeeId}`, '_blank');
+
+    // Listen for a message from the report page indicating it is ready
+    window.addEventListener('message', function handleMessage(event) {
+      if (event.data === 'reportReady') {
+        setTimeout(() => {
+          try {
+            if (!reportWindow.document.execCommand('print', false, null)) {
+              reportWindow.print();
+            }
+          } catch (e) {
+            reportWindow.print();
+          }
+        }, 500);
+        window.removeEventListener('message', handleMessage); // Clean up
+      }
+    });
+  } else {
+    alert('No employee ID provided in the URL.');
+  }
+});
+
 
     window.uploadProfileImage = async function () {
       const file = document.getElementById("profile-input").files[0];
