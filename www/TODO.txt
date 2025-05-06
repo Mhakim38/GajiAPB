@@ -18,7 +18,7 @@ Part 1 (Staff List)
 - [x] Add toupper on employeeID in add_staff and edit/update
 - [x] Add checking on Staff ID to be unique
 - [x] Make sure that staff detail is also updated in Salaries collection
-- [x] If user want to update staff, but no salaries record an error appear - Add checking to salaries collection
+- [] If user want to update staff, but no salaries record an error appear - Add checking to salaries collection
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff

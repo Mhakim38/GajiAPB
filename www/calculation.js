@@ -33,4 +33,4 @@ const publlicHoliday = (salary, days) => salary + (PH * days);
 const overTime = (salary, hours) => salary + (OT * hours);
 const unpaidLeave = (salary, days) => salary - (UPL * days);
 
-export { calcStaffOT, calcPartTime, publlicHoliday, overTime, unpaidLeave, db, addDoc, getDoc , collection, doc, updateDoc, app, persistentLocalCache };
+export { calcStaffOT, calcPartTime, publlicHoliday, overTime, unpaidLeave, db, addDoc, getDoc , collection, doc, updateDoc, app, persistentLocalCache, S_EIS, S_socso, S_KWSP };
