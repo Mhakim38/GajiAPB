@@ -346,6 +346,17 @@
                                         <label for="phoneNumber" class="placeholder">Phone Number</label>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="input-container ic2">
+                                        <select id="position" class="input text-center" required>
+                                            <option value="Customer Service">Customer Service</option>
+                                            <option value="Barista/Cashier">Barista/Cashier</option>
+                                            <option value="Kitchen Helper">Kitchen Helper</option>
+                                        </select>
+                                        <div class="cut cut-short"></div>
+                                        <label for="position" class="placeholder">Position</label>
+                                    </div>
+                                </div>
                             </div><br>
                             
                             <div class="subtitle"><strong>Family Related</strong></div>
@@ -574,6 +585,7 @@
         const KWSP = document.getElementById('kwsp').value;
         const Email = document.getElementById('email').value;
         const Address = document.getElementById('address').value || "";
+        let Position = document.getElementById('position').value || "";
 
         let Bank = document.getElementById('bankName').value || "";
         Bank = Bank.toUpperCase(); // Convert bank name to uppercase
@@ -597,7 +609,7 @@
         const Penyakit = hasDisease === 'yes' ? document.getElementById('diseaseName').value : "";
 
         const newStaff = { 
-            Nama, id, IC, KWSP, Email, Address, 
+            Nama, id, IC, KWSP, Email, Address, Position, 
             Bank, Nombor_Bank, Phone_Number, 
             Nama_Suami_Istri, 
             Nombor_Telefon_Suami_Istri, 
