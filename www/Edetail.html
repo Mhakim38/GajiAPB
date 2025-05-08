@@ -339,8 +339,18 @@
         <input type="file" id="profile-input" accept="image/*" style="display: none;" onchange="uploadProfileImage()">
 
         <h5 class="mt-3 font-weight-bold emp-name" id="employee-name"><strong></strong></h5>
+
+      <!-- Position Badge Placeholder -->
+      <div id="position-badge-placeholder" class="d-flex align-items-center justify-content-center">
+        <span class="badge badge-pill text-center align-items-center p-2"
+          style="width: fit-content; height: auto; background-color:var(--primary); letter-spacing: 1px;">
+          <div class="spinner-border text-dark spinner-border-sm" role="status">
+            <!-- <span class="sr-only"></span> -->
+          </div>
+        </span>
       </div>
     </div>
+  </div>
 
 
     <!-- Personal Info Card -->
@@ -692,10 +702,35 @@
       reader.readAsDataURL(file);
     };
     fetchEmployeeDetails();
+
+    const employeeId = getQueryParam('id');
+    const employeeDoc = await getDoc(doc(db, 'employees', employeeId));
+    const employeeData = employeeDoc.data();
+
+    const position = employeeData.Position;
+    const badgeContainer = document.getElementById('position-badge-placeholder');
+
+    let badgeHTML = '';
+
+    if (position === 'Customer Service') {
+        badgeHTML = `<span class="badge badge-pill text-center align-items-center p-2"
+            style="width: fit-content; height: auto; background-color: var(--soft); letter-spacing: 1px;">
+            Customer Service</span>`;
+    } else if (position === 'Cashier/Barista') {
+        badgeHTML = `<span class="badge badge-pill text-center align-items-center p-2"
+            style="width: fit-content; height: auto; background-color: var(--accent); letter-spacing: 1px;">
+            Cashier/Barista</span>`;
+    } else if (position === 'Kitchen Helper') {
+        badgeHTML = `<span class="badge badge-pill text-center align-items-center p-2"
+            style="width: fit-content; height: auto; background-color: #ffa154; letter-spacing: 1px;">
+            Kitchen Helper</span>`;
+    } else {
+        badgeHTML = `<span class="badge badge-pill badge-danger text-center align-items-center p-2"
+            style="width: fit-content; height: auto; letter-spacing: 1px;">
+            ${position || 'No Position'}</span>`;
+    }
+
+    badgeContainer.innerHTML = badgeHTML;
   </script>
-
-
-
 </body>
-
 </html>
