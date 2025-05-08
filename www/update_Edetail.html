@@ -342,6 +342,17 @@
                                             <label for="phoneNumber" class="placeholder">Phone Number</label>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="input-container ic2">
+                                            <select id="position" class="input text-center" required>
+                                                <option value="Customer Service">Customer Service</option>
+                                                <option value="Barista/Cashier">Barista/Cashier</option>
+                                                <option value="Kitchen Helper">Kitchen Helper</option>
+                                            </select>
+                                            <div class="cut cut-short"></div>
+                                            <label for="position" class="placeholder">Position</label>
+                                        </div>
+                                    </div>
                                 </div><br>
     
                                 <div class="subtitle"><strong>Family Related</strong></div>
@@ -522,7 +533,7 @@
 
             if (employeeDoc.exists()) {
                 const employeeData = employeeDoc.data();
-                console.log(`Employee ID: ${employeeDoc.id}`, employeeData);
+                // console.log(`Employee ID: ${employeeDoc.id}`, employeeData);
 
                 // Populate main fields
                 document.getElementById('employee-id').value = employeeDoc.id || '';
@@ -534,6 +545,7 @@
                 document.getElementById('bankName').value = employeeData.Bank || '';
                 document.getElementById('bankNumber').value = employeeData.Nombor_Bank || '';
                 document.getElementById('phoneNumber').value = employeeData.Phone_Number || '';
+                document.getElementById('position').value = employeeData.Position || '';
 
                 // Handle marital status and family fields
                 const maritalStatus = document.getElementById('maritalStatus');
@@ -604,6 +616,7 @@
                     Bank: document.getElementById('bankName').value.trim().toUpperCase(),
                     Nombor_Bank: document.getElementById('bankNumber').value.trim(),
                     Phone_Number: document.getElementById('phoneNumber').value.trim(),
+                    Position: document.getElementById('position').value.trim(),
                     Nama_Suami_Istri: document.getElementById('householdName').value.trim().toUpperCase(),
                     Nombor_Telefon_Suami_Istri: document.getElementById('householdPhone').value.trim(),
                     Bilangan_Anak: document.getElementById('kidsCount').value.trim(),
@@ -621,10 +634,15 @@
 
                 await updateDoc(doc(db, "employees", employeeId), updateData);
 
-                // Also update corresponding document in 'salaries' collection
-                await updateDoc(doc(db, "salaries", employeeDoc.id), {
-                    nama: updateData.Nama,
-                });
+                // Check if the corresponding document in 'salaries' exists
+                const salaryDocRef = doc(db, "salaries", employeeDoc.id);
+                const salaryDocSnap = await getDoc(salaryDocRef);
+
+                if (salaryDocSnap.exists()) {
+                    await updateDoc(salaryDocRef, {
+                        nama: updateData.Nama,
+                    });
+                }
 
                 // Update Firestore document
                 await updateDoc(doc(db, "employees", employeeId), updateData);
