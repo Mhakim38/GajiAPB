@@ -635,7 +635,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         allEmployees.forEach(emp=>{
           const div = document.createElement('div');
           div.innerHTML = generateEmployeeCard(
-            emp.id, emp.Nama, emp.id, emp.profileImage || 'src/default-avatar.png'
+            emp.id, emp.Nama, emp.id, emp.profileImage || 'src/default-avatar.png', emp.Position
           );
           frag.appendChild(div.firstElementChild);
         });
@@ -665,26 +665,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
     }
   }
 
-  function generateEmployeeCard(id,name,employeeId,imageUrl){
-    return `
-      <div class="staff-card" onclick="location.href='Edetail.html?id=${id}'">
-        <div class="staff-avatar" style="position:relative;width:48px;height:48px;">
-          <div class="skeleton-avatar" 
-               style="position:absolute;top:0;left:0;width:48px;height:48px;
-                      border-radius:50%;background:#eee;">
-          </div>
-          <img src="${imageUrl}"
-               alt="${name}" 
-               style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
-        </div>
-        <div class="staff-info">
-          <h5 class="staff-name">${name}</h5>
-          <p class="staff-position">ID: ${employeeId}</p>
-          <span class="status-label status-active">Active</span>
-        </div>
-        <i class="fas fa-chevron-right staff-chevron"></i>
-      </div>`;
+  function generateEmployeeCard(id, name, employeeId, imageUrl, position) {
+  let iconColor = 'var(--danger)';
+  let bgColor = 'rgba(209, 18, 31, 0.2)'; // light red background
+  let icon = 'fa fa-times-circle';
+
+  if (position === 'Customer Service') {
+    iconColor = 'var(--soft)';
+    bgColor = 'rgba(245, 163, 145, 0.2)';
+    icon = 'fa fa-user-circle';
+  } else if (position === 'Barista/Cashier') {
+    iconColor = 'var(--accent)';
+    bgColor = 'rgba(139, 197, 63, 0.2)';
+    icon = 'fa fa-coffee';
+  } else if (position === 'Kitchen Helper') {
+    iconColor = '#ffa154';
+    bgColor = 'rgba(255, 161, 84, 0.2)';
+    icon = 'fa fa-utensils';
   }
+
+  return `
+    <div class="staff-card" onclick="location.href='Edetail.html?id=${id}'">
+      <div class="staff-avatar" style="position:relative;width:48px;height:48px;">
+        <div class="skeleton-avatar" 
+             style="position:absolute;top:0;left:0;width:48px;height:48px;
+                    border-radius:50%;background:#eee;">
+        </div>
+        <img src="${imageUrl}"
+             alt="${name}" 
+             style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
+      </div>
+      <div class="staff-info">
+        <h5 class="staff-name">${name}</h5>
+        <p class="staff-position">ID: ${employeeId}</p>
+        <span class="d-inline-flex justify-content-center align-items-center me-2"
+              style="width: 24px; height: 24px; border-radius: 50%; background-color: ${bgColor}; color: ${iconColor}; font-size: 0.75rem;">
+          <i class="${icon}" aria-hidden="true"></i>
+        </span>
+      </div>
+      <i class="fas fa-chevron-right staff-chevron"></i>
+    </div>`;
+}
+
+
 
   function generateSkeletons(count){
     let s = '';
