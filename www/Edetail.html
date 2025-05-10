@@ -714,15 +714,15 @@
 
     if (position === 'Customer Service') {
         badgeHTML = `<span class="badge badge-pill text-center align-items-center p-2"
-            style="width: fit-content; height: auto; background-color: var(--soft); letter-spacing: 1px;">
-            Customer Service</span>`;
-    } else if (position === 'Cashier/Barista') {
-        badgeHTML = `<span class="badge badge-pill text-center align-items-center p-2"
             style="width: fit-content; height: auto; background-color: var(--accent); letter-spacing: 1px;">
-            Cashier/Barista</span>`;
+            Customer Service</span>`;
+    } else if (position === 'Barista/Cashier') {
+        badgeHTML = `<span class="badge badge-pill text-center align-items-center p-2"
+            style="width: fit-content; height: auto; background-color: #17a2b8; letter-spacing: 1px;">
+            Barista/Cashier</span>`;
     } else if (position === 'Kitchen Helper') {
         badgeHTML = `<span class="badge badge-pill text-center align-items-center p-2"
-            style="width: fit-content; height: auto; background-color: #ffa154; letter-spacing: 1px;">
+            style="width: fit-content; height: auto; background-color: var(--danger); letter-spacing: 1px;">
             Kitchen Helper</span>`;
     } else {
         badgeHTML = `<span class="badge badge-pill badge-danger text-center align-items-center p-2"
