@@ -215,7 +215,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     .staff-position {
       color: var(--secondary);
       font-size: 0.85rem;
-      margin-bottom: 5px;
+      margin-bottom: 3px;
     }
     
     .status-label {
@@ -666,21 +666,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
   }
 
   function generateEmployeeCard(id, name, employeeId, imageUrl, position) {
-  let iconColor = 'var(--danger)';
-  let bgColor = 'rgba(209, 18, 31, 0.2)'; // light red background
+  let iconColor = 'var(--secondary)'; // default icon color
+  let bgColor = '#dadade'; // light red background
   let icon = 'fa fa-times-circle';
 
   if (position === 'Customer Service') {
-    iconColor = 'var(--soft)';
-    bgColor = 'rgba(245, 163, 145, 0.2)';
-    icon = 'fa fa-user-circle';
-  } else if (position === 'Barista/Cashier') {
     iconColor = 'var(--accent)';
     bgColor = 'rgba(139, 197, 63, 0.2)';
+    icon = 'fa fa-user-circle';
+  } else if (position === 'Barista/Cashier') {
+    iconColor = '#17a2b8';
+    bgColor = '#D0E9ED';
     icon = 'fa fa-coffee';
   } else if (position === 'Kitchen Helper') {
-    iconColor = '#ffa154';
-    bgColor = 'rgba(255, 161, 84, 0.2)';
+    iconColor = 'var(--danger)';
+    bgColor = 'rgba(209, 18, 31, 0.2)';
     icon = 'fa fa-utensils';
   }
 
