@@ -201,6 +201,7 @@
             document.getElementById('ic').innerText = empData.IC || '-';
             document.getElementById('bankNo').innerText = empData.Nombor_Bank || '-';
             document.getElementById('bank').innerText = empData.Bank ||  '-';
+            document.getElementById('position').innerText = empData.Position ||  '-';
 
             //calculations
             let OT = salData.overtime != null ? (salData.overtime * 12.26).toFixed(2) : '-';

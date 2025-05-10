@@ -20,7 +20,7 @@ Part 1 (Staff List)
 - [x] Make sure that staff detail is also updated in Salaries collection
 - [x] If user want to update staff, but no salaries record an error appear - Add checking to salaries collection
 - [x] 1. Add POSITION attribute for add, update, Edetail staff
-- [] 2. Replace the active label with position, try icon only
+- [x] 2. Replace the active label with position, try icon only
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff
@@ -36,8 +36,8 @@ Part 2 (Salary Management)
 - [x] There is an error on displaying the salaries record on salary report
 - [x] Add search function in #Msalary.html 
 - [x] Change the print to download - Mobile (Not Working - uses capture canvas) - Solved Stack Overflow old ways
-- [] 3. Add POSITION for salary Report. 
-- [] 4. Add POSITION for salary paycheck. 
+- [x] 3. Add POSITION for salary Report. 
+- [x] 4. Add POSITION for salary paycheck. 
 
 Part 3 (Login)
 - [x] Add Login Page
@@ -69,6 +69,7 @@ feature to add:
 - [-] Avoid using image in css instead use in body - performance issue (Header, nabvar, login)
 - [-] Add User Restriction - do i need ??? - IN FUTURE
 - [-] Add forgot password recovery do i need ??? - IN FUTURE
+- [] Add Warning & Sebab ii letter for the employee. 
 
 Finalised
 - [x] Double Check Function on Salary Management
