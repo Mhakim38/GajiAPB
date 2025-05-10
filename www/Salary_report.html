@@ -106,6 +106,7 @@
 
 
         const salariesRef = collection(db, 'salaries'); // Reference to the salaries collection
+        const employeesRef = collection(db, 'employees'); // Reference to the employees collection
 
         // Salary Deduction Constants
         const S_KWSP = 187;
@@ -114,12 +115,22 @@
         const StaffSalary = 1700;
 
         async function fetchSalaryReport() {
-            const querySnapshot = await getDocs(salariesRef);
+            const salarySnapshot = await getDocs(salariesRef);
+            const employeeSnapshot = await getDocs(employeesRef);
+
+            // Create a map of employeeId to position for quick lookup
+            const employeePositions = {};
+            employeeSnapshot.forEach((doc) => {
+                const employeeData = doc.data();
+                employeePositions[doc.id] = employeeData.Position || 'Unknown'; // Default to 'Unknown' if position is missing
+            });
+
             let tableRows = '';
 
-            querySnapshot.forEach((doc) => {
+            salarySnapshot.forEach((doc) => {
                 const salaryData = doc.data();
-                console.log(salaryData);
+                const position = employeePositions[salaryData.employeeId]; // Get position from the map
+
                 // Calculate values using imported functions
                 const unpaidLeaveDeduction = unpaidLeave(StaffSalary, salaryData.unpaidLeave || 0) - StaffSalary;
                 const publicHolidayAddition = publlicHoliday(0, salaryData.publicHoliday || 0);
@@ -128,7 +139,8 @@
                 tableRows += `
                     <tr>
                         <td>${salaryData.employeeId}</td>
-                        <td>${salaryData.nama}</td>
+                        <td style="text-align: start">${salaryData.nama}</td>
+                        <td>${position}</td> <!-- Add position here -->
                         <td>${StaffSalary.toFixed(2)}</td> <!-- Base salary -->
                         <td>${salaryData.unpaidLeave || 0}</td> <!-- Days for Unpaid Leave -->
                         <td>${Math.abs(unpaidLeaveDeduction).toFixed(2)}</td>
@@ -159,14 +171,14 @@
     <div class="header">
         <img src="src/APB.png" alt="APB Logo">
         <div>
-            <h1 class="mb-5px font-weight-bold">Ayam Penyet Best</h1>
+            <h1 class="mb-5px font-weight-bold">Ayam Penyet Mayang Sdn Bhd</h1>
             <h5 class="m-1" style="font-size: small;">Address: L3-33A, 3rd Floor Mayang Mall, 20000 Kuala Terengganu, Terengganu</h5>
-            <div style="display: flex; gap: 76px;">
+            <div style="display: flex; gap: 170px;">
                 <h5 class="m-1" style="font-size: small;">Email : apbmayang@gmail.com</h5>
-                <h5 class="m-1" style="font-size: small;">Phone : 016-410 3533 / 011-2337 1228</h5>
+                <h5 class="" style="font-size: small;">Phone : 016-410 3533 / 011-2337 1228</h5>
             </div>
         </div>
-        <h5 class="font-weight-bold" style="font-size: medium; text-align: right;" id="dateIssued">Date issued: </h5>
+        <h5 class="font-weight-bold" style="font-size: medium;" id="dateIssued">Date issued: </h5>
     </div><br>
     <h2 class="text-center font-weight-bold mt-3" id="monthElement"></h2>
     <table>
@@ -174,6 +186,7 @@
             <tr>
                 <th rowspan="3">Employee ID</th>
                 <th rowspan="3">Name</th>
+                <th rowspan="3">Position</th>
                 <th rowspan="3">Base <br>Salary</th>
                 <th colspan="5">Deduction</th>
                 <th colspan="4">Addition</th>
