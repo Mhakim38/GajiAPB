@@ -21,6 +21,7 @@ Part 1 (Staff List)
 - [x] If user want to update staff, but no salaries record an error appear - Add checking to salaries collection
 - [x] 1. Add POSITION attribute for add, update, Edetail staff
 - [x] 2. Replace the active label with position, try icon only
+- [] Bug Fix on update next to kin information. Add function works ok. UPDATE problem
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff
