@@ -465,6 +465,15 @@
     });
 </script>
 <script>
+    function validateForm() {
+        const form = document.getElementById("letterGeneration");
+        if (!form.checkValidity()) {
+            alert("Please fill out all required fields.");
+            return false;
+        }
+        return true;
+    }
+
     function collectsData(){
         return {
             designation: document.getElementById("designation").value || "NULL",
@@ -477,6 +486,7 @@
     }
 
     function generateWarningLetter() {
+        if (!validateForm()) return;
         const data = collectsData();
         const templatePath = 'MS_letter/warning_letter.docx';
         const fileName = 'Surat_Amaran.docx';
@@ -485,6 +495,7 @@
     }
 
     function generateReasonLetter() {
+        if (!validateForm()) return;
         const data = collectsData();
         const templatePath = 'MS_letter/reason_letter.docx';
         const fileName = 'Surat_Tunjuk_Sebab.docx';
