@@ -473,32 +473,6 @@
 
   const auth = getAuth();
 
-  // Utility to handle localStorage fallback
-  function setSessionData(key, value) {
-    try {
-      localStorage.setItem(key, value);
-    } catch (e) {
-      document.cookie = `${key}=${value}; path=/`;
-    }
-  }
-
-  function getSessionData(key) {
-    try {
-      return localStorage.getItem(key);
-    } catch (e) {
-      const match = document.cookie.match(new RegExp(`(^| )${key}=([^;]+)`));
-      return match ? match[2] : null;
-    }
-  }
-
-  function removeSessionData(key) {
-    try {
-      localStorage.removeItem(key);
-    } catch (e) {
-      document.cookie = `${key}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-    }
-  }
-
   // Front-end session check on page load
   onAuthStateChanged(auth, (user) => {
     if (!user) {
@@ -506,12 +480,13 @@
       return;
     }
 
-    const loginTime = parseInt(getSessionData('loginTime'), 10);
+    const loginTime = parseInt(localStorage.getItem('loginTime'), 10);
     const currentTime = Date.now();
     const sessionDuration = 30 * 60 * 1000; // 30 minutes
+    //const sessionDuration = 10 * 1000; // 10 minutes
 
     if (!loginTime || currentTime - loginTime > sessionDuration) {
-      removeSessionData('loginTime');
+      localStorage.removeItem('loginTime');
       signOut(auth).then(() => {
         location.href = 'login.html';
       });
@@ -520,19 +495,12 @@
 
   // Reset session timer on user interaction
   function refreshSessionTimer() {
-    setSessionData('loginTime', Date.now().toString());
+    localStorage.setItem('loginTime', Date.now().toString());
   }
 
   window.addEventListener('mousemove', refreshSessionTimer);
   window.addEventListener('keydown', refreshSessionTimer);
   window.addEventListener('click', refreshSessionTimer);
-
-  // Handle background/foreground transitions
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') {
-      refreshSessionTimer();
-    }
-  });
 
   // Setup Capacitor-based background/foreground checker
   setupCapacitorSessionChecker();
