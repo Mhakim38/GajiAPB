@@ -21,7 +21,8 @@ Part 1 (Staff List)
 - [x] If user want to update staff, but no salaries record an error appear - Add checking to salaries collection
 - [x] 1. Add POSITION attribute for add, update, Edetail staff
 - [x] 2. Replace the active label with position, try icon only
-- [] Bug Fix on update next to kin information. Add function works ok. UPDATE problem
+- [x] Bug Fix on update next to kin information. Add function works ok. UPDATE problem
+- [] When searching the position icon set to undefine for some reason
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff
@@ -44,7 +45,7 @@ Part 3 (Login)
 - [x] Add Login Page
 - [x] Add session for every page
 - [x] Add timeout for logged in user - debug for mobile Use @capasitor/app 
-- [] Add timeout for logged in user - debug for PWA
+- [-] Add timeout for logged in user - debug for PWA (IDEK if it is possible)
 - [x] Dont zoom in focus on input when in mobile (Press login with no input)
 
 Part 3.3 (Interface)
