@@ -252,7 +252,7 @@
     <nav class="main-header navbar navbar-expand-md navbar-light navbar-white border-0" style="background-image: url('src/soft-yellowbg.jpg');">
         <div class="container justify-content-center"> <!-- Center the container content -->
             <!-- Logo -->
-            <a href="../../index3.html" class="navbar-brand">
+            <a href="../../index.html" class="navbar-brand">
                 <img src="src/APB.png" alt="APB Logo" class="Logo-container" style="opacity: .8 ; width: 400px; height: 100px; object-fit: contain;">
             </a>
             <!-- end logo -->
@@ -348,6 +348,11 @@
                             Cancel
                           </button>
                         </form>
+
+                        <!-- Add a button and container for the PDF download link -->
+                        <div class="subtitle mt-4"><strong>Download PDF</strong></div>
+                        <div id="pdfDownloadContainer" class="mt-3"></div>
+                        <button id="fetchPDFButton" class="submit mt-0">Fetch PDF</button>
                     </div>
                 </div>
             </div>
@@ -383,8 +388,10 @@
     import { db, addDoc, collection } from './calculation.js';
     import { getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-storage.js";
 
     const auth = getAuth();
+    const storage = getStorage();
         
     onAuthStateChanged(auth, (user) => {
       if (!user) {
@@ -465,8 +472,7 @@
             }
         };
     });
-</script>
-<script>
+
     function validateForm() {
         const form = document.getElementById("letterGeneration");
         if (!form.checkValidity()) {
@@ -496,11 +502,11 @@
         generateFromTemplate(templatePath, data, fileName);
     }
 
-    function generateReasonLetter() {
+        function generateReasonLetter() {
         if (!validateForm()) return;
         const data = collectsData();
         const templatePath = 'MS_letter/reason_letter.docx';
-        const fileName = 'Surat_Tunjuk_Sebab.docx';
+        const fileName = 'Surat_Sebab.docx';
 
         generateFromTemplate(templatePath, data, fileName);
     }
@@ -517,8 +523,10 @@
                 try {
                     doc.render();
                     const blob = doc.getZip().generate({ type: "blob" });
+
+                    // Save locally and upload to Firebase
                     saveAs(blob, fileName);
-                    alert("Letter generated successfully!");
+                    uploadToFirebase(blob, fileName);
                 } catch (error) {
                     console.error("Rendering error:", error);
                     alert("There was an error generating the letter.");
@@ -529,6 +537,95 @@
                 alert("Failed to load the template.");
             });
     }
+
+    async function uploadToFirebase(blob, fileName) {
+        const employeeId = document.getElementById("id").value || "unknown";
+        const storageRef = ref(storage, `letters/${employeeId}/${fileName}`);
+
+        try {
+            const snapshot = await uploadBytes(storageRef, blob);
+            const downloadURL = await getDownloadURL(snapshot.ref);
+
+            console.log("File uploaded successfully:", downloadURL);
+            alert("Letter uploaded to Firebase successfully!");
+
+            // Send the .docx URL to processPDF.php
+            await convertToPDF(downloadURL);
+        } catch (error) {
+            console.error("Error uploading file to Firebase:", error);
+            alert("Failed to upload the letter to Firebase. Please check the console for details.");
+        }
+    }
+
+    async function convertToPDF(docxUrl) {
+        try {
+            const response = await fetch('ajax/processPDF.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ docxUrl })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to convert the document to PDF.');
+            }
+
+            const result = await response.json(); // Parse the JSON response
+            if (result.success) {
+                console.log("PDF generated successfully:", result.publicUrl);
+
+                // Automatically open the PDF in a new tab
+                window.open(result.publicUrl, '_blank');
+                alert("PDF generated successfully! The file has been opened in a new tab.");
+            } else {
+                throw new Error(result.message);
+            }
+        } catch (error) {
+            console.error("Error converting to PDF:", error);
+            alert("Failed to convert the document to PDF. Please check the console for details.");
+        }
+    }
+
+    async function fetchPDF() {
+        const employeeId = document.getElementById("id").value || "unknown";
+        const fileName = "Surat_Sebab.pdf"; // File name remains consistent
+        const filePath = `letters/${encodeURIComponent(employeeId)}/${fileName}`; // Encode the employeeId properly
+        const storageRef = ref(storage, filePath);
+
+        console.log("Attempting to fetch PDF from path:", filePath); // Log the file path for debugging
+
+        try {
+            const downloadURL = await getDownloadURL(storageRef);
+            console.log("PDF file URL:", downloadURL);
+
+            // Provide a download link to the user
+            const downloadLink = document.createElement("a");
+            downloadLink.href = downloadURL;
+            downloadLink.target = "_blank";
+            downloadLink.download = fileName; // Set the download attribute for direct download
+            downloadLink.textContent = "Download PDF";
+            downloadLink.style.display = "block";
+            downloadLink.style.marginTop = "10px";
+
+            const container = document.getElementById("pdfDownloadContainer");
+            container.innerHTML = ""; // Clear any existing content
+            container.appendChild(downloadLink);
+
+            alert("PDF file is ready for download!");
+        } catch (error) {
+            if (error.code === "storage/object-not-found") {
+                console.error("Error fetching PDF file: File does not exist at path:", filePath);
+                alert("The requested PDF file does not exist. Please ensure the file has been uploaded.");
+            } else {
+                console.error("Error fetching PDF file:", error);
+                alert("Failed to fetch the PDF file. Please check the console for details.");
+            }
+        }
+    }
+
+    // Attach functions to the global window object
+    window.generateWarningLetter = generateWarningLetter;
+    window.generateReasonLetter = generateReasonLetter;
+    document.getElementById("fetchPDFButton").addEventListener("click", fetchPDF);
 </script>
 </body>
 </html>
