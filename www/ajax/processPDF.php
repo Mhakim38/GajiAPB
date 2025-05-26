@@ -2,7 +2,6 @@
 require_once 'token.php';
 
 // URL of the uploaded .docx file from Firebase (test URL hardcoded)
-// $docxUrl = "https://firebasestorage.googleapis.com/v0/b/mygaji-7212c.firebasestorage.app/o/letters%2FAPB111%2FSurat_Sebab.docx?alt=media&token=61e504bd-c523-417a-8341-be97fb99fc34";
 $docxUrl = $_POST['docxUrl'] ?? null; // Get the URL from POST request
 if (!$docxUrl) {
     die('Error: No .docx file URL provided.');
