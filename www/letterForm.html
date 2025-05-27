@@ -274,7 +274,7 @@
                         <form id="letterGeneration">
                             <!-- Updated form fields -->
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-4">
                                             <div class="input-container ic1">
@@ -300,28 +300,36 @@
                                         </div>
                                     </div>
 
-                                    <div class="subtitle mt-3"><strong>Information</strong></div>
-                                    <div class="input-container ic1 mt-3">
-                                        <input id="name" class="input" type="text" placeholder=" " disabled style="background-color: #cfcfcf;"/>
-                                        <div class="cut cut-short"></div>
-                                        <label for="name" class="placeholder">Name</label>
-                                    </div>
-                                    <div class="input-container ic1">
-                                        <input id="id" class="input" type="text" placeholder=" " disabled style="background-color: #cfcfcf;"/>
-                                        <div class="cut cut-short"></div>
-                                        <label for="id" class="placeholder">Staff ID</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-container ic1">
-                                        <input id="ic" class="input" type="text" placeholder=" " disabled style="background-color: #cfcfcf;"/>
-                                        <div class="cut cut-short"></div>
-                                        <label for="ic" class="placeholder">IC</label>
-                                    </div>
-                                    <div class="input-container ic1">
-                                        <input id="position" class="input" type="text" placeholder=" " disabled style="background-color: #cfcfcf;"/>
-                                        <div class="cut cut-short"></div>
-                                        <label for="position" class="placeholder">Position</label>
+                                    <div class="subtitle mt-4"><strong>Information</strong></div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="input-container ic1 mt-4">
+                                                <input id="name" class="input" type="text" placeholder=" " disabled style="background-color: #cfcfcf;"/>
+                                                <div class="cut cut-short"></div>
+                                                <label for="name" class="placeholder">Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-container ic1 mt-4">
+                                                <input id="position" class="input" type="text" placeholder=" " disabled style="background-color: #cfcfcf;"/>
+                                                <div class="cut cut-short"></div>
+                                                <label for="position" class="placeholder">Position</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="input-container ic1 mt-4">
+                                                <input id="id" class="input" type="text" placeholder=" " disabled style="background-color: #cfcfcf;"/>
+                                                <div class="cut cut-short"></div>
+                                                <label for="id" class="placeholder">Staff ID</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-container ic1 mt-4">
+                                                <input id="ic" class="input" type="text" placeholder=" " disabled style="background-color: #cfcfcf;"/>
+                                                <div class="cut cut-short"></div>
+                                                <label for="ic" class="placeholder">IC</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <br>
@@ -350,9 +358,9 @@
                         </form>
 
                         <!-- Add a button and container for the PDF download link -->
-                        <div class="subtitle mt-4"><strong>Download PDF</strong></div>
-                        <div id="pdfDownloadContainer" class="mt-3"></div>
-                        <button id="fetchPDFButton" class="submit mt-0">Fetch PDF</button>
+                        <!-- <div class="subtitle mt-4"><strong>Download PDF</strong></div> -->
+                        <!-- <div id="pdfDownloadContainer" class="mt-3"></div> -->
+                        <!-- <button id="fetchPDFButton" class="submit mt-0">Fetch PDF</button> -->
                     </div>
                 </div>
             </div>
@@ -370,7 +378,7 @@
     <footer class="main-footer border-0 text-center" style="background-image: url('src/soft-yellowbg.jpg');
 "> <!-- Add text-center class -->
         <!-- Default to the left -->
-        &copy; 2025 Ayam Penyet Mayang Sdn Bhd. All rights reserved.<br>Website developed by <a href="https://github.com/Mhakim38" target="_blank">Hakim.</a>
+        &copy; 2025 Ayam Penyet Mayang Sdn Bhd. All rights reserved.<br>Developed by <a href="https://github.com/Mhakim38" target="_blank">Hakim.</a>
     </footer>
 
 <!-- REQUIRED SCRIPTS -->
@@ -550,82 +558,82 @@
             alert("Letter uploaded to Firebase successfully!");
 
             // Send the .docx URL to processPDF.php
-            await convertToPDF(downloadURL);
+            // await convertToPDF(downloadURL);
         } catch (error) {
             console.error("Error uploading file to Firebase:", error);
             alert("Failed to upload the letter to Firebase. Please check the console for details.");
         }
     }
 
-    async function convertToPDF(docxUrl) {
-        try {
-            const response = await fetch('ajax/processPDF.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({ docxUrl })
-            });
+    // async function convertToPDF(docxUrl) {
+    //     try {
+    //         const response = await fetch('ajax/processPDF.php', {
+    //             method: 'POST',
+    //             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    //             body: new URLSearchParams({ docxUrl })
+    //         });
 
-            if (!response.ok) {
-                throw new Error('Failed to convert the document to PDF.');
-            }
+    //         if (!response.ok) {
+    //             throw new Error('Failed to convert the document to PDF.');
+    //         }
 
-            const result = await response.json(); // Parse the JSON response
-            if (result.success) {
-                console.log("PDF generated successfully:", result.publicUrl);
+    //         const result = await response.json(); // Parse the JSON response
+    //         if (result.success) {
+    //             console.log("PDF generated successfully:", result.publicUrl);
 
-                // Automatically open the PDF in a new tab
-                window.open(result.publicUrl, '_blank');
-                alert("PDF generated successfully! The file has been opened in a new tab.");
-            } else {
-                throw new Error(result.message);
-            }
-        } catch (error) {
-            console.error("Error converting to PDF:", error);
-            alert("Failed to convert the document to PDF. Please check the console for details.");
-        }
-    }
+    //             // Automatically open the PDF in a new tab
+    //             window.open(result.publicUrl, '_blank');
+    //             alert("PDF generated successfully! The file has been opened in a new tab.");
+    //         } else {
+    //             throw new Error(result.message);
+    //         }
+    //     } catch (error) {
+    //         console.error("Error converting to PDF:", error);
+    //         alert("Failed to convert the document to PDF. Please check the console for details.");
+    //     }
+    // }
 
-    async function fetchPDF() {
-        const employeeId = document.getElementById("id").value || "unknown";
-        const fileName = "Surat_Sebab.pdf"; // File name remains consistent
-        const filePath = `letters/${encodeURIComponent(employeeId)}/${fileName}`; // Encode the employeeId properly
-        const storageRef = ref(storage, filePath);
+    // async function fetchPDF() {
+    //     const employeeId = document.getElementById("id").value || "unknown";
+    //     const fileName = "Surat_Sebab.pdf"; // File name remains consistent
+    //     const filePath = `letters/${encodeURIComponent(employeeId)}/${fileName}`; // Encode the employeeId properly
+    //     const storageRef = ref(storage, filePath);
 
-        console.log("Attempting to fetch PDF from path:", filePath); // Log the file path for debugging
+    //     console.log("Attempting to fetch PDF from path:", filePath); // Log the file path for debugging
 
-        try {
-            const downloadURL = await getDownloadURL(storageRef);
-            console.log("PDF file URL:", downloadURL);
+    //     try {
+    //         const downloadURL = await getDownloadURL(storageRef);
+    //         console.log("PDF file URL:", downloadURL);
 
-            // Provide a download link to the user
-            const downloadLink = document.createElement("a");
-            downloadLink.href = downloadURL;
-            downloadLink.target = "_blank";
-            downloadLink.download = fileName; // Set the download attribute for direct download
-            downloadLink.textContent = "Download PDF";
-            downloadLink.style.display = "block";
-            downloadLink.style.marginTop = "10px";
+    //         // Provide a download link to the user
+    //         const downloadLink = document.createElement("a");
+    //         downloadLink.href = downloadURL;
+    //         downloadLink.target = "_blank";
+    //         downloadLink.download = fileName; // Set the download attribute for direct download
+    //         downloadLink.textContent = "Download PDF";
+    //         downloadLink.style.display = "block";
+    //         downloadLink.style.marginTop = "10px";
 
-            const container = document.getElementById("pdfDownloadContainer");
-            container.innerHTML = ""; // Clear any existing content
-            container.appendChild(downloadLink);
+    //         const container = document.getElementById("pdfDownloadContainer");
+    //         container.innerHTML = ""; // Clear any existing content
+    //         container.appendChild(downloadLink);
 
-            alert("PDF file is ready for download!");
-        } catch (error) {
-            if (error.code === "storage/object-not-found") {
-                console.error("Error fetching PDF file: File does not exist at path:", filePath);
-                alert("The requested PDF file does not exist. Please ensure the file has been uploaded.");
-            } else {
-                console.error("Error fetching PDF file:", error);
-                alert("Failed to fetch the PDF file. Please check the console for details.");
-            }
-        }
-    }
+    //         alert("PDF file is ready for download!");
+    //     } catch (error) {
+    //         if (error.code === "storage/object-not-found") {
+    //             console.error("Error fetching PDF file: File does not exist at path:", filePath);
+    //             alert("The requested PDF file does not exist. Please ensure the file has been uploaded.");
+    //         } else {
+    //             console.error("Error fetching PDF file:", error);
+    //             alert("Failed to fetch the PDF file. Please check the console for details.");
+    //         }
+    //     }
+    // }
 
     // Attach functions to the global window object
     window.generateWarningLetter = generateWarningLetter;
     window.generateReasonLetter = generateReasonLetter;
-    document.getElementById("fetchPDFButton").addEventListener("click", fetchPDF);
+    // document.getElementById("fetchPDFButton").addEventListener("click", fetchPDF);
 </script>
 </body>
 </html>
