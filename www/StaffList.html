@@ -830,8 +830,9 @@ body.fab-menu-open .fab-overlay {
       filtered.forEach(emp=>{
         const d = document.createElement('div');
         d.innerHTML = generateEmployeeCard(
-          emp.id, emp.Nama, emp.id, emp.profileImage||'src/default-avatar.png'
+          emp.id, emp.Nama, emp.id, emp.profileImage||'src/default-avatar.png', emp.Position
         );
+        // alert(emp.id ,emp.position)
         frag.appendChild(d.firstElementChild);
       });
       container.appendChild(frag);

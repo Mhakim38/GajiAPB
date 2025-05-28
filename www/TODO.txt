@@ -22,7 +22,7 @@ Part 1 (Staff List)
 - [x] 1. Add POSITION attribute for add, update, Edetail staff
 - [x] 2. Replace the active label with position, try icon only
 - [x] Bug Fix on update next to kin information. Add function works ok. UPDATE problem
-- [] When searching the position icon set to undefine for some reason
+- [x] When searching the position icon set to undefine for some reason
 
 Part 2 (Salary Management)
 - [x] Display the name of the Staff
@@ -71,7 +71,9 @@ feature to add:
 - [-] Avoid using image in css instead use in body - performance issue (Header, nabvar, login)
 - [-] Add User Restriction - do i need ??? - IN FUTURE
 - [-] Add forgot password recovery do i need ??? - IN FUTURE
-- [] Add Warning & Sebab ii letter for the employee. 
+- [x] Add Warning & Sebab ii letter for the employee. 
+- [-] Convert the letter to PDF - DONE but it is only in php file
+- [ ] Send the Wrong Doings in array where the user can add more wrong doing and how to add it in the template ???? 
 
 Finalised
 - [x] Double Check Function on Salary Management
