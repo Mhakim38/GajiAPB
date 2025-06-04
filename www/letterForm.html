@@ -490,16 +490,16 @@
         return true;
     }
 
-    function collectsData(){
-        return {
-            designation: document.getElementById("designation").value || "NULL",
-            name: document.getElementById("name").value || "NULL",
-            id: document.getElementById("id").value || "NULL",
-            ic: document.getElementById("ic").value || "NULL",
-            position: document.getElementById("position").value || "NULL",
-            fault: document.getElementById("fault").value || "NULL"
-        };
-    }
+    function collectsData() {
+    return {
+        designation: document.getElementById("designation").value || "NULL",
+        name: document.getElementById("name").value || "NULL",
+        id: document.getElementById("id").value || "NULL",
+        ic: document.getElementById("ic").value || "NULL",
+        position: document.getElementById("position").value || "NULL",
+        fault: document.getElementById("fault").value || "NULL"  // preserve original
+    };
+}
 
     function generateWarningLetter() {
         if (!validateForm()) return;
@@ -524,7 +524,10 @@
             .then(response => response.arrayBuffer())
             .then(content => {
                 const zip = new PizZip(content);
-                const doc = new window.docxtemplater().loadZip(zip);
+                const doc = new window.docxtemplater(zip, {
+                                    paragraphLoop: true,
+                                    linebreaks: true
+                                });
 
                 doc.setData(data);
 
