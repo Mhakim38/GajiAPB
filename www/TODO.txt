@@ -73,7 +73,7 @@ feature to add:
 - [-] Add forgot password recovery do i need ??? - IN FUTURE
 - [x] Add Warning & Sebab ii letter for the employee. 
 - [-] Convert the letter to PDF - DONE but it is only in php file
-- [ ] Send the Wrong Doings in array where the user can add more wrong doing and how to add it in the template ???? 
+- [x] Send the Wrong Doings in array where the user can add more wrong doing and how to add it in the template ???? -- IDEK HOW (Chat GPT)
 
 Finalised
 - [x] Double Check Function on Salary Management
